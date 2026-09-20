@@ -1,26 +1,311 @@
+/* ── Thmanyah Sans ── */
+@font-face {
+  font-family: 'ThmanyahSans';
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+  src: url('/fonts/thmanyahsans-Light.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'ThmanyahSans';
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url('/fonts/thmanyahsans-Regular.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'ThmanyahSans';
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  src: url('/fonts/thmanyahsans-Medium.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'ThmanyahSans';
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  src: url('/fonts/thmanyahsans-Bold.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'ThmanyahSans';
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+  src: url('/fonts/thmanyahsans-Black.woff2') format('woff2');
+}
+
+/* ── Thmanyah Serif Display ── */
+@font-face {
+  font-family: 'ThmanyahSerifDisplay';
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+  src: url('/fonts/thmanyahserifdisplay-Light.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'ThmanyahSerifDisplay';
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url('/fonts/thmanyahserifdisplay-Regular.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'ThmanyahSerifDisplay';
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  src: url('/fonts/thmanyahserifdisplay-Medium.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'ThmanyahSerifDisplay';
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  src: url('/fonts/thmanyahserifdisplay-Bold.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'ThmanyahSerifDisplay';
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+  src: url('/fonts/thmanyahserifdisplay-Black.woff2') format('woff2');
+}
+
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
+/* ── Brand tokens ── */
 @theme inline {
-  --color-background: var(--background);
+  /* ThmanyahSans replaces Cairo for UI / body text */
+  --font-cairo: 'ThmanyahSans', sans-serif;
+  /* ThmanyahSerifDisplay replaces Amiri for headings / display */
+  --font-amiri: 'ThmanyahSerifDisplay', serif;
+  --font-heading: 'ThmanyahSerifDisplay', serif;
+  --font-sans: 'ThmanyahSans', sans-serif;
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-background: var(--background);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ── Base ── */
+html {
+  scroll-behavior: smooth;
+  height: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  position: relative; /* Required by Base UI Drawer for iOS Safari overlay */
+  font-family: 'ThmanyahSans', sans-serif;
+  background-color: #FAF8F3;
+  color: #1A1714;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100%;
+}
+
+/* Hide scrollbar but allow scroll */
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
+/* ── Form focus ── */
+input:focus,
+textarea:focus {
+  outline: none;
+}
+
+/* ── Nav link underline (::after — cannot use Tailwind) ── */
+.nav-link {
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  right: 0;
+  width: 0;
+  height: 1px;
+  background: #C09A5B;
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* ── Menu open animation (keyframe forwards — cannot use Tailwind) ── */
+@keyframes fadeSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.menu-open {
+  animation: fadeSlideDown 0.25s ease forwards;
+}
+
+/* ── Calendar day transition (0.15s ease — not a Tailwind default) ── */
+.cal-day {
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+/* ── shadcn Calendar: event dot indicator ── */
+/* Applied via modifiersClassNames={{ hasEvent: "has-event" }} */
+.has-event > button::after {
+  content: '';
+  position: absolute;
+  /* sit in the middle of the lower ~30% of the cell */
+  bottom: 18%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #8B1A1A;
+  pointer-events: none;
+}
+
+/* ── RTL: flip DayPicker nav chevrons ── */
+[dir="rtl"] .rdp-button_previous svg,
+[dir="rtl"] .rdp-button_next svg {
+  transform: scaleX(-1);
+}
+
+/* ── Section fade-in ── */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeUp 0.7s ease forwards;
+}
+
+:root {
+  /* ── Roznama brand mapped to shadcn semantic tokens ── */
+  --background: #FAF8F3;          /* cream */
+  --foreground: #1A1714;          /* charcoal */
+  --card: #FAF8F3;
+  --card-foreground: #1A1714;
+  --popover: #FAF8F3;
+  --popover-foreground: #1A1714;
+  --primary: #8B1A1A;             /* maroon */
+  --primary-foreground: #FAF8F3;
+  --secondary: #F3EDE3;           /* warm surface */
+  --secondary-foreground: #1A1714;
+  --muted: #F3EDE3;
+  --muted-foreground: #A09080;
+  --accent: #F5EFE6;
+  --accent-foreground: #1A1714;
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: #E5DDD0;
+  --input: #E5DDD0;
+  --ring: #C9973A;                /* gold ring */
+  --chart-1: #8B1A1A;
+  --chart-2: #C9973A;
+  --chart-3: #E8CC88;
+  --chart-4: #6B5E52;
+  --chart-5: #1A1714;
+  --radius: 0.75rem;
+  --sidebar: #FAF8F3;
+  --sidebar-foreground: #1A1714;
+  --sidebar-primary: #8B1A1A;
+  --sidebar-primary-foreground: #FAF8F3;
+  --sidebar-accent: #F3EDE3;
+  --sidebar-accent-foreground: #1A1714;
+  --sidebar-border: #E5DDD0;
+  --sidebar-ring: #C9973A;
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  /* body and html overrides handled by our explicit rules above */
 }
