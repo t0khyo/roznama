@@ -12,6 +12,9 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
+import { arSA } from "react-day-picker/locale"
+
+const customArSA = { ...arSA, code: "ar-SA-u-ca-gregory" }
 
 export default function BookingForm() {
   const [formData, setFormData] = useState({ name: "", phone: "", date: "", venue: "" })
@@ -81,6 +84,8 @@ export default function BookingForm() {
                       }}
                       autoFocus
                       dir="rtl"
+                      locale={customArSA}
+                      className="p-4 font-cairo [--cell-size:--spacing(10)] md:[--cell-size:--spacing(11)]"
                     />
                   </PopoverContent>
                 </Popover>

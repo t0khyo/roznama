@@ -5,21 +5,21 @@ export const weddingsData: Wedding[] = [
     id: 1,
     tribe: "العنزي",
     groom: "محمد بن خالد بن سعد العنزي",
-    date: "2026-09-12",
+    date: "2026-09-03",
     image: "https://rznamaaldhfeer.online/public/uploads/occasions/6a9f2dfdd73b01.24104818.jpeg",
   },
   {
     id: 2,
     tribe: "المطيري",
     groom: "عبدالله بن فهد بن ناصر المطيري",
-    date: "2026-09-18",
+    date: "2026-09-07",
     image: "https://rznamaaldhfeer.online/public/uploads/occasions/6aa57787c51257.40185050.jpeg",
   },
   {
     id: 3,
     tribe: "الرشيدي",
     groom: "سلطان بن عبدالعزيز بن تركي الرشيدي",
-    date: "2026-09-25",
+    date: "2026-09-24",
     image: "https://rznamaaldhfeer.online/public/uploads/occasions/6a46db95345f17.82185605.jpeg",
   },
   {
@@ -40,7 +40,7 @@ export const weddingsData: Wedding[] = [
     id: 6,
     tribe: "العجمي",
     groom: "ناصر بن راشد بن يوسف العجمي",
-    date: "2026-10-17",
+    date: "2026-10-15",
     image: "https://images.unsplash.com/photo-1538439907460-1596cafd4eff?w=400&h=520&fit=crop&auto=format",
   },
   {

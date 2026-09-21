@@ -6,6 +6,8 @@ import { Calendar } from "@/components/ui/calendar"
 import { weddingsData, arabicMonths } from "@/lib/constants"
 import { formatArabicDate } from "@/lib/date-utils"
 
+const customArSA = { ...arSA, code: "ar-SA-u-ca-gregory" }
+
 export default function WeddingCalendar() {
   const [month, setMonth] = useState<Date>(new Date(2026, 8, 1))
   const [selectedDay, setSelectedDay] = useState<Date | undefined>(undefined)
@@ -60,7 +62,7 @@ export default function WeddingCalendar() {
             captionLayout="dropdown"
             startMonth={new Date(2020, 0)}
             endMonth={new Date(2030, 11)}
-            locale={arSA}
+            locale={customArSA}
             dir="rtl"
             modifiers={{ hasEvent: weddingDays }}
             modifiersClassNames={{
@@ -80,9 +82,9 @@ export default function WeddingCalendar() {
               dropdowns: "flex h-(--cell-size) w-full items-center justify-center gap-2 font-bold text-[#1A1714] text-sm md:text-base",
               // Nav buttons — brand hover
               button_previous:
-                "rtl:[&>svg]:rotate-180 size-(--cell-size) p-0 select-none rounded-full border border-[#E5DDD0] text-[#6B5E52] hover:border-[#8B1A1A] hover:text-[#8B1A1A] transition-colors bg-transparent hover:bg-transparent inline-flex items-center justify-center z-10",
+                "size-(--cell-size) p-0 select-none rounded-full border border-[#E5DDD0] text-[#6B5E52] hover:border-[#8B1A1A] hover:text-[#8B1A1A] transition-colors bg-transparent hover:bg-transparent inline-flex items-center justify-center z-10",
               button_next:
-                "rtl:[&>svg]:rotate-180 size-(--cell-size) p-0 select-none rounded-full border border-[#E5DDD0] text-[#6B5E52] hover:border-[#8B1A1A] hover:text-[#8B1A1A] transition-colors bg-transparent hover:bg-transparent inline-flex items-center justify-center z-10",
+                "size-(--cell-size) p-0 select-none rounded-full border border-[#E5DDD0] text-[#6B5E52] hover:border-[#8B1A1A] hover:text-[#8B1A1A] transition-colors bg-transparent hover:bg-transparent inline-flex items-center justify-center z-10",
               // Weekday header
               weekday:
                 "font-cairo text-xs font-semibold text-[#A09080] py-3",
