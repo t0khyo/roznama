@@ -6,6 +6,7 @@ import {
   DrawerContent,
   DrawerTrigger,
 } from "@/components/ui/drawer"
+import { Button } from "@/components/ui/button"
 import { navLinks } from "@/lib/constants"
 
 export default function Navbar() {
@@ -49,19 +50,21 @@ export default function Navbar() {
           {/* Right side: CTA + hamburger */}
           <div className="flex items-center gap-2 flex-shrink-0">
             {/* CTA — visible on all sizes */}
-            <button
+            <Button
               onClick={() => scrollTo("booking")}
-              className="bg-[#8B1A1A] text-[#FAF8F3] font-cairo font-bold text-sm px-5 py-2 rounded-full hover:bg-[#6A1212] transition-colors duration-300 whitespace-nowrap"
+              className="bg-[#8B1A1A] text-[#FAF8F3] font-cairo font-bold text-sm px-5 py-2 h-auto rounded-full hover:bg-[#6A1212] transition-colors duration-300 whitespace-nowrap"
             >
               سجل مناسبتك
-            </button>
+            </Button>
 
             {/* Hamburger — mobile only, opens Drawer */}
             <Drawer swipeDirection="right">
               <DrawerTrigger
                 render={
-                  <button
-                    className="md:hidden flex flex-col gap-1.5 w-9 h-9 items-center justify-center rounded-full border border-[#E5DDD0] hover:border-[#8B1A1A]/40 transition-colors"
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="md:hidden flex flex-col gap-1.5 size-9 items-center justify-center rounded-full border border-[#E5DDD0] hover:border-[#8B1A1A]/40 transition-colors bg-transparent hover:bg-transparent"
                     aria-label="القائمة"
                   />
                 }
@@ -72,7 +75,7 @@ export default function Navbar() {
               </DrawerTrigger>
 
               <DrawerContent
-                className="md:hidden w-[80vw] max-w-xs border-l border-[#E5DDD0]"
+                className="md:hidden w-[80vw] max-w-xs border-l border-[#E5DDD0] !rounded-none"
                 style={{
                   background: "rgba(250,248,243,0.97)",
                   backdropFilter: "blur(20px)",
@@ -84,8 +87,10 @@ export default function Navbar() {
                   <img src="/logo.png" alt="سناب مطير" className="h-8 w-auto" />
                   <DrawerClose
                     render={
-                      <button
-                        className="w-8 h-8 flex items-center justify-center rounded-full border border-[#E5DDD0] text-[#6B5E52] hover:border-[#8B1A1A]/40 hover:text-[#8B1A1A] transition-colors"
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        className="size-8 flex items-center justify-center rounded-full border border-[#E5DDD0] text-[#6B5E52] hover:border-[#8B1A1A]/40 hover:text-[#8B1A1A] transition-colors bg-transparent hover:bg-transparent"
                         aria-label="إغلاق"
                       />
                     }
@@ -126,9 +131,9 @@ export default function Navbar() {
                 <div className="p-5 border-t border-[#E5DDD0]/60">
                   <DrawerClose
                     render={
-                      <button
+                      <Button
                         onClick={() => scrollTo("booking")}
-                        className="w-full bg-[#8B1A1A] text-[#FAF8F3] font-cairo font-bold text-sm py-3.5 rounded-full hover:bg-[#6A1212] transition-colors duration-300"
+                        className="w-full bg-[#8B1A1A] text-[#FAF8F3] font-cairo font-bold text-sm py-3.5 h-auto rounded-full hover:bg-[#6A1212] transition-colors duration-300"
                       />
                     }
                   >

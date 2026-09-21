@@ -14,6 +14,8 @@ import {
   Dialog,
   DialogContent,
 } from "@/components/ui/dialog"
+import { Button, buttonVariants } from "@/components/ui/button"
+import { cn } from "cn"
 import { DownloadIcon } from "lucide-react"
 
 export default function WeddingCarousel({ weddings }: { weddings: Wedding[] }) {
@@ -127,16 +129,18 @@ export default function WeddingCarousel({ weddings }: { weddings: Wedding[] }) {
       {/* Controls row */}
       <div className="flex items-center justify-center gap-5 mt-4">
         {/* Prev */}
-        <button
+        <Button
+          variant="outline"
+          size="icon"
           onClick={() => { api?.scrollPrev(); autoplay.current.reset() }}
-          className="w-10 h-10 rounded-full border border-[#E5DDD0] flex items-center justify-center text-[#6B5E52] hover:border-[#8B1A1A] hover:text-[#8B1A1A] transition-colors"
+          className="size-10 rounded-full border border-[#E5DDD0] flex items-center justify-center text-[#6B5E52] hover:border-[#8B1A1A] hover:text-[#8B1A1A] transition-colors bg-transparent hover:bg-transparent"
           aria-label="السابق"
         >
           {/* RTL: prev = scroll right, so arrow points right → */}
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
             <path d="M6 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
-        </button>
+        </Button>
 
         {/* Dot indicators */}
         <div className="flex items-center gap-2">
@@ -157,21 +161,23 @@ export default function WeddingCarousel({ weddings }: { weddings: Wedding[] }) {
         </div>
 
         {/* Next */}
-        <button
+        <Button
+          variant="outline"
+          size="icon"
           onClick={() => { api?.scrollNext(); autoplay.current.reset() }}
-          className="w-10 h-10 rounded-full border border-[#E5DDD0] flex items-center justify-center text-[#6B5E52] hover:border-[#8B1A1A] hover:text-[#8B1A1A] transition-colors"
+          className="size-10 rounded-full border border-[#E5DDD0] flex items-center justify-center text-[#6B5E52] hover:border-[#8B1A1A] hover:text-[#8B1A1A] transition-colors bg-transparent hover:bg-transparent"
           aria-label="التالي"
         >
           {/* RTL: next = scroll left, so arrow points left ← */}
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
             <path d="M10 4l-4 4 4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
-        </button>
+        </Button>
       </div>
 
       {/* Lightbox Dialog */}
       <Dialog open={!!lightboxImage} onOpenChange={(open) => !open && setLightboxImage(null)}>
-        <DialogContent className="max-w-[95vw] md:max-w-4xl p-0 overflow-hidden bg-[#1A1714]/95 border-none shadow-2xl" showCloseButton={true}>
+        <DialogContent className="max-w-[95vw] md:max-w-4xl p-0 overflow-hidden bg-[#1A1714]/95 border-none shadow-2xl [&_[data-slot=dialog-close]_button]:text-white/80 [&_[data-slot=dialog-close]_button]:hover:text-white [&_[data-slot=dialog-close]_button]:hover:bg-white/10" showCloseButton={true}>
           {lightboxImage && (
             <div className="relative flex flex-col items-center justify-center w-full min-h-[50vh]">
               <img 
@@ -185,7 +191,10 @@ export default function WeddingCarousel({ weddings }: { weddings: Wedding[] }) {
                   download={`invitation-${lightboxImage.id}.jpg`}
                   target="_blank" 
                   rel="noreferrer"
-                  className="flex items-center gap-2 bg-[#8B1A1A] hover:bg-[#6A1212] text-[#FAF8F3] font-cairo font-bold px-6 py-3 rounded-full transition-colors shadow-lg"
+                  className={cn(
+                    buttonVariants({ variant: "default" }),
+                    "flex items-center gap-2 bg-[#8B1A1A] hover:bg-[#6A1212] text-[#FAF8F3] font-cairo font-bold px-6 py-3 h-auto rounded-full transition-colors shadow-lg"
+                  )}
                 >
                   <DownloadIcon className="w-5 h-5" />
                   <span>تنزيل الصورة</span>

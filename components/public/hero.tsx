@@ -1,5 +1,7 @@
 "use client"
 
+import { Button } from "@/components/ui/button"
+
 export default function Hero() {
   const scrollTo = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" })
@@ -39,18 +41,19 @@ export default function Hero() {
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
-          <button
-            onClick={() => scrollTo("booking")}
-            className="bg-[#8B1A1A] text-[#FAF8F3] font-cairo font-bold px-8 py-3.5 rounded-full text-sm hover:bg-[#6A1212] transition-all duration-300 w-full sm:w-auto shadow-sm"
-          >
-            سجل مناسبتك
-          </button>
-          <button
+          <Button
+            variant="outline"
             onClick={() => scrollTo("upcoming")}
-            className="border border-[#8B1A1A] text-[#8B1A1A] font-cairo font-medium px-8 py-3.5 rounded-full text-sm hover:bg-[#8B1A1A]/10 transition-colors duration-300 w-full sm:w-auto"
+            className="border border-[#8B1A1A] text-[#8B1A1A] font-cairo font-medium px-8 py-3.5 h-auto rounded-full text-sm hover:bg-[#8B1A1A]/10 transition-colors duration-300 w-full sm:w-auto bg-transparent"
           >
             المناسبات القادمة
-          </button>
+          </Button>
+          <Button
+            onClick={() => scrollTo("booking")}
+            className="bg-[#8B1A1A] text-[#FAF8F3] font-cairo font-bold px-8 py-3.5 h-auto rounded-full text-sm hover:bg-[#6A1212] transition-all duration-300 w-full sm:w-auto shadow-sm"
+          >
+            سجل مناسبتك
+          </Button>
         </div>
       </div>
 

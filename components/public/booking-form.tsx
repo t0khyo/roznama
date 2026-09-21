@@ -44,7 +44,7 @@ export default function BookingForm() {
 
         <form onSubmit={handleSubmit} className="space-y-5">
           {[
-            { key: "name", label: "الاسم الرباعي", type: "text", placeholder: "محمد بن خالد بن سعد العنزي" },
+            { key: "name", label: "الاسم", type: "text", placeholder: "محمد بن خالد بن سعد المطيري" },
             { key: "phone", label: "رقم الهاتف", type: "tel", placeholder: "+965 9804 0875" },
             { key: "date", label: "تاريخ المناسبة", type: "date", placeholder: "" },
             { key: "venue", label: "المكان", type: "text", placeholder: "قاعة الملوك — الجهراء" },
@@ -98,12 +98,12 @@ export default function BookingForm() {
             </div>
           ))}
 
-          <button
+          <Button
             type="submit"
-            className="w-full bg-[#8B1A1A] text-[#FAF8F3] font-cairo font-semibold py-4 rounded-xl text-base hover:bg-[#C9973A] transition-colors duration-300 mt-2"
+            className="w-full bg-[#8B1A1A] text-[#FAF8F3] font-cairo font-semibold py-4 h-auto rounded-xl text-base hover:bg-[#C9973A] transition-colors duration-300 mt-2"
           >
             إرسال الطلب
-          </button>
+          </Button>
         </form>
 
         {/* Success toast */}
