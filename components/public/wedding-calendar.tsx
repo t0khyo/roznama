@@ -5,12 +5,19 @@ import { arSA } from "react-day-picker/locale"
 import { Calendar } from "@/components/ui/calendar"
 import { weddingsData, arabicMonths } from "@/lib/constants"
 import { formatArabicDate } from "@/lib/date-utils"
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog"
 
 const customArSA = { ...arSA, code: "ar-SA-u-ca-gregory" }
 
 export default function WeddingCalendar() {
   const [month, setMonth] = useState<Date>(new Date(2026, 8, 1))
-  const [selectedDay, setSelectedDay] = useState<Date | undefined>(undefined)
+  const [dialogOpen, setDialogOpen] = useState(false)
+  const [dialogDay, setDialogDay] = useState<Date | undefined>(undefined)
 
   const year = month.getFullYear()
   const monthIndex = month.getMonth()
@@ -22,14 +29,15 @@ export default function WeddingCalendar() {
 
   const weddingDays = weddingsData.map((w) => new Date(w.date))
 
-  const selectedWeddings = selectedDay
-    ? weddingsThisMonth.filter(
-      (w) => new Date(w.date).getDate() === selectedDay.getDate()
-    )
-    : weddingsThisMonth
+  const dialogWeddings = dialogDay
+    ? weddingsData.filter(
+        (w) => new Date(w.date).toDateString() === dialogDay.toDateString()
+      )
+    : []
 
   return (
-    <section id="calendar" className="py-24 bg-[#F3EDE3]">
+    <>
+      <section id="calendar" className="py-24 bg-[#F3EDE3]">
       <div className="max-w-4xl mx-auto px-6">
         {/* Section heading */}
         <div className="mb-12">
@@ -48,16 +56,21 @@ export default function WeddingCalendar() {
         <div className="bg-[#FAF8F3] rounded-2xl border border-[#E5DDD0] overflow-hidden">
           <Calendar
             mode="single"
-            selected={selectedDay}
-            onSelect={(day) =>
-              setSelectedDay((prev) =>
-                prev?.toDateString() === day?.toDateString() ? undefined : day
+            selected={undefined}
+            onSelect={(day) => {
+              if (!day) return
+              const hasWedding = weddingsData.some(
+                (w) => new Date(w.date).toDateString() === day.toDateString()
               )
-            }
+              if (hasWedding) {
+                setDialogDay(day)
+                setDialogOpen(true)
+              }
+            }}
             month={month}
             onMonthChange={(m) => {
               setMonth(m)
-              setSelectedDay(undefined)
+              setDialogDay(undefined)
             }}
             captionLayout="dropdown"
             startMonth={new Date(2020, 0)}
@@ -82,9 +95,9 @@ export default function WeddingCalendar() {
               dropdowns: "flex h-(--cell-size) w-full items-center justify-center gap-2 font-bold text-[#1A1714] text-sm md:text-base",
               // Nav buttons — brand hover
               button_previous:
-                "size-(--cell-size) p-0 select-none rounded-full border border-[#E5DDD0] text-[#6B5E52] hover:border-[#8B1A1A] hover:text-[#8B1A1A] transition-colors bg-transparent hover:bg-transparent inline-flex items-center justify-center z-10",
+                "size-(--cell-size) p-0 select-none rounded-full border border-[#E5DDD0] text-[#6B5E52] hover:border-[#8B1A1A] hover:text-[#8B1A1A] transition-colors bg-transparent hover:bg-transparent inline-flex items-center justify-center z-10 [&>svg]:-scale-x-100",
               button_next:
-                "size-(--cell-size) p-0 select-none rounded-full border border-[#E5DDD0] text-[#6B5E52] hover:border-[#8B1A1A] hover:text-[#8B1A1A] transition-colors bg-transparent hover:bg-transparent inline-flex items-center justify-center z-10",
+                "size-(--cell-size) p-0 select-none rounded-full border border-[#E5DDD0] text-[#6B5E52] hover:border-[#8B1A1A] hover:text-[#8B1A1A] transition-colors bg-transparent hover:bg-transparent inline-flex items-center justify-center z-10 [&>svg]:-scale-x-100",
               // Weekday header
               weekday:
                 "font-cairo text-xs font-semibold text-[#A09080] py-3",
@@ -106,14 +119,12 @@ export default function WeddingCalendar() {
         </div>
 
         {/* Event list for selected/current month */}
-        {selectedWeddings.length > 0 && (
+        {weddingsThisMonth.length > 0 && (
           <div className="mt-8 space-y-3">
             <p className="font-cairo text-sm font-medium text-[#6B5E52] mb-4">
-              {selectedDay
-                ? `أفراح يوم ${selectedDay.getDate()} ${arabicMonths[monthIndex]}`
-                : `أفراح ${arabicMonths[monthIndex]}`}
+              {`أفراح ${arabicMonths[monthIndex]}`}
             </p>
-            {selectedWeddings.map((w) => (
+            {weddingsThisMonth.map((w) => (
               <div
                 key={w.id}
                 className="flex items-center gap-4 bg-[#FAF8F3] border border-[#E5DDD0] rounded-xl px-5 py-4 hover:border-[#8B1A1A]/30 transition-colors"
@@ -147,5 +158,44 @@ export default function WeddingCalendar() {
         )}
       </div>
     </section>
+
+      {/* Dialog for selected day's weddings */}
+      <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+        <DialogContent dir="rtl" className="font-cairo max-w-md">
+          <DialogHeader>
+            <DialogTitle className="text-right font-cairo text-[#1A1714]">
+              {dialogDay
+                ? `أفراح يوم ${dialogDay.getDate()} ${arabicMonths[dialogDay.getMonth()]}`
+                : ""}
+            </DialogTitle>
+          </DialogHeader>
+          <div className="space-y-3 mt-2">
+            {dialogWeddings.map((w) => (
+              <div
+                key={w.id}
+                className="flex items-center gap-4 bg-[#FAF8F3] border border-[#E5DDD0] rounded-xl px-5 py-4"
+              >
+                <div className="w-10 h-10 rounded-full bg-[#C9973A] flex items-center justify-center flex-shrink-0">
+                  <span className="font-cairo font-bold text-sm text-[#FAF8F3]">
+                    {new Date(w.date).getDate()}
+                  </span>
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="font-cairo font-bold text-sm text-[#1A1714]">
+                    {w.groom}
+                  </p>
+                  <p className="font-cairo text-xs text-[#C9973A] font-medium">
+                    {w.tribe}
+                  </p>
+                </div>
+                <p className="font-cairo text-xs text-[#A09080] flex-shrink-0">
+                  {formatArabicDate(w.date)}
+                </p>
+              </div>
+            ))}
+          </div>
+        </DialogContent>
+      </Dialog>
+    </>
   )
 }

@@ -43,7 +43,7 @@ export default function Navbar() {
               <button
                 key={link.id}
                 onClick={() => scrollTo(link.id)}
-                className="nav-link font-cairo text-sm font-medium text-[#4A4038] hover:text-[#8B1A1A] transition-colors px-3 py-1.5 rounded-full hover:bg-[#8B1A1A]/6"
+                className="font-cairo text-sm font-medium text-[#4A4038] hover:text-[#8B1A1A] transition-colors px-3 py-1.5 rounded-full hover:bg-[#8B1A1A]/6"
               >
                 {link.label}
               </button>
