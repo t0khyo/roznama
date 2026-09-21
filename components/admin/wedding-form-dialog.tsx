@@ -20,8 +20,19 @@ import {
   AttachmentMedia,
   AttachmentTitle,
 } from "@/components/ui/attachment"
-import { UploadCloudIcon, XIcon } from "lucide-react"
+import { Calendar as CalendarIcon, UploadCloudIcon, XIcon } from "lucide-react"
+import { format } from "date-fns"
+import { ar } from "date-fns/locale"
+import { Calendar } from "@/components/ui/calendar"
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
+import { arSA } from "react-day-picker/locale"
 import type { Wedding } from "@/types"
+
+const customArSA = { ...arSA, code: "ar-SA-u-ca-gregory" }
 
 interface WeddingFormDialogProps {
   open: boolean
@@ -51,6 +62,7 @@ export function WeddingFormDialog({
 }: WeddingFormDialogProps) {
   const [form, setForm] = useState<Omit<Wedding, "id">>(EMPTY)
   const [fileInfo, setFileInfo] = useState<FileMeta | null>(null)
+  const [isCalendarOpen, setIsCalendarOpen] = useState(false)
   const [saving, setSaving] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
 
@@ -116,6 +128,7 @@ export function WeddingFormDialog({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    if (!form.date) return
     setSaving(true)
     try {
       await onSave(form)
@@ -124,6 +137,10 @@ export function WeddingFormDialog({
       setSaving(false)
     }
   }
+
+  const selectedDate = form.date
+    ? new Date(form.date.includes("T") ? form.date : `${form.date}T00:00:00`)
+    : undefined
 
   const isEdit = !!wedding
 
@@ -166,14 +183,41 @@ export function WeddingFormDialog({
 
           <div className="space-y-1.5">
             <Label className="font-cairo text-sm text-[#4A4038]">تاريخ المناسبة</Label>
-            <Input
-              required
-              type="date"
-              dir="ltr"
-              value={form.date}
-              onChange={set("date")}
-              className="font-cairo bg-[#F3EDE3] border-[#E5DDD0] focus:border-[#C9973A]"
-            />
+            <Popover open={isCalendarOpen} onOpenChange={setIsCalendarOpen}>
+              <PopoverTrigger
+                render={
+                  <Button
+                    type="button"
+                    variant="outline"
+                    className={`w-full justify-start bg-[#F3EDE3] border-[#E5DDD0] rounded-lg px-3 py-2.5 h-auto font-cairo text-sm focus:border-[#C9973A] focus:bg-[#FAF8F3] transition-colors ${
+                      !selectedDate ? "text-[#C0B4A8]" : "text-[#1A1714]"
+                    }`}
+                    dir="rtl"
+                  />
+                }
+              >
+                <CalendarIcon className="ms-2 h-4 w-4 opacity-50" />
+                {selectedDate ? (
+                  format(selectedDate, "PPP", { locale: ar })
+                ) : (
+                  <span>اختر التاريخ</span>
+                )}
+              </PopoverTrigger>
+              <PopoverContent className="w-auto p-0 z-[60]" align="start" dir="rtl">
+                <Calendar
+                  mode="single"
+                  selected={selectedDate}
+                  onSelect={(d) => {
+                    setForm((f) => ({ ...f, date: d ? format(d, "yyyy-MM-dd") : "" }))
+                    if (d) setIsCalendarOpen(false)
+                  }}
+                  autoFocus
+                  dir="rtl"
+                  locale={customArSA}
+                  className="p-4 font-cairo [--cell-size:--spacing(10)] md:[--cell-size:--spacing(11)]"
+                />
+              </PopoverContent>
+            </Popover>
           </div>
 
           {/* Single Image Attachment Slot */}

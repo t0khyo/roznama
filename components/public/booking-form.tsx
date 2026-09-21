@@ -19,6 +19,7 @@ const customArSA = { ...arSA, code: "ar-SA-u-ca-gregory" }
 export default function BookingForm() {
   const [formData, setFormData] = useState({ name: "", phone: "", date: "", venue: "" })
   const [date, setDate] = useState<Date>()
+  const [isCalendarOpen, setIsCalendarOpen] = useState(false)
   const [formSent, setFormSent] = useState(false)
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -55,7 +56,7 @@ export default function BookingForm() {
             <div key={key} className="group">
               <label className="block font-cairo text-sm font-medium text-[#4A4038] mb-2">{label}</label>
               {key === "date" ? (
-                <Popover>
+                <Popover open={isCalendarOpen} onOpenChange={setIsCalendarOpen}>
                   <PopoverTrigger
                     render={
                       <Button
@@ -80,7 +81,10 @@ export default function BookingForm() {
                       selected={date}
                       onSelect={(d) => {
                         setDate(d)
-                        if (d) setFormData({ ...formData, date: d.toISOString() })
+                        if (d) {
+                          setFormData({ ...formData, date: d.toISOString() })
+                          setIsCalendarOpen(false)
+                        }
                       }}
                       autoFocus
                       dir="rtl"
