@@ -75,7 +75,7 @@ export default function WeddingCarousel({ weddings }: { weddings: Wedding[] }) {
                   }}
                 >
                   {/* Image */}
-                  <div 
+                  <div
                     className="relative aspect-[4/3] overflow-hidden bg-[#1A1714] cursor-pointer group"
                     onClick={() => setLightboxImage(w)}
                   >
@@ -99,7 +99,7 @@ export default function WeddingCarousel({ weddings }: { weddings: Wedding[] }) {
                     {/* Bottom text overlay — Tribe name */}
                     <div className="absolute bottom-0 inset-x-0 p-4 sm:p-5 z-20 pointer-events-none">
                       <p className="font-amiri text-[#E8CC88] text-lg sm:text-xl font-bold leading-snug drop-shadow-md">
-                        قبيلة {w.tribe}
+                        {w.tribe}
                       </p>
                     </div>
                   </div>
@@ -180,16 +180,16 @@ export default function WeddingCarousel({ weddings }: { weddings: Wedding[] }) {
         <DialogContent className="max-w-[95vw] md:max-w-4xl p-0 overflow-hidden bg-[#1A1714]/95 border-none shadow-2xl [&_[data-slot=dialog-close]_button]:text-white/80 [&_[data-slot=dialog-close]_button]:hover:text-white [&_[data-slot=dialog-close]_button]:hover:bg-white/10" showCloseButton={true}>
           {lightboxImage && (
             <div className="relative flex flex-col items-center justify-center w-full min-h-[50vh]">
-              <img 
-                src={lightboxImage.image} 
+              <img
+                src={lightboxImage.image}
                 alt={`مناسبة ${lightboxImage.tribe}`}
                 className="w-full max-h-[85vh] object-contain"
               />
               <div className="absolute bottom-6 left-1/2 -translate-x-1/2">
-                <a 
-                  href={lightboxImage.image} 
+                <a
+                  href={lightboxImage.image}
                   download={`invitation-${lightboxImage.id}.jpg`}
-                  target="_blank" 
+                  target="_blank"
                   rel="noreferrer"
                   className={cn(
                     buttonVariants({ variant: "default" }),

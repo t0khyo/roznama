@@ -66,9 +66,9 @@ export function WeddingFormDialog({
       setFileInfo(
         wedding.image
           ? {
-              name: `دعوة ${wedding.tribe || "المناسبة"}`,
-              size: "الصورة الحالية للمناسبة",
-            }
+            name: `دعوة ${wedding.tribe || "المناسبة"}`,
+            size: "الصورة الحالية للمناسبة",
+          }
           : null
       )
     } else {
