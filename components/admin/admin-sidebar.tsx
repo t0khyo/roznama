@@ -61,7 +61,9 @@ export function AdminSidebar() {
       {/* ── Brand header ── */}
       <SidebarHeader className="border-b border-[#E5DDD0] px-4 py-4">
         <Link href="/" className="flex items-center gap-3 group">
-          <img src="/logo.png" alt="سناب مطير" className="h-8 w-auto shrink-0" />
+          <div className="size-9 rounded-full bg-[#FCFEFB] overflow-hidden flex items-center justify-center border border-[#E5DDD0]/80 shadow-xs shrink-0">
+            <img src="/logo.png" alt="سناب مطير" className="size-full object-contain p-0.5" />
+          </div>
           <div className="flex flex-col leading-none overflow-hidden">
             <span
               className="text-base font-bold text-[#1A1714] truncate group-hover:text-[#8B1A1A] transition-colors"

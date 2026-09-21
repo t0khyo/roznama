@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/drawer"
 import { Button } from "@/components/ui/button"
 import { navLinks } from "@/lib/constants"
+import { Menu } from "lucide-react"
 
 export default function Navbar() {
   const scrollTo = (id: string) => {
@@ -28,10 +29,12 @@ export default function Navbar() {
           {/* Logo */}
           <button
             onClick={() => scrollTo("hero")}
-            className="flex-shrink-0 hover:opacity-75 transition-opacity"
+            className="flex-shrink-0 hover:opacity-85 transition-opacity"
             aria-label="سناب مطير"
           >
-            <img src="/logo.png" alt="سناب مطير" className="h-9 w-auto" />
+            <div className="size-10 rounded-full bg-[#FCFEFB] overflow-hidden flex items-center justify-center border border-[#E5DDD0]/80 shadow-xs">
+              <img src="/logo.png" alt="سناب مطير" className="size-full object-contain p-0.5" />
+            </div>
           </button>
 
           {/* Desktop nav links — center */}
@@ -64,14 +67,12 @@ export default function Navbar() {
                   <Button
                     variant="outline"
                     size="icon"
-                    className="md:hidden flex flex-col gap-1.5 size-9 items-center justify-center rounded-full border border-[#E5DDD0] hover:border-[#8B1A1A]/40 transition-colors bg-transparent hover:bg-transparent"
+                    className="md:hidden flex size-9 items-center justify-center rounded-full border border-[#E5DDD0] text-[#1A1714] hover:border-[#8B1A1A]/40 hover:text-[#8B1A1A] transition-colors bg-transparent hover:bg-transparent"
                     aria-label="القائمة"
                   />
                 }
               >
-                <span className="block w-4 h-px bg-[#1A1714]" />
-                <span className="block w-4 h-px bg-[#1A1714]" />
-                <span className="block w-4 h-px bg-[#1A1714]" />
+                <Menu className="w-5 h-5" />
               </DrawerTrigger>
 
               <DrawerContent
@@ -84,7 +85,9 @@ export default function Navbar() {
               >
                 {/* Header */}
                 <div className="flex items-center justify-between px-5 pt-6 pb-4 border-b border-[#E5DDD0]/60">
-                  <img src="/logo.png" alt="سناب مطير" className="h-8 w-auto" />
+                  <div className="size-9 rounded-full bg-[#FCFEFB] overflow-hidden flex items-center justify-center border border-[#E5DDD0]/80 shadow-xs">
+                    <img src="/logo.png" alt="سناب مطير" className="size-full object-contain p-0.5" />
+                  </div>
                   <DrawerClose
                     render={
                       <Button
