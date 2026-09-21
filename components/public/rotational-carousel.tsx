@@ -14,9 +14,8 @@ import {
   Dialog,
   DialogContent,
 } from "@/components/ui/dialog"
-import { Button, buttonVariants } from "@/components/ui/button"
+import { Button } from "@/components/ui/button"
 import { cn } from "cn"
-import { DownloadIcon } from "lucide-react"
 
 export default function WeddingCarousel({ weddings }: { weddings: Wedding[] }) {
   const [api, setApi] = React.useState<CarouselApi>()
@@ -177,29 +176,17 @@ export default function WeddingCarousel({ weddings }: { weddings: Wedding[] }) {
 
       {/* Lightbox Dialog */}
       <Dialog open={!!lightboxImage} onOpenChange={(open) => !open && setLightboxImage(null)}>
-        <DialogContent className="max-w-[95vw] md:max-w-4xl p-0 overflow-hidden bg-[#1A1714]/95 border-none shadow-2xl [&_[data-slot=dialog-close]_button]:text-white/80 [&_[data-slot=dialog-close]_button]:hover:text-white [&_[data-slot=dialog-close]_button]:hover:bg-white/10" showCloseButton={true}>
+        <DialogContent
+          className="max-w-[95vw] md:max-w-4xl p-0 overflow-hidden bg-[#1A1714]/95 border-none shadow-2xl [&_[data-slot=dialog-close]]:bg-white/40 [&_[data-slot=dialog-close]]:hover:bg-white/70 [&_[data-slot=dialog-close]]:text-[#1A1714] [&_[data-slot=dialog-close]]:hover:text-[#8B1A1A] [&_[data-slot=dialog-close]]:border-2 [&_[data-slot=dialog-close]]:border-white/60 [&_[data-slot=dialog-close]]:hover:border-white [&_[data-slot=dialog-close]]:backdrop-blur-sm [&_[data-slot=dialog-close]]:shadow-lg [&_[data-slot=dialog-close]]:rounded-full [&_[data-slot=dialog-close]]:size-10 [&_[data-slot=dialog-close]]:top-4 [&_[data-slot=dialog-close]]:rtl:left-4 [&_[data-slot=dialog-close]]:ltr:right-4 [&_[data-slot=dialog-close]]:z-50 [&_[data-slot=dialog-close]]:transition-all [&_[data-slot=dialog-close]]:duration-200 [&_[data-slot=dialog-close]]:hover:scale-110 [&_[data-slot=dialog-close]]:active:scale-95 [&_[data-slot=dialog-close]_svg]:size-5 [&_[data-slot=dialog-close]_svg]:stroke-[2.5]"
+          showCloseButton={true}
+        >
           {lightboxImage && (
             <div className="relative flex flex-col items-center justify-center w-full min-h-[50vh]">
               <img
                 src={lightboxImage.image}
                 alt={`مناسبة ${lightboxImage.tribe}`}
-                className="w-full max-h-[85vh] object-contain"
+                className="w-full max-h-[85vh] object-contain select-none"
               />
-              <div className="absolute bottom-6 left-1/2 -translate-x-1/2">
-                <a
-                  href={lightboxImage.image}
-                  download={`invitation-${lightboxImage.id}.jpg`}
-                  target="_blank"
-                  rel="noreferrer"
-                  className={cn(
-                    buttonVariants({ variant: "default" }),
-                    "flex items-center gap-2 bg-[#8B1A1A] hover:bg-[#6A1212] text-[#FAF8F3] font-cairo font-bold px-6 py-3 h-auto rounded-full transition-colors shadow-lg"
-                  )}
-                >
-                  <DownloadIcon className="w-5 h-5" />
-                  <span>تنزيل الصورة</span>
-                </a>
-              </div>
             </div>
           )}
         </DialogContent>
