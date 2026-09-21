@@ -5,14 +5,14 @@ export const weddingsData: Wedding[] = [
     id: 1,
     tribe: "العنزي",
     groom: "محمد بن خالد بن سعد العنزي",
-    date: "2026-09-03",
+    date: "2026-09-10",
     image: "https://rznamaaldhfeer.online/public/uploads/occasions/6a9f2dfdd73b01.24104818.jpeg",
   },
   {
     id: 2,
     tribe: "المطيري",
     groom: "عبدالله بن فهد بن ناصر المطيري",
-    date: "2026-09-07",
+    date: "2026-09-16",
     image: "https://rznamaaldhfeer.online/public/uploads/occasions/6aa57787c51257.40185050.jpeg",
   },
   {

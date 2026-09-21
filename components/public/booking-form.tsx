@@ -74,7 +74,7 @@ export default function BookingForm() {
                       <span>اختر التاريخ</span>
                     )}
                   </PopoverTrigger>
-                  <PopoverContent className="w-auto p-0" align="start">
+                  <PopoverContent className="w-auto p-0" align="start" dir="rtl">
                     <Calendar
                       mode="single"
                       selected={date}
