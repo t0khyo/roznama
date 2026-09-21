@@ -4,7 +4,7 @@ import { useState } from "react"
 import { useForm, Controller } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
-import { Calendar as CalendarIcon } from "lucide-react"
+import { Calendar as CalendarIcon, CircleCheckIcon } from "lucide-react"
 import { format } from "date-fns"
 import { ar } from "date-fns/locale"
 import { arSA } from "react-day-picker/locale"
@@ -79,7 +79,11 @@ export default function BookingForm() {
     })
 
     toast.promise(submitRequest, {
-      loading: "جارٍ إرسال طلب الحجز...",
+      loading: (
+        <span className="block w-full text-center font-cairo text-sm text-[#4A4038]">
+          جارٍ إرسال طلب الحجز...
+        </span>
+      ),
       success: () => {
         reset({
           name: "",
@@ -88,13 +92,47 @@ export default function BookingForm() {
           venue: "",
         })
         return {
-          message: "تم إرسال طلبك بنجاح!",
-          description: "سيتواصل معك فريقنا عبر الواتساب قريباً لتأكيد التفاصيل.",
+          message: (
+            <span className="block w-full text-center font-bold text-emerald-800 text-sm font-cairo">
+              تم إرسال طلبك بنجاح!
+            </span>
+          ),
+          description: (
+            <span className="block w-full text-center text-emerald-700 text-xs font-cairo mt-1">
+              سيتواصل معك فريقنا عبر الواتساب قريباً لتأكيد التفاصيل.
+            </span>
+          ),
+          className:
+            "border border-emerald-200 bg-emerald-50 text-emerald-800 shadow-md font-cairo",
+          duration: 5000,
+          classNames: {
+            content: "flex-1 flex flex-col items-center text-center justify-center",
+            title: "w-full text-center font-bold text-emerald-800",
+            description: "w-full text-center text-emerald-700",
+            icon: "text-emerald-600 self-center",
+          },
+          icon: <CircleCheckIcon className="size-5 text-emerald-600 shrink-0" />,
         }
       },
       error: () => ({
-        message: "تعذر إرسال الطلب",
-        description: "حدث خطأ غير متوقع، يرجى المحاولة مرة أخرى أو التواصل معنا مباشرة.",
+        message: (
+          <span className="block w-full text-center font-bold text-red-800 text-sm font-cairo">
+            تعذر إرسال الطلب
+          </span>
+        ),
+        description: (
+          <span className="block w-full text-center text-red-700 text-xs font-cairo mt-1">
+            حدث خطأ غير متوقع، يرجى المحاولة مرة أخرى أو التواصل معنا مباشرة.
+          </span>
+        ),
+        className:
+          "border border-red-200 bg-red-50 text-red-800 shadow-md font-cairo",
+        classNames: {
+          content: "flex-1 flex flex-col items-center text-center justify-center",
+          title: "w-full text-center font-bold text-red-800",
+          description: "w-full text-center text-red-700",
+          icon: "text-red-600 self-center",
+        },
       }),
     })
 
@@ -177,9 +215,8 @@ export default function BookingForm() {
                       <Button
                         type="button"
                         variant="outline"
-                        className={`w-full justify-start bg-[#F3EDE3] border-[#E5DDD0] rounded-xl px-4 py-6 font-cairo text-sm focus:border-[#C9973A] focus:bg-[#FAF8F3] transition-colors ${
-                          !field.value ? "text-[#C0B4A8]" : "text-[#1A1714]"
-                        } ${errors.date ? "!border-red-500" : ""}`}
+                        className={`w-full justify-start bg-[#F3EDE3] border-[#E5DDD0] rounded-xl px-4 py-6 font-cairo text-sm focus:border-[#C9973A] focus:bg-[#FAF8F3] transition-colors ${!field.value ? "text-[#C0B4A8]" : "text-[#1A1714]"
+                          } ${errors.date ? "!border-red-500" : ""}`}
                         dir="rtl"
                       />
                     }
