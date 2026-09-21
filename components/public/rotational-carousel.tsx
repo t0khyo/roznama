@@ -43,34 +43,31 @@ export default function WeddingCarousel({ weddings }: { weddings: Wedding[] }) {
           loop: true,
           direction: "rtl",
           dragFree: false,
+          duration: 30,
         }}
         plugins={[autoplay.current]}
         className="w-full"
       >
-        <CarouselContent className="-ml-3 py-8">
+        <CarouselContent className="-ms-3 py-8">
           {weddings.map((w, i) => {
             const isActive = i === current
             return (
               <CarouselItem
                 key={w.id}
-                className="pl-3 basis-[78%] sm:basis-[52%] md:basis-[36%] lg:basis-[30%]"
-                style={{
-                  opacity: isActive ? 1 : 0.6,
-                  transform: isActive ? "scale(1)" : "scale(0.88)",
-                  transition: "opacity 0.5s ease, transform 0.5s ease",
-                  zIndex: isActive ? 10 : 1,
-                }}
+                className="ps-3 basis-[78%] sm:basis-[52%] md:basis-[36%] lg:basis-[30%]"
               >
                 {/* Hero card */}
                 <div
-                  className="relative rounded-2xl overflow-hidden select-none"
+                  className="relative rounded-2xl overflow-hidden select-none transition-all duration-500 ease-out"
                   style={{
                     background: "#F3EDE3",
                     border: "1px solid #E5DDD0",
+                    opacity: isActive ? 1 : 0.65,
+                    transform: isActive ? "scale(1)" : "scale(0.88)",
+                    zIndex: isActive ? 10 : 1,
                     boxShadow: isActive
                       ? "0 28px 72px rgba(26,23,20,0.22), 0 4px 20px rgba(139,26,26,0.14)"
                       : "0 6px 20px rgba(26,23,20,0.08)",
-                    transition: "box-shadow 0.5s ease",
                   }}
                 >
                   {/* Image */}
