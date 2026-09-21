@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import { DirectionProvider } from "@/components/ui/direction"
+import { Toaster } from "@/components/ui/sonner"
 import "./globals.css"
 
 export const metadata: Metadata = {
@@ -14,6 +15,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <DirectionProvider direction="rtl">
           {children}
         </DirectionProvider>
+        <Toaster position="top-center" dir="rtl" />
       </body>
     </html>
   )

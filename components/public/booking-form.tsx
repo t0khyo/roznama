@@ -1,33 +1,108 @@
 "use client"
 
 import { useState } from "react"
+import { useForm, Controller } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { z } from "zod"
 import { Calendar as CalendarIcon } from "lucide-react"
 import { format } from "date-fns"
 import { ar } from "date-fns/locale"
+import { arSA } from "react-day-picker/locale"
+import { toast } from "sonner"
 
 import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
+import { Input } from "@/components/ui/input"
+import { Field, FieldLabel, FieldError } from "@/components/ui/field"
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
-import { arSA } from "react-day-picker/locale"
 
 const customArSA = { ...arSA, code: "ar-SA-u-ca-gregory" }
 
-export default function BookingForm() {
-  const [formData, setFormData] = useState({ name: "", phone: "", date: "", venue: "" })
-  const [date, setDate] = useState<Date>()
-  const [isCalendarOpen, setIsCalendarOpen] = useState(false)
-  const [formSent, setFormSent] = useState(false)
+const bookingSchema = z.object({
+  name: z
+    .string()
+    .trim()
+    .min(1, "يرجى كتابة الاسم")
+    .min(3, "يرجى كتابة الاسم كاملاً (3 أحرف على الأقل)")
+    .max(100, "الاسم طويل جداً"),
+  phone: z
+    .string()
+    .trim()
+    .min(1, "رقم الهاتف مطلوب")
+    .refine(
+      (val) => {
+        const clean = val.replace(/[\s-]/g, "")
+        return /^\+?\d{8,15}$/.test(clean)
+      },
+      { message: "يرجى إدخال رقم هاتف صحيح (مثال: +965 9804 0875)" }
+    ),
+  date: z.date({
+    required_error: "يرجى اختيار تاريخ المناسبة",
+    invalid_type_error: "يرجى اختيار تاريخ المناسبة",
+  }),
+  venue: z
+    .string()
+    .trim()
+    .max(100, "اسم المكان طويل جداً")
+    .optional(),
+})
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    setFormSent(true)
-    setFormData({ name: "", phone: "", date: "", venue: "" })
-    setDate(undefined)
-    setTimeout(() => setFormSent(false), 4000)
+type BookingFormData = z.infer<typeof bookingSchema>
+
+export default function BookingForm() {
+  const [isCalendarOpen, setIsCalendarOpen] = useState(false)
+
+  const {
+    register,
+    handleSubmit,
+    control,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm<BookingFormData>({
+    resolver: zodResolver(bookingSchema),
+    defaultValues: {
+      name: "",
+      phone: "",
+      venue: "",
+    },
+  })
+
+  const onSubmit = async (data: BookingFormData) => {
+    const submitRequest = new Promise<{ name: string }>((resolve) => {
+      setTimeout(() => {
+        resolve({ name: data.name })
+      }, 1200)
+    })
+
+    toast.promise(submitRequest, {
+      loading: "جارٍ إرسال طلب الحجز...",
+      success: () => {
+        reset({
+          name: "",
+          phone: "",
+          date: undefined,
+          venue: "",
+        })
+        return {
+          message: "تم إرسال طلبك بنجاح!",
+          description: "سيتواصل معك فريقنا عبر الواتساب قريباً لتأكيد التفاصيل.",
+        }
+      },
+      error: () => ({
+        message: "تعذر إرسال الطلب",
+        description: "حدث خطأ غير متوقع، يرجى المحاولة مرة أخرى أو التواصل معنا مباشرة.",
+      }),
+    })
+
+    try {
+      await submitRequest
+    } catch {
+      // Handled by toast.promise
+    }
   }
 
   return (
@@ -46,31 +121,72 @@ export default function BookingForm() {
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-5">
-          {[
-            { key: "name", label: "الاسم", type: "text", placeholder: "محمد بن خالد بن سعد المطيري" },
-            { key: "phone", label: "رقم الهاتف", type: "tel", placeholder: "+965 9804 0875" },
-            { key: "date", label: "تاريخ المناسبة", type: "date", placeholder: "" },
-            { key: "venue", label: "المكان", type: "text", placeholder: "قاعة الملوك — الجهراء" },
-          ].map(({ key, label, type, placeholder }) => (
-            <div key={key} className="group">
-              <label className="block font-cairo text-sm font-medium text-[#4A4038] mb-2">{label}</label>
-              {key === "date" ? (
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-5" noValidate>
+          <Field data-invalid={!!errors.name} className="space-y-2">
+            <FieldLabel htmlFor="booking-name" className="font-cairo text-sm font-medium text-[#4A4038]">
+              الاسم
+            </FieldLabel>
+            <Input
+              id="booking-name"
+              type="text"
+              placeholder="محمد بن خالد بن سعد المطيري"
+              aria-invalid={!!errors.name}
+              className="w-full bg-[#F3EDE3] border border-[#E5DDD0] rounded-xl px-4 py-3.5 h-auto font-cairo text-sm text-[#1A1714] placeholder:text-[#C0B4A8] focus-visible:border-[#C9973A] focus-visible:bg-[#FAF8F3] focus-visible:ring-0 transition-colors shadow-none"
+              dir="rtl"
+              {...register("name")}
+            />
+            {errors.name && (
+              <FieldError className="font-cairo text-xs text-red-600">
+                {errors.name.message}
+              </FieldError>
+            )}
+          </Field>
+
+          <Field data-invalid={!!errors.phone} className="space-y-2">
+            <FieldLabel htmlFor="booking-phone" className="font-cairo text-sm font-medium text-[#4A4038]">
+              رقم الهاتف
+            </FieldLabel>
+            <Input
+              id="booking-phone"
+              type="tel"
+              placeholder="+965 9804 0875"
+              aria-invalid={!!errors.phone}
+              className="w-full bg-[#F3EDE3] border border-[#E5DDD0] rounded-xl px-4 py-3.5 h-auto font-cairo text-sm text-[#1A1714] placeholder:text-[#C0B4A8] focus-visible:border-[#C9973A] focus-visible:bg-[#FAF8F3] focus-visible:ring-0 transition-colors shadow-none"
+              dir="ltr"
+              {...register("phone")}
+            />
+            {errors.phone && (
+              <FieldError className="font-cairo text-xs text-red-600">
+                {errors.phone.message}
+              </FieldError>
+            )}
+          </Field>
+
+          <Controller
+            control={control}
+            name="date"
+            render={({ field }) => (
+              <Field data-invalid={!!errors.date} className="space-y-2">
+                <FieldLabel htmlFor="booking-date" className="font-cairo text-sm font-medium text-[#4A4038]">
+                  تاريخ المناسبة
+                </FieldLabel>
                 <Popover open={isCalendarOpen} onOpenChange={setIsCalendarOpen}>
                   <PopoverTrigger
+                    id="booking-date"
                     render={
                       <Button
+                        type="button"
                         variant="outline"
                         className={`w-full justify-start bg-[#F3EDE3] border-[#E5DDD0] rounded-xl px-4 py-6 font-cairo text-sm focus:border-[#C9973A] focus:bg-[#FAF8F3] transition-colors ${
-                          !date ? "text-[#C0B4A8]" : "text-[#1A1714]"
-                        }`}
+                          !field.value ? "text-[#C0B4A8]" : "text-[#1A1714]"
+                        } ${errors.date ? "!border-red-500" : ""}`}
                         dir="rtl"
                       />
                     }
                   >
                     <CalendarIcon className="ml-2 h-4 w-4 opacity-50" />
-                    {date ? (
-                      format(date, "PPP", { locale: ar })
+                    {field.value ? (
+                      format(field.value, "PPP", { locale: ar })
                     ) : (
                       <span>اختر التاريخ</span>
                     )}
@@ -78,11 +194,10 @@ export default function BookingForm() {
                   <PopoverContent className="w-auto p-0" align="start" dir="rtl">
                     <Calendar
                       mode="single"
-                      selected={date}
+                      selected={field.value}
                       onSelect={(d) => {
-                        setDate(d)
+                        field.onChange(d)
                         if (d) {
-                          setFormData({ ...formData, date: d.toISOString() })
                           setIsCalendarOpen(false)
                         }
                       }}
@@ -93,41 +208,45 @@ export default function BookingForm() {
                     />
                   </PopoverContent>
                 </Popover>
-              ) : (
-                <input
-                  type={type}
-                  required
-                  placeholder={placeholder}
-                  value={formData[key as keyof typeof formData]}
-                  onChange={(e) => setFormData({ ...formData, [key]: e.target.value })}
-                  className="w-full bg-[#F3EDE3] border border-[#E5DDD0] rounded-xl px-4 py-3.5 font-cairo text-sm text-[#1A1714] placeholder-[#C0B4A8] focus:border-[#C9973A] focus:bg-[#FAF8F3] transition-colors"
-                  dir={key === "phone" ? "ltr" : "rtl"}
-                />
-              )}
+                {errors.date && (
+                  <FieldError className="font-cairo text-xs text-red-600">
+                    {errors.date.message}
+                  </FieldError>
+                )}
+              </Field>
+            )}
+          />
+
+          <Field data-invalid={!!errors.venue} className="space-y-2">
+            <div className="flex items-center justify-between">
+              <FieldLabel htmlFor="booking-venue" className="font-cairo text-sm font-medium text-[#4A4038]">
+                المكان
+              </FieldLabel>
             </div>
-          ))}
+            <Input
+              id="booking-venue"
+              type="text"
+              placeholder="قاعة الملوك — الجهراء"
+              aria-invalid={!!errors.venue}
+              className="w-full bg-[#F3EDE3] border border-[#E5DDD0] rounded-xl px-4 py-3.5 h-auto font-cairo text-sm text-[#1A1714] placeholder:text-[#C0B4A8] focus-visible:border-[#C9973A] focus-visible:bg-[#FAF8F3] focus-visible:ring-0 transition-colors shadow-none"
+              dir="rtl"
+              {...register("venue")}
+            />
+            {errors.venue && (
+              <FieldError className="font-cairo text-xs text-red-600">
+                {errors.venue.message}
+              </FieldError>
+            )}
+          </Field>
 
           <Button
             type="submit"
+            disabled={isSubmitting}
             className="w-full bg-[#8B1A1A] text-[#FAF8F3] font-cairo font-semibold py-4 h-auto rounded-xl text-base hover:bg-[#C9973A] transition-colors duration-300 mt-2"
           >
-            إرسال الطلب
+            {isSubmitting ? "جارٍ الإرسال..." : "إرسال الطلب"}
           </Button>
         </form>
-
-        {/* Success toast */}
-        {formSent && (
-          <div className="mt-6 bg-[#F5EFE6] border border-[#8B1A1A]/25 rounded-xl px-5 py-4 flex items-center gap-3 menu-open">
-            <div className="w-8 h-8 rounded-full bg-[#8B1A1A]/10 flex items-center justify-center flex-shrink-0">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <path d="M3 8l3.5 3.5L13 4.5" stroke="#8B1A1A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </div>
-            <p className="font-cairo text-sm text-[#4A4038]">
-              تم إرسال طلبك بنجاح، سنتواصل معك قريباً
-            </p>
-          </div>
-        )}
       </div>
     </section>
   )
