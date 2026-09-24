@@ -10,40 +10,16 @@ import {
 } from "@/components/ui/table"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { MoreHorizontalIcon } from "lucide-react"
-import type { BookingRequest, BookingStatus } from "@/types"
+import { ClockIcon, CheckCircle2Icon, XCircleIcon } from "lucide-react"
+import { FaWhatsapp } from "react-icons/fa6"
+import { RequestStatus, type EventRequest, REQUEST_STATUS_LABELS } from "@/types"
 import { formatArabicDate } from "@/lib/date-utils"
-
-const statusConfig: Record<
-  BookingStatus,
-  { label: string; className: string }
-> = {
-  pending: {
-    label: "قيد الانتظار",
-    className:
-      "bg-[#C9973A]/10 text-[#C9973A] border border-[#C9973A]/25 hover:bg-[#C9973A]/10 font-cairo text-xs",
-  },
-  approved: {
-    label: "مقبول",
-    className:
-      "bg-emerald-50 text-emerald-700 border border-emerald-200 hover:bg-emerald-50 font-cairo text-xs",
-  },
-  rejected: {
-    label: "مرفوض",
-    className:
-      "bg-red-50 text-red-600 border border-red-200 hover:bg-red-50 font-cairo text-xs",
-  },
-}
+import { formatWhatsAppUrl } from "@/lib/whatsapp"
+import { cn } from "@/lib/utils"
 
 interface BookingsTableProps {
-  bookings: BookingRequest[]
-  onStatusChange: (id: number, status: BookingStatus) => Promise<void>
+  bookings: EventRequest[]
+  onStatusChange: (id: string, status: RequestStatus) => Promise<void>
 }
 
 export function BookingsTable({ bookings, onStatusChange }: BookingsTableProps) {
@@ -58,7 +34,7 @@ export function BookingsTable({ bookings, onStatusChange }: BookingsTableProps) 
             <TableHead className="font-cairo font-semibold text-[#6B5E52] text-sm text-right">المكان</TableHead>
             <TableHead className="font-cairo font-semibold text-[#6B5E52] text-sm text-right">تاريخ الطلب</TableHead>
             <TableHead className="font-cairo font-semibold text-[#6B5E52] text-sm text-right">الحالة</TableHead>
-            <TableHead className="w-[48px]" />
+            <TableHead className="w-[120px] font-cairo font-semibold text-[#6B5E52] text-sm text-center">الإجراءات</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -70,7 +46,7 @@ export function BookingsTable({ bookings, onStatusChange }: BookingsTableProps) 
             </TableRow>
           )}
           {bookings.map((b) => {
-            const sc = statusConfig[b.status]
+            const sc = REQUEST_STATUS_LABELS[b.status] ?? REQUEST_STATUS_LABELS.NEW
             return (
               <TableRow
                 key={b.id}
@@ -79,17 +55,33 @@ export function BookingsTable({ bookings, onStatusChange }: BookingsTableProps) 
                 <TableCell className="font-cairo font-semibold text-[#1A1714] text-sm">
                   {b.name}
                 </TableCell>
-                <TableCell className="font-cairo text-[#4A4038] text-sm tabular-nums" dir="ltr">
-                  {b.phone}
+                <TableCell className="font-cairo text-sm text-right">
+                  <div className="flex items-center gap-2 justify-start">
+                    <span className="text-[#1A1714] font-medium tabular-nums" dir="ltr">
+                      {b.phone}
+                    </span>
+                    <a
+                      href={formatWhatsAppUrl(b.phone)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center size-6 rounded-full bg-emerald-50 text-emerald-600 hover:bg-emerald-600 hover:text-white border border-emerald-200 transition-all shadow-2xs hover:scale-105 shrink-0"
+                      title="مراسلة عبر واتساب"
+                      aria-label={`مراسلة ${b.name} عبر واتساب`}
+                    >
+                      <FaWhatsapp className="size-3.5" />
+                    </a>
+                  </div>
                 </TableCell>
                 <TableCell className="font-cairo text-[#4A4038] text-sm tabular-nums">
-                  {formatArabicDate(b.date)}
+                  {b.preferredDate
+                    ? formatArabicDate(new Date(b.preferredDate).toISOString())
+                    : "—"}
                 </TableCell>
                 <TableCell className="font-cairo text-[#4A4038] text-sm max-w-[180px] truncate">
-                  {b.venue}
+                  {b.venue ?? "—"}
                 </TableCell>
                 <TableCell className="font-cairo text-[#A09080] text-xs tabular-nums">
-                  {new Date(b.submittedAt).toLocaleDateString("ar-KW", {
+                  {new Date(b.createdAt).toLocaleDateString("ar-KW", {
                     year: "numeric",
                     month: "short",
                     day: "numeric",
@@ -99,46 +91,64 @@ export function BookingsTable({ bookings, onStatusChange }: BookingsTableProps) 
                   <Badge className={sc.className}>{sc.label}</Badge>
                 </TableCell>
                 <TableCell>
-                  <DropdownMenu>
-                    <DropdownMenuTrigger
-                      render={
-                        <Button
-                          variant="ghost"
-                          size="icon-sm"
-                          className="size-7 text-[#6B5E52] hover:text-[#1A1714] hover:bg-[#E5DDD0]/60"
-                          aria-label="خيارات"
-                        />
-                      }
+                  <div className="flex items-center gap-1.5 justify-center">
+                    {/* جديد (New) */}
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="icon-sm"
+                      onClick={() => onStatusChange(b.id, RequestStatus.NEW)}
+                      disabled={b.status === RequestStatus.NEW}
+                      title="تعيين كـ جديد"
+                      aria-label="جديد"
+                      className={cn(
+                        "size-7 rounded-lg transition-all",
+                        b.status === RequestStatus.NEW
+                          ? "bg-[#C9973A]/20 text-[#9E6E1A] border border-[#C9973A]/40 cursor-default opacity-100 shadow-2xs"
+                          : "text-[#A09080] hover:text-[#C9973A] hover:bg-[#C9973A]/10 border border-transparent hover:border-[#C9973A]/25"
+                      )}
                     >
-                      <MoreHorizontalIcon className="size-4" />
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent
-                      align="start"
-                      className="font-cairo text-sm bg-[#FAF8F3] border-[#E5DDD0]"
+                      <ClockIcon className="size-3.5" />
+                    </Button>
+
+                    {/* منشور (Published) */}
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="icon-sm"
+                      onClick={() => onStatusChange(b.id, RequestStatus.PUBLISHED)}
+                      disabled={b.status === RequestStatus.PUBLISHED}
+                      title="تعيين كـ منشور"
+                      aria-label="منشور"
+                      className={cn(
+                        "size-7 rounded-lg transition-all",
+                        b.status === RequestStatus.PUBLISHED
+                          ? "bg-emerald-100 text-emerald-800 border border-emerald-300 cursor-default opacity-100 shadow-2xs"
+                          : "text-[#A09080] hover:text-emerald-700 hover:bg-emerald-50 border border-transparent hover:border-emerald-200"
+                      )}
                     >
-                      <DropdownMenuItem
-                        className="text-emerald-700 focus:text-emerald-700 focus:bg-emerald-50 cursor-pointer"
-                        onClick={() => onStatusChange(b.id, "approved")}
-                        disabled={b.status === "approved"}
-                      >
-                        قبول الطلب
-                      </DropdownMenuItem>
-                      <DropdownMenuItem
-                        className="text-red-600 focus:text-red-600 focus:bg-red-50 cursor-pointer"
-                        onClick={() => onStatusChange(b.id, "rejected")}
-                        disabled={b.status === "rejected"}
-                      >
-                        رفض الطلب
-                      </DropdownMenuItem>
-                      <DropdownMenuItem
-                        className="text-[#C9973A] focus:text-[#C9973A] focus:bg-[#C9973A]/10 cursor-pointer"
-                        onClick={() => onStatusChange(b.id, "pending")}
-                        disabled={b.status === "pending"}
-                      >
-                        إعادة للانتظار
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
+                      <CheckCircle2Icon className="size-3.5" />
+                    </Button>
+
+                    {/* مرفوض (Rejected) */}
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="icon-sm"
+                      onClick={() => onStatusChange(b.id, RequestStatus.CLOSED)}
+                      disabled={b.status === RequestStatus.CLOSED}
+                      title="تعيين كـ مرفوض"
+                      aria-label="مرفوض"
+                      className={cn(
+                        "size-7 rounded-lg transition-all",
+                        b.status === RequestStatus.CLOSED
+                          ? "bg-red-100 text-red-800 border border-red-300 cursor-default opacity-100 shadow-2xs"
+                          : "text-[#A09080] hover:text-red-700 hover:bg-red-50 border border-transparent hover:border-red-200"
+                      )}
+                    >
+                      <XCircleIcon className="size-3.5" />
+                    </Button>
+                  </div>
                 </TableCell>
               </TableRow>
             )

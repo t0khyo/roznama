@@ -8,12 +8,12 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
-import type { Wedding } from "@/types"
+import type { Event } from "@/types"
 
 interface DeleteWeddingDialogProps {
   open: boolean
   onOpenChange: (open: boolean) => void
-  wedding: Wedding | null
+  wedding: Event | null
   onConfirm: () => Promise<void>
 }
 

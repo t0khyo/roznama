@@ -8,7 +8,8 @@ import {
   ClockIcon,
 } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { getDashboardStats, type DashboardStats } from "@/lib/data/stats"
+import type { DashboardStats } from "@/lib/data/stats"
+import { getDashboardStatsAction } from "@/app/admin/actions"
 import { cn } from "@/lib/utils"
 
 const statConfig = [
@@ -84,7 +85,7 @@ export default function AdminOverviewPage() {
   const [stats, setStats] = useState<DashboardStats | null>(null)
 
   useEffect(() => {
-    getDashboardStats().then(setStats)
+    getDashboardStatsAction().then(setStats)
   }, [])
 
   return (

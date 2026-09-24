@@ -9,6 +9,7 @@ import { format } from "date-fns"
 import { ar } from "date-fns/locale"
 import { arSA } from "react-day-picker/locale"
 import { toast } from "sonner"
+import { submitBookingAction } from "@/app/(public)/actions"
 
 import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
@@ -72,10 +73,11 @@ export default function BookingForm() {
   })
 
   const onSubmit = async (data: BookingFormData) => {
-    const submitRequest = new Promise<{ name: string }>((resolve) => {
-      setTimeout(() => {
-        resolve({ name: data.name })
-      }, 1200)
+    const submitRequest = submitBookingAction({
+      name: data.name,
+      phone: data.phone,
+      preferredDate: data.date,
+      venue: data.venue || undefined,
     })
 
     toast.promise(submitRequest, {
@@ -122,7 +124,7 @@ export default function BookingForm() {
         ),
         description: (
           <span className="block w-full text-center text-red-700 text-xs font-cairo mt-1">
-            حدث خطأ غير متوقع، يرجى المحاولة مرة أخرى أو التواصل معنا مباشرة.
+            حدث خطأ غير متوقع، يرجى المحاولة مرة أخرى أو التواصل معنا مباشرة عبر الواتساب.
           </span>
         ),
         className:

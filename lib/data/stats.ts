@@ -1,25 +1,25 @@
-import { getWeddings } from "@/lib/data/weddings"
-import { getBookingRequests } from "@/lib/data/bookings"
+import { getEvents } from "@/lib/data/events"
+import { getEventRequests } from "@/lib/data/event-requests"
 
 export interface DashboardStats {
   totalWeddings: number
-  upcomingWeddings: number   // date >= today
+  upcomingWeddings: number  // eventDate >= today
   totalBookings: number
-  pendingBookings: number
+  pendingBookings: number   // status === NEW
 }
 
 export async function getDashboardStats(): Promise<DashboardStats> {
-  const [weddings, bookings] = await Promise.all([
-    getWeddings(),
-    getBookingRequests(),
+  const [events, requests] = await Promise.all([
+    getEvents(),
+    getEventRequests(),
   ])
   const today = new Date()
   today.setHours(0, 0, 0, 0)
 
   return {
-    totalWeddings: weddings.length,
-    upcomingWeddings: weddings.filter((w) => new Date(w.date) >= today).length,
-    totalBookings: bookings.length,
-    pendingBookings: bookings.filter((b) => b.status === "pending").length,
+    totalWeddings: events.length,
+    upcomingWeddings: events.filter((e) => new Date(e.eventDate) >= today).length,
+    totalBookings: requests.length,
+    pendingBookings: requests.filter((r) => r.status === "NEW").length,
   }
 }

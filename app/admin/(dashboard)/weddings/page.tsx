@@ -7,35 +7,36 @@ import { WeddingsTable } from "@/components/admin/weddings-table"
 import { WeddingFormDialog } from "@/components/admin/wedding-form-dialog"
 import { DeleteWeddingDialog } from "@/components/admin/delete-wedding-dialog"
 import {
-  getWeddings,
-  createWedding,
-  updateWedding,
-  deleteWedding,
-} from "@/lib/data/weddings"
-import type { Wedding } from "@/types"
+  getEventsAction,
+  createEventAction,
+  updateEventAction,
+  deleteEventAction,
+} from "@/app/admin/events/actions"
+import type { Event } from "@/types"
+import type { CreateEventInput } from "@/lib/data/events"
 
 export default function AdminWeddingsPage() {
-  const [weddings, setWeddings] = useState<Wedding[]>([])
+  const [weddings, setWeddings] = useState<Event[]>([])
   const [formOpen, setFormOpen] = useState(false)
-  const [editTarget, setEditTarget] = useState<Wedding | null>(null)
-  const [deleteTarget, setDeleteTarget] = useState<Wedding | null>(null)
+  const [editTarget, setEditTarget] = useState<Event | null>(null)
+  const [deleteTarget, setDeleteTarget] = useState<Event | null>(null)
 
-  const refresh = () => getWeddings().then(setWeddings)
+  const refresh = () => getEventsAction().then(setWeddings)
 
   useEffect(() => { refresh() }, [])
 
-  const handleSave = async (data: Omit<Wedding, "id">) => {
+  const handleSave = async (data: CreateEventInput) => {
     if (editTarget) {
-      await updateWedding(editTarget.id, data)
+      await updateEventAction(editTarget.id, data)
     } else {
-      await createWedding(data)
+      await createEventAction(data)
     }
     await refresh()
   }
 
   const handleDelete = async () => {
     if (!deleteTarget) return
-    await deleteWedding(deleteTarget.id)
+    await deleteEventAction(deleteTarget.id)
     setDeleteTarget(null)
     await refresh()
   }
@@ -45,7 +46,7 @@ export default function AdminWeddingsPage() {
     setFormOpen(true)
   }
 
-  const openEdit = (w: Wedding) => {
+  const openEdit = (w: Event) => {
     setEditTarget(w)
     setFormOpen(true)
   }

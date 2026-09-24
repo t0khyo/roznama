@@ -11,13 +11,13 @@ import {
 } from "@/components/ui/table"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import type { Wedding } from "@/types"
+import type { Event } from "@/types"
 import { formatArabicDate } from "@/lib/date-utils"
 
 interface WeddingsTableProps {
-  weddings: Wedding[]
-  onEdit: (wedding: Wedding) => void
-  onDelete: (wedding: Wedding) => void
+  weddings: Event[]
+  onEdit: (wedding: Event) => void
+  onDelete: (wedding: Event) => void
 }
 
 export function WeddingsTable({ weddings, onEdit, onDelete }: WeddingsTableProps) {
@@ -46,7 +46,7 @@ export function WeddingsTable({ weddings, onEdit, onDelete }: WeddingsTableProps
             </TableRow>
           )}
           {weddings.map((w) => {
-            const isPast = new Date(w.date) < today
+            const isPast = new Date(w.eventDate) < today
             return (
               <TableRow
                 key={w.id}
@@ -56,10 +56,10 @@ export function WeddingsTable({ weddings, onEdit, onDelete }: WeddingsTableProps
                   {w.tribe}
                 </TableCell>
                 <TableCell className="font-cairo text-[#4A4038] text-sm">
-                  {w.groom}
+                  {w.groomName}
                 </TableCell>
                 <TableCell className="font-cairo text-[#4A4038] text-sm tabular-nums">
-                  {formatArabicDate(w.date)}
+                  {formatArabicDate(new Date(w.eventDate).toISOString())}
                 </TableCell>
                 <TableCell>
                   <Badge
@@ -73,9 +73,9 @@ export function WeddingsTable({ weddings, onEdit, onDelete }: WeddingsTableProps
                   </Badge>
                 </TableCell>
                 <TableCell>
-                  {w.image ? (
+                  {w.imageUrl ? (
                     <img
-                      src={w.image}
+                      src={w.imageUrl}
                       alt={`دعوة ${w.tribe}`}
                       className="w-12 h-12 rounded-lg object-cover border border-[#E5DDD0]"
                     />

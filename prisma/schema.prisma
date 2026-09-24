@@ -1,0 +1,45 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+enum RequestStatus {
+  NEW
+  CONTACTED
+  CLOSED
+  PUBLISHED
+}
+
+model Event {
+  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  tribe      String
+  groomName  String
+  eventDate  DateTime @db.Date
+  venue      String?
+  imageUrl   String
+  galleryUrl String?
+  slug       String   @unique
+  shortCode  String   @unique
+  clickCount Int      @default(0)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@map("events")
+}
+
+model EventRequest {
+  id            String        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name          String
+  phone         String
+  preferredDate DateTime?     @db.Date
+  venue         String?
+  status        RequestStatus @default(NEW)
+  createdAt     DateTime      @default(now())
+
+  @@map("event_requests")
+}

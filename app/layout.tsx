@@ -5,8 +5,8 @@ import { CircleCheckIcon } from "lucide-react"
 import "./globals.css"
 
 export const metadata: Metadata = {
-  title: "سناب مطير — مناسبات الكويت",
-  description: "مرجعكم للتنسيق والتذكير بالمناسبات في الكويت",
+  title: "سناب مطير — مناسبات",
+  description: "مرجعكم للتنسيق والتذكير بالمناسبات",
 }
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

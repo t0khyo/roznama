@@ -11,7 +11,7 @@ export default function Footer() {
               <img src="/logo.png" alt="سناب مطير" className="h-12 w-auto object-contain rounded-lg" />
             </div>
             <p className="font-cairo text-[#A09080] text-sm max-w-xs">
-              مرجعكم للتنسيق والتذكير بالمناسبات في الكويت
+              مرجعكم للتنسيق والتذكير بمناسبات مطير
             </p>
           </div>
 
