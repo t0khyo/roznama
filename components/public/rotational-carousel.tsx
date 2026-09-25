@@ -72,7 +72,7 @@ export default function WeddingCarousel({ weddings }: { weddings: Wedding[] }) {
                 >
                   {/* Image */}
                   <div
-                    className="relative aspect-[4/3] overflow-hidden bg-[#1A1714] cursor-pointer group"
+                    className="relative aspect-[3/4] overflow-hidden bg-[#1A1714] cursor-pointer group"
                     onClick={() => setLightboxImage(w)}
                   >
                     {/* Blurred background layer */}
