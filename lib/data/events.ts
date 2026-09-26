@@ -1,5 +1,5 @@
 import "server-only"
-import { db } from "@/lib/db"
+import { getDb } from "@/lib/db"
 import type { Event } from "@prisma/client"
 
 export type { Event }
@@ -22,7 +22,7 @@ function buildSlug(groomName: string, eventDate: Date): string {
 
 async function generateSlug(groomName: string, eventDate: Date): Promise<string> {
   const base = buildSlug(groomName, eventDate)
-  const existing = await db.event.findUnique({ where: { slug: base } })
+  const existing = await getDb().event.findUnique({ where: { slug: base } })
   if (!existing) return base
   // Collision: append random 4-char suffix
   const suffix = Math.random().toString(36).slice(2, 6)
@@ -39,7 +39,7 @@ async function generateShortCode(): Promise<string> {
     const code = Array.from({ length: 5 }, () =>
       SHORT_CHARS[Math.floor(Math.random() * SHORT_CHARS.length)]
     ).join("")
-    const existing = await db.event.findUnique({ where: { shortCode: code } })
+    const existing = await getDb().event.findUnique({ where: { shortCode: code } })
     if (!existing) return code
   }
   throw new Error("Failed to generate unique shortCode after 10 attempts")
@@ -48,15 +48,15 @@ async function generateShortCode(): Promise<string> {
 // ── Public read functions ────────────────────────────────────────────────────
 
 export async function getEvents(): Promise<Event[]> {
-  return db.event.findMany({ orderBy: { eventDate: "asc" } })
+  return getDb().event.findMany({ orderBy: { eventDate: "asc" } })
 }
 
 export async function getEventBySlug(slug: string): Promise<Event | null> {
-  return db.event.findUnique({ where: { slug } })
+  return getDb().event.findUnique({ where: { slug } })
 }
 
 export async function getEventByShortCode(code: string): Promise<Event | null> {
-  return db.event.findUnique({ where: { shortCode: code } })
+  return getDb().event.findUnique({ where: { shortCode: code } })
 }
 
 // ── Admin write functions — call only from authed Server Actions ─────────────
@@ -75,23 +75,23 @@ export type UpdateEventInput = Partial<CreateEventInput>
 export async function createEvent(data: CreateEventInput): Promise<Event> {
   const slug = await generateSlug(data.groomName, data.eventDate)
   const shortCode = await generateShortCode()
-  return db.event.create({
+  return getDb().event.create({
     data: { ...data, slug, shortCode },
   })
 }
 
 export async function updateEvent(id: string, data: UpdateEventInput): Promise<Event> {
-  return db.event.update({ where: { id }, data })
+  return getDb().event.update({ where: { id }, data })
 }
 
 export async function deleteEvent(id: string): Promise<void> {
-  await db.event.delete({ where: { id } })
+  await getDb().event.delete({ where: { id } })
 }
 
 // ── Short-link click tracking ────────────────────────────────────────────────
 
 export async function incrementClickCount(id: string): Promise<void> {
-  await db.event.update({
+  await getDb().event.update({
     where: { id },
     data: { clickCount: { increment: 1 } },
   })

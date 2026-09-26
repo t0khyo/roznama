@@ -1,0 +1,8 @@
+# Wrangler / OpenNext preview reads this file (not .env).
+# Copy to .dev.vars and fill in real values. Never commit .dev.vars.
+#
+# DATABASE_URL must be Neon's POOLED connection string (hostname contains "-pooler").
+# DIRECT_URL is the non-pooled host — Prisma CLI migrations only, not the Worker.
+
+DATABASE_URL="postgresql://USER:PASSWORD@ep-XXXX-pooler.REGION.aws.neon.tech/neondb?sslmode=require"
+DIRECT_URL="postgresql://USER:PASSWORD@ep-XXXX.REGION.aws.neon.tech/neondb?sslmode=require"

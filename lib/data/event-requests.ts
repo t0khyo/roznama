@@ -1,5 +1,5 @@
 import "server-only"
-import { db } from "@/lib/db"
+import { getDb } from "@/lib/db"
 import { RequestStatus, type EventRequest } from "@prisma/client"
 
 export { RequestStatus }
@@ -16,12 +16,12 @@ export interface CreateEventRequestInput {
 export async function createEventRequest(
   data: CreateEventRequestInput
 ): Promise<EventRequest> {
-  return db.eventRequest.create({ data })
+  return getDb().eventRequest.create({ data })
 }
 
 /** Admin only — call only from authed Server Actions */
 export async function getEventRequests(): Promise<EventRequest[]> {
-  return db.eventRequest.findMany({ orderBy: { createdAt: "desc" } })
+  return getDb().eventRequest.findMany({ orderBy: { createdAt: "desc" } })
 }
 
 /** Admin only — call only from authed Server Actions */
@@ -29,5 +29,5 @@ export async function updateRequestStatus(
   id: string,
   status: RequestStatus
 ): Promise<EventRequest> {
-  return db.eventRequest.update({ where: { id }, data: { status } })
+  return getDb().eventRequest.update({ where: { id }, data: { status } })
 }
