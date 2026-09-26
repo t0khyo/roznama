@@ -1,21 +1,19 @@
-import type { Metadata } from "next"
-import { DirectionProvider } from "@/components/ui/direction"
-import { Toaster } from "@/components/ui/sonner"
-import { CircleCheckIcon } from "lucide-react"
-import "./globals.css"
+import type { Metadata } from "next";
+import { DirectionProvider } from "@/components/ui/direction";
+import { Toaster } from "@/components/ui/sonner";
+import { CircleCheckIcon } from "lucide-react";
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "سناب مطير — مناسبات",
-  description: "مرجعكم للتنسيق والتذكير بالمناسبات",
-}
+  description: "مرجعكم للتنسيق والتذكير بمناسبات مطير",
+};
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="ar" dir="rtl" className="h-full" suppressHydrationWarning>
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
-        <DirectionProvider direction="rtl">
-          {children}
-        </DirectionProvider>
+        <DirectionProvider direction="rtl">{children}</DirectionProvider>
         <Toaster
           position="top-center"
           dir="rtl"
@@ -32,5 +30,5 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         />
       </body>
     </html>
-  )
+  );
 }
