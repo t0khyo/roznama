@@ -20,6 +20,7 @@
 # OpenNext and Cloudflare
 /.open-next/
 /.wrangler/
+/lib/generated/prisma/
 
 # production
 /build
