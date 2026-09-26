@@ -1,13 +1,17 @@
 {
-    "$schema": "node_modules/wrangler/config-schema.json",
-    "name": "roznama",
-    "main": ".open-next/worker.js",
-    "compatibility_date": "2026-09-01",
-    "compatibility_flags": [
-        "nodejs_compat"
-    ],
-    "assets": {
-        "directory": ".open-next/assets",
-        "binding": "ASSETS"
-    }
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "roznama",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2026-09-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS",
+  },
+  "vars": {
+    "ADMIN_USERNAME": "admin",
+    "R2_BUCKET_NAME": "roznama",
+    "R2_PUBLIC_URL": "https://pub-d6cae836e48e4f28a3cd8a7aff1fbe5d.r2.dev",
+  },
+  "r2_buckets": [{ "binding": "IMAGES", "bucket_name": "roznama" }],
 }
