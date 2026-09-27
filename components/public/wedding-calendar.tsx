@@ -3,8 +3,9 @@
 import { useState } from "react"
 import { arSA } from "react-day-picker/locale"
 import { Calendar } from "@/components/ui/calendar"
-import { weddingsData, arabicMonths } from "@/lib/constants"
+import { arabicMonths } from "@/lib/constants"
 import { formatArabicDate } from "@/lib/date-utils"
+import type { Event } from "@prisma/client"
 import {
   Dialog,
   DialogContent,
@@ -14,7 +15,7 @@ import {
 
 const customArSA = { ...arSA, code: "ar-SA-u-ca-gregory" }
 
-export default function WeddingCalendar() {
+export default function WeddingCalendar({ events }: { events: Event[] }) {
   const [month, setMonth] = useState<Date>(new Date(2026, 8, 1))
   const [dialogOpen, setDialogOpen] = useState(false)
   const [dialogDay, setDialogDay] = useState<Date | undefined>(undefined)
@@ -22,16 +23,16 @@ export default function WeddingCalendar() {
   const year = month.getFullYear()
   const monthIndex = month.getMonth()
 
-  const weddingsThisMonth = weddingsData.filter((w) => {
-    const d = new Date(w.date)
+  const weddingsThisMonth = events.filter((w) => {
+    const d = new Date(w.eventDate)
     return d.getFullYear() === year && d.getMonth() === monthIndex
   })
 
-  const weddingDays = weddingsData.map((w) => new Date(w.date))
+  const weddingDays = events.map((w) => new Date(w.eventDate))
 
   const dialogWeddings = dialogDay
-    ? weddingsData.filter(
-        (w) => new Date(w.date).toDateString() === dialogDay.toDateString()
+    ? events.filter(
+        (w) => new Date(w.eventDate).toDateString() === dialogDay.toDateString()
       )
     : []
 
@@ -59,8 +60,8 @@ export default function WeddingCalendar() {
             selected={undefined}
             onSelect={(day) => {
               if (!day) return
-              const hasWedding = weddingsData.some(
-                (w) => new Date(w.date).toDateString() === day.toDateString()
+              const hasWedding = events.some(
+                (w) => new Date(w.eventDate).toDateString() === day.toDateString()
               )
               if (hasWedding) {
                 setDialogDay(day)
@@ -132,19 +133,19 @@ export default function WeddingCalendar() {
               >
                 <div className="w-10 h-10 rounded-full bg-[#C9973A] flex items-center justify-center flex-shrink-0 shadow-sm shadow-[#C9973A]/25">
                   <span className="font-cairo font-bold text-sm text-[#FAF8F3]">
-                    {new Date(w.date).getDate()}
+                    {new Date(w.eventDate).getDate()}
                   </span>
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="font-cairo font-bold text-sm text-[#1A1714]">
-                    {w.groom}
+                    {w.groomName}
                   </p>
                   <p className="font-cairo text-xs text-[#C9973A] font-medium">
                     {w.tribe}
                   </p>
                 </div>
                 <p className="font-cairo text-xs text-[#A09080] flex-shrink-0">
-                  {formatArabicDate(w.date)}
+                  {formatArabicDate(w.eventDate)}
                 </p>
               </div>
             ))}
@@ -177,19 +178,19 @@ export default function WeddingCalendar() {
               >
                 <div className="w-10 h-10 rounded-full bg-[#C9973A] flex items-center justify-center flex-shrink-0">
                   <span className="font-cairo font-bold text-sm text-[#FAF8F3]">
-                    {new Date(w.date).getDate()}
+                    {new Date(w.eventDate).getDate()}
                   </span>
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="font-cairo font-bold text-sm text-[#1A1714]">
-                    {w.groom}
+                    {w.groomName}
                   </p>
                   <p className="font-cairo text-xs text-[#C9973A] font-medium">
                     {w.tribe}
                   </p>
                 </div>
                 <p className="font-cairo text-xs text-[#A09080] flex-shrink-0">
-                  {formatArabicDate(w.date)}
+                  {formatArabicDate(w.eventDate)}
                 </p>
               </div>
             ))}

@@ -1,9 +1,9 @@
 "use client"
 
-import { weddingsData } from "@/lib/constants"
+import type { Event } from "@prisma/client"
 import WeddingCarousel from "./rotational-carousel"
 
-export default function UpcomingWeddings() {
+export default function UpcomingEvents({ events }: { events: Event[] }) {
   return (
     <section id="upcoming" className="py-24 overflow-hidden">
       <div className="max-w-6xl mx-auto px-6 mb-12">
@@ -23,7 +23,7 @@ export default function UpcomingWeddings() {
 
       {/* Full-width carousel — overflow visible so adjacent slides peek in */}
       <div className="max-w-6xl mx-auto">
-        <WeddingCarousel weddings={weddingsData} />
+        <WeddingCarousel weddings={events} />
       </div>
     </section>
   )

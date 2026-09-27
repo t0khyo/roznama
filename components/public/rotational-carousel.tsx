@@ -8,7 +8,7 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel"
-import type { Wedding } from "@/types"
+import type { Event } from "@prisma/client"
 import { formatArabicDate } from "@/lib/date-utils"
 import {
   Dialog,
@@ -17,11 +17,11 @@ import {
 import { Button } from "@/components/ui/button"
 import { cn } from "cn"
 
-export default function WeddingCarousel({ weddings }: { weddings: Wedding[] }) {
+export default function WeddingCarousel({ weddings }: { weddings: Event[] }) {
   const [api, setApi] = React.useState<CarouselApi>()
   const [current, setCurrent] = React.useState(0)
   const count = weddings.length
-  const [lightboxImage, setLightboxImage] = React.useState<Wedding | null>(null)
+  const [lightboxImage, setLightboxImage] = React.useState<Event | null>(null)
 
   const autoplay = React.useRef(
     Autoplay({ delay: 3500, stopOnInteraction: true, stopOnMouseEnter: true })
@@ -77,14 +77,14 @@ export default function WeddingCarousel({ weddings }: { weddings: Wedding[] }) {
                   >
                     {/* Blurred background layer */}
                     <img
-                      src={w.image}
+                      src={w.imageUrl}
                       alt=""
                       className="absolute inset-0 w-full h-full object-cover blur-xl scale-110 opacity-60 transition-transform duration-500 group-hover:scale-125"
                       draggable={false}
                     />
                     {/* Foreground contained image */}
                     <img
-                      src={w.image}
+                      src={w.imageUrl}
                       alt={`مناسبة ${w.tribe}`}
                       className="relative w-full h-full object-contain z-10 transition-transform duration-500 group-hover:scale-105"
                       draggable={false}
@@ -104,10 +104,10 @@ export default function WeddingCarousel({ weddings }: { weddings: Wedding[] }) {
                   <div className="px-5 py-4 flex items-center justify-between">
                     <div>
                       <p className="font-cairo font-bold text-sm text-[#1A1714] leading-snug">
-                        {w.groom}
+                        {w.groomName}
                       </p>
                       <p className="font-cairo text-xs text-[#8B1A1A] font-medium mt-0.5">
-                        {formatArabicDate(w.date)}
+                        {formatArabicDate(w.eventDate)}
                       </p>
                     </div>
                     {/* Active indicator ring */}
@@ -180,7 +180,7 @@ export default function WeddingCarousel({ weddings }: { weddings: Wedding[] }) {
           {lightboxImage && (
             <div className="relative flex flex-col items-center justify-center w-full min-h-[50vh]">
               <img
-                src={lightboxImage.image}
+                src={lightboxImage.imageUrl}
                 alt={`مناسبة ${lightboxImage.tribe}`}
                 className="w-full max-h-[85vh] object-contain select-none"
               />

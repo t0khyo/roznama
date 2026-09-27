@@ -3,13 +3,6 @@
 export type { Event, EventRequest } from "@prisma/client"
 export { RequestStatus } from "@prisma/client"
 
-export interface Wedding {
-  id: number
-  tribe: string
-  groom: string
-  date: string // ISO date string "YYYY-MM-DD"
-  image: string // URL
-}
 
 /** UI label and style map for RequestStatus values */
 export const REQUEST_STATUS_LABELS: Record<string, { label: string; className: string }> = {
