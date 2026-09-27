@@ -27,16 +27,18 @@ import { RequestStatus, type EventRequest, REQUEST_STATUS_LABELS } from "@/types
 import { formatArabicDate } from "@/lib/date-utils"
 import { formatWhatsAppUrl } from "@/lib/whatsapp"
 import { cn } from "@/lib/utils"
+import { Skeleton } from "@/components/ui/skeleton"
 
 interface BookingsTableProps {
   bookings: EventRequest[]
+  isLoading?: boolean
   onStatusChange: (id: string, status: RequestStatus) => Promise<void>
 }
 
 type SortKey = "name" | "phone" | "preferredDate" | "venue" | "createdAt" | "status"
 type SortDirection = "asc" | "desc"
 
-export function BookingsTable({ bookings, onStatusChange }: BookingsTableProps) {
+export function BookingsTable({ bookings, isLoading, onStatusChange }: BookingsTableProps) {
   const [searchQuery, setSearchQuery] = useState("")
   const [sortConfig, setSortConfig] = useState<{ key: SortKey; direction: SortDirection }>({
     key: "createdAt",
@@ -203,14 +205,26 @@ export function BookingsTable({ bookings, onStatusChange }: BookingsTableProps) 
           </TableRow>
         </TableHeader>
         <TableBody>
-          {filteredAndSortedBookings.length === 0 && (
+          {isLoading ? (
+            Array.from({ length: 5 }).map((_, index) => (
+              <TableRow key={`skeleton-${index}`}>
+                <TableCell><Skeleton className="h-4 w-[120px]" /></TableCell>
+                <TableCell><Skeleton className="h-4 w-[150px]" /></TableCell>
+                <TableCell><Skeleton className="h-4 w-[100px]" /></TableCell>
+                <TableCell><Skeleton className="h-4 w-[120px]" /></TableCell>
+                <TableCell><Skeleton className="h-4 w-[80px]" /></TableCell>
+                <TableCell><Skeleton className="h-6 w-[80px] rounded-full" /></TableCell>
+                <TableCell><Skeleton className="h-8 w-full rounded-md" /></TableCell>
+              </TableRow>
+            ))
+          ) : filteredAndSortedBookings.length === 0 ? (
             <TableRow>
               <TableCell colSpan={7} className="h-32 text-center font-cairo text-[#A09080] text-sm">
                 {searchQuery ? "لا توجد نتائج مطابقة لبحثك" : "لا توجد طلبات حجز"}
               </TableCell>
             </TableRow>
-          )}
-          {filteredAndSortedBookings.map((b) => {
+          ) : (
+            filteredAndSortedBookings.map((b) => {
             const sc = REQUEST_STATUS_LABELS[b.status] ?? REQUEST_STATUS_LABELS.NEW
             return (
               <TableRow
@@ -317,7 +331,8 @@ export function BookingsTable({ bookings, onStatusChange }: BookingsTableProps) 
                 </TableCell>
               </TableRow>
             )
-          })}
+          })
+          )}
         </TableBody>
       </Table>
     </div>

@@ -17,11 +17,12 @@ import type { CreateEventInput } from "@/lib/data/events"
 
 export default function AdminWeddingsPage() {
   const [weddings, setWeddings] = useState<Event[]>([])
+  const [isLoading, setIsLoading] = useState(true)
   const [formOpen, setFormOpen] = useState(false)
   const [editTarget, setEditTarget] = useState<Event | null>(null)
   const [deleteTarget, setDeleteTarget] = useState<Event | null>(null)
 
-  const refresh = () => getEventsAction().then(setWeddings)
+  const refresh = () => getEventsAction().then(setWeddings).finally(() => setIsLoading(false))
 
   useEffect(() => { refresh() }, [])
 
@@ -81,6 +82,7 @@ export default function AdminWeddingsPage() {
       {/* Table */}
       <WeddingsTable
         weddings={weddings}
+        isLoading={isLoading}
         onEdit={openEdit}
         onDelete={setDeleteTarget}
       />

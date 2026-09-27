@@ -10,8 +10,9 @@ import { RequestStatus, type EventRequest } from "@/types"
 
 export default function AdminBookingsPage() {
   const [bookings, setBookings] = useState<EventRequest[]>([])
+  const [isLoading, setIsLoading] = useState(true)
 
-  const refresh = () => getEventRequestsAction().then(setBookings)
+  const refresh = () => getEventRequestsAction().then(setBookings).finally(() => setIsLoading(false))
 
   useEffect(() => { refresh() }, [])
 
@@ -47,6 +48,7 @@ export default function AdminBookingsPage() {
       {/* Table */}
       <BookingsTable
         bookings={bookings}
+        isLoading={isLoading}
         onStatusChange={handleStatusChange}
       />
     </div>

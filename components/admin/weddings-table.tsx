@@ -23,9 +23,11 @@ import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import type { Event } from "@/types"
 import { formatArabicDate } from "@/lib/date-utils"
+import { Skeleton } from "@/components/ui/skeleton"
 
 interface WeddingsTableProps {
   weddings: Event[]
+  isLoading?: boolean
   onEdit: (wedding: Event) => void
   onDelete: (wedding: Event) => void
 }
@@ -33,7 +35,7 @@ interface WeddingsTableProps {
 type SortKey = "tribe" | "groomName" | "eventDate" | "status"
 type SortDirection = "asc" | "desc"
 
-export function WeddingsTable({ weddings, onEdit, onDelete }: WeddingsTableProps) {
+export function WeddingsTable({ weddings, isLoading, onEdit, onDelete }: WeddingsTableProps) {
   const [searchQuery, setSearchQuery] = useState("")
   const [sortConfig, setSortConfig] = useState<{ key: SortKey; direction: SortDirection }>({
     key: "eventDate",
@@ -184,14 +186,25 @@ export function WeddingsTable({ weddings, onEdit, onDelete }: WeddingsTableProps
           </TableRow>
         </TableHeader>
         <TableBody>
-          {filteredAndSortedWeddings.length === 0 && (
+          {isLoading ? (
+            Array.from({ length: 5 }).map((_, index) => (
+              <TableRow key={`skeleton-${index}`}>
+                <TableCell><Skeleton className="h-4 w-[120px]" /></TableCell>
+                <TableCell><Skeleton className="h-4 w-[150px]" /></TableCell>
+                <TableCell><Skeleton className="h-4 w-[100px]" /></TableCell>
+                <TableCell><Skeleton className="h-6 w-[80px] rounded-full" /></TableCell>
+                <TableCell><Skeleton className="h-10 w-10 rounded-md" /></TableCell>
+                <TableCell><Skeleton className="h-8 w-16 rounded-md" /></TableCell>
+              </TableRow>
+            ))
+          ) : filteredAndSortedWeddings.length === 0 ? (
             <TableRow>
               <TableCell colSpan={6} className="h-32 text-center font-cairo text-[#A09080] text-sm">
                 {searchQuery ? "لا توجد نتائج مطابقة لبحثك" : "لا توجد مناسبات مسجلة"}
               </TableCell>
             </TableRow>
-          )}
-          {filteredAndSortedWeddings.map((w) => {
+          ) : (
+            filteredAndSortedWeddings.map((w) => {
             const isPast = new Date(w.eventDate) < today
             return (
               <TableRow
@@ -253,7 +266,8 @@ export function WeddingsTable({ weddings, onEdit, onDelete }: WeddingsTableProps
                 </TableCell>
               </TableRow>
             )
-          })}
+          })
+          )}
         </TableBody>
       </Table>
     </div>
