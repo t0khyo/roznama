@@ -7,15 +7,13 @@ import BookingForm from "@/components/public/booking-form"
 import WhatsappButton from "@/components/public/whatsapp-button"
 import Footer from "@/components/public/footer"
 
-import { getDb } from "@/lib/db"
+import { getEvents } from "@/lib/data/events"
 import { Skeleton } from "@/components/ui/skeleton"
 
 export const revalidate = 60 // ISR cache for 60 seconds
 
 async function EventsSection() {
-  const events = await getDb().event.findMany({
-    orderBy: { eventDate: "asc" },
-  })
+  const events = await getEvents()
 
   return (
     <>

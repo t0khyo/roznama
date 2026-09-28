@@ -1,7 +1,16 @@
-// All DB types come from @prisma/client directly.
-// Re-exported here so UI components don't depend on @prisma/client directly.
-export type { Event, EventRequest } from "@prisma/client"
-export { RequestStatus } from "@prisma/client"
+import type { FieldOutputTypes } from "@/prisma/contract.d";
+
+export type Event = FieldOutputTypes["public"]["Event"];
+export type EventRequest = FieldOutputTypes["public"]["EventRequest"];
+
+export const RequestStatus = {
+  NEW: "NEW",
+  CONTACTED: "CONTACTED",
+  CLOSED: "CLOSED",
+  PUBLISHED: "PUBLISHED",
+} as const;
+
+export type RequestStatus = (typeof RequestStatus)[keyof typeof RequestStatus];
 
 
 /** UI label and style map for RequestStatus values */

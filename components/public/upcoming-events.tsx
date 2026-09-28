@@ -1,6 +1,6 @@
 "use client"
 
-import type { Event } from "@prisma/client"
+import type { Event } from "@/types"
 import WeddingCarousel from "./rotational-carousel"
 
 export default function UpcomingEvents({ events }: { events: Event[] }) {

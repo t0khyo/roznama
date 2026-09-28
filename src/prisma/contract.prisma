@@ -1,0 +1,39 @@
+// use prisma-next
+
+namespace public {
+  model Event {
+    id         Uuid               @id(map: "events_pkey") @default(uuid())
+    tribe      String
+    groomName  String
+    eventDate  DateString
+    venue      String?
+    imageUrl   String
+    galleryUrl String?
+    slug       String             @unique(map: "events_slug_key")
+    shortCode  String             @unique(map: "events_shortCode_key")
+    clickCount Int
+    createdAt  TimestampString(3) @default(now())
+    updatedAt  TimestampString(3) @default(now())
+
+    @@map("events")
+  }
+
+  model EventRequest {
+    id            Uuid                   @id(map: "event_requests_pkey") @default(uuid())
+    name          String
+    phone         String
+    preferredDate DateString?
+    venue         String?
+    status        pg.enum(RequestStatus) @default("NEW")
+    createdAt     TimestampString(3)     @default(now())
+
+    @@map("event_requests")
+  }
+
+  native_enum RequestStatus {
+    NEW       = "NEW"
+    CONTACTED = "CONTACTED"
+    CLOSED    = "CLOSED"
+    PUBLISHED = "PUBLISHED"
+  }
+}

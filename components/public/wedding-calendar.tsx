@@ -5,7 +5,7 @@ import { arSA } from "react-day-picker/locale"
 import { Calendar } from "@/components/ui/calendar"
 import { arabicMonths } from "@/lib/constants"
 import { formatArabicDate } from "@/lib/date-utils"
-import type { Event } from "@prisma/client"
+import type { Event } from "@/types"
 import {
   Dialog,
   DialogContent,

@@ -8,7 +8,7 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel"
-import type { Event } from "@prisma/client"
+import type { Event } from "@/types"
 import { formatArabicDate } from "@/lib/date-utils"
 import {
   Dialog,

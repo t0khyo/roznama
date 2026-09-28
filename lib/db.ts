@@ -1,27 +1,70 @@
-import { PrismaNeon } from "@prisma/adapter-neon";
-import { PrismaClient } from "@prisma/client";
+import "temporal-polyfill/full/global";
+import { getCloudflareContext } from "@opennextjs/cloudflare";
+import postgres from "@prisma/orm-postgres/runtime";
+import type { Contract } from "@/prisma/contract.d";
+import contractJson from "@/prisma/contract.json" with { type: "json" };
 
-const globalForPrisma = globalThis as unknown as { prisma?: PrismaClient };
+export type DbClient = ReturnType<typeof postgres<Contract>>;
 
-function createClient() {
-  const connectionString = process.env.DATABASE_URL;
-  if (!connectionString) {
+/**
+ * Execute a callback with a per-request database client.
+ * The client is created per-request and closed with ctx.waitUntil(db.close()) after queries complete.
+ */
+export async function withDb<T>(fn: (db: DbClient) => Promise<T>): Promise<T> {
+  let env: any;
+  let ctx: any;
+  try {
+    const cfContext = getCloudflareContext();
+    env = cfContext.env;
+    ctx = cfContext.ctx;
+  } catch {
+    // In environments where getCloudflareContext is unavailable
+  }
+
+  const url = (env?.DATABASE_URL as string | undefined) || process.env.DATABASE_URL;
+  if (!url) {
     throw new Error("DATABASE_URL is not set");
   }
 
-  const adapter = new PrismaNeon({ connectionString });
-  return new PrismaClient({
-    adapter,
-    log:
-      process.env.NODE_ENV === "development"
-        ? ["query", "error", "warn"]
-        : ["error"],
-  });
+  const db = postgres<Contract>({ contractJson, url });
+  try {
+    return await fn(db);
+  } finally {
+    if (ctx && typeof ctx.waitUntil === "function") {
+      ctx.waitUntil(db.close());
+    } else {
+      await db.close();
+    }
+  }
 }
 
-export function getDb(): PrismaClient {
-  if (!globalForPrisma.prisma) {
-    globalForPrisma.prisma = createClient();
+/**
+ * Creates a per-request database client and a close function bound to ctx.waitUntil.
+ */
+export function createRequestDb(): { db: DbClient; close: () => void } {
+  let env: any;
+  let ctx: any;
+  try {
+    const cfContext = getCloudflareContext();
+    env = cfContext.env;
+    ctx = cfContext.ctx;
+  } catch {
+    // In environments where getCloudflareContext is unavailable
   }
-  return globalForPrisma.prisma;
+
+  const url = (env?.DATABASE_URL as string | undefined) || process.env.DATABASE_URL;
+  if (!url) {
+    throw new Error("DATABASE_URL is not set");
+  }
+
+  const db = postgres<Contract>({ contractJson, url });
+  const close = () => {
+    if (ctx && typeof ctx.waitUntil === "function") {
+      ctx.waitUntil(db.close());
+    } else {
+      void db.close();
+    }
+  };
+
+  return { db, close };
 }

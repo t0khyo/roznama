@@ -1,7 +1,7 @@
 "use server"
 
 import { redirect } from "next/navigation"
-import { RequestStatus } from "@prisma/client"
+import { RequestStatus } from "@/types"
 import { verifySession } from "@/lib/session"
 import {
   getEventRequests,

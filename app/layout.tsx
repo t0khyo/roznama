@@ -1,3 +1,4 @@
+import "temporal-polyfill/full/global";
 import type { Metadata } from "next";
 import { DirectionProvider } from "@/components/ui/direction";
 import { Toaster } from "@/components/ui/sonner";
