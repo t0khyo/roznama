@@ -10,7 +10,7 @@ import Footer from "@/components/public/footer"
 import { getEvents } from "@/lib/data/events"
 import { Skeleton } from "@/components/ui/skeleton"
 
-export const revalidate = 60 // ISR cache for 60 seconds
+export const dynamic = "force-dynamic";
 
 async function EventsSection() {
   const events = await getEvents()
