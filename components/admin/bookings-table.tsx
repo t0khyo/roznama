@@ -12,6 +12,8 @@ import {
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { Switch } from "@/components/ui/switch"
+import { Label } from "@/components/ui/label"
 import {
   ClockIcon,
   CheckCircle2Icon,
@@ -40,10 +42,16 @@ type SortDirection = "asc" | "desc"
 
 export function BookingsTable({ bookings, isLoading, onStatusChange }: BookingsTableProps) {
   const [searchQuery, setSearchQuery] = useState("")
+  const [showRejected, setShowRejected] = useState(false)
   const [sortConfig, setSortConfig] = useState<{ key: SortKey; direction: SortDirection }>({
     key: "createdAt",
     direction: "desc",
   })
+
+  const rejectedCount = useMemo(
+    () => bookings.filter((b) => b.status === RequestStatus.CLOSED).length,
+    [bookings]
+  )
 
   const handleSort = (key: SortKey) => {
     setSortConfig((current) => ({
@@ -67,6 +75,9 @@ export function BookingsTable({ bookings, isLoading, onStatusChange }: BookingsT
     const query = searchQuery.trim().toLowerCase()
 
     const filtered = bookings.filter((b) => {
+      if (!showRejected && b.status === RequestStatus.CLOSED) {
+        return false
+      }
       if (!query) return true
       const name = (b.name || "").toLowerCase()
       const phone = (b.phone || "").toLowerCase()
@@ -103,31 +114,53 @@ export function BookingsTable({ bookings, isLoading, onStatusChange }: BookingsT
 
       return direction === "asc" ? comparison : -comparison
     })
-  }, [bookings, searchQuery, sortConfig])
+  }, [bookings, searchQuery, sortConfig, showRejected])
 
   return (
     <div className="rounded-xl border border-[#E5DDD0] overflow-hidden bg-[#FAF8F3] shadow-sm">
       {/* ── Search & Filter Toolbar ── */}
       <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 p-3.5 border-b border-[#E5DDD0] bg-[#F3EDE3]/40">
-        <div className="relative w-full sm:max-w-xs">
-          <SearchIcon className="absolute right-3 top-1/2 -translate-y-1/2 size-4 text-[#A09080] pointer-events-none" />
-          <Input
-            type="text"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="بحث بالاسم، رقم الهاتف، أو المكان..."
-            className="font-cairo text-sm pr-9 pl-8 h-9 bg-[#FAF8F3] border-[#E5DDD0] focus:border-[#C9973A] placeholder:text-[#C0B4A8]"
-          />
-          {searchQuery && (
-            <button
-              type="button"
-              onClick={() => setSearchQuery("")}
-              className="absolute left-2.5 top-1/2 -translate-y-1/2 text-[#A09080] hover:text-[#1A1714] p-0.5 rounded-full"
-              title="مسح البحث"
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 flex-1">
+          <div className="relative w-full sm:max-w-xs">
+            <SearchIcon className="absolute right-3 top-1/2 -translate-y-1/2 size-4 text-[#A09080] pointer-events-none" />
+            <Input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="بحث بالاسم، رقم الهاتف، أو المكان..."
+              className="font-cairo text-sm pr-9 pl-8 h-9 bg-[#FAF8F3] border-[#E5DDD0] focus:border-[#C9973A] placeholder:text-[#C0B4A8]"
+            />
+            {searchQuery && (
+              <button
+                type="button"
+                onClick={() => setSearchQuery("")}
+                className="absolute left-2.5 top-1/2 -translate-y-1/2 text-[#A09080] hover:text-[#1A1714] p-0.5 rounded-full"
+                title="مسح البحث"
+              >
+                <XIcon className="size-3.5" />
+              </button>
+            )}
+          </div>
+
+          <div className="flex items-center gap-2 self-start sm:self-center">
+            <Switch
+              id="show-rejected"
+              checked={showRejected}
+              onCheckedChange={setShowRejected}
+              className="data-checked:bg-[#8B1A1A] cursor-pointer"
+            />
+            <Label
+              htmlFor="show-rejected"
+              className="font-cairo text-xs text-[#6B5E52] cursor-pointer select-none flex items-center gap-1.5"
             >
-              <XIcon className="size-3.5" />
-            </button>
-          )}
+              <span>عرض المرفوض</span>
+              {rejectedCount > 0 && (
+                <span className="text-[10px] bg-[#E5DDD0] text-[#6B5E52] px-1.5 py-0.5 rounded-full tabular-nums">
+                  {rejectedCount}
+                </span>
+              )}
+            </Label>
+          </div>
         </div>
 
         <div className="text-xs font-cairo text-[#7D6E63] shrink-0 self-end sm:self-center">
@@ -225,113 +258,113 @@ export function BookingsTable({ bookings, isLoading, onStatusChange }: BookingsT
             </TableRow>
           ) : (
             filteredAndSortedBookings.map((b) => {
-            const sc = REQUEST_STATUS_LABELS[b.status] ?? REQUEST_STATUS_LABELS.NEW
-            return (
-              <TableRow
-                key={b.id}
-                className="border-[#E5DDD0] hover:bg-[#F3EDE3]/40 transition-colors"
-              >
-                <TableCell className="font-cairo font-semibold text-[#1A1714] text-sm">
-                  {b.name}
-                </TableCell>
-                <TableCell className="font-cairo text-sm text-right">
-                  <div className="flex items-center gap-2 justify-start">
-                    <span className="text-[#1A1714] font-medium tabular-nums" dir="ltr">
-                      {b.phone}
-                    </span>
-                    <a
-                      href={formatWhatsAppUrl(b.phone)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center size-6 rounded-full bg-emerald-50 text-emerald-600 hover:bg-emerald-600 hover:text-white border border-emerald-200 transition-all shadow-2xs hover:scale-105 shrink-0"
-                      title="مراسلة عبر واتساب"
-                      aria-label={`مراسلة ${b.name} عبر واتساب`}
-                    >
-                      <FaWhatsapp className="size-3.5" />
-                    </a>
-                  </div>
-                </TableCell>
-                <TableCell className="font-cairo text-[#4A4038] text-sm tabular-nums">
-                  {b.preferredDate
-                    ? formatArabicDate(new Date(b.preferredDate).toISOString())
-                    : "—"}
-                </TableCell>
-                <TableCell className="font-cairo text-[#4A4038] text-sm max-w-[180px] truncate">
-                  {b.venue ?? "—"}
-                </TableCell>
-                <TableCell className="font-cairo text-[#A09080] text-xs tabular-nums">
-                  {new Date(b.createdAt).toLocaleDateString("ar-KW", {
-                    year: "numeric",
-                    month: "short",
-                    day: "numeric",
-                  })}
-                </TableCell>
-                <TableCell>
-                  <Badge className={sc.className}>{sc.label}</Badge>
-                </TableCell>
-                <TableCell>
-                  <div className="flex items-center gap-1.5 justify-center">
-                    {/* جديد (New) */}
-                    <Button
-                      type="button"
-                      variant="ghost"
-                      size="icon-sm"
-                      onClick={() => onStatusChange(b.id, RequestStatus.NEW)}
-                      disabled={b.status === RequestStatus.NEW}
-                      title="تعيين كـ جديد"
-                      aria-label="جديد"
-                      className={cn(
-                        "size-7 rounded-lg transition-all",
-                        b.status === RequestStatus.NEW
-                          ? "bg-[#C9973A]/20 text-[#9E6E1A] border border-[#C9973A]/40 cursor-default opacity-100 shadow-2xs"
-                          : "text-[#A09080] hover:text-[#C9973A] hover:bg-[#C9973A]/10 border border-transparent hover:border-[#C9973A]/25"
-                      )}
-                    >
-                      <ClockIcon className="size-3.5" />
-                    </Button>
+              const sc = REQUEST_STATUS_LABELS[b.status] ?? REQUEST_STATUS_LABELS.NEW
+              return (
+                <TableRow
+                  key={b.id}
+                  className="border-[#E5DDD0] hover:bg-[#F3EDE3]/40 transition-colors"
+                >
+                  <TableCell className="font-cairo font-semibold text-[#1A1714] text-sm">
+                    {b.name}
+                  </TableCell>
+                  <TableCell className="font-cairo text-sm text-right">
+                    <div className="flex items-center gap-2 justify-start">
+                      <span className="text-[#1A1714] font-medium tabular-nums" dir="ltr">
+                        {b.phone}
+                      </span>
+                      <a
+                        href={formatWhatsAppUrl(b.phone)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center size-6 rounded-full bg-emerald-50 text-emerald-600 hover:bg-emerald-600 hover:text-white border border-emerald-200 transition-all shadow-2xs hover:scale-105 shrink-0"
+                        title="مراسلة عبر واتساب"
+                        aria-label={`مراسلة ${b.name} عبر واتساب`}
+                      >
+                        <FaWhatsapp className="size-3.5" />
+                      </a>
+                    </div>
+                  </TableCell>
+                  <TableCell className="font-cairo text-[#4A4038] text-sm tabular-nums">
+                    {b.preferredDate
+                      ? formatArabicDate(new Date(b.preferredDate).toISOString())
+                      : "—"}
+                  </TableCell>
+                  <TableCell className="font-cairo text-[#4A4038] text-sm max-w-[180px] truncate">
+                    {b.venue ?? "—"}
+                  </TableCell>
+                  <TableCell className="font-cairo text-[#A09080] text-xs tabular-nums">
+                    {new Date(b.createdAt).toLocaleDateString("ar-KW", {
+                      year: "numeric",
+                      month: "short",
+                      day: "numeric",
+                    })}
+                  </TableCell>
+                  <TableCell>
+                    <Badge className={sc.className}>{sc.label}</Badge>
+                  </TableCell>
+                  <TableCell>
+                    <div className="flex items-center gap-1.5 justify-center">
+                      {/* جديد (New) */}
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="icon-sm"
+                        onClick={() => onStatusChange(b.id, RequestStatus.NEW)}
+                        disabled={b.status === RequestStatus.NEW}
+                        title="تعيين كـ جديد"
+                        aria-label="جديد"
+                        className={cn(
+                          "size-7 rounded-lg transition-all",
+                          b.status === RequestStatus.NEW
+                            ? "bg-[#C9973A]/20 text-[#9E6E1A] border border-[#C9973A]/40 cursor-default opacity-100 shadow-2xs"
+                            : "text-[#A09080] hover:text-[#C9973A] hover:bg-[#C9973A]/10 border border-transparent hover:border-[#C9973A]/25"
+                        )}
+                      >
+                        <ClockIcon className="size-3.5" />
+                      </Button>
 
-                    {/* منشور (Published) */}
-                    <Button
-                      type="button"
-                      variant="ghost"
-                      size="icon-sm"
-                      onClick={() => onStatusChange(b.id, RequestStatus.PUBLISHED)}
-                      disabled={b.status === RequestStatus.PUBLISHED}
-                      title="تعيين كـ منشور"
-                      aria-label="منشور"
-                      className={cn(
-                        "size-7 rounded-lg transition-all",
-                        b.status === RequestStatus.PUBLISHED
-                          ? "bg-emerald-100 text-emerald-800 border border-emerald-300 cursor-default opacity-100 shadow-2xs"
-                          : "text-[#A09080] hover:text-emerald-700 hover:bg-emerald-50 border border-transparent hover:border-emerald-200"
-                      )}
-                    >
-                      <CheckCircle2Icon className="size-3.5" />
-                    </Button>
+                      {/* منشور (Published) */}
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="icon-sm"
+                        onClick={() => onStatusChange(b.id, RequestStatus.PUBLISHED)}
+                        disabled={b.status === RequestStatus.PUBLISHED}
+                        title="تعيين كـ منشور"
+                        aria-label="منشور"
+                        className={cn(
+                          "size-7 rounded-lg transition-all",
+                          b.status === RequestStatus.PUBLISHED
+                            ? "bg-emerald-100 text-emerald-800 border border-emerald-300 cursor-default opacity-100 shadow-2xs"
+                            : "text-[#A09080] hover:text-emerald-700 hover:bg-emerald-50 border border-transparent hover:border-emerald-200"
+                        )}
+                      >
+                        <CheckCircle2Icon className="size-3.5" />
+                      </Button>
 
-                    {/* مرفوض (Rejected) */}
-                    <Button
-                      type="button"
-                      variant="ghost"
-                      size="icon-sm"
-                      onClick={() => onStatusChange(b.id, RequestStatus.CLOSED)}
-                      disabled={b.status === RequestStatus.CLOSED}
-                      title="تعيين كـ مرفوض"
-                      aria-label="مرفوض"
-                      className={cn(
-                        "size-7 rounded-lg transition-all",
-                        b.status === RequestStatus.CLOSED
-                          ? "bg-red-100 text-red-800 border border-red-300 cursor-default opacity-100 shadow-2xs"
-                          : "text-[#A09080] hover:text-red-700 hover:bg-red-50 border border-transparent hover:border-red-200"
-                      )}
-                    >
-                      <XCircleIcon className="size-3.5" />
-                    </Button>
-                  </div>
-                </TableCell>
-              </TableRow>
-            )
-          })
+                      {/* مرفوض (Rejected) */}
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="icon-sm"
+                        onClick={() => onStatusChange(b.id, RequestStatus.CLOSED)}
+                        disabled={b.status === RequestStatus.CLOSED}
+                        title="تعيين كـ مرفوض"
+                        aria-label="مرفوض"
+                        className={cn(
+                          "size-7 rounded-lg transition-all",
+                          b.status === RequestStatus.CLOSED
+                            ? "bg-red-100 text-red-800 border border-red-300 cursor-default opacity-100 shadow-2xs"
+                            : "text-[#A09080] hover:text-red-700 hover:bg-red-50 border border-transparent hover:border-red-200"
+                        )}
+                      >
+                        <XCircleIcon className="size-3.5" />
+                      </Button>
+                    </div>
+                  </TableCell>
+                </TableRow>
+              )
+            })
           )}
         </TableBody>
       </Table>

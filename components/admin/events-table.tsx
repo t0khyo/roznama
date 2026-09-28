@@ -21,6 +21,8 @@ import {
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
+import { Switch } from "@/components/ui/switch"
+import { Label } from "@/components/ui/label"
 import type { Event } from "@/types"
 import { formatArabicDate } from "@/lib/date-utils"
 import { Skeleton } from "@/components/ui/skeleton"
@@ -37,6 +39,7 @@ type SortDirection = "asc" | "desc"
 
 export function EventsTable({ events, isLoading, onEdit, onDelete }: EventsTableProps) {
   const [searchQuery, setSearchQuery] = useState("")
+  const [showFinished, setShowFinished] = useState(false)
   const [sortConfig, setSortConfig] = useState<{ key: SortKey; direction: SortDirection }>({
     key: "eventDate",
     direction: "asc",
@@ -47,6 +50,11 @@ export function EventsTable({ events, isLoading, onEdit, onDelete }: EventsTable
     d.setHours(0, 0, 0, 0)
     return d
   }, [])
+
+  const finishedCount = useMemo(
+    () => events.filter((e) => new Date(e.eventDate) < today).length,
+    [events, today]
+  )
 
   const handleSort = (key: SortKey) => {
     setSortConfig((current) => ({
@@ -71,6 +79,9 @@ export function EventsTable({ events, isLoading, onEdit, onDelete }: EventsTable
     const query = searchQuery.trim().toLowerCase()
 
     const filtered = events.filter((e) => {
+      if (!showFinished && new Date(e.eventDate) < today) {
+        return false
+      }
       if (!query) return true
       const tribe = (e.tribe || "").toLowerCase()
       const groom = (e.groomName || "").toLowerCase()
@@ -103,31 +114,53 @@ export function EventsTable({ events, isLoading, onEdit, onDelete }: EventsTable
 
       return direction === "asc" ? comparison : -comparison
     })
-  }, [events, searchQuery, sortConfig, today])
+  }, [events, searchQuery, sortConfig, today, showFinished])
 
   return (
     <div className="rounded-xl border border-[#E5DDD0] overflow-hidden bg-[#FAF8F3] shadow-sm">
       {/* ── Search & Filter Toolbar ── */}
       <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 p-3.5 border-b border-[#E5DDD0] bg-[#F3EDE3]/40">
-        <div className="relative w-full sm:max-w-xs">
-          <SearchIcon className="absolute right-3 top-1/2 -translate-y-1/2 size-4 text-[#A09080] pointer-events-none" />
-          <Input
-            type="text"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="بحث بالقبيلة، اسم المعرس، أو المكان..."
-            className="font-cairo text-sm pr-9 pl-8 h-9 bg-[#FAF8F3] border-[#E5DDD0] focus:border-[#C9973A] placeholder:text-[#C0B4A8]"
-          />
-          {searchQuery && (
-            <button
-              type="button"
-              onClick={() => setSearchQuery("")}
-              className="absolute left-2.5 top-1/2 -translate-y-1/2 text-[#A09080] hover:text-[#1A1714] p-0.5 rounded-full"
-              title="مسح البحث"
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 flex-1">
+          <div className="relative w-full sm:max-w-xs">
+            <SearchIcon className="absolute right-3 top-1/2 -translate-y-1/2 size-4 text-[#A09080] pointer-events-none" />
+            <Input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="بحث بالقبيلة، اسم المعرس، أو المكان..."
+              className="font-cairo text-sm pr-9 pl-8 h-9 bg-[#FAF8F3] border-[#E5DDD0] focus:border-[#C9973A] placeholder:text-[#C0B4A8]"
+            />
+            {searchQuery && (
+              <button
+                type="button"
+                onClick={() => setSearchQuery("")}
+                className="absolute left-2.5 top-1/2 -translate-y-1/2 text-[#A09080] hover:text-[#1A1714] p-0.5 rounded-full"
+                title="مسح البحث"
+              >
+                <XIcon className="size-3.5" />
+              </button>
+            )}
+          </div>
+
+          <div className="flex items-center gap-2 self-start sm:self-center">
+            <Switch
+              id="show-finished"
+              checked={showFinished}
+              onCheckedChange={setShowFinished}
+              className="data-checked:bg-[#8B1A1A] cursor-pointer"
+            />
+            <Label
+              htmlFor="show-finished"
+              className="font-cairo text-xs text-[#6B5E52] cursor-pointer select-none flex items-center gap-1.5"
             >
-              <XIcon className="size-3.5" />
-            </button>
-          )}
+              <span>عرض المنتهي</span>
+              {finishedCount > 0 && (
+                <span className="text-[10px] bg-[#E5DDD0] text-[#6B5E52] px-1.5 py-0.5 rounded-full tabular-nums">
+                  {finishedCount}
+                </span>
+              )}
+            </Label>
+          </div>
         </div>
 
         <div className="text-xs font-cairo text-[#7D6E63] shrink-0 self-end sm:self-center">
