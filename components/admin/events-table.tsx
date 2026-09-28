@@ -25,17 +25,17 @@ import type { Event } from "@/types"
 import { formatArabicDate } from "@/lib/date-utils"
 import { Skeleton } from "@/components/ui/skeleton"
 
-interface WeddingsTableProps {
-  weddings: Event[]
+interface EventsTableProps {
+  events: Event[]
   isLoading?: boolean
-  onEdit: (wedding: Event) => void
-  onDelete: (wedding: Event) => void
+  onEdit: (event: Event) => void
+  onDelete: (event: Event) => void
 }
 
 type SortKey = "tribe" | "groomName" | "eventDate" | "status"
 type SortDirection = "asc" | "desc"
 
-export function WeddingsTable({ weddings, isLoading, onEdit, onDelete }: WeddingsTableProps) {
+export function EventsTable({ events, isLoading, onEdit, onDelete }: EventsTableProps) {
   const [searchQuery, setSearchQuery] = useState("")
   const [sortConfig, setSortConfig] = useState<{ key: SortKey; direction: SortDirection }>({
     key: "eventDate",
@@ -67,15 +67,15 @@ export function WeddingsTable({ weddings, isLoading, onEdit, onDelete }: Wedding
   }
 
   // Filter and sort
-  const filteredAndSortedWeddings = useMemo(() => {
+  const filteredAndSortedEvents = useMemo(() => {
     const query = searchQuery.trim().toLowerCase()
 
-    const filtered = weddings.filter((w) => {
+    const filtered = events.filter((e) => {
       if (!query) return true
-      const tribe = (w.tribe || "").toLowerCase()
-      const groom = (w.groomName || "").toLowerCase()
-      const venue = (w.venue || "").toLowerCase()
-      const dateFormatted = formatArabicDate(new Date(w.eventDate).toISOString()).toLowerCase()
+      const tribe = (e.tribe || "").toLowerCase()
+      const groom = (e.groomName || "").toLowerCase()
+      const venue = (e.venue || "").toLowerCase()
+      const dateFormatted = formatArabicDate(new Date(e.eventDate).toISOString()).toLowerCase()
 
       return (
         tribe.includes(query) ||
@@ -103,7 +103,7 @@ export function WeddingsTable({ weddings, isLoading, onEdit, onDelete }: Wedding
 
       return direction === "asc" ? comparison : -comparison
     })
-  }, [weddings, searchQuery, sortConfig, today])
+  }, [events, searchQuery, sortConfig, today])
 
   return (
     <div className="rounded-xl border border-[#E5DDD0] overflow-hidden bg-[#FAF8F3] shadow-sm">
@@ -131,7 +131,7 @@ export function WeddingsTable({ weddings, isLoading, onEdit, onDelete }: Wedding
         </div>
 
         <div className="text-xs font-cairo text-[#7D6E63] shrink-0 self-end sm:self-center">
-          {filteredAndSortedWeddings.length} من {weddings.length} مناسبة
+          {filteredAndSortedEvents.length} من {events.length} مناسبة
         </div>
       </div>
 
@@ -197,76 +197,76 @@ export function WeddingsTable({ weddings, isLoading, onEdit, onDelete }: Wedding
                 <TableCell><Skeleton className="h-8 w-16 rounded-md" /></TableCell>
               </TableRow>
             ))
-          ) : filteredAndSortedWeddings.length === 0 ? (
+          ) : filteredAndSortedEvents.length === 0 ? (
             <TableRow>
               <TableCell colSpan={6} className="h-32 text-center font-cairo text-[#A09080] text-sm">
                 {searchQuery ? "لا توجد نتائج مطابقة لبحثك" : "لا توجد مناسبات مسجلة"}
               </TableCell>
             </TableRow>
           ) : (
-            filteredAndSortedWeddings.map((w) => {
-            const isPast = new Date(w.eventDate) < today
-            return (
-              <TableRow
-                key={w.id}
-                className="border-[#E5DDD0] hover:bg-[#F3EDE3]/40 transition-colors"
-              >
-                <TableCell className="font-cairo font-semibold text-[#1A1714] text-sm">
-                  {w.tribe}
-                </TableCell>
-                <TableCell className="font-cairo text-[#4A4038] text-sm">
-                  {w.groomName}
-                </TableCell>
-                <TableCell className="font-cairo text-[#4A4038] text-sm tabular-nums">
-                  {formatArabicDate(new Date(w.eventDate).toISOString())}
-                </TableCell>
-                <TableCell>
-                  <Badge
-                    className={
-                      isPast
-                        ? "bg-[#E5DDD0] text-[#6B5E52] hover:bg-[#E5DDD0] font-cairo text-xs"
-                        : "bg-[#8B1A1A]/10 text-[#8B1A1A] hover:bg-[#8B1A1A]/10 border border-[#8B1A1A]/20 font-cairo text-xs"
-                    }
-                  >
-                    {isPast ? "انتهى" : "قادم"}
-                  </Badge>
-                </TableCell>
-                <TableCell>
-                  {w.imageUrl ? (
-                    <img
-                      src={w.imageUrl}
-                      alt={`دعوة ${w.tribe}`}
-                      className="w-12 h-12 rounded-lg object-cover border border-[#E5DDD0]"
-                    />
-                  ) : (
-                    <span className="text-[#A09080] font-cairo text-xs">—</span>
-                  )}
-                </TableCell>
-                <TableCell>
-                  <div className="flex items-center gap-1 justify-end">
-                    <Button
-                      variant="ghost"
-                      size="icon-sm"
-                      onClick={() => onEdit(w)}
-                      className="size-7 text-[#6B5E52] hover:text-[#8B1A1A] hover:bg-[#8B1A1A]/8 transition-colors"
-                      aria-label="تعديل"
+            filteredAndSortedEvents.map((event) => {
+              const isPast = new Date(event.eventDate) < today
+              return (
+                <TableRow
+                  key={event.id}
+                  className="border-[#E5DDD0] hover:bg-[#F3EDE3]/40 transition-colors"
+                >
+                  <TableCell className="font-cairo font-semibold text-[#1A1714] text-sm">
+                    {event.tribe}
+                  </TableCell>
+                  <TableCell className="font-cairo text-[#4A4038] text-sm">
+                    {event.groomName}
+                  </TableCell>
+                  <TableCell className="font-cairo text-[#4A4038] text-sm tabular-nums">
+                    {formatArabicDate(new Date(event.eventDate).toISOString())}
+                  </TableCell>
+                  <TableCell>
+                    <Badge
+                      className={
+                        isPast
+                          ? "bg-[#E5DDD0] text-[#6B5E52] hover:bg-[#E5DDD0] font-cairo text-xs"
+                          : "bg-[#8B1A1A]/10 text-[#8B1A1A] hover:bg-[#8B1A1A]/10 border border-[#8B1A1A]/20 font-cairo text-xs"
+                      }
                     >
-                      <PencilIcon className="size-3.5" />
-                    </Button>
-                    <Button
-                      variant="ghost"
-                      size="icon-sm"
-                      onClick={() => onDelete(w)}
-                      className="size-7 text-[#6B5E52] hover:text-red-600 hover:bg-red-50 transition-colors"
-                      aria-label="حذف"
-                    >
-                      <Trash2Icon className="size-3.5" />
-                    </Button>
-                  </div>
-                </TableCell>
-              </TableRow>
-            )
-          })
+                      {isPast ? "انتهى" : "قادم"}
+                    </Badge>
+                  </TableCell>
+                  <TableCell>
+                    {event.imageUrl ? (
+                      <img
+                        src={event.imageUrl}
+                        alt={`دعوة ${event.tribe}`}
+                        className="w-12 h-12 rounded-lg object-cover border border-[#E5DDD0]"
+                      />
+                    ) : (
+                      <span className="text-[#A09080] font-cairo text-xs">—</span>
+                    )}
+                  </TableCell>
+                  <TableCell>
+                    <div className="flex items-center gap-1 justify-end">
+                      <Button
+                        variant="ghost"
+                        size="icon-sm"
+                        onClick={() => onEdit(event)}
+                        className="size-7 text-[#6B5E52] hover:text-[#8B1A1A] hover:bg-[#8B1A1A]/8 transition-colors"
+                        aria-label="تعديل"
+                      >
+                        <PencilIcon className="size-3.5" />
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="icon-sm"
+                        onClick={() => onDelete(event)}
+                        className="size-7 text-[#6B5E52] hover:text-red-600 hover:bg-red-50 transition-colors"
+                        aria-label="حذف"
+                      >
+                        <Trash2Icon className="size-3.5" />
+                      </Button>
+                    </div>
+                  </TableCell>
+                </TableRow>
+              )
+            })
           )}
         </TableBody>
       </Table>

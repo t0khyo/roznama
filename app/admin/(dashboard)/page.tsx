@@ -14,7 +14,7 @@ import { cn } from "@/lib/utils"
 
 const statConfig = [
   {
-    key: "totalWeddings" as keyof DashboardStats,
+    key: "totalEvents" as keyof DashboardStats,
     label: "إجمالي المناسبات",
     icon: HeartHandshakeIcon,
     color: "text-[#8B1A1A]",
@@ -22,7 +22,7 @@ const statConfig = [
     border: "border-[#8B1A1A]/20",
   },
   {
-    key: "upcomingWeddings" as keyof DashboardStats,
+    key: "upcomingEvents" as keyof DashboardStats,
     label: "مناسبات قادمة",
     icon: CalendarDaysIcon,
     color: "text-[#C9973A]",

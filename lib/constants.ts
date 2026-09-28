@@ -12,3 +12,21 @@ export const navLinks = [
   { label: "سجل مناسبتك", id: "booking" },
   { label: "تواصل معنا", id: "contact" },
 ]
+
+export const adminNavItems = [
+  {
+    label: "نظرة عامة",
+    href: "/admin",
+    exact: true,
+  },
+  {
+    label: "إدارة المناسبات",
+    href: "/admin/events",
+    exact: false,
+  },
+  {
+    label: "طلبات الحجز",
+    href: "/admin/bookings",
+    exact: false,
+  },
+]

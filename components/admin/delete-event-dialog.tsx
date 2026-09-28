@@ -10,19 +10,19 @@ import {
 import { Button } from "@/components/ui/button"
 import type { Event } from "@/types"
 
-interface DeleteWeddingDialogProps {
+interface DeleteEventDialogProps {
   open: boolean
   onOpenChange: (open: boolean) => void
-  wedding: Event | null
+  event: Event | null
   onConfirm: () => Promise<void>
 }
 
-export function DeleteWeddingDialog({
+export function DeleteEventDialog({
   open,
   onOpenChange,
-  wedding,
+  event,
   onConfirm,
-}: DeleteWeddingDialogProps) {
+}: DeleteEventDialogProps) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-sm bg-[#FAF8F3]" dir="rtl">
@@ -37,7 +37,7 @@ export function DeleteWeddingDialog({
 
         <p className="font-cairo text-sm text-[#6B5E52] leading-relaxed">
           هل أنت متأكد من حذف مناسبة{" "}
-          <span className="font-bold text-[#1A1714]">{wedding?.tribe}</span>؟
+          <span className="font-bold text-[#1A1714]">{event?.tribe}</span>؟
           <br />
           لا يمكن التراجع عن هذا الإجراء.
         </p>

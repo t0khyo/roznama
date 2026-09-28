@@ -2,8 +2,8 @@ import { getEvents } from "@/lib/data/events"
 import { getEventRequests } from "@/lib/data/event-requests"
 
 export interface DashboardStats {
-  totalWeddings: number
-  upcomingWeddings: number  // eventDate >= today
+  totalEvents: number
+  upcomingEvents: number  // eventDate >= today
   totalBookings: number
   pendingBookings: number   // status === NEW
 }
@@ -17,8 +17,8 @@ export async function getDashboardStats(): Promise<DashboardStats> {
   today.setHours(0, 0, 0, 0)
 
   return {
-    totalWeddings: events.length,
-    upcomingWeddings: events.filter((e) => new Date(e.eventDate) >= today).length,
+    totalEvents: events.length,
+    upcomingEvents: events.filter((e) => new Date(e.eventDate) >= today).length,
     totalBookings: requests.length,
     pendingBookings: requests.filter((r) => r.status === "NEW").length,
   }

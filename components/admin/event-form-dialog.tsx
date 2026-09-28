@@ -38,11 +38,11 @@ import { cn } from "@/lib/utils"
 
 const customArSA = { ...arSA, code: "ar-SA-u-ca-gregory" }
 
-interface WeddingFormDialogProps {
+interface EventFormDialogProps {
   open: boolean
   onOpenChange: (open: boolean) => void
   /** If provided, we're editing; otherwise creating */
-  wedding?: Event | null
+  event?: Event | null
   onSave: (data: CreateEventInput) => Promise<void>
 }
 
@@ -60,12 +60,12 @@ const EMPTY: CreateEventInput = {
   venue: null,
 }
 
-export function WeddingFormDialog({
+export function EventFormDialog({
   open,
   onOpenChange,
-  wedding,
+  event,
   onSave,
-}: WeddingFormDialogProps) {
+}: EventFormDialogProps) {
   const [form, setForm] = useState<CreateEventInput>(EMPTY)
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
   const [previewUrl, setPreviewUrl] = useState<string | null>(null)
@@ -78,21 +78,21 @@ export function WeddingFormDialog({
 
   // Populate form when editing or resetting
   useEffect(() => {
-    if (wedding) {
+    if (event) {
       setForm({
-        tribe: wedding.tribe,
-        groomName: wedding.groomName,
-        eventDate: new Date(wedding.eventDate),
-        imageUrl: wedding.imageUrl,
-        galleryUrl: wedding.galleryUrl ?? null,
-        venue: wedding.venue ?? null,
+        tribe: event.tribe,
+        groomName: event.groomName,
+        eventDate: new Date(event.eventDate),
+        imageUrl: event.imageUrl,
+        galleryUrl: event.galleryUrl ?? null,
+        venue: event.venue ?? null,
       })
       setSelectedFile(null)
-      setPreviewUrl(wedding.imageUrl)
+      setPreviewUrl(event.imageUrl)
       setFileInfo(
-        wedding.imageUrl
+        event.imageUrl
           ? {
-              name: `دعوة ${wedding.tribe || "المناسبة"}`,
+              name: `دعوة ${event.tribe || "المناسبة"}`,
               size: "الصورة المحفوظة للمناسبة",
             }
           : null
@@ -106,7 +106,7 @@ export function WeddingFormDialog({
     if (fileInputRef.current) {
       fileInputRef.current.value = ""
     }
-  }, [wedding, open])
+  }, [event, open])
 
   // Cleanup object URLs on unmount/change
   useEffect(() => {
@@ -210,7 +210,7 @@ export function WeddingFormDialog({
     }
   }
 
-  const isEdit = !!wedding
+  const isEdit = !!event
   const hasImage = !!previewUrl || !!form.imageUrl
 
   return (

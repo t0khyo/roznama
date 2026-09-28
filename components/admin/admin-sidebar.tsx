@@ -24,28 +24,14 @@ import {
   SidebarRail,
   SidebarSeparator,
 } from "@/components/ui/sidebar"
+import { adminNavItems } from "@/lib/constants"
 import { cn } from "@/lib/utils"
 
-const navItems = [
-  {
-    label: "نظرة عامة",
-    href: "/admin",
-    icon: LayoutDashboardIcon,
-    exact: true,
-  },
-  {
-    label: "إدارة المناسبات",
-    href: "/admin/weddings",
-    icon: HeartHandshakeIcon,
-    exact: false,
-  },
-  {
-    label: "طلبات الحجز",
-    href: "/admin/bookings",
-    icon: ClipboardListIcon,
-    exact: false,
-  },
-]
+const NAV_ICONS: Record<string, typeof LayoutDashboardIcon> = {
+  "/admin": LayoutDashboardIcon,
+  "/admin/events": HeartHandshakeIcon,
+  "/admin/bookings": ClipboardListIcon,
+}
 
 export function AdminSidebar() {
   const pathname = usePathname()
@@ -88,8 +74,9 @@ export function AdminSidebar() {
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu className="group-data-[collapsible=icon]:items-center">
-              {navItems.map((item) => {
+              {adminNavItems.map((item) => {
                 const active = isActive(item.href, item.exact)
+                const Icon = NAV_ICONS[item.href] || LayoutDashboardIcon
                 return (
                   <SidebarMenuItem key={item.href} className="group-data-[collapsible=icon]:flex group-data-[collapsible=icon]:justify-center">
                     <SidebarMenuButton
@@ -104,7 +91,7 @@ export function AdminSidebar() {
                           : "text-[#4A4038] hover:bg-[#8B1A1A]/6 hover:text-[#8B1A1A]"
                       )}
                     >
-                      <item.icon
+                      <Icon
                         className={cn(
                           "size-4 shrink-0 transition-colors",
                           active ? "text-[#8B1A1A]" : "text-[#6B5E52]"

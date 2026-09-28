@@ -3,9 +3,9 @@
 import { useEffect, useState } from "react"
 import { PlusIcon } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { WeddingsTable } from "@/components/admin/weddings-table"
-import { WeddingFormDialog } from "@/components/admin/wedding-form-dialog"
-import { DeleteWeddingDialog } from "@/components/admin/delete-wedding-dialog"
+import { EventsTable } from "@/components/admin/events-table"
+import { EventFormDialog } from "@/components/admin/event-form-dialog"
+import { DeleteEventDialog } from "@/components/admin/delete-event-dialog"
 import {
   getEventsAction,
   createEventAction,
@@ -15,14 +15,14 @@ import {
 import type { Event } from "@/types"
 import type { CreateEventInput } from "@/lib/data/events"
 
-export default function AdminWeddingsPage() {
-  const [weddings, setWeddings] = useState<Event[]>([])
+export default function AdminEventsPage() {
+  const [events, setEvents] = useState<Event[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [formOpen, setFormOpen] = useState(false)
   const [editTarget, setEditTarget] = useState<Event | null>(null)
   const [deleteTarget, setDeleteTarget] = useState<Event | null>(null)
 
-  const refresh = () => getEventsAction().then(setWeddings).finally(() => setIsLoading(false))
+  const refresh = () => getEventsAction().then(setEvents).finally(() => setIsLoading(false))
 
   useEffect(() => { refresh() }, [])
 
@@ -47,8 +47,8 @@ export default function AdminWeddingsPage() {
     setFormOpen(true)
   }
 
-  const openEdit = (w: Event) => {
-    setEditTarget(w)
+  const openEdit = (e: Event) => {
+    setEditTarget(e)
     setFormOpen(true)
   }
 
@@ -58,7 +58,7 @@ export default function AdminWeddingsPage() {
       <div className="flex items-end justify-between gap-4">
         <div>
           <p className="text-[#8B1A1A] font-cairo text-xs font-semibold tracking-widest mb-1 uppercase">
-            Weddings
+            Events
           </p>
           <h1
             className="text-3xl md:text-4xl font-bold text-[#1A1714]"
@@ -67,7 +67,7 @@ export default function AdminWeddingsPage() {
             إدارة المناسبات
           </h1>
           <p className="font-cairo text-sm text-[#A09080] mt-1">
-            {weddings.length} مناسبة مسجلة
+            {events.length} مناسبة مسجلة
           </p>
         </div>
         <Button
@@ -80,29 +80,29 @@ export default function AdminWeddingsPage() {
       </div>
 
       {/* Table */}
-      <WeddingsTable
-        weddings={weddings}
+      <EventsTable
+        events={events}
         isLoading={isLoading}
         onEdit={openEdit}
         onDelete={setDeleteTarget}
       />
 
       {/* Create / Edit dialog */}
-      <WeddingFormDialog
+      <EventFormDialog
         open={formOpen}
         onOpenChange={(open) => {
           setFormOpen(open)
           if (!open) setEditTarget(null)
         }}
-        wedding={editTarget}
+        event={editTarget}
         onSave={handleSave}
       />
 
       {/* Delete confirmation dialog */}
-      <DeleteWeddingDialog
+      <DeleteEventDialog
         open={!!deleteTarget}
         onOpenChange={(open) => !open && setDeleteTarget(null)}
-        wedding={deleteTarget}
+        event={deleteTarget}
         onConfirm={handleDelete}
       />
     </div>
