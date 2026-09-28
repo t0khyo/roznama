@@ -168,206 +168,382 @@ export function BookingsTable({ bookings, isLoading, onStatusChange }: BookingsT
         </div>
       </div>
 
-      {/* ── Table ── */}
-      <Table dir="rtl">
-        <TableHeader>
-          <TableRow className="border-[#E5DDD0] bg-[#F3EDE3]/60 hover:bg-[#F3EDE3]/60">
-            <TableHead
-              onClick={() => handleSort("name")}
-              className="font-cairo font-semibold text-[#6B5E52] text-sm text-right cursor-pointer select-none hover:text-[#8B1A1A] transition-colors"
-            >
-              <div className="flex items-center gap-1.5 justify-start">
-                <span>الاسم</span>
-                {renderSortIcon("name")}
+      {/* ── Mobile View: Cards Pattern ── */}
+      <div className="md:hidden">
+        {isLoading ? (
+          <div className="p-3 space-y-3">
+            {Array.from({ length: 4 }).map((_, index) => (
+              <div
+                key={`mobile-booking-skeleton-${index}`}
+                className="bg-[#FAF8F3] border border-[#E5DDD0] rounded-xl p-3.5 space-y-3 shadow-2xs"
+              >
+                <div className="flex items-start justify-between">
+                  <div className="space-y-1.5 w-1/2">
+                    <Skeleton className="h-4 w-3/4" />
+                    <Skeleton className="h-3 w-1/2" />
+                  </div>
+                  <Skeleton className="h-6 w-16 rounded-full" />
+                </div>
+                <div className="p-2.5 rounded-lg border border-[#E5DDD0]/60 space-y-2">
+                  <Skeleton className="h-3.5 w-full" />
+                  <Skeleton className="h-3.5 w-4/5" />
+                </div>
+                <div className="flex items-center justify-end gap-1.5 pt-1">
+                  <Skeleton className="h-7 w-16 rounded-lg" />
+                  <Skeleton className="h-7 w-16 rounded-lg" />
+                  <Skeleton className="h-7 w-16 rounded-lg" />
+                </div>
               </div>
-            </TableHead>
-
-            <TableHead
-              onClick={() => handleSort("phone")}
-              className="font-cairo font-semibold text-[#6B5E52] text-sm text-right cursor-pointer select-none hover:text-[#8B1A1A] transition-colors"
-            >
-              <div className="flex items-center gap-1.5 justify-start">
-                <span>الهاتف</span>
-                {renderSortIcon("phone")}
-              </div>
-            </TableHead>
-
-            <TableHead
-              onClick={() => handleSort("preferredDate")}
-              className="font-cairo font-semibold text-[#6B5E52] text-sm text-right cursor-pointer select-none hover:text-[#8B1A1A] transition-colors"
-            >
-              <div className="flex items-center gap-1.5 justify-start">
-                <span>التاريخ المطلوب</span>
-                {renderSortIcon("preferredDate")}
-              </div>
-            </TableHead>
-
-            <TableHead
-              onClick={() => handleSort("venue")}
-              className="font-cairo font-semibold text-[#6B5E52] text-sm text-right cursor-pointer select-none hover:text-[#8B1A1A] transition-colors"
-            >
-              <div className="flex items-center gap-1.5 justify-start">
-                <span>المكان</span>
-                {renderSortIcon("venue")}
-              </div>
-            </TableHead>
-
-            <TableHead
-              onClick={() => handleSort("createdAt")}
-              className="font-cairo font-semibold text-[#6B5E52] text-sm text-right cursor-pointer select-none hover:text-[#8B1A1A] transition-colors"
-            >
-              <div className="flex items-center gap-1.5 justify-start">
-                <span>تاريخ الطلب</span>
-                {renderSortIcon("createdAt")}
-              </div>
-            </TableHead>
-
-            <TableHead
-              onClick={() => handleSort("status")}
-              className="font-cairo font-semibold text-[#6B5E52] text-sm text-right cursor-pointer select-none hover:text-[#8B1A1A] transition-colors"
-            >
-              <div className="flex items-center gap-1.5 justify-start">
-                <span>الحالة</span>
-                {renderSortIcon("status")}
-              </div>
-            </TableHead>
-
-            <TableHead className="w-[120px] font-cairo font-semibold text-[#6B5E52] text-sm text-center">
-              الإجراءات
-            </TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {isLoading ? (
-            Array.from({ length: 5 }).map((_, index) => (
-              <TableRow key={`skeleton-${index}`}>
-                <TableCell><Skeleton className="h-4 w-[120px]" /></TableCell>
-                <TableCell><Skeleton className="h-4 w-[150px]" /></TableCell>
-                <TableCell><Skeleton className="h-4 w-[100px]" /></TableCell>
-                <TableCell><Skeleton className="h-4 w-[120px]" /></TableCell>
-                <TableCell><Skeleton className="h-4 w-[80px]" /></TableCell>
-                <TableCell><Skeleton className="h-6 w-[80px] rounded-full" /></TableCell>
-                <TableCell><Skeleton className="h-8 w-full rounded-md" /></TableCell>
-              </TableRow>
-            ))
-          ) : filteredAndSortedBookings.length === 0 ? (
-            <TableRow>
-              <TableCell colSpan={7} className="h-32 text-center font-cairo text-[#A09080] text-sm">
-                {searchQuery ? "لا توجد نتائج مطابقة لبحثك" : "لا توجد طلبات حجز"}
-              </TableCell>
-            </TableRow>
-          ) : (
-            filteredAndSortedBookings.map((b) => {
+            ))}
+          </div>
+        ) : filteredAndSortedBookings.length === 0 ? (
+          <div className="p-8 text-center font-cairo text-[#A09080] text-sm">
+            {searchQuery ? "لا توجد نتائج مطابقة لبحثك" : "لا توجد طلبات حجز"}
+          </div>
+        ) : (
+          <div className="p-3 space-y-3">
+            {filteredAndSortedBookings.map((b) => {
               const sc = REQUEST_STATUS_LABELS[b.status] ?? REQUEST_STATUS_LABELS.NEW
               return (
-                <TableRow
-                  key={b.id}
-                  className="border-[#E5DDD0] hover:bg-[#F3EDE3]/40 transition-colors"
+                <div
+                  key={`mobile-${b.id}`}
+                  className="bg-[#FAF8F3] border border-[#E5DDD0] rounded-xl p-3.5 space-y-3 shadow-2xs hover:border-[#C9973A]/60 transition-all"
                 >
-                  <TableCell className="font-cairo font-semibold text-[#1A1714] text-sm">
-                    {b.name}
-                  </TableCell>
-                  <TableCell className="font-cairo text-sm text-right">
-                    <div className="flex items-center gap-2 justify-start">
-                      <span className="text-[#1A1714] font-medium tabular-nums" dir="ltr">
-                        {b.phone}
-                      </span>
-                      <a
-                        href={formatWhatsAppUrl(b.phone)}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center size-6 rounded-full bg-emerald-50 text-emerald-600 hover:bg-emerald-600 hover:text-white border border-emerald-200 transition-all shadow-2xs hover:scale-105 shrink-0"
-                        title="مراسلة عبر واتساب"
-                        aria-label={`مراسلة ${b.name} عبر واتساب`}
-                      >
-                        <FaWhatsapp className="size-3.5" />
-                      </a>
+                  {/* Card Header: Name, date & status badge */}
+                  <div className="flex items-start justify-between gap-2">
+                    <div>
+                      <h3 className="font-cairo font-bold text-[#1A1714] text-sm">
+                        {b.name}
+                      </h3>
+                      <p className="font-cairo text-[11px] text-[#A09080] tabular-nums mt-0.5">
+                        طُلب في {new Date(b.createdAt).toLocaleDateString("ar-KW", {
+                          year: "numeric",
+                          month: "short",
+                          day: "numeric",
+                        })}
+                      </p>
                     </div>
-                  </TableCell>
-                  <TableCell className="font-cairo text-[#4A4038] text-sm tabular-nums">
-                    {b.preferredDate
-                      ? formatArabicDate(new Date(b.preferredDate).toISOString())
-                      : "—"}
-                  </TableCell>
-                  <TableCell className="font-cairo text-[#4A4038] text-sm max-w-[180px] truncate">
-                    {b.venue ?? "—"}
-                  </TableCell>
-                  <TableCell className="font-cairo text-[#A09080] text-xs tabular-nums">
-                    {new Date(b.createdAt).toLocaleDateString("ar-KW", {
-                      year: "numeric",
-                      month: "short",
-                      day: "numeric",
-                    })}
-                  </TableCell>
-                  <TableCell>
                     <Badge className={sc.className}>{sc.label}</Badge>
-                  </TableCell>
-                  <TableCell>
-                    <div className="flex items-center gap-1.5 justify-center">
-                      {/* جديد (New) */}
-                      <Button
-                        type="button"
-                        variant="ghost"
-                        size="icon-sm"
-                        onClick={() => onStatusChange(b.id, RequestStatus.NEW)}
-                        disabled={b.status === RequestStatus.NEW}
-                        title="تعيين كـ جديد"
-                        aria-label="جديد"
-                        className={cn(
-                          "size-7 rounded-lg transition-all",
-                          b.status === RequestStatus.NEW
-                            ? "bg-[#C9973A]/20 text-[#9E6E1A] border border-[#C9973A]/40 cursor-default opacity-100 shadow-2xs"
-                            : "text-[#A09080] hover:text-[#C9973A] hover:bg-[#C9973A]/10 border border-transparent hover:border-[#C9973A]/25"
-                        )}
-                      >
-                        <ClockIcon className="size-3.5" />
-                      </Button>
+                  </div>
 
-                      {/* منشور (Published) */}
-                      <Button
-                        type="button"
-                        variant="ghost"
-                        size="icon-sm"
-                        onClick={() => onStatusChange(b.id, RequestStatus.PUBLISHED)}
-                        disabled={b.status === RequestStatus.PUBLISHED}
-                        title="تعيين كـ منشور"
-                        aria-label="منشور"
-                        className={cn(
-                          "size-7 rounded-lg transition-all",
-                          b.status === RequestStatus.PUBLISHED
-                            ? "bg-emerald-100 text-emerald-800 border border-emerald-300 cursor-default opacity-100 shadow-2xs"
-                            : "text-[#A09080] hover:text-emerald-700 hover:bg-emerald-50 border border-transparent hover:border-emerald-200"
-                        )}
-                      >
-                        <CheckCircle2Icon className="size-3.5" />
-                      </Button>
-
-                      {/* مرفوض (Rejected) */}
-                      <Button
-                        type="button"
-                        variant="ghost"
-                        size="icon-sm"
-                        onClick={() => onStatusChange(b.id, RequestStatus.CLOSED)}
-                        disabled={b.status === RequestStatus.CLOSED}
-                        title="تعيين كـ مرفوض"
-                        aria-label="مرفوض"
-                        className={cn(
-                          "size-7 rounded-lg transition-all",
-                          b.status === RequestStatus.CLOSED
-                            ? "bg-red-100 text-red-800 border border-red-300 cursor-default opacity-100 shadow-2xs"
-                            : "text-[#A09080] hover:text-red-700 hover:bg-red-50 border border-transparent hover:border-red-200"
-                        )}
-                      >
-                        <XCircleIcon className="size-3.5" />
-                      </Button>
+                  {/* Card Info Box */}
+                  <div className="bg-[#F3EDE3]/40 p-2.5 rounded-lg border border-[#E5DDD0]/60 space-y-2 text-xs font-cairo">
+                    {/* Phone + WhatsApp button */}
+                    <div className="flex items-center justify-between">
+                      <span className="text-[#7D6E63]">الهاتف:</span>
+                      <div className="flex items-center gap-2">
+                        <span className="text-[#1A1714] font-medium tabular-nums" dir="ltr">
+                          {b.phone}
+                        </span>
+                        <a
+                          href={formatWhatsAppUrl(b.phone)}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center justify-center size-6 rounded-full bg-emerald-50 text-emerald-600 hover:bg-emerald-600 hover:text-white border border-emerald-200 transition-all shadow-2xs hover:scale-105 shrink-0"
+                          title="مراسلة عبر واتساب"
+                          aria-label={`مراسلة ${b.name} عبر واتساب`}
+                        >
+                          <FaWhatsapp className="size-3.5" />
+                        </a>
+                      </div>
                     </div>
-                  </TableCell>
-                </TableRow>
+
+                    {/* Preferred Date */}
+                    <div className="flex items-center justify-between">
+                      <span className="text-[#7D6E63]">التاريخ المطلوب:</span>
+                      <span className="text-[#1A1714] font-medium tabular-nums">
+                        {b.preferredDate
+                          ? formatArabicDate(new Date(b.preferredDate).toISOString())
+                          : "—"}
+                      </span>
+                    </div>
+
+                    {/* Venue */}
+                    {b.venue && (
+                      <div className="flex items-center justify-between">
+                        <span className="text-[#7D6E63]">المكان:</span>
+                        <span className="text-[#1A1714] font-medium truncate max-w-[200px]">
+                          {b.venue}
+                        </span>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Card Actions: Status change */}
+                  <div className="pt-2 border-t border-[#E5DDD0]/60">
+                    <div className="flex items-center justify-between gap-1.5">
+                      <span className="font-cairo text-[11px] text-[#A09080] shrink-0">
+                        تغيير الحالة:
+                      </span>
+                      <div className="flex items-center gap-1.5 flex-wrap justify-end">
+                        {/* جديد */}
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="sm"
+                          onClick={() => onStatusChange(b.id, RequestStatus.NEW)}
+                          disabled={b.status === RequestStatus.NEW}
+                          title="تعيين كـ جديد"
+                          className={cn(
+                            "font-cairo text-xs h-7 px-2.5 gap-1 rounded-lg transition-all",
+                            b.status === RequestStatus.NEW
+                              ? "bg-[#C9973A]/20 text-[#9E6E1A] border-[#C9973A]/40 cursor-default opacity-100 font-semibold"
+                              : "border-[#E5DDD0] text-[#6B5E52] hover:text-[#C9973A] hover:bg-[#C9973A]/10 hover:border-[#C9973A]/30"
+                          )}
+                        >
+                          <ClockIcon className="size-3.5" />
+                          <span>جديد</span>
+                        </Button>
+
+                        {/* منشور */}
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="sm"
+                          onClick={() => onStatusChange(b.id, RequestStatus.PUBLISHED)}
+                          disabled={b.status === RequestStatus.PUBLISHED}
+                          title="تعيين كـ منشور"
+                          className={cn(
+                            "font-cairo text-xs h-7 px-2.5 gap-1 rounded-lg transition-all",
+                            b.status === RequestStatus.PUBLISHED
+                              ? "bg-emerald-100 text-emerald-800 border-emerald-300 cursor-default opacity-100 font-semibold"
+                              : "border-[#E5DDD0] text-[#6B5E52] hover:text-emerald-700 hover:bg-emerald-50 hover:border-emerald-200"
+                          )}
+                        >
+                          <CheckCircle2Icon className="size-3.5" />
+                          <span>نشر</span>
+                        </Button>
+
+                        {/* مرفوض */}
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="sm"
+                          onClick={() => onStatusChange(b.id, RequestStatus.CLOSED)}
+                          disabled={b.status === RequestStatus.CLOSED}
+                          title="تعيين كـ مرفوض"
+                          className={cn(
+                            "font-cairo text-xs h-7 px-2.5 gap-1 rounded-lg transition-all",
+                            b.status === RequestStatus.CLOSED
+                              ? "bg-red-100 text-red-800 border-red-300 cursor-default opacity-100 font-semibold"
+                              : "border-[#E5DDD0] text-[#6B5E52] hover:text-red-700 hover:bg-red-50 hover:border-red-200"
+                          )}
+                        >
+                          <XCircleIcon className="size-3.5" />
+                          <span>رفض</span>
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               )
-            })
-          )}
-        </TableBody>
-      </Table>
+            })}
+          </div>
+        )}
+      </div>
+
+      {/* ── Desktop View: Table ── */}
+      <div className="hidden md:block">
+        <Table dir="rtl">
+          <TableHeader>
+            <TableRow className="border-[#E5DDD0] bg-[#F3EDE3]/60 hover:bg-[#F3EDE3]/60">
+              <TableHead
+                onClick={() => handleSort("name")}
+                className="font-cairo font-semibold text-[#6B5E52] text-sm text-right cursor-pointer select-none hover:text-[#8B1A1A] transition-colors"
+              >
+                <div className="flex items-center gap-1.5 justify-start">
+                  <span>الاسم</span>
+                  {renderSortIcon("name")}
+                </div>
+              </TableHead>
+
+              <TableHead
+                onClick={() => handleSort("phone")}
+                className="font-cairo font-semibold text-[#6B5E52] text-sm text-right cursor-pointer select-none hover:text-[#8B1A1A] transition-colors"
+              >
+                <div className="flex items-center gap-1.5 justify-start">
+                  <span>الهاتف</span>
+                  {renderSortIcon("phone")}
+                </div>
+              </TableHead>
+
+              <TableHead
+                onClick={() => handleSort("preferredDate")}
+                className="font-cairo font-semibold text-[#6B5E52] text-sm text-right cursor-pointer select-none hover:text-[#8B1A1A] transition-colors"
+              >
+                <div className="flex items-center gap-1.5 justify-start">
+                  <span>التاريخ المطلوب</span>
+                  {renderSortIcon("preferredDate")}
+                </div>
+              </TableHead>
+
+              <TableHead
+                onClick={() => handleSort("venue")}
+                className="font-cairo font-semibold text-[#6B5E52] text-sm text-right cursor-pointer select-none hover:text-[#8B1A1A] transition-colors"
+              >
+                <div className="flex items-center gap-1.5 justify-start">
+                  <span>المكان</span>
+                  {renderSortIcon("venue")}
+                </div>
+              </TableHead>
+
+              <TableHead
+                onClick={() => handleSort("createdAt")}
+                className="font-cairo font-semibold text-[#6B5E52] text-sm text-right cursor-pointer select-none hover:text-[#8B1A1A] transition-colors"
+              >
+                <div className="flex items-center gap-1.5 justify-start">
+                  <span>تاريخ الطلب</span>
+                  {renderSortIcon("createdAt")}
+                </div>
+              </TableHead>
+
+              <TableHead
+                onClick={() => handleSort("status")}
+                className="font-cairo font-semibold text-[#6B5E52] text-sm text-right cursor-pointer select-none hover:text-[#8B1A1A] transition-colors"
+              >
+                <div className="flex items-center gap-1.5 justify-start">
+                  <span>الحالة</span>
+                  {renderSortIcon("status")}
+                </div>
+              </TableHead>
+
+              <TableHead className="w-[120px] font-cairo font-semibold text-[#6B5E52] text-sm text-center">
+                الإجراءات
+              </TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {isLoading ? (
+              Array.from({ length: 5 }).map((_, index) => (
+                <TableRow key={`skeleton-${index}`}>
+                  <TableCell><Skeleton className="h-4 w-[120px]" /></TableCell>
+                  <TableCell><Skeleton className="h-4 w-[150px]" /></TableCell>
+                  <TableCell><Skeleton className="h-4 w-[100px]" /></TableCell>
+                  <TableCell><Skeleton className="h-4 w-[120px]" /></TableCell>
+                  <TableCell><Skeleton className="h-4 w-[80px]" /></TableCell>
+                  <TableCell><Skeleton className="h-6 w-[80px] rounded-full" /></TableCell>
+                  <TableCell><Skeleton className="h-8 w-full rounded-md" /></TableCell>
+                </TableRow>
+              ))
+            ) : filteredAndSortedBookings.length === 0 ? (
+              <TableRow>
+                <TableCell colSpan={7} className="h-32 text-center font-cairo text-[#A09080] text-sm">
+                  {searchQuery ? "لا توجد نتائج مطابقة لبحثك" : "لا توجد طلبات حجز"}
+                </TableCell>
+              </TableRow>
+            ) : (
+              filteredAndSortedBookings.map((b) => {
+                const sc = REQUEST_STATUS_LABELS[b.status] ?? REQUEST_STATUS_LABELS.NEW
+                return (
+                  <TableRow
+                    key={b.id}
+                    className="border-[#E5DDD0] hover:bg-[#F3EDE3]/40 transition-colors"
+                  >
+                    <TableCell className="font-cairo font-semibold text-[#1A1714] text-sm">
+                      {b.name}
+                    </TableCell>
+                    <TableCell className="font-cairo text-sm text-right">
+                      <div className="flex items-center gap-2 justify-start">
+                        <span className="text-[#1A1714] font-medium tabular-nums" dir="ltr">
+                          {b.phone}
+                        </span>
+                        <a
+                          href={formatWhatsAppUrl(b.phone)}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center justify-center size-6 rounded-full bg-emerald-50 text-emerald-600 hover:bg-emerald-600 hover:text-white border border-emerald-200 transition-all shadow-2xs hover:scale-105 shrink-0"
+                          title="مراسلة عبر واتساب"
+                          aria-label={`مراسلة ${b.name} عبر واتساب`}
+                        >
+                          <FaWhatsapp className="size-3.5" />
+                        </a>
+                      </div>
+                    </TableCell>
+                    <TableCell className="font-cairo text-[#4A4038] text-sm tabular-nums">
+                      {b.preferredDate
+                        ? formatArabicDate(new Date(b.preferredDate).toISOString())
+                        : "—"}
+                    </TableCell>
+                    <TableCell className="font-cairo text-[#4A4038] text-sm max-w-[180px] truncate">
+                      {b.venue ?? "—"}
+                    </TableCell>
+                    <TableCell className="font-cairo text-[#A09080] text-xs tabular-nums">
+                      {new Date(b.createdAt).toLocaleDateString("ar-KW", {
+                        year: "numeric",
+                        month: "short",
+                        day: "numeric",
+                      })}
+                    </TableCell>
+                    <TableCell>
+                      <Badge className={sc.className}>{sc.label}</Badge>
+                    </TableCell>
+                    <TableCell>
+                      <div className="flex items-center gap-1.5 justify-center">
+                        {/* جديد (New) */}
+                        <Button
+                          type="button"
+                          variant="ghost"
+                          size="icon-sm"
+                          onClick={() => onStatusChange(b.id, RequestStatus.NEW)}
+                          disabled={b.status === RequestStatus.NEW}
+                          title="تعيين كـ جديد"
+                          aria-label="جديد"
+                          className={cn(
+                            "size-7 rounded-lg transition-all",
+                            b.status === RequestStatus.NEW
+                              ? "bg-[#C9973A]/20 text-[#9E6E1A] border border-[#C9973A]/40 cursor-default opacity-100 shadow-2xs"
+                              : "text-[#A09080] hover:text-[#C9973A] hover:bg-[#C9973A]/10 border border-transparent hover:border-[#C9973A]/25"
+                          )}
+                        >
+                          <ClockIcon className="size-3.5" />
+                        </Button>
+
+                        {/* منشور (Published) */}
+                        <Button
+                          type="button"
+                          variant="ghost"
+                          size="icon-sm"
+                          onClick={() => onStatusChange(b.id, RequestStatus.PUBLISHED)}
+                          disabled={b.status === RequestStatus.PUBLISHED}
+                          title="تعيين كـ منشور"
+                          aria-label="منشور"
+                          className={cn(
+                            "size-7 rounded-lg transition-all",
+                            b.status === RequestStatus.PUBLISHED
+                              ? "bg-emerald-100 text-emerald-800 border border-emerald-300 cursor-default opacity-100 shadow-2xs"
+                              : "text-[#A09080] hover:text-emerald-700 hover:bg-emerald-50 border border-transparent hover:border-emerald-200"
+                          )}
+                        >
+                          <CheckCircle2Icon className="size-3.5" />
+                        </Button>
+
+                        {/* مرفوض (Rejected) */}
+                        <Button
+                          type="button"
+                          variant="ghost"
+                          size="icon-sm"
+                          onClick={() => onStatusChange(b.id, RequestStatus.CLOSED)}
+                          disabled={b.status === RequestStatus.CLOSED}
+                          title="تعيين كـ مرفوض"
+                          aria-label="مرفوض"
+                          className={cn(
+                            "size-7 rounded-lg transition-all",
+                            b.status === RequestStatus.CLOSED
+                              ? "bg-red-100 text-red-800 border border-red-300 cursor-default opacity-100 shadow-2xs"
+                              : "text-[#A09080] hover:text-red-700 hover:bg-red-50 border border-transparent hover:border-red-200"
+                          )}
+                        >
+                          <XCircleIcon className="size-3.5" />
+                        </Button>
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                )
+              })
+            )}
+          </TableBody>
+        </Table>
+      </div>
     </div>
   )
 }
