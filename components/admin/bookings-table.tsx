@@ -271,68 +271,63 @@ export function BookingsTable({ bookings, isLoading, onStatusChange }: BookingsT
 
                   {/* Card Actions: Status change */}
                   <div className="pt-2 border-t border-[#E5DDD0]/60">
-                    <div className="flex items-center justify-between gap-1.5">
-                      <span className="font-cairo text-[11px] text-[#A09080] shrink-0">
-                        تغيير الحالة:
-                      </span>
-                      <div className="flex items-center gap-1.5 flex-wrap justify-end">
-                        {/* جديد */}
-                        <Button
-                          type="button"
-                          variant="outline"
-                          size="sm"
-                          onClick={() => onStatusChange(b.id, RequestStatus.NEW)}
-                          disabled={b.status === RequestStatus.NEW}
-                          title="تعيين كـ جديد"
-                          className={cn(
-                            "font-cairo text-xs h-7 px-2.5 gap-1 rounded-lg transition-all",
-                            b.status === RequestStatus.NEW
-                              ? "bg-[#C9973A]/20 text-[#9E6E1A] border-[#C9973A]/40 cursor-default opacity-100 font-semibold"
-                              : "border-[#E5DDD0] text-[#6B5E52] hover:text-[#C9973A] hover:bg-[#C9973A]/10 hover:border-[#C9973A]/30"
-                          )}
-                        >
-                          <ClockIcon className="size-3.5" />
-                          <span>جديد</span>
-                        </Button>
+                    <div className="flex items-center justify-center gap-2 flex-wrap">
+                      {/* جديد */}
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        onClick={() => onStatusChange(b.id, RequestStatus.NEW)}
+                        disabled={b.status === RequestStatus.NEW}
+                        title="تعيين كـ جديد"
+                        className={cn(
+                          "font-cairo text-xs h-7 px-2.5 gap-1 rounded-lg transition-all",
+                          b.status === RequestStatus.NEW
+                            ? "bg-[#C9973A]/20 text-[#9E6E1A] border-[#C9973A]/40 cursor-default opacity-100 font-semibold"
+                            : "border-[#E5DDD0] text-[#6B5E52] hover:text-[#C9973A] hover:bg-[#C9973A]/10 hover:border-[#C9973A]/30"
+                        )}
+                      >
+                        <ClockIcon className="size-3.5" />
+                        <span>جديد</span>
+                      </Button>
 
-                        {/* منشور */}
-                        <Button
-                          type="button"
-                          variant="outline"
-                          size="sm"
-                          onClick={() => onStatusChange(b.id, RequestStatus.PUBLISHED)}
-                          disabled={b.status === RequestStatus.PUBLISHED}
-                          title="تعيين كـ منشور"
-                          className={cn(
-                            "font-cairo text-xs h-7 px-2.5 gap-1 rounded-lg transition-all",
-                            b.status === RequestStatus.PUBLISHED
-                              ? "bg-emerald-100 text-emerald-800 border-emerald-300 cursor-default opacity-100 font-semibold"
-                              : "border-[#E5DDD0] text-[#6B5E52] hover:text-emerald-700 hover:bg-emerald-50 hover:border-emerald-200"
-                          )}
-                        >
-                          <CheckCircle2Icon className="size-3.5" />
-                          <span>نشر</span>
-                        </Button>
+                      {/* منشور */}
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        onClick={() => onStatusChange(b.id, RequestStatus.PUBLISHED)}
+                        disabled={b.status === RequestStatus.PUBLISHED}
+                        title="تعيين كـ منشور"
+                        className={cn(
+                          "font-cairo text-xs h-7 px-2.5 gap-1 rounded-lg transition-all",
+                          b.status === RequestStatus.PUBLISHED
+                            ? "bg-emerald-100 text-emerald-800 border-emerald-300 cursor-default opacity-100 font-semibold"
+                            : "border-[#E5DDD0] text-[#6B5E52] hover:text-emerald-700 hover:bg-emerald-50 hover:border-emerald-200"
+                        )}
+                      >
+                        <CheckCircle2Icon className="size-3.5" />
+                        <span>نشر</span>
+                      </Button>
 
-                        {/* مرفوض */}
-                        <Button
-                          type="button"
-                          variant="outline"
-                          size="sm"
-                          onClick={() => onStatusChange(b.id, RequestStatus.CLOSED)}
-                          disabled={b.status === RequestStatus.CLOSED}
-                          title="تعيين كـ مرفوض"
-                          className={cn(
-                            "font-cairo text-xs h-7 px-2.5 gap-1 rounded-lg transition-all",
-                            b.status === RequestStatus.CLOSED
-                              ? "bg-red-100 text-red-800 border-red-300 cursor-default opacity-100 font-semibold"
-                              : "border-[#E5DDD0] text-[#6B5E52] hover:text-red-700 hover:bg-red-50 hover:border-red-200"
-                          )}
-                        >
-                          <XCircleIcon className="size-3.5" />
-                          <span>رفض</span>
-                        </Button>
-                      </div>
+                      {/* مرفوض */}
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        onClick={() => onStatusChange(b.id, RequestStatus.CLOSED)}
+                        disabled={b.status === RequestStatus.CLOSED}
+                        title="تعيين كـ مرفوض"
+                        className={cn(
+                          "font-cairo text-xs h-7 px-2.5 gap-1 rounded-lg transition-all",
+                          b.status === RequestStatus.CLOSED
+                            ? "bg-red-100 text-red-800 border-red-300 cursor-default opacity-100 font-semibold"
+                            : "border-[#E5DDD0] text-[#6B5E52] hover:text-red-700 hover:bg-red-50 hover:border-red-200"
+                        )}
+                      >
+                        <XCircleIcon className="size-3.5" />
+                        <span>رفض</span>
+                      </Button>
                     </div>
                   </div>
                 </div>
@@ -372,7 +367,7 @@ export function BookingsTable({ bookings, isLoading, onStatusChange }: BookingsT
                 className="font-cairo font-semibold text-[#6B5E52] text-sm text-right cursor-pointer select-none hover:text-[#8B1A1A] transition-colors"
               >
                 <div className="flex items-center gap-1.5 justify-start">
-                  <span>التاريخ المطلوب</span>
+                  <span>تاريخ المناسبة</span>
                   {renderSortIcon("preferredDate")}
                 </div>
               </TableHead>
