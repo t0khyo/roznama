@@ -58,7 +58,7 @@ function EventsSkeleton() {
 
 export default function HomePage() {
   return (
-    <div dir="rtl" className="min-h-screen bg-[#FAF8F3] text-[#1A1714]">
+    <div dir="rtl" className="min-h-screen text-[#1A1714]">
       <Navbar />
       <Hero />
       <Suspense fallback={<EventsSkeleton />}>
