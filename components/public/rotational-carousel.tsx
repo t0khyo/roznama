@@ -12,15 +12,15 @@ import type { Event } from "@/types"
 import { formatArabicDate } from "@/lib/date-utils"
 import {
   Dialog,
+  DialogClose,
   DialogContent,
 } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
-import { cn } from "cn"
+import { XIcon } from "lucide-react"
 
 export default function WeddingCarousel({ weddings }: { weddings: Event[] }) {
   const [api, setApi] = React.useState<CarouselApi>()
   const [current, setCurrent] = React.useState(0)
-  const count = weddings.length
   const [lightboxImage, setLightboxImage] = React.useState<Event | null>(null)
 
   // Stable plugin instance — must not be recreated on every render
@@ -31,8 +31,13 @@ export default function WeddingCarousel({ weddings }: { weddings: Event[] }) {
 
   React.useEffect(() => {
     if (!api) return
-    setCurrent(api.selectedScrollSnap())
-    api.on("select", () => setCurrent(api.selectedScrollSnap()))
+
+    const handleSelect = () => setCurrent(api.selectedScrollSnap())
+    api.on("select", handleSelect)
+
+    return () => {
+      api.off("select", handleSelect)
+    }
   }, [api])
 
   return (
@@ -182,6 +187,19 @@ export default function WeddingCarousel({ weddings }: { weddings: Event[] }) {
         >
           {lightboxImage && (
             <div className="relative flex flex-col items-center justify-center w-full min-h-[50vh]">
+              <DialogClose
+                render={
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="absolute top-3 end-3 z-10 size-10 rounded-full bg-white/10 text-zinc-200 backdrop-blur-sm hover:bg-white/20 hover:text-white"
+                    aria-label="إغلاق الصورة"
+                  />
+                }
+              >
+                <XIcon className="size-5" />
+                <span className="sr-only">إغلاق الصورة</span>
+              </DialogClose>
               <img
                 src={lightboxImage.imageUrl}
                 alt={`مناسبة ${lightboxImage.tribe}`}

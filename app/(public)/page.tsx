@@ -6,6 +6,7 @@ import WeddingCalendar from "@/components/public/wedding-calendar"
 import BookingForm from "@/components/public/booking-form"
 import WhatsappButton from "@/components/public/whatsapp-button"
 import Footer from "@/components/public/footer"
+import ScrollReveal from "@/components/public/scroll-reveal"
 
 import { getEvents } from "@/lib/data/events"
 import { Skeleton } from "@/components/ui/skeleton"
@@ -16,10 +17,10 @@ async function EventsSection() {
   const events = await getEvents()
 
   return (
-    <>
+    <ScrollReveal>
       <UpcomingEvents events={events} />
       <WeddingCalendar events={events} />
-    </>
+    </ScrollReveal>
   )
 }
 
@@ -60,13 +61,17 @@ export default function HomePage() {
   return (
     <div dir="rtl" className="min-h-screen text-[#1A1714]">
       <Navbar />
-      <Hero />
+      <ScrollReveal>
+        <Hero />
+      </ScrollReveal>
       <Suspense fallback={<EventsSkeleton />}>
         <EventsSection />
       </Suspense>
-      <BookingForm />
+      <ScrollReveal>
+        <BookingForm />
+        <Footer />
+      </ScrollReveal>
       <WhatsappButton />
-      <Footer />
     </div>
   )
 }

@@ -235,6 +235,57 @@ textarea:focus {
   animation: fadeUp 0.7s ease forwards;
 }
 
+/* ── Public-page reveal and hero motion ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0s), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0s);
+  will-change: opacity, transform;
+}
+
+.revealed {
+  opacity: 1;
+  transform: translateY(0);
+  will-change: auto;
+}
+
+.hero-overlay {
+  transform: translateY(var(--hero-parallax-y, 0px));
+  will-change: transform;
+}
+
+@keyframes scrollBounce {
+  0%, 100% {
+    opacity: 0.6;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(8px);
+  }
+}
+
+.scroll-indicator-arrow {
+  animation: scrollBounce 2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal,
+  .hero-overlay {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .scroll-indicator-arrow {
+    animation: none;
+  }
+}
+
 :root {
   /* ── Roznama brand mapped to shadcn semantic tokens ── */
   --background: #FAF8F3;          /* cream */

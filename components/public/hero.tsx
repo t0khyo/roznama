@@ -1,17 +1,53 @@
 "use client"
 
+import { useEffect, useRef } from "react"
 import { Button } from "@/components/ui/button"
 
 export default function Hero() {
+  const heroRef = useRef<HTMLElement>(null)
+
+  useEffect(() => {
+    const hero = heroRef.current
+
+    if (!hero || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return
+    }
+
+    let animationFrame: number | undefined
+
+    const updateParallax = () => {
+      animationFrame = undefined
+      const offset = Math.min(window.scrollY * 0.2, 80)
+      hero.style.setProperty("--hero-parallax-y", `${offset}px`)
+    }
+
+    const handleScroll = () => {
+      if (animationFrame === undefined) {
+        animationFrame = window.requestAnimationFrame(updateParallax)
+      }
+    }
+
+    updateParallax()
+    window.addEventListener("scroll", handleScroll, { passive: true })
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
+      if (animationFrame !== undefined) {
+        window.cancelAnimationFrame(animationFrame)
+      }
+      hero.style.removeProperty("--hero-parallax-y")
+    }
+  }, [])
+
   const scrollTo = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" })
   }
 
   return (
-    <section id="hero" className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-20">
+    <section ref={heroRef} id="hero" className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-20 overflow-hidden">
       {/* Subtle background texture */}
       <div
-        className="absolute inset-0 opacity-30"
+        className="hero-overlay absolute -inset-12 opacity-30"
         style={{
           backgroundImage: `radial-gradient(circle at 20% 50%, #8B1A1A12 0%, transparent 50%),
                             radial-gradient(circle at 80% 20%, #C9973A10 0%, transparent 40%)`,
@@ -23,24 +59,25 @@ export default function Hero() {
       <div className="absolute top-1/3 left-0 w-px h-32 bg-gradient-to-b from-transparent via-[#8B1A1A]/25 to-transparent" />
 
       <div className="relative text-center space-y-8 max-w-3xl">
-        <div className="flex items-center justify-center gap-3 mb-6">
+        <div data-reveal className="flex items-center justify-center gap-3 mb-6">
           <div className="h-px w-16 bg-gradient-to-l from-[#8B1A1A] to-transparent" />
           <span className="text-[#8B1A1A] font-cairo text-sm font-medium tracking-widest">مناسبات</span>
           <div className="h-px w-16 bg-gradient-to-r from-[#8B1A1A] to-transparent" />
         </div>
 
         <h1
+          data-reveal
           className="text-5xl md:text-7xl font-bold leading-tight text-[#1A1714]"
           style={{ fontFamily: "'ThmanyahSerifDisplay', serif", lineHeight: "1.4" }}
         >
           سناب مطير
         </h1>
 
-        <p className="font-cairo text-lg md:text-xl text-[#6B5E52] font-light leading-relaxed max-w-xl mx-auto">
+        <p data-reveal className="font-cairo text-lg md:text-xl text-[#6B5E52] font-light leading-relaxed max-w-xl mx-auto">
           نقدمها لكم لتكون مرجعاً للتنسيق والتذكير بالمناسبات كافة
         </p>
 
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+        <div data-reveal className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
           <Button
             variant="outline"
             onClick={() => scrollTo("upcoming")}
@@ -58,9 +95,9 @@ export default function Hero() {
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-10 flex flex-col items-center gap-2 animate-bounce">
+      <div className="absolute bottom-10 flex flex-col items-center gap-2">
         <span className="font-cairo text-xs text-[#A09080]">انزل للأسفل</span>
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <svg className="scroll-indicator-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none">
           <path d="M8 3v10M3 9l5 5 5-5" stroke="#8B1A1A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </div>
