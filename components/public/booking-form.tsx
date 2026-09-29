@@ -39,7 +39,7 @@ const bookingSchema = z.object({
         const clean = val.replace(/[\s-]/g, "")
         return /^\+?\d{8,15}$/.test(clean)
       },
-      { message: "يرجى إدخال رقم هاتف صحيح (مثال: +965 9804 0875)" }
+      { message: "يرجى إدخال رقم هاتف صحيح (مثال: 98040875)" }
     ),
   date: z.date({
     required_error: "يرجى اختيار تاريخ المناسبة",

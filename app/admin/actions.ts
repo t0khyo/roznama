@@ -4,7 +4,7 @@ import { redirect } from "next/navigation"
 import bcrypt from "bcryptjs"
 import { z } from "zod"
 import { createSession, deleteSession, verifySession } from "@/lib/session"
-import { getDashboardStats } from "@/lib/data/stats"
+import { getDashboardStats, getDashboardData } from "@/lib/data/stats"
 
 const loginSchema = z.object({
   username: z.string().min(1, "يرجى إدخال اسم المستخدم").trim(),
@@ -71,4 +71,10 @@ export async function getDashboardStatsAction() {
   const session = await verifySession()
   if (!session) redirect("/admin/login")
   return getDashboardStats()
+}
+
+export async function getDashboardDataAction() {
+  const session = await verifySession()
+  if (!session) redirect("/admin/login")
+  return getDashboardData()
 }
