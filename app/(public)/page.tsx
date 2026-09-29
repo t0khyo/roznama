@@ -61,9 +61,7 @@ export default function HomePage() {
   return (
     <div dir="rtl" className="min-h-screen text-[#1A1714]">
       <Navbar />
-      <ScrollReveal>
-        <Hero />
-      </ScrollReveal>
+      <Hero />
       <Suspense fallback={<EventsSkeleton />}>
         <EventsSection />
       </Suspense>

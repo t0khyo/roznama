@@ -1,50 +1,6 @@
-"use client"
-
-import { useEffect, useRef } from "react"
-import { Button } from "@/components/ui/button"
-
 export default function Hero() {
-  const heroRef = useRef<HTMLElement>(null)
-
-  useEffect(() => {
-    const hero = heroRef.current
-
-    if (!hero || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      return
-    }
-
-    let animationFrame: number | undefined
-
-    const updateParallax = () => {
-      animationFrame = undefined
-      const offset = Math.min(window.scrollY * 0.2, 80)
-      hero.style.setProperty("--hero-parallax-y", `${offset}px`)
-    }
-
-    const handleScroll = () => {
-      if (animationFrame === undefined) {
-        animationFrame = window.requestAnimationFrame(updateParallax)
-      }
-    }
-
-    updateParallax()
-    window.addEventListener("scroll", handleScroll, { passive: true })
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll)
-      if (animationFrame !== undefined) {
-        window.cancelAnimationFrame(animationFrame)
-      }
-      hero.style.removeProperty("--hero-parallax-y")
-    }
-  }, [])
-
-  const scrollTo = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" })
-  }
-
   return (
-    <section ref={heroRef} id="hero" className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-20 overflow-hidden">
+    <section id="hero" className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-20 overflow-hidden">
       {/* Subtle background texture */}
       <div
         className="hero-overlay absolute -inset-12 opacity-30"
@@ -59,38 +15,36 @@ export default function Hero() {
       <div className="absolute top-1/3 left-0 w-px h-32 bg-gradient-to-b from-transparent via-[#8B1A1A]/25 to-transparent" />
 
       <div className="relative text-center space-y-8 max-w-3xl">
-        <div data-reveal className="flex items-center justify-center gap-3 mb-6">
+        <div className="flex items-center justify-center gap-3 mb-6 opacity-0 animate-fade-up [animation-delay:0ms]">
           <div className="h-px w-16 bg-gradient-to-l from-[#8B1A1A] to-transparent" />
           <span className="text-[#8B1A1A] font-cairo text-sm font-medium tracking-widest">مناسبات</span>
           <div className="h-px w-16 bg-gradient-to-r from-[#8B1A1A] to-transparent" />
         </div>
 
         <h1
-          data-reveal
-          className="text-5xl md:text-7xl font-bold leading-tight text-[#1A1714]"
+          className="text-5xl md:text-7xl font-bold leading-tight text-[#1A1714] opacity-0 animate-fade-up [animation-delay:100ms]"
           style={{ fontFamily: "'ThmanyahSerifDisplay', serif", lineHeight: "1.4" }}
         >
           سناب مطير
         </h1>
 
-        <p data-reveal className="font-cairo text-lg md:text-xl text-[#6B5E52] font-light leading-relaxed max-w-xl mx-auto">
+        <p className="font-cairo text-lg md:text-xl text-[#6B5E52] font-light leading-relaxed max-w-xl mx-auto opacity-0 animate-fade-up [animation-delay:200ms]">
           نقدمها لكم لتكون مرجعاً للتنسيق والتذكير بالمناسبات كافة
         </p>
 
-        <div data-reveal className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
-          <Button
-            variant="outline"
-            onClick={() => scrollTo("upcoming")}
-            className="border border-[#8B1A1A] text-[#8B1A1A] font-cairo font-medium px-8 py-3.5 h-auto rounded-full text-sm hover:bg-[#8B1A1A]/10 transition-colors duration-300 w-full sm:w-auto bg-transparent"
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4 opacity-0 animate-fade-up [animation-delay:300ms]">
+          <a
+            href="#upcoming"
+            className="inline-flex items-center justify-center border border-[#8B1A1A] text-[#8B1A1A] font-cairo font-medium px-8 py-3.5 h-auto rounded-full text-sm hover:bg-[#8B1A1A]/10 transition-colors duration-300 w-full sm:w-auto bg-transparent"
           >
             المناسبات القادمة
-          </Button>
-          <Button
-            onClick={() => scrollTo("booking")}
-            className="bg-[#8B1A1A] text-[#FAF8F3] font-cairo font-bold px-8 py-3.5 h-auto rounded-full text-sm hover:bg-[#6A1212] transition-all duration-300 w-full sm:w-auto shadow-sm"
+          </a>
+          <a
+            href="#booking"
+            className="inline-flex items-center justify-center bg-[#8B1A1A] text-[#FAF8F3] font-cairo font-bold px-8 py-3.5 h-auto rounded-full text-sm hover:bg-[#6A1212] transition-all duration-300 w-full sm:w-auto shadow-sm"
           >
             سجل مناسبتك
-          </Button>
+          </a>
         </div>
       </div>
 

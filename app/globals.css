@@ -80,6 +80,7 @@
 
 /* ── Brand tokens ── */
 @theme inline {
+  --animate-fade-up: fadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   /* ThmanyahSans replaces Cairo for UI / body text */
   --font-cairo: 'ThmanyahSans', sans-serif;
   /* ThmanyahSerifDisplay replaces Amiri for headings / display */
@@ -221,11 +222,11 @@ textarea:focus {
 
 /* ── Section fade-in ── */
 @keyframes fadeUp {
-  from {
+  0% {
     opacity: 0;
-    transform: translateY(24px);
+    transform: translateY(36px);
   }
-  to {
+  100% {
     opacity: 1;
     transform: translateY(0);
   }
@@ -282,6 +283,12 @@ textarea:focus {
   }
 
   .scroll-indicator-arrow {
+    animation: none;
+  }
+
+  .animate-fade-up {
+    opacity: 1;
+    transform: none;
     animation: none;
   }
 }
