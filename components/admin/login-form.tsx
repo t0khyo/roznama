@@ -1,8 +1,8 @@
 "use client"
 
-import { useActionState } from "react"
+import { useState, useActionState } from "react"
 import Link from "next/link"
-import { LockIcon, UserIcon, ArrowRightIcon, Loader2Icon } from "lucide-react"
+import { UserIcon, ArrowLeftIcon, Loader2Icon, EyeIcon, EyeOffIcon } from "lucide-react"
 import { loginAction, type LoginState } from "@/app/admin/actions"
 import {
   Card,
@@ -17,6 +17,7 @@ import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
 
 export function LoginForm() {
+  const [showPassword, setShowPassword] = useState(false)
   const [state, formAction, isPending] = useActionState<LoginState | undefined, FormData>(
     loginAction,
     undefined
@@ -25,9 +26,6 @@ export function LoginForm() {
   return (
     <div className="w-full max-w-md mx-auto" dir="rtl">
       <Card className="border border-[#E5DDD0] shadow-sm bg-[#FCFEFB] overflow-hidden">
-        {/* Top colored accent line */}
-        <div className="h-1.5 w-full bg-[#8B1A1A]" />
-
         <CardHeader className="space-y-3 text-center pb-2 pt-6">
           {/* Logo with matching navbar fill and border styling */}
           <div className="flex justify-center">
@@ -109,7 +107,7 @@ export function LoginForm() {
                 <Input
                   id="password"
                   name="password"
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   autoComplete="current-password"
                   required
                   placeholder="••••••••"
@@ -117,7 +115,20 @@ export function LoginForm() {
                   className="font-cairo text-sm h-10 pr-9 border-[#E5DDD0] focus-visible:border-[#8B1A1A] focus-visible:ring-[#8B1A1A]/20 bg-[#FAF8F3]/50 text-left"
                   disabled={isPending}
                 />
-                <LockIcon className="absolute right-3 top-1/2 -translate-y-1/2 size-4 text-[#A09080] pointer-events-none" />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword((prev) => !prev)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-[#A09080] hover:text-[#4A4038] p-0.5 rounded transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-[#8B1A1A]"
+                  aria-label={showPassword ? "إخفاء كلمة المرور" : "إظهار كلمة المرور"}
+                  title={showPassword ? "إخفاء كلمة المرور" : "إظهار كلمة المرور"}
+                  tabIndex={0}
+                >
+                  {showPassword ? (
+                    <EyeOffIcon className="size-4" />
+                  ) : (
+                    <EyeIcon className="size-4" />
+                  )}
+                </button>
               </div>
               {state?.errors?.password && (
                 <p className="text-xs text-red-600 font-cairo mt-1">
@@ -144,16 +155,17 @@ export function LoginForm() {
         </CardContent>
 
         <CardFooter className="border-t border-[#E5DDD0]/60 bg-[#FAF8F3]/60 px-6 py-3 flex items-center justify-between">
+          <span className="text-[11px] font-cairo text-[#A09080]">
+            سناب مطير الرسمي
+          </span>
           <Link
             href="/"
             className="inline-flex items-center gap-1.5 text-xs font-cairo text-[#7D6E63] hover:text-[#8B1A1A] transition-colors"
           >
-            <ArrowRightIcon className="size-3.5" />
             العودة إلى الموقع الرئيسي
+            <ArrowLeftIcon className="size-3.5" />
           </Link>
-          <span className="text-[11px] font-cairo text-[#A09080]">
-            سناب مطير الرسمي
-          </span>
+
         </CardFooter>
       </Card>
     </div>
