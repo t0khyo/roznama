@@ -12,7 +12,7 @@ export default function UpcomingEvents({ events }: { events: Event[] }) {
             <p className="text-[#8B1A1A] font-cairo text-sm font-medium mb-2 tracking-wider">المناسبات</p>
             <h2
               className="text-4xl md:text-5xl font-bold text-[#1A1714]"
-              style={{ fontFamily: "'ThmanyahSerifDisplay', serif" }}
+              style={{ fontFamily: "var(--font-thmanyah-serif), serif" }}
             >
               المناسبات القادمة
             </h2>

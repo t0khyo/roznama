@@ -51,7 +51,7 @@ export function LoginForm() {
           <div className="space-y-1">
             <CardTitle
               className="text-2xl font-bold text-[#1A1714]"
-              style={{ fontFamily: "'ThmanyahSerifDisplay', serif" }}
+              style={{ fontFamily: "var(--font-thmanyah-serif), serif" }}
             >
               تسجيل دخول لوحة التحكم
             </CardTitle>
@@ -133,8 +133,8 @@ export function LoginForm() {
             >
               {isPending ? (
                 <>
-                  <Loader2Icon className="size-4 animate-spin ml-2" />
                   جاري التحقق...
+                  <Loader2Icon className="size-4 animate-spin ml-2" />
                 </>
               ) : (
                 "تسجيل الدخول"

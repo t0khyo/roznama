@@ -47,7 +47,7 @@ export default function WeddingCalendar({ events }: { events: Event[] }) {
           </p>
           <h2
             className="text-4xl md:text-5xl font-bold text-[#1A1714]"
-            style={{ fontFamily: "'ThmanyahSerifDisplay', serif" }}
+            style={{ fontFamily: "var(--font-thmanyah-serif), serif" }}
           >
             التقويم
           </h2>
@@ -115,7 +115,7 @@ export default function WeddingCalendar({ events }: { events: Event[] }) {
           {/* Legend */}
           <div className="flex items-center gap-2 px-4 py-3 border-t border-[#E5DDD0]/50 text-[#A09080] font-cairo text-xs">
             <span className="w-2 h-2 rounded-full bg-[#8B1A1A] inline-block" />
-            <span>يوم به فرح</span>
+            <span>يوم به مناسبة</span>
           </div>
         </div>
 
@@ -123,7 +123,7 @@ export default function WeddingCalendar({ events }: { events: Event[] }) {
         {weddingsThisMonth.length > 0 && (
           <div className="mt-8 space-y-3">
             <p className="font-cairo text-sm font-medium text-[#6B5E52] mb-4">
-              {`أفراح ${arabicMonths[monthIndex]}`}
+              {`مناسبات ${arabicMonths[monthIndex]}`}
             </p>
             {weddingsThisMonth.map((w) => (
               <div
@@ -154,7 +154,7 @@ export default function WeddingCalendar({ events }: { events: Event[] }) {
 
         {weddingsThisMonth.length === 0 && (
           <p className="text-center font-cairo text-[#A09080] text-sm mt-8 py-8">
-            لا توجد أفراح مسجلة في هذا الشهر
+            لا توجد مناسبات مسجلة في هذا الشهر
           </p>
         )}
       </div>
@@ -166,7 +166,7 @@ export default function WeddingCalendar({ events }: { events: Event[] }) {
           <DialogHeader>
             <DialogTitle className="text-right font-cairo text-[#1A1714]">
               {dialogDay
-                ? `أفراح يوم ${dialogDay.getDate()} ${arabicMonths[dialogDay.getMonth()]}`
+                ? `مناسبات يوم ${dialogDay.getDate()} ${arabicMonths[dialogDay.getMonth()]}`
                 : ""}
             </DialogTitle>
           </DialogHeader>

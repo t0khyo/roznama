@@ -29,7 +29,7 @@ export function DeleteEventDialog({
         <DialogHeader>
           <DialogTitle
             className="text-[#1A1714] font-bold text-xl"
-            style={{ fontFamily: "'ThmanyahSerifDisplay', serif" }}
+            style={{ fontFamily: "var(--font-thmanyah-serif), serif" }}
           >
             حذف المناسبة
           </DialogTitle>

@@ -82,7 +82,7 @@ export default function BookingForm() {
 
     toast.promise(submitRequest, {
       loading: (
-        <span className="block w-full text-center font-cairo text-sm text-[#4A4038]">
+        <span className="block w-full text-center text-sm text-[#4A4038]">
           جارٍ إرسال طلب التسجيل...
         </span>
       ),
@@ -95,45 +95,45 @@ export default function BookingForm() {
         })
         return {
           message: (
-            <span className="block w-full text-center font-bold text-emerald-800 text-sm font-cairo">
+            <span className="block w-full text-center font-bold text-emerald-800 text-sm">
               تم إرسال طلبك بنجاح!
             </span>
           ),
           description: (
-            <span className="block w-full text-center text-emerald-700 text-xs font-cairo mt-1">
+            <span className="block w-full text-center text-emerald-700 text-xs mt-1">
               سيتواصل معك فريقنا عبر الواتساب قريباً لتأكيد التفاصيل.
             </span>
           ),
           className:
-            "border border-emerald-200 bg-emerald-50 text-emerald-800 shadow-md font-cairo",
+            "border border-emerald-200 bg-emerald-50 text-emerald-800 shadow-md",
           duration: 5000,
           classNames: {
             content: "flex-1 flex flex-col items-center text-center justify-center",
             title: "w-full text-center font-bold text-emerald-800",
             description: "w-full text-center text-emerald-700",
-            icon: "text-emerald-600 self-center",
+            icon: "text-emerald-600 self-center order-last shrink-0",
           },
           icon: <CircleCheckIcon className="size-5 text-emerald-600 shrink-0" />,
         }
       },
       error: () => ({
         message: (
-          <span className="block w-full text-center font-bold text-red-800 text-sm font-cairo">
+          <span className="block w-full text-center font-bold text-red-800 text-sm">
             تعذر إرسال الطلب
           </span>
         ),
         description: (
-          <span className="block w-full text-center text-red-700 text-xs font-cairo mt-1">
+          <span className="block w-full text-center text-red-700 text-xs mt-1">
             حدث خطأ غير متوقع، يرجى المحاولة مرة أخرى أو التواصل معنا مباشرة عبر الواتساب.
           </span>
         ),
         className:
-          "border border-red-200 bg-red-50 text-red-800 shadow-md font-cairo",
+          "border border-red-200 bg-red-50 text-red-800 shadow-md",
         classNames: {
           content: "flex-1 flex flex-col items-center text-center justify-center",
           title: "w-full text-center font-bold text-red-800",
           description: "w-full text-center text-red-700",
-          icon: "text-red-600 self-center",
+          icon: "text-red-600 self-center order-last shrink-0",
         },
       }),
     })
@@ -152,7 +152,7 @@ export default function BookingForm() {
           <p className="text-[#8B1A1A] font-cairo text-sm font-medium mb-2 tracking-wider">التسجيل</p>
           <h2
             className="text-4xl md:text-5xl font-bold text-[#1A1714]"
-            style={{ fontFamily: "'ThmanyahSerifDisplay', serif" }}
+            style={{ fontFamily: "var(--font-thmanyah-serif), serif" }}
           >
             سجل مناسبتك
           </h2>

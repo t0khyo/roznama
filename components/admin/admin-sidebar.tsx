@@ -57,7 +57,7 @@ export function AdminSidebar() {
           <div className="flex flex-col leading-none overflow-hidden group-data-[collapsible=icon]:hidden">
             <span
               className="text-base font-bold text-[#1A1714] truncate"
-              style={{ fontFamily: "'ThmanyahSerifDisplay', serif" }}
+              style={{ fontFamily: "var(--font-thmanyah-serif), serif" }}
             >
               سناب مطير
             </span>

@@ -1,0 +1,94 @@
+import type { Metadata } from "next"
+import Link from "next/link"
+
+export const metadata: Metadata = {
+  title: "الصفحة غير موجودة — سناب مطير",
+  description: "تعذر العثور على الصفحة المطلوبة.",
+}
+
+export default function NotFound() {
+  return (
+    <main className="relative min-h-screen flex flex-col items-center justify-center px-6 overflow-hidden">
+      {/* Ambient background gradients — same as hero */}
+      <div
+        className="absolute -inset-12 opacity-30 pointer-events-none"
+        style={{
+          backgroundImage: `
+            radial-gradient(circle at 20% 50%, #8B1A1A12 0%, transparent 50%),
+            radial-gradient(circle at 80% 20%, #C9973A10 0%, transparent 40%)
+          `,
+        }}
+      />
+
+      {/* Side decorative rules */}
+      <div className="absolute top-1/3 right-0 w-px h-32 bg-gradient-to-b from-transparent via-[#8B1A1A]/25 to-transparent" />
+      <div className="absolute top-1/3 left-0 w-px h-32 bg-gradient-to-b from-transparent via-[#8B1A1A]/25 to-transparent" />
+
+      <div className="relative text-center space-y-8 max-w-2xl animate-fade-up">
+
+        {/* Category label */}
+        <div className="flex items-center justify-center gap-3">
+          <div className="h-px w-12 bg-gradient-to-l from-[#8B1A1A] to-transparent" />
+          <span className="text-[#8B1A1A] font-cairo text-sm font-medium tracking-widest">
+            خطأ ٤٠٤
+          </span>
+          <div className="h-px w-12 bg-gradient-to-r from-[#8B1A1A] to-transparent" />
+        </div>
+
+        {/* Large ornamental 404 */}
+        <div className="relative select-none">
+          <p
+            className="text-[9rem] md:text-[12rem] font-bold leading-none text-[#1A1714]/[0.05]"
+            style={{ fontFamily: "var(--font-thmanyah-serif), serif" }}
+            aria-hidden="true"
+          >
+            ٤٠٤
+          </p>
+          {/* Overlaid readable heading */}
+          <h1
+            className="absolute inset-0 flex items-center justify-center text-4xl md:text-5xl font-bold text-[#1A1714]"
+            style={{ fontFamily: "var(--font-thmanyah-serif), serif", lineHeight: "1.4" }}
+          >
+            لم نجد الصفحة
+          </h1>
+        </div>
+
+        {/* Decorative gold divider */}
+        <div className="flex items-center justify-center gap-3">
+          <div className="h-px flex-1 max-w-[80px] bg-gradient-to-l from-[#C9973A]/60 to-transparent" />
+          <div className="w-1.5 h-1.5 rounded-full bg-[#C9973A]" />
+          <div className="w-1 h-1 rounded-full bg-[#C9973A]/60" />
+          <div className="w-1.5 h-1.5 rounded-full bg-[#C9973A]" />
+          <div className="h-px flex-1 max-w-[80px] bg-gradient-to-r from-[#C9973A]/60 to-transparent" />
+        </div>
+
+        {/* Description */}
+        <p className="font-cairo text-lg text-[#6B5E52] font-light leading-relaxed max-w-md mx-auto">
+          الصفحة التي تبحث عنها غير موجودة أو ربما تمت إزالتها.
+        </p>
+
+        {/* CTA */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
+          <Link
+            href="/"
+            className="inline-flex items-center justify-center bg-[#8B1A1A] text-[#FAF8F3] font-cairo font-bold px-8 py-3.5 rounded-full text-sm hover:bg-[#6A1212] transition-all duration-300 w-full sm:w-auto shadow-sm"
+          >
+            العودة للرئيسية
+          </Link>
+          <Link
+            href="/#upcoming"
+            className="inline-flex items-center justify-center border border-[#8B1A1A] text-[#8B1A1A] font-cairo font-medium px-8 py-3.5 rounded-full text-sm hover:bg-[#8B1A1A]/10 transition-colors duration-300 w-full sm:w-auto bg-transparent"
+          >
+            المناسبات القادمة
+          </Link>
+        </div>
+      </div>
+
+      {/* Bottom logo watermark */}
+      <div className="absolute bottom-10 flex flex-col items-center gap-3 opacity-40">
+        <img src="/logo.png" alt="سناب مطير" className="h-8 w-auto object-contain" />
+        <span className="font-cairo text-xs text-[#A09080]">سناب مطير</span>
+      </div>
+    </main>
+  )
+}

@@ -62,7 +62,7 @@ export default function AdminEventsPage() {
           </p>
           <h1
             className="text-3xl md:text-4xl font-bold text-[#1A1714]"
-            style={{ fontFamily: "'ThmanyahSerifDisplay', serif" }}
+            style={{ fontFamily: "var(--font-thmanyah-serif), serif" }}
           >
             إدارة المناسبات
           </h1>

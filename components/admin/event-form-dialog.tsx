@@ -92,9 +92,9 @@ export function EventFormDialog({
       setFileInfo(
         event.imageUrl
           ? {
-              name: `دعوة ${event.tribe || "المناسبة"}`,
-              size: "الصورة المحفوظة للمناسبة",
-            }
+            name: `دعوة ${event.tribe || "المناسبة"}`,
+            size: "الصورة المحفوظة للمناسبة",
+          }
           : null
       )
     } else {
@@ -119,8 +119,8 @@ export function EventFormDialog({
 
   const set =
     (key: keyof CreateEventInput) =>
-    (e: React.ChangeEvent<HTMLInputElement>) =>
-      setForm((f) => ({ ...f, [key]: e.target.value }))
+      (e: React.ChangeEvent<HTMLInputElement>) =>
+        setForm((f) => ({ ...f, [key]: e.target.value }))
 
   const handleSelectedFile = (file: File) => {
     if (!file.type.startsWith("image/")) {
@@ -219,7 +219,7 @@ export function EventFormDialog({
         <DialogHeader>
           <DialogTitle
             className="text-[#1A1714] font-bold text-xl"
-            style={{ fontFamily: "'ThmanyahSerifDisplay', serif" }}
+            style={{ fontFamily: "var(--font-thmanyah-serif), serif" }}
           >
             {isEdit ? "تعديل المناسبة" : "إضافة مناسبة جديدة"}
           </DialogTitle>
@@ -273,9 +273,8 @@ export function EventFormDialog({
                   <Button
                     type="button"
                     variant="outline"
-                    className={`w-full justify-start bg-[#F3EDE3] border-[#E5DDD0] rounded-lg px-3 py-2.5 h-auto font-cairo text-sm focus:border-[#C9973A] focus:bg-[#FAF8F3] transition-colors ${
-                      !form.eventDate ? "text-[#C0B4A8]" : "text-[#1A1714]"
-                    }`}
+                    className={`w-full justify-start bg-[#F3EDE3] border-[#E5DDD0] rounded-lg px-3 py-2.5 h-auto font-cairo text-sm focus:border-[#C9973A] focus:bg-[#FAF8F3] transition-colors ${!form.eventDate ? "text-[#C0B4A8]" : "text-[#1A1714]"
+                      }`}
                     dir="rtl"
                   />
                 }
@@ -399,13 +398,13 @@ export function EventFormDialog({
             >
               {uploading ? (
                 <>
-                  <Loader2Icon className="size-4 animate-spin ml-2" />
                   جارٍ رفع الصورة…
+                  <Loader2Icon className="size-4 animate-spin ml-2" />
                 </>
               ) : saving ? (
                 <>
+                  جاري الحفظ...
                   <Loader2Icon className="size-4 animate-spin ml-2" />
-                  جارٍ الحفظ…
                 </>
               ) : isEdit ? (
                 "حفظ التعديلات"

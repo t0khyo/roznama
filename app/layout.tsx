@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { DirectionProvider } from "@/components/ui/direction";
 import { Toaster } from "@/components/ui/sonner";
 import { CircleCheckIcon } from "lucide-react";
+import { thmanyahSans, thmanyahSerif } from "@/lib/fonts";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -12,8 +13,14 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="ar" dir="rtl" className="h-full" suppressHydrationWarning>
-      <body className="min-h-full flex flex-col" suppressHydrationWarning>
+    <html
+      lang="ar"
+      dir="rtl"
+      className={`h-full ${thmanyahSans.variable} ${thmanyahSerif.variable}`}
+      data-scroll-behavior="smooth"
+      suppressHydrationWarning
+    >
+      <body className="min-h-full flex flex-col font-sans" suppressHydrationWarning>
         <DirectionProvider direction="rtl">{children}</DirectionProvider>
         <Toaster
           position="top-center"
@@ -26,6 +33,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
               content: "flex-1 flex flex-col items-center text-center",
               title: "text-center font-bold",
               description: "text-center",
+              icon: "order-last shrink-0",
             },
           }}
         />

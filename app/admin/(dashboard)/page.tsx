@@ -161,7 +161,7 @@ export function StatCard({
       <CardContent className="px-4 md:px-5 pb-4 md:pb-5">
         <p
           className={cn("text-3xl md:text-4xl font-bold", stat.color)}
-          style={{ fontFamily: "'ThmanyahSerifDisplay', serif" }}
+          style={{ fontFamily: "var(--font-thmanyah-serif), serif" }}
         >
           {value}
         </p>
@@ -635,7 +635,7 @@ export default function AdminOverviewPage() {
         </p>
         <h1
           className="text-3xl md:text-4xl font-bold text-[#1A1714]"
-          style={{ fontFamily: "'ThmanyahSerifDisplay', serif" }}
+          style={{ fontFamily: "var(--font-thmanyah-serif), serif" }}
         >
           نظرة عامة
         </h1>

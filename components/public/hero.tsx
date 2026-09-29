@@ -23,7 +23,7 @@ export default function Hero() {
 
         <h1
           className="text-5xl md:text-7xl font-bold leading-tight text-[#1A1714] opacity-0 animate-fade-up [animation-delay:100ms]"
-          style={{ fontFamily: "'ThmanyahSerifDisplay', serif", lineHeight: "1.4" }}
+          style={{ fontFamily: "var(--font-thmanyah-serif), serif", lineHeight: "1.4" }}
         >
           سناب مطير
         </h1>
