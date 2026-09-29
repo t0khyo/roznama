@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <main className="relative min-h-screen flex flex-col items-center justify-center px-6 overflow-hidden">
+    <main className="relative min-h-screen flex flex-col items-center justify-center px-6 py-12 overflow-hidden">
       {/* Ambient background gradients — same as hero */}
       <div
         className="absolute -inset-12 opacity-30 pointer-events-none"
@@ -21,8 +21,8 @@ export default function NotFound() {
       />
 
       {/* Side decorative rules */}
-      <div className="absolute top-1/3 right-0 w-px h-32 bg-gradient-to-b from-transparent via-[#8B1A1A]/25 to-transparent" />
-      <div className="absolute top-1/3 left-0 w-px h-32 bg-gradient-to-b from-transparent via-[#8B1A1A]/25 to-transparent" />
+      <div className="absolute top-1/3 right-0 w-px h-32 bg-gradient-to-b from-transparent via-[#8B1A1A]/25 to-transparent pointer-events-none" />
+      <div className="absolute top-1/3 left-0 w-px h-32 bg-gradient-to-b from-transparent via-[#8B1A1A]/25 to-transparent pointer-events-none" />
 
       <div className="relative text-center space-y-8 max-w-2xl animate-fade-up">
 
@@ -70,24 +70,24 @@ export default function NotFound() {
         {/* CTA */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
           <Link
-            href="/"
-            className="inline-flex items-center justify-center bg-[#8B1A1A] text-[#FAF8F3] font-cairo font-bold px-8 py-3.5 rounded-full text-sm hover:bg-[#6A1212] transition-all duration-300 w-full sm:w-auto shadow-sm"
-          >
-            العودة للرئيسية
-          </Link>
-          <Link
             href="/#upcoming"
             className="inline-flex items-center justify-center border border-[#8B1A1A] text-[#8B1A1A] font-cairo font-medium px-8 py-3.5 rounded-full text-sm hover:bg-[#8B1A1A]/10 transition-colors duration-300 w-full sm:w-auto bg-transparent"
           >
             المناسبات القادمة
           </Link>
+          <Link
+            href="/"
+            className="inline-flex items-center justify-center bg-[#8B1A1A] text-[#FAF8F3] font-cairo font-bold px-8 py-3.5 rounded-full text-sm hover:bg-[#6A1212] transition-all duration-300 w-full sm:w-auto shadow-sm"
+          >
+            العودة للرئيسية
+          </Link>
         </div>
-      </div>
 
-      {/* Bottom logo watermark */}
-      <div className="absolute bottom-10 flex flex-col items-center gap-3 opacity-40">
-        <img src="/logo.png" alt="سناب مطير" className="h-8 w-auto object-contain" />
-        <span className="font-cairo text-xs text-[#A09080]">سناب مطير</span>
+        {/* Bottom logo watermark */}
+        <div className="pt-8 flex flex-col items-center gap-2 opacity-40">
+          <img src="/logo.png" alt="سناب مطير" className="h-8 w-auto object-contain" />
+          <span className="font-cairo text-xs text-[#A09080]">سناب مطير</span>
+        </div>
       </div>
     </main>
   )
