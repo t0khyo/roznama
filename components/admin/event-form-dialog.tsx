@@ -351,8 +351,8 @@ export function EventFormDialog({
                 </div>
               </div>
             ) : (
-              <Attachment className="w-full justify-between items-center bg-[#F3EDE3]/70 border-[#E5DDD0] p-2.5 rounded-xl">
-                <div className="flex items-center gap-3 min-w-0">
+              <Attachment className="w-full flex-nowrap justify-between items-center bg-[#F3EDE3]/70 border-[#E5DDD0] p-2.5 rounded-xl min-w-0">
+                <div className="flex items-center gap-3 min-w-0 flex-1">
                   <AttachmentMedia
                     variant="image"
                     className="size-14 rounded-lg overflow-hidden border border-[#E5DDD0] shrink-0"
@@ -363,11 +363,14 @@ export function EventFormDialog({
                       className="size-full object-cover"
                     />
                   </AttachmentMedia>
-                  <AttachmentContent className="text-right min-w-0">
-                    <AttachmentTitle className="font-cairo text-sm font-semibold text-[#1A1714] truncate block">
+                  <AttachmentContent className="text-right min-w-0 flex-1 overflow-hidden">
+                    <AttachmentTitle
+                      className="font-cairo text-sm font-semibold text-[#1A1714] truncate block"
+                      title={fileInfo?.name || "صورة الدعوة"}
+                    >
                       {fileInfo?.name || "صورة الدعوة"}
                     </AttachmentTitle>
-                    <AttachmentDescription className="font-cairo text-xs text-[#7D6E63] mt-0.5">
+                    <AttachmentDescription className="font-cairo text-xs text-[#7D6E63] mt-0.5 truncate block">
                       {selectedFile
                         ? fileInfo?.size || "جاهز للرفع إلى Cloudflare R2"
                         : "الصورة الحالية للدعوة"}

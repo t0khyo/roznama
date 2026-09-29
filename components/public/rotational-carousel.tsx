@@ -23,8 +23,10 @@ export default function WeddingCarousel({ weddings }: { weddings: Event[] }) {
   const count = weddings.length
   const [lightboxImage, setLightboxImage] = React.useState<Event | null>(null)
 
-  const autoplay = React.useRef(
-    Autoplay({ delay: 3500, stopOnInteraction: true, stopOnMouseEnter: true })
+  // Stable plugin instance — must not be recreated on every render
+  const autoplay = React.useMemo(
+    () => Autoplay({ delay: 3500, stopOnInteraction: true, stopOnMouseEnter: true }),
+    []
   )
 
   React.useEffect(() => {
@@ -43,9 +45,10 @@ export default function WeddingCarousel({ weddings }: { weddings: Event[] }) {
           loop: true,
           direction: "rtl",
           dragFree: false,
+          containScroll: false,
           duration: 30,
         }}
-        plugins={[autoplay.current]}
+        plugins={[autoplay]}
         className="w-full"
       >
         <CarouselContent className="-ms-3 py-8">
@@ -79,7 +82,7 @@ export default function WeddingCarousel({ weddings }: { weddings: Event[] }) {
                     <img
                       src={w.imageUrl}
                       alt=""
-                      className="absolute inset-0 w-full h-full object-cover blur-xl scale-110 opacity-60 transition-transform duration-500 group-hover:scale-125"
+                      className="absolute inset-0 w-full h-full object-cover blur-md scale-105 opacity-60 transition-transform duration-500 group-hover:scale-115"
                       draggable={false}
                     />
                     {/* Foreground contained image */}
@@ -90,7 +93,7 @@ export default function WeddingCarousel({ weddings }: { weddings: Event[] }) {
                       draggable={false}
                     />
                     {/* Gradient overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#1A1714]/80 via-[#1A1714]/15 to-transparent z-10 pointer-events-none" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#1A1714]/60 via-[#1A1714]/10 to-transparent z-10 pointer-events-none" />
 
                     {/* Bottom text overlay — Tribe name */}
                     <div className="absolute bottom-0 inset-x-0 p-4 sm:p-5 z-20 pointer-events-none">
@@ -128,7 +131,7 @@ export default function WeddingCarousel({ weddings }: { weddings: Event[] }) {
         <Button
           variant="outline"
           size="icon"
-          onClick={() => { api?.scrollPrev(); autoplay.current.reset() }}
+          onClick={() => { api?.scrollPrev(); autoplay.reset() }}
           className="size-10 rounded-full border border-[#E5DDD0] flex items-center justify-center text-[#6B5E52] hover:border-[#8B1A1A] hover:text-[#8B1A1A] transition-colors bg-transparent hover:bg-transparent"
           aria-label="السابق"
         >
@@ -143,7 +146,7 @@ export default function WeddingCarousel({ weddings }: { weddings: Event[] }) {
           {weddings.map((_, i) => (
             <button
               key={i}
-              onClick={() => { api?.scrollTo(i); autoplay.current.reset() }}
+              onClick={() => { api?.scrollTo(i); autoplay.reset() }}
               aria-label={`الانتقال إلى البطاقة ${i + 1}`}
               style={{
                 width: i === current ? "22px" : "6px",
@@ -160,7 +163,7 @@ export default function WeddingCarousel({ weddings }: { weddings: Event[] }) {
         <Button
           variant="outline"
           size="icon"
-          onClick={() => { api?.scrollNext(); autoplay.current.reset() }}
+          onClick={() => { api?.scrollNext(); autoplay.reset() }}
           className="size-10 rounded-full border border-[#E5DDD0] flex items-center justify-center text-[#6B5E52] hover:border-[#8B1A1A] hover:text-[#8B1A1A] transition-colors bg-transparent hover:bg-transparent"
           aria-label="التالي"
         >
@@ -174,8 +177,8 @@ export default function WeddingCarousel({ weddings }: { weddings: Event[] }) {
       {/* Lightbox Dialog */}
       <Dialog open={!!lightboxImage} onOpenChange={(open) => !open && setLightboxImage(null)}>
         <DialogContent
-          className="max-w-[95vw] md:max-w-4xl p-0 overflow-hidden bg-[#1A1714]/95 border-none shadow-2xl [&_[data-slot=dialog-close]]:bg-white/40 [&_[data-slot=dialog-close]]:hover:bg-white/70 [&_[data-slot=dialog-close]]:text-[#1A1714] [&_[data-slot=dialog-close]]:hover:text-[#8B1A1A] [&_[data-slot=dialog-close]]:border-2 [&_[data-slot=dialog-close]]:border-white/60 [&_[data-slot=dialog-close]]:hover:border-white [&_[data-slot=dialog-close]]:backdrop-blur-sm [&_[data-slot=dialog-close]]:shadow-lg [&_[data-slot=dialog-close]]:rounded-full [&_[data-slot=dialog-close]]:size-10 [&_[data-slot=dialog-close]]:top-4 [&_[data-slot=dialog-close]]:rtl:left-4 [&_[data-slot=dialog-close]]:ltr:right-4 [&_[data-slot=dialog-close]]:z-50 [&_[data-slot=dialog-close]]:transition-all [&_[data-slot=dialog-close]]:duration-200 [&_[data-slot=dialog-close]]:hover:scale-110 [&_[data-slot=dialog-close]]:active:scale-95 [&_[data-slot=dialog-close]_svg]:size-5 [&_[data-slot=dialog-close]_svg]:stroke-[2.5]"
-          showCloseButton={true}
+          className="max-w-[95vw] md:max-w-4xl p-0 overflow-hidden bg-[#1A1714]/95 border-none shadow-2xl"
+          showCloseButton={false}
         >
           {lightboxImage && (
             <div className="relative flex flex-col items-center justify-center w-full min-h-[50vh]">

@@ -23,6 +23,7 @@ import {
   SidebarMenuItem,
   SidebarRail,
   SidebarSeparator,
+  useSidebar,
 } from "@/components/ui/sidebar"
 import { adminNavItems } from "@/lib/constants"
 import { cn } from "@/lib/utils"
@@ -35,6 +36,7 @@ const NAV_ICONS: Record<string, typeof LayoutDashboardIcon> = {
 
 export function AdminSidebar() {
   const pathname = usePathname()
+  const { setOpenMobile } = useSidebar()
 
   const isActive = (href: string, exact: boolean) =>
     exact ? pathname === href : pathname.startsWith(href)
@@ -83,6 +85,7 @@ export function AdminSidebar() {
                       render={<Link href={item.href} />}
                       isActive={active}
                       tooltip={{ children: item.label, side: "left" }}
+                      onClick={() => setOpenMobile(false)}
                       className={cn(
                         "font-cairo text-sm rounded-lg h-10 gap-3 transition-all duration-200",
                         "group-data-[collapsible=icon]:size-8 group-data-[collapsible=icon]:p-0 group-data-[collapsible=icon]:justify-center",
