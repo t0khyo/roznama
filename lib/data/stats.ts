@@ -50,7 +50,8 @@ export async function getDashboardData(): Promise<DashboardData> {
     pendingBookings: requests.filter((r) => r.status === "NEW").length,
   }
 
-  const recentRequests = [...requests]
+  const recentRequests = requests
+    .filter((r) => r.status === "NEW")
     .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
     .slice(0, 8)
 

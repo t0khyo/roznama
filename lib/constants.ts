@@ -25,7 +25,7 @@ export const adminNavItems = [
     exact: false,
   },
   {
-    label: "طلبات الحجز",
+    label: "طلبات التسجيل",
     href: "/admin/bookings",
     exact: false,
   },

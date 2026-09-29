@@ -54,7 +54,7 @@ const statConfig = [
   },
   {
     key: "totalBookings" as keyof DashboardStats,
-    label: "طلبات الحجز",
+    label: "طلبات التسجيل",
     icon: ClipboardListIcon,
     color: "text-[#6B5E52]",
     bg: "bg-[#6B5E52]/10",
@@ -191,12 +191,14 @@ function StatCardSkeleton({ stat }: { stat: (typeof statConfig)[number] }) {
 // ─── Recent requests panel ───────────────────────────────────────────────────
 
 function RecentRequestsPanel({ requests }: { requests: EventRequest[] }) {
+  const newRequests = requests.filter((r) => r.status === RequestStatus.NEW)
+
   return (
     <Card className="border border-[#E5DDD0] bg-[#FAF8F3] shadow-sm flex flex-col">
       <CardHeader className="pb-3 pt-4 px-4 md:px-5 border-b border-[#E5DDD0]/60">
         <div className="flex items-center justify-between">
           <CardTitle className="font-cairo text-sm font-semibold text-[#1A1714] flex items-center gap-2">
-            آخر طلبات الحجز
+            طلبات التسجيل الجديدة
             <ClipboardListIcon className="size-4 text-[#6B5E52]" />
           </CardTitle>
           <Link
@@ -209,14 +211,14 @@ function RecentRequestsPanel({ requests }: { requests: EventRequest[] }) {
         </div>
       </CardHeader>
       <CardContent className="px-0 pb-0 flex-1">
-        {requests.length === 0 ? (
+        {newRequests.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-10 text-center px-4">
             <ClipboardListIcon className="size-8 text-[#D0C4B0] mb-2" />
-            <p className="font-cairo text-sm text-[#A09080]">لا توجد طلبات حجز بعد</p>
+            <p className="font-cairo text-sm text-[#A09080]">لا توجد طلبات حجز جديدة حالياً</p>
           </div>
         ) : (
           <div className="divide-y divide-[#E5DDD0]/50">
-            {requests.map((req) => {
+            {newRequests.map((req) => {
               const isPending = req.status === RequestStatus.NEW
               const statusMeta = REQUEST_STATUS_LABELS[req.status]
               return (
@@ -260,15 +262,6 @@ function RecentRequestsPanel({ requests }: { requests: EventRequest[] }) {
             })}
           </div>
         )}
-        <div className="px-4 py-2.5 border-t border-[#E5DDD0]/60">
-          <Link
-            href="/admin/bookings"
-            className="font-cairo text-xs text-[#6B5E52] hover:text-[#8B1A1A] transition-colors flex items-center justify-center gap-1"
-          >
-            عرض جميع الطلبات
-            <ArrowLeftIcon className="size-3" />
-          </Link>
-        </div>
       </CardContent>
     </Card>
   )

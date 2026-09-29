@@ -8,7 +8,7 @@ import { verifySession } from "@/lib/session"
 
 export const metadata: Metadata = {
   title: "لوحة التحكم — سناب مطير",
-  description: "إدارة المناسبات وطلبات الحجز",
+  description: "إدارة المناسبات وطلبات التسجيل",
 }
 
 export default async function DashboardLayout({
