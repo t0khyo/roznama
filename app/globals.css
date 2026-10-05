@@ -6,7 +6,7 @@
 
 /* ── Brand tokens ── */
 @theme inline {
-  --animate-fade-up: fadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  --animate-fade-up: fadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   /* ThmanyahSans replaces Cairo for UI / body text */
   --font-cairo: var(--font-thmanyah-sans), sans-serif;
   /* ThmanyahSerifDisplay replaces Amiri for headings / display */
@@ -174,7 +174,7 @@ textarea:focus {
 .reveal {
   opacity: 0;
   transform: translateY(36px);
-  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0s), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0s);
+  transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0s), transform 0.5s cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0s);
   will-change: opacity, transform;
 }
 
