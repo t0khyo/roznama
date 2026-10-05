@@ -204,6 +204,26 @@ textarea:focus {
   animation: scrollBounce 2s ease-in-out infinite;
 }
 
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  33% {
+    background-position: 100% 100%;
+  }
+  66% {
+    background-position: 0% 100%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient-shift {
+  background-size: 300% 300%;
+  animation: gradientShift 6s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

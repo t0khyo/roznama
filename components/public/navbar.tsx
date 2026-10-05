@@ -47,7 +47,7 @@ export default function Navbar() {
             {/* CTA — visible on all sizes */}
             <Button
               onClick={() => scrollTo("booking")}
-              className="bg-gradient-to-r from-primary to-[#722230] text-primary-foreground font-cairo font-bold text-sm px-5 py-2 h-auto rounded-md hover:opacity-90 hover:scale-95 hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 whitespace-nowrap active:scale-95"
+              className="bg-gradient-to-tr from-primary via-[#722230] to-primary animate-gradient-shift text-primary-foreground font-cairo font-bold text-sm px-5 py-2 h-auto rounded-md hover:opacity-90 hover:scale-95 hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 whitespace-nowrap active:scale-95"
             >
               سجل مناسبتك
             </Button>
@@ -126,7 +126,7 @@ export default function Navbar() {
                     render={
                       <Button
                         onClick={() => scrollTo("booking")}
-                        className="w-full bg-gradient-to-r from-primary to-[#722230] text-primary-foreground font-cairo font-bold text-sm py-3.5 h-auto rounded-md hover:opacity-90 hover:scale-95 hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 active:scale-95"
+                        className="w-full bg-gradient-to-tr from-primary via-[#722230] to-primary animate-gradient-shift text-primary-foreground font-cairo font-bold text-sm py-3.5 h-auto rounded-md hover:opacity-90 hover:scale-95 hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 active:scale-95"
                       />
                     }
                   >
