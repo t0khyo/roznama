@@ -7,9 +7,7 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto px-6">
         <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-12">
           <div>
-            <div className="inline-flex items-center justify-center p-2 bg-[#FAF8F3] rounded-md mb-4 shadow-sm border border-[#3A3530]/40">
-              <img src="/logo.png" alt="سناب مطير" className="h-12 w-auto object-contain rounded-lg" />
-            </div>
+            <img src="/logo.png" alt="سناب مطير" className="h-15 w-auto object-contain mb-4 drop-shadow-sm" />
             <p className="font-cairo text-[#A09080] text-sm max-w-xs">
               مرجعكم للتنسيق والتذكير بمناسبات مطير
             </p>

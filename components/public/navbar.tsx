@@ -26,9 +26,7 @@ export default function Navbar() {
             className="flex-shrink-0 hover:opacity-85 transition-opacity"
             aria-label="سناب مطير"
           >
-            <div className="size-10 rounded-md bg-[#FCFEFB] overflow-hidden flex items-center justify-center border border-[#E5DDD0]/80 shadow-sm">
-              <img src="/logo.png" alt="سناب مطير" className="size-full object-contain p-0.5" />
-            </div>
+            <img src="/logo.png" alt="سناب مطير" className="size-9 object-contain drop-shadow-sm" />
           </button>
 
           {/* Desktop nav links — center */}
@@ -79,9 +77,7 @@ export default function Navbar() {
               >
                 {/* Header */}
                 <div className="flex items-center justify-between px-5 pt-6 pb-4 border-b border-[#E5DDD0]/60">
-                  <div className="size-9 rounded-md bg-[#FCFEFB] overflow-hidden flex items-center justify-center border border-[#E5DDD0]/80 shadow-sm">
-                    <img src="/logo.png" alt="سناب مطير" className="size-full object-contain p-0.5" />
-                  </div>
+                  <img src="/logo.png" alt="سناب مطير" className="size-9 object-contain drop-shadow-sm" />
                   <DrawerClose
                     render={
                       <Button

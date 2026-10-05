@@ -85,7 +85,7 @@ export default function NotFound() {
 
         {/* Bottom logo watermark */}
         <div className="pt-8 flex flex-col items-center gap-2 opacity-40">
-          <img src="/logo.png" alt="سناب مطير" className="h-8 w-auto object-contain" />
+          <img src="/logo.png" alt="سناب مطير" className="h-10 w-auto object-contain" />
           <span className="font-cairo text-xs text-[#A09080]">سناب مطير</span>
         </div>
       </div>
