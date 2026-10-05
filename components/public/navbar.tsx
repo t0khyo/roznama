@@ -16,23 +16,17 @@ export default function Navbar() {
   }
 
   return (
-    <div className="fixed top-4 inset-x-0 z-50 flex justify-center px-4">
-      <div
-        className="w-full max-w-4xl"
-        style={{ filter: "drop-shadow(0 8px 32px rgba(26,23,20,0.13))" }}
-      >
+    <div className="fixed top-0 inset-x-0 z-50 flex justify-center bg-[#FAF8F3]/95 backdrop-blur-md border-b border-[#E5DDD0]/80 transition-all duration-300">
+      <div className="w-full">
         {/* Main capsule bar */}
-        <div
-          className="flex items-center justify-between gap-3 px-3 py-2 rounded-full border border-[#E5DDD0]/80"
-          style={{ background: "rgba(250,248,243,0.92)", backdropFilter: "blur(16px)" }}
-        >
+        <div className="flex items-center justify-between gap-3 px-6 md:px-12 py-3">
           {/* Logo */}
           <button
             onClick={() => scrollTo("hero")}
             className="flex-shrink-0 hover:opacity-85 transition-opacity"
             aria-label="سناب مطير"
           >
-            <div className="size-10 rounded-full bg-[#FCFEFB] overflow-hidden flex items-center justify-center border border-[#E5DDD0]/80 shadow-xs">
+            <div className="size-10 rounded-md bg-[#FCFEFB] overflow-hidden flex items-center justify-center border border-[#E5DDD0]/80 shadow-sm">
               <img src="/logo.png" alt="سناب مطير" className="size-full object-contain p-0.5" />
             </div>
           </button>
@@ -43,7 +37,7 @@ export default function Navbar() {
               <button
                 key={link.id}
                 onClick={() => scrollTo(link.id)}
-                className="font-cairo text-sm font-medium text-[#4A4038] hover:text-[#8B1A1A] transition-colors px-3 py-1.5 rounded-full hover:bg-[#8B1A1A]/6"
+                className="font-cairo text-sm font-medium text-[#4A4038] hover:text-[#9F3647] transition-colors px-3 py-1.5 rounded-md hover:bg-[#9F3647]/5"
               >
                 {link.label}
               </button>
@@ -55,7 +49,7 @@ export default function Navbar() {
             {/* CTA — visible on all sizes */}
             <Button
               onClick={() => scrollTo("booking")}
-              className="bg-[#8B1A1A] text-[#FAF8F3] font-cairo font-bold text-sm px-5 py-2 h-auto rounded-full hover:bg-[#6A1212] transition-colors duration-300 whitespace-nowrap"
+              className="bg-gradient-to-r from-primary to-[#722230] text-primary-foreground font-cairo font-bold text-sm px-5 py-2 h-auto rounded-md hover:opacity-90 hover:scale-95 hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 whitespace-nowrap active:scale-95"
             >
               سجل مناسبتك
             </Button>
@@ -67,7 +61,7 @@ export default function Navbar() {
                   <Button
                     variant="outline"
                     size="icon"
-                    className="md:hidden flex size-9 items-center justify-center rounded-full border border-[#E5DDD0] text-[#1A1714] hover:border-[#8B1A1A]/40 hover:text-[#8B1A1A] transition-colors bg-transparent hover:bg-transparent"
+                    className="md:hidden flex size-9 items-center justify-center rounded-md border border-[#E5DDD0] text-[#1A1714] hover:border-[#9F3647]/40 hover:text-[#9F3647] transition-colors bg-transparent hover:bg-transparent"
                     aria-label="القائمة"
                   />
                 }
@@ -85,7 +79,7 @@ export default function Navbar() {
               >
                 {/* Header */}
                 <div className="flex items-center justify-between px-5 pt-6 pb-4 border-b border-[#E5DDD0]/60">
-                  <div className="size-9 rounded-full bg-[#FCFEFB] overflow-hidden flex items-center justify-center border border-[#E5DDD0]/80 shadow-xs">
+                  <div className="size-9 rounded-md bg-[#FCFEFB] overflow-hidden flex items-center justify-center border border-[#E5DDD0]/80 shadow-sm">
                     <img src="/logo.png" alt="سناب مطير" className="size-full object-contain p-0.5" />
                   </div>
                   <DrawerClose
@@ -93,7 +87,7 @@ export default function Navbar() {
                       <Button
                         variant="outline"
                         size="icon"
-                        className="size-8 flex items-center justify-center rounded-full border border-[#E5DDD0] text-[#6B5E52] hover:border-[#8B1A1A]/40 hover:text-[#8B1A1A] transition-colors bg-transparent hover:bg-transparent"
+                        className="size-8 flex items-center justify-center rounded-md border border-[#E5DDD0] text-[#6B5E52] hover:border-[#9F3647]/40 hover:text-[#9F3647] transition-colors bg-transparent hover:bg-transparent"
                         aria-label="إغلاق"
                       />
                     }
@@ -119,7 +113,7 @@ export default function Navbar() {
                         render={
                           <button
                             onClick={() => scrollTo(link.id)}
-                            className={`w-full text-right px-5 py-4 font-cairo text-base font-medium text-[#4A4038] hover:text-[#8B1A1A] hover:bg-[#8B1A1A]/5 transition-colors ${
+                            className={`w-full text-right px-5 py-4 font-cairo text-base font-medium text-[#4A4038] hover:text-[#9F3647] hover:bg-[#9F3647]/5 transition-colors ${
                               idx < arr.length - 1 ? "border-b border-[#E5DDD0]/40" : ""
                             }`}
                           />
@@ -131,12 +125,12 @@ export default function Navbar() {
                 </nav>
 
                 {/* Bottom CTA */}
-                <div className="p-5 border-t border-[#E5DDD0]/60">
+                <div className="p-5 border-t border-border/60">
                   <DrawerClose
                     render={
                       <Button
                         onClick={() => scrollTo("booking")}
-                        className="w-full bg-[#8B1A1A] text-[#FAF8F3] font-cairo font-bold text-sm py-3.5 h-auto rounded-full hover:bg-[#6A1212] transition-colors duration-300"
+                        className="w-full bg-gradient-to-r from-primary to-[#722230] text-primary-foreground font-cairo font-bold text-sm py-3.5 h-auto rounded-md hover:opacity-90 hover:scale-95 hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 active:scale-95"
                       />
                     }
                   >

@@ -40,17 +40,17 @@ const statConfig = [
     key: "totalEvents" as keyof DashboardStats,
     label: "المناسبات",
     icon: HeartHandshakeIcon,
-    color: "text-[#8B1A1A]",
-    bg: "bg-[#8B1A1A]/10",
-    border: "border-[#8B1A1A]/20",
+    color: "text-[#9F3647]",
+    bg: "bg-[#9F3647]/10",
+    border: "border-[#9F3647]/20",
   },
   {
     key: "upcomingEvents" as keyof DashboardStats,
     label: "مناسبات قادمة",
     icon: CalendarDaysIcon,
-    color: "text-[#C9973A]",
-    bg: "bg-[#C9973A]/10",
-    border: "border-[#C9973A]/20",
+    color: "text-[#A8823A]",
+    bg: "bg-[#A8823A]/10",
+    border: "border-[#A8823A]/20",
   },
   {
     key: "totalBookings" as keyof DashboardStats,
@@ -64,9 +64,9 @@ const statConfig = [
     key: "pendingBookings" as keyof DashboardStats,
     label: "طلبات قيد الانتظار",
     icon: ClockIcon,
-    color: "text-[#8B1A1A]",
-    bg: "bg-[#8B1A1A]/8",
-    border: "border-[#8B1A1A]/15",
+    color: "text-[#9F3647]",
+    bg: "bg-[#9F3647]/8",
+    border: "border-[#9F3647]/15",
   },
 ]
 
@@ -77,17 +77,17 @@ const quickActions = [
     label: "إضافة مناسبة",
     icon: PlusCircleIcon,
     href: "/admin/events",
-    color: "text-[#8B1A1A]",
-    bg: "bg-[#8B1A1A]/8 hover:bg-[#8B1A1A]/16",
-    border: "border-[#8B1A1A]/20",
+    color: "text-[#9F3647]",
+    bg: "bg-[#9F3647]/8 hover:bg-[#9F3647]/16",
+    border: "border-[#9F3647]/20",
   },
   {
     label: "طلبات الانتظار",
     icon: ClockIcon,
     href: "/admin/bookings",
-    color: "text-[#C9973A]",
-    bg: "bg-[#C9973A]/8 hover:bg-[#C9973A]/16",
-    border: "border-[#C9973A]/20",
+    color: "text-[#A8823A]",
+    bg: "bg-[#A8823A]/8 hover:bg-[#A8823A]/16",
+    border: "border-[#A8823A]/20",
   },
   {
     label: "إدارة المناسبات",
@@ -203,7 +203,7 @@ function RecentRequestsPanel({ requests }: { requests: EventRequest[] }) {
           </CardTitle>
           <Link
             href="/admin/bookings"
-            className="font-cairo text-xs text-[#8B1A1A] hover:underline flex items-center gap-1"
+            className="font-cairo text-xs text-[#9F3647] hover:underline flex items-center gap-1"
           >
             عرض الكل
             <ArrowLeftIcon className="size-3" />
@@ -226,13 +226,13 @@ function RecentRequestsPanel({ requests }: { requests: EventRequest[] }) {
                   key={req.id}
                   className={cn(
                     "flex items-center gap-3 px-4 py-3 transition-colors hover:bg-[#F3EDE3]/40",
-                    isPending && "border-r-2 border-r-[#C9973A] bg-[#C9973A]/3"
+                    isPending && "border-r-2 border-r-[#A8823A] bg-[#A8823A]/3"
                   )}
                 >
                   {/* Avatar initial */}
                   <div className={cn(
                     "size-8 rounded-full flex items-center justify-center shrink-0 font-cairo font-bold text-sm",
-                    isPending ? "bg-[#C9973A]/15 text-[#9E6E1A]" : "bg-[#E5DDD0] text-[#6B5E52]"
+                    isPending ? "bg-[#A8823A]/15 text-[#9E6E1A]" : "bg-[#E5DDD0] text-[#6B5E52]"
                   )}>
                     {req.name.charAt(0)}
                   </div>
@@ -306,11 +306,11 @@ function UpcomingTimeline({ events }: { events: Event[] }) {
         <div className="flex items-center justify-between">
           <CardTitle className="font-cairo text-sm font-semibold text-[#1A1714] flex items-center gap-2">
             المناسبات القادمة
-            <CalendarDaysIcon className="size-4 text-[#C9973A]" />
+            <CalendarDaysIcon className="size-4 text-[#A8823A]" />
           </CardTitle>
           <Link
             href="/admin/events"
-            className="font-cairo text-xs text-[#8B1A1A] hover:underline flex items-center gap-1"
+            className="font-cairo text-xs text-[#9F3647] hover:underline flex items-center gap-1"
           >
             عرض الكل
             <ArrowLeftIcon className="size-3" />
@@ -326,7 +326,7 @@ function UpcomingTimeline({ events }: { events: Event[] }) {
         ) : (
           <div className="relative">
             {/* Timeline line */}
-            <div className="absolute right-[19px] top-2 bottom-2 w-px bg-gradient-to-b from-[#C9973A]/30 via-[#E5DDD0] to-transparent" />
+            <div className="absolute right-[19px] top-2 bottom-2 w-px bg-gradient-to-b from-[#A8823A]/30 via-[#E5DDD0] to-transparent" />
             <div className="space-y-1">
               {events.map((ev, idx) => {
                 const days = daysUntil(ev.eventDate)
@@ -338,9 +338,9 @@ function UpcomingTimeline({ events }: { events: Event[] }) {
                     <div className={cn(
                       "flex flex-col items-center justify-center size-10 rounded-xl shrink-0 text-center z-10",
                       isToday
-                        ? "bg-[#8B1A1A] text-[#FAF8F3]"
+                        ? "bg-[#9F3647] text-[#FAF8F3]"
                         : isSoon
-                          ? "bg-[#C9973A]/15 text-[#9E6E1A] border border-[#C9973A]/30"
+                          ? "bg-[#A8823A]/15 text-[#9E6E1A] border border-[#A8823A]/30"
                           : "bg-[#F3EDE3] text-[#6B5E52] border border-[#E5DDD0]"
                     )}>
                       <span className="text-[11px] font-bold leading-none font-cairo">
@@ -364,14 +364,14 @@ function UpcomingTimeline({ events }: { events: Event[] }) {
                     {/* Days badge */}
                     <div className="shrink-0 pt-1">
                       {isToday ? (
-                        <span className="font-cairo text-[10px] font-bold text-[#8B1A1A] bg-[#8B1A1A]/10 px-2 py-0.5 rounded-full">
+                        <span className="font-cairo text-[10px] font-bold text-[#9F3647] bg-[#9F3647]/10 px-2 py-0.5 rounded-full">
                           اليوم
                         </span>
                       ) : (
                         <span className={cn(
                           "font-cairo text-[10px] px-2 py-0.5 rounded-full",
                           isSoon
-                            ? "text-[#9E6E1A] bg-[#C9973A]/10"
+                            ? "text-[#9E6E1A] bg-[#A8823A]/10"
                             : "text-[#A09080] bg-[#F3EDE3]"
                         )}>
                           {days === 1 ? "غداً" : `${days} يوم`}
@@ -444,11 +444,11 @@ function MiniCalendarPanel({ events }: { events: Event[] }) {
         <div className="pb-3 pt-4 px-4 md:px-5 border-b border-[#E5DDD0]/60 flex items-center justify-between">
           <CardTitle className="font-cairo text-sm font-semibold text-[#1A1714] flex items-center gap-2">
             تقويم المناسبات
-            <CalendarDaysIcon className="size-4 text-[#8B1A1A]" />
+            <CalendarDaysIcon className="size-4 text-[#9F3647]" />
           </CardTitle>
           <Link
             href="/admin/events"
-            className="font-cairo text-xs text-[#8B1A1A] hover:underline flex items-center gap-1"
+            className="font-cairo text-xs text-[#9F3647] hover:underline flex items-center gap-1"
           >
             عرض الكل
             <ArrowLeftIcon className="size-3" />
@@ -495,9 +495,9 @@ function MiniCalendarPanel({ events }: { events: Event[] }) {
             dropdowns:
               "flex h-(--cell-size) w-full items-center justify-center gap-2 font-bold text-[#1A1714] text-sm md:text-base",
             button_previous:
-              "size-(--cell-size) p-0 select-none rounded-full border border-[#E5DDD0] text-[#6B5E52] hover:border-[#8B1A1A] hover:text-[#8B1A1A] transition-colors bg-transparent hover:bg-transparent inline-flex items-center justify-center z-10 [&>svg]:-scale-x-100",
+              "size-(--cell-size) p-0 select-none rounded-full border border-[#E5DDD0] text-[#6B5E52] hover:border-[#9F3647] hover:text-[#9F3647] transition-colors bg-transparent hover:bg-transparent inline-flex items-center justify-center z-10 [&>svg]:-scale-x-100",
             button_next:
-              "size-(--cell-size) p-0 select-none rounded-full border border-[#E5DDD0] text-[#6B5E52] hover:border-[#8B1A1A] hover:text-[#8B1A1A] transition-colors bg-transparent hover:bg-transparent inline-flex items-center justify-center z-10 [&>svg]:-scale-x-100",
+              "size-(--cell-size) p-0 select-none rounded-full border border-[#E5DDD0] text-[#6B5E52] hover:border-[#9F3647] hover:text-[#9F3647] transition-colors bg-transparent hover:bg-transparent inline-flex items-center justify-center z-10 [&>svg]:-scale-x-100",
             weekday:
               "font-cairo text-xs font-semibold text-[#A09080] py-3",
             weekdays: "border-b border-[#E5DDD0]",
@@ -509,7 +509,7 @@ function MiniCalendarPanel({ events }: { events: Event[] }) {
 
         {/* Legend */}
         <div className="flex items-center gap-2 px-4 py-3 border-t border-[#E5DDD0]/50 text-[#A09080] font-cairo text-xs">
-          <span className="w-2 h-2 rounded-full bg-[#8B1A1A] inline-block" />
+          <span className="w-2 h-2 rounded-full bg-[#9F3647] inline-block" />
           <span>يوم به مناسبة</span>
         </div>
 
@@ -523,10 +523,10 @@ function MiniCalendarPanel({ events }: { events: Event[] }) {
               {eventsThisMonth.map((w) => (
                 <div
                   key={w.id}
-                  className="flex items-center gap-4 bg-[#FAF8F3] border border-[#E5DDD0] rounded-xl px-4 py-3 hover:border-[#8B1A1A]/30 transition-colors"
+                  className="flex items-center gap-4 bg-[#FAF8F3] border border-[#E5DDD0] rounded-xl px-4 py-3 hover:border-[#9F3647]/30 transition-colors"
                   style={{ boxShadow: "0 1px 8px rgba(26,23,20,0.04)" }}
                 >
-                  <div className="w-9 h-9 rounded-full bg-[#C9973A] flex items-center justify-center shrink-0 shadow-sm shadow-[#C9973A]/25">
+                  <div className="w-9 h-9 rounded-full bg-[#A8823A] flex items-center justify-center shrink-0 shadow-sm shadow-[#A8823A]/25">
                     <span className="font-cairo font-bold text-xs text-[#FAF8F3]">
                       {new Date(w.eventDate).getDate()}
                     </span>
@@ -535,7 +535,7 @@ function MiniCalendarPanel({ events }: { events: Event[] }) {
                     <p className="font-cairo font-bold text-sm text-[#1A1714] truncate">
                       {w.groomName}
                     </p>
-                    <p className="font-cairo text-xs text-[#C9973A] font-medium truncate">
+                    <p className="font-cairo text-xs text-[#A8823A] font-medium truncate">
                       {w.tribe}{w.venue ? ` • ${w.venue}` : ""}
                     </p>
                   </div>
@@ -571,7 +571,7 @@ function MiniCalendarPanel({ events }: { events: Event[] }) {
                 key={w.id}
                 className="flex items-center gap-4 bg-[#FAF8F3] border border-[#E5DDD0] rounded-xl px-5 py-4"
               >
-                <div className="w-10 h-10 rounded-full bg-[#C9973A] flex items-center justify-center shrink-0 shadow-sm shadow-[#C9973A]/25">
+                <div className="w-10 h-10 rounded-full bg-[#A8823A] flex items-center justify-center shrink-0 shadow-sm shadow-[#A8823A]/25">
                   <span className="font-cairo font-bold text-sm text-[#FAF8F3]">
                     {new Date(w.eventDate).getDate()}
                   </span>
@@ -580,7 +580,7 @@ function MiniCalendarPanel({ events }: { events: Event[] }) {
                   <p className="font-cairo font-bold text-sm text-[#1A1714]">
                     {w.groomName}
                   </p>
-                  <p className="font-cairo text-xs text-[#C9973A] font-medium">
+                  <p className="font-cairo text-xs text-[#A8823A] font-medium">
                     {w.tribe}{w.venue ? ` • ${w.venue}` : ""}
                   </p>
                 </div>
@@ -630,7 +630,7 @@ export default function AdminOverviewPage() {
     <div className="space-y-6 max-w-5xl">
       {/* ── Page heading ── */}
       <div>
-        <p className="text-[#8B1A1A] font-cairo text-xs font-semibold tracking-widest mb-1 uppercase">
+        <p className="text-[#9F3647] font-cairo text-xs font-semibold tracking-widest mb-1 uppercase">
           Dashboard
         </p>
         <h1

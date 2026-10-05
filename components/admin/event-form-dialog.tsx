@@ -234,7 +234,7 @@ export function EventFormDialog({
               placeholder="مثال: المطيري"
               value={form.tribe}
               onChange={set("tribe")}
-              className="font-cairo bg-[#F3EDE3] border-[#E5DDD0] focus:border-[#C9973A] placeholder:text-[#C0B4A8]"
+              className="font-cairo bg-[#F3EDE3] border-[#E5DDD0] focus:border-[#A8823A] placeholder:text-[#C0B4A8]"
             />
           </div>
 
@@ -246,7 +246,7 @@ export function EventFormDialog({
               placeholder="مثال: محمد بن خالد بن سعد المطيري"
               value={form.groomName}
               onChange={set("groomName")}
-              className="font-cairo bg-[#F3EDE3] border-[#E5DDD0] focus:border-[#C9973A] placeholder:text-[#C0B4A8]"
+              className="font-cairo bg-[#F3EDE3] border-[#E5DDD0] focus:border-[#A8823A] placeholder:text-[#C0B4A8]"
             />
           </div>
 
@@ -259,7 +259,7 @@ export function EventFormDialog({
               placeholder="مثال: قاعة الأفراح — الجهراء"
               value={form.venue ?? ""}
               onChange={set("venue")}
-              className="font-cairo bg-[#F3EDE3] border-[#E5DDD0] focus:border-[#C9973A] placeholder:text-[#C0B4A8]"
+              className="font-cairo bg-[#F3EDE3] border-[#E5DDD0] focus:border-[#A8823A] placeholder:text-[#C0B4A8]"
             />
           </div>
 
@@ -273,7 +273,7 @@ export function EventFormDialog({
                   <Button
                     type="button"
                     variant="outline"
-                    className={`w-full justify-start bg-[#F3EDE3] border-[#E5DDD0] rounded-lg px-3 py-2.5 h-auto font-cairo text-sm focus:border-[#C9973A] focus:bg-[#FAF8F3] transition-colors ${!form.eventDate ? "text-[#C0B4A8]" : "text-[#1A1714]"
+                    className={`w-full justify-start bg-[#F3EDE3] border-[#E5DDD0] rounded-lg px-3 py-2.5 h-auto font-cairo text-sm focus:border-[#A8823A] focus:bg-[#FAF8F3] transition-colors ${!form.eventDate ? "text-[#C0B4A8]" : "text-[#1A1714]"
                       }`}
                     dir="rtl"
                   />
@@ -333,11 +333,11 @@ export function EventFormDialog({
                 className={cn(
                   "border-2 border-dashed rounded-xl p-6 text-center cursor-pointer transition-all flex flex-col items-center justify-center gap-2.5 bg-[#F3EDE3]/50 hover:bg-[#F3EDE3]",
                   dragActive
-                    ? "border-[#8B1A1A] bg-[#8B1A1A]/5"
-                    : "border-[#E5DDD0] hover:border-[#C9973A]"
+                    ? "border-[#9F3647] bg-[#9F3647]/5"
+                    : "border-[#E5DDD0] hover:border-[#A8823A]"
                 )}
               >
-                <div className="size-11 rounded-full bg-[#FAF8F3] border border-[#E5DDD0] flex items-center justify-center text-[#8B1A1A] shadow-xs">
+                <div className="size-11 rounded-full bg-[#FAF8F3] border border-[#E5DDD0] flex items-center justify-center text-[#9F3647] shadow-xs">
                   <UploadCloudIcon className="size-5" />
                 </div>
                 <div>
@@ -394,7 +394,7 @@ export function EventFormDialog({
             <Button
               type="submit"
               disabled={saving || uploading}
-              className="font-cairo font-bold bg-[#8B1A1A] text-[#FAF8F3] hover:bg-[#6A1212] h-9 px-5"
+              className="font-cairo font-bold bg-[#9F3647] text-[#FAF8F3] hover:bg-[#722230] h-9 px-5"
             >
               {uploading ? (
                 <>

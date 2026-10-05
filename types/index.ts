@@ -18,7 +18,7 @@ export const REQUEST_STATUS_LABELS: Record<string, { label: string; className: s
   NEW: {
     label: "جديد",
     className:
-      "bg-[#C9973A]/10 text-[#C9973A] border border-[#C9973A]/25 hover:bg-[#C9973A]/10 font-cairo text-xs",
+      "bg-[#A8823A]/10 text-[#A8823A] border border-[#A8823A]/25 hover:bg-[#A8823A]/10 font-cairo text-xs",
   },
   CONTACTED: {
     label: "تم التواصل",

@@ -1,4 +1,5 @@
 import localFont from "next/font/local";
+import { IBM_Plex_Sans_Arabic, Tajawal } from "next/font/google";
 
 export const thmanyahSans = localFont({
   src: [
@@ -36,5 +37,19 @@ export const thmanyahSerif = localFont({
     },
   ],
   variable: "--font-thmanyah-serif",
+  display: "swap",
+});
+
+export const ibmPlexSansArabic = IBM_Plex_Sans_Arabic({
+  subsets: ["arabic"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-ibm-plex-arabic",
+  display: "swap",
+});
+
+export const tajawal = Tajawal({
+  subsets: ["arabic"],
+  weight: ["300", "400", "500", "700", "800"],
+  variable: "--font-tajawal",
   display: "swap",
 });

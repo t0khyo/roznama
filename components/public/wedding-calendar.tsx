@@ -42,7 +42,7 @@ export default function WeddingCalendar({ events }: { events: Event[] }) {
       <div className="max-w-4xl mx-auto px-6">
         {/* Section heading */}
         <div className="mb-12">
-          <p className="text-[#8B1A1A] font-cairo text-sm font-medium mb-2 tracking-wider">
+          <p className="text-[#9F3647] font-cairo text-sm font-medium mb-2 tracking-wider">
             المواعيد
           </p>
           <h2
@@ -54,7 +54,7 @@ export default function WeddingCalendar({ events }: { events: Event[] }) {
         </div>
 
         {/* Calendar card */}
-        <div className="bg-[#FAF8F3] rounded-2xl border border-[#E5DDD0] overflow-hidden">
+        <div className="bg-[#FAF8F3] rounded-lg border border-[#E5DDD0] overflow-hidden">
           <Calendar
             mode="single"
             selected={undefined}
@@ -96,9 +96,9 @@ export default function WeddingCalendar({ events }: { events: Event[] }) {
               dropdowns: "flex h-(--cell-size) w-full items-center justify-center gap-2 font-bold text-[#1A1714] text-sm md:text-base",
               // Nav buttons — brand hover
               button_previous:
-                "size-(--cell-size) p-0 select-none rounded-full border border-[#E5DDD0] text-[#6B5E52] hover:border-[#8B1A1A] hover:text-[#8B1A1A] transition-colors bg-transparent hover:bg-transparent inline-flex items-center justify-center z-10 [&>svg]:-scale-x-100",
+                "size-(--cell-size) p-0 select-none rounded-full border border-[#E5DDD0] text-[#6B5E52] hover:border-[#9F3647] hover:text-[#9F3647] transition-colors bg-transparent hover:bg-transparent inline-flex items-center justify-center z-10 [&>svg]:-scale-x-100",
               button_next:
-                "size-(--cell-size) p-0 select-none rounded-full border border-[#E5DDD0] text-[#6B5E52] hover:border-[#8B1A1A] hover:text-[#8B1A1A] transition-colors bg-transparent hover:bg-transparent inline-flex items-center justify-center z-10 [&>svg]:-scale-x-100",
+                "size-(--cell-size) p-0 select-none rounded-full border border-[#E5DDD0] text-[#6B5E52] hover:border-[#9F3647] hover:text-[#9F3647] transition-colors bg-transparent hover:bg-transparent inline-flex items-center justify-center z-10 [&>svg]:-scale-x-100",
               // Weekday header
               weekday:
                 "font-cairo text-xs font-semibold text-[#A09080] py-3",
@@ -114,7 +114,7 @@ export default function WeddingCalendar({ events }: { events: Event[] }) {
 
           {/* Legend */}
           <div className="flex items-center gap-2 px-4 py-3 border-t border-[#E5DDD0]/50 text-[#A09080] font-cairo text-xs">
-            <span className="w-2 h-2 rounded-full bg-[#8B1A1A] inline-block" />
+            <span className="w-2 h-2 rounded-full bg-[#9F3647] inline-block" />
             <span>يوم به مناسبة</span>
           </div>
         </div>
@@ -128,10 +128,9 @@ export default function WeddingCalendar({ events }: { events: Event[] }) {
             {weddingsThisMonth.map((w) => (
               <div
                 key={w.id}
-                className="flex items-center gap-4 bg-[#FAF8F3] border border-[#E5DDD0] rounded-xl px-5 py-4 hover:border-[#8B1A1A]/30 transition-colors"
-                style={{ boxShadow: "0 1px 8px rgba(26,23,20,0.04)" }}
+                className="flex items-center gap-4 px-2 py-4 border-b border-[#E5DDD0] hover:bg-[#E5DDD0]/10 transition-colors last:border-b-0"
               >
-                <div className="w-10 h-10 rounded-full bg-[#C9973A] flex items-center justify-center flex-shrink-0 shadow-sm shadow-[#C9973A]/25">
+                <div className="w-10 h-10 rounded-md bg-[#A8823A] flex items-center justify-center flex-shrink-0 shadow-sm shadow-[#A8823A]/25">
                   <span className="font-cairo font-bold text-sm text-[#FAF8F3]">
                     {new Date(w.eventDate).getDate()}
                   </span>
@@ -140,7 +139,7 @@ export default function WeddingCalendar({ events }: { events: Event[] }) {
                   <p className="font-cairo font-bold text-sm text-[#1A1714]">
                     {w.groomName}
                   </p>
-                  <p className="font-cairo text-xs text-[#C9973A] font-medium">
+                  <p className="font-cairo text-xs text-[#A8823A] font-medium">
                     {w.tribe}
                   </p>
                 </div>
@@ -174,9 +173,9 @@ export default function WeddingCalendar({ events }: { events: Event[] }) {
             {dialogWeddings.map((w) => (
               <div
                 key={w.id}
-                className="flex items-center gap-4 bg-[#FAF8F3] border border-[#E5DDD0] rounded-xl px-5 py-4"
+                className="flex items-center gap-4 px-2 py-4 border-b border-[#E5DDD0] last:border-b-0"
               >
-                <div className="w-10 h-10 rounded-full bg-[#C9973A] flex items-center justify-center flex-shrink-0">
+                <div className="w-10 h-10 rounded-md bg-[#A8823A] flex items-center justify-center flex-shrink-0">
                   <span className="font-cairo font-bold text-sm text-[#FAF8F3]">
                     {new Date(w.eventDate).getDate()}
                   </span>
@@ -185,7 +184,7 @@ export default function WeddingCalendar({ events }: { events: Event[] }) {
                   <p className="font-cairo font-bold text-sm text-[#1A1714]">
                     {w.groomName}
                   </p>
-                  <p className="font-cairo text-xs text-[#C9973A] font-medium">
+                  <p className="font-cairo text-xs text-[#A8823A] font-medium">
                     {w.tribe}
                   </p>
                 </div>

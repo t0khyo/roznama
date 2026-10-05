@@ -68,9 +68,9 @@ export function EventsTable({ events, isLoading, onEdit, onDelete }: EventsTable
       return <ArrowUpDownIcon className="size-3 text-[#A09080]/60 shrink-0" />
     }
     return sortConfig.direction === "asc" ? (
-      <ArrowUpIcon className="size-3 text-[#8B1A1A] shrink-0" />
+      <ArrowUpIcon className="size-3 text-[#9F3647] shrink-0" />
     ) : (
-      <ArrowDownIcon className="size-3 text-[#8B1A1A] shrink-0" />
+      <ArrowDownIcon className="size-3 text-[#9F3647] shrink-0" />
     )
   }
 
@@ -128,7 +128,7 @@ export function EventsTable({ events, isLoading, onEdit, onDelete }: EventsTable
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="بحث بالقبيلة، اسم المعرس، أو المكان..."
-              className="font-cairo text-sm pr-9 pl-8 h-9 bg-[#FAF8F3] border-[#E5DDD0] focus:border-[#C9973A] placeholder:text-[#C0B4A8]"
+              className="font-cairo text-sm pr-9 pl-8 h-9 bg-[#FAF8F3] border-[#E5DDD0] focus:border-[#A8823A] placeholder:text-[#C0B4A8]"
             />
             {searchQuery && (
               <button
@@ -147,7 +147,7 @@ export function EventsTable({ events, isLoading, onEdit, onDelete }: EventsTable
               id="show-finished"
               checked={showFinished}
               onCheckedChange={setShowFinished}
-              className="data-checked:bg-[#8B1A1A] cursor-pointer"
+              className="data-checked:bg-[#9F3647] cursor-pointer"
             />
             <Label
               htmlFor="show-finished"
@@ -206,7 +206,7 @@ export function EventsTable({ events, isLoading, onEdit, onDelete }: EventsTable
               return (
                 <div
                   key={`mobile-${event.id}`}
-                  className="bg-[#FAF8F3] border border-[#E5DDD0] rounded-xl p-3.5 space-y-3 shadow-2xs hover:border-[#C9973A]/60 transition-all"
+                  className="bg-[#FAF8F3] border border-[#E5DDD0] rounded-xl p-3.5 space-y-3 shadow-2xs hover:border-[#A8823A]/60 transition-all"
                 >
                   {/* Card Header: Thumbnail, Event details & Status badge */}
                   <div className="flex items-start justify-between gap-3">
@@ -245,7 +245,7 @@ export function EventsTable({ events, isLoading, onEdit, onDelete }: EventsTable
                       className={
                         isPast
                           ? "bg-[#E5DDD0] text-[#6B5E52] hover:bg-[#E5DDD0] font-cairo text-xs shrink-0"
-                          : "bg-[#8B1A1A]/10 text-[#8B1A1A] hover:bg-[#8B1A1A]/10 border border-[#8B1A1A]/20 font-cairo text-xs shrink-0"
+                          : "bg-[#9F3647]/10 text-[#9F3647] hover:bg-[#9F3647]/10 border border-[#9F3647]/20 font-cairo text-xs shrink-0"
                       }
                     >
                       {isPast ? "انتهى" : "قادم"}
@@ -268,7 +268,7 @@ export function EventsTable({ events, isLoading, onEdit, onDelete }: EventsTable
                       variant="outline"
                       size="sm"
                       onClick={() => onEdit(event)}
-                      className="font-cairo text-xs h-8 px-3 gap-1.5 border-[#E5DDD0] text-[#6B5E52] hover:text-[#8B1A1A] hover:bg-[#8B1A1A]/10 hover:border-[#8B1A1A]/30 rounded-lg transition-all"
+                      className="font-cairo text-xs h-8 px-3 gap-1.5 border-[#E5DDD0] text-[#6B5E52] hover:text-[#9F3647] hover:bg-[#9F3647]/10 hover:border-[#9F3647]/30 rounded-lg transition-all"
                     >
                       <PencilIcon className="size-3.5" />
                       <span>تعديل</span>
@@ -297,7 +297,7 @@ export function EventsTable({ events, isLoading, onEdit, onDelete }: EventsTable
             <TableRow className="border-[#E5DDD0] bg-[#F3EDE3]/60 hover:bg-[#F3EDE3]/60">
               <TableHead
                 onClick={() => handleSort("tribe")}
-                className="font-cairo font-semibold text-[#6B5E52] text-sm text-right cursor-pointer select-none hover:text-[#8B1A1A] transition-colors"
+                className="font-cairo font-semibold text-[#6B5E52] text-sm text-right cursor-pointer select-none hover:text-[#9F3647] transition-colors"
               >
                 <div className="flex items-center gap-1.5 justify-start">
                   <span>القبيلة</span>
@@ -307,7 +307,7 @@ export function EventsTable({ events, isLoading, onEdit, onDelete }: EventsTable
 
               <TableHead
                 onClick={() => handleSort("groomName")}
-                className="font-cairo font-semibold text-[#6B5E52] text-sm text-right cursor-pointer select-none hover:text-[#8B1A1A] transition-colors"
+                className="font-cairo font-semibold text-[#6B5E52] text-sm text-right cursor-pointer select-none hover:text-[#9F3647] transition-colors"
               >
                 <div className="flex items-center gap-1.5 justify-start">
                   <span>اسم المعرس</span>
@@ -317,7 +317,7 @@ export function EventsTable({ events, isLoading, onEdit, onDelete }: EventsTable
 
               <TableHead
                 onClick={() => handleSort("eventDate")}
-                className="font-cairo font-semibold text-[#6B5E52] text-sm text-right cursor-pointer select-none hover:text-[#8B1A1A] transition-colors"
+                className="font-cairo font-semibold text-[#6B5E52] text-sm text-right cursor-pointer select-none hover:text-[#9F3647] transition-colors"
               >
                 <div className="flex items-center gap-1.5 justify-start">
                   <span>التاريخ</span>
@@ -327,7 +327,7 @@ export function EventsTable({ events, isLoading, onEdit, onDelete }: EventsTable
 
               <TableHead
                 onClick={() => handleSort("status")}
-                className="font-cairo font-semibold text-[#6B5E52] text-sm text-right cursor-pointer select-none hover:text-[#8B1A1A] transition-colors"
+                className="font-cairo font-semibold text-[#6B5E52] text-sm text-right cursor-pointer select-none hover:text-[#9F3647] transition-colors"
               >
                 <div className="flex items-center gap-1.5 justify-start">
                   <span>الحالة</span>
@@ -381,7 +381,7 @@ export function EventsTable({ events, isLoading, onEdit, onDelete }: EventsTable
                         className={
                           isPast
                             ? "bg-[#E5DDD0] text-[#6B5E52] hover:bg-[#E5DDD0] font-cairo text-xs"
-                            : "bg-[#8B1A1A]/10 text-[#8B1A1A] hover:bg-[#8B1A1A]/10 border border-[#8B1A1A]/20 font-cairo text-xs"
+                            : "bg-[#9F3647]/10 text-[#9F3647] hover:bg-[#9F3647]/10 border border-[#9F3647]/20 font-cairo text-xs"
                         }
                       >
                         {isPast ? "انتهى" : "قادم"}
@@ -404,7 +404,7 @@ export function EventsTable({ events, isLoading, onEdit, onDelete }: EventsTable
                           variant="ghost"
                           size="icon-sm"
                           onClick={() => onEdit(event)}
-                          className="size-7 text-[#6B5E52] hover:text-[#8B1A1A] hover:bg-[#8B1A1A]/8 transition-colors"
+                          className="size-7 text-[#6B5E52] hover:text-[#9F3647] hover:bg-[#9F3647]/8 transition-colors"
                           aria-label="تعديل"
                         >
                           <PencilIcon className="size-3.5" />

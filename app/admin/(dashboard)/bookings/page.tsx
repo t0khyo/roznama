@@ -30,7 +30,7 @@ export default function AdminBookingsPage() {
     <div className="space-y-6 max-w-6xl">
       {/* Heading */}
       <div>
-        <p className="text-[#8B1A1A] font-cairo text-xs font-semibold tracking-widest mb-1 uppercase">
+        <p className="text-[#9F3647] font-cairo text-xs font-semibold tracking-widest mb-1 uppercase">
           Bookings
         </p>
         <h1

@@ -114,13 +114,13 @@ export default function WeddingCarousel({ weddings }: { weddings: Event[] }) {
                       <p className="font-cairo font-bold text-sm text-[#1A1714] leading-snug">
                         {w.groomName}
                       </p>
-                      <p className="font-cairo text-xs text-[#8B1A1A] font-medium mt-0.5">
+                      <p className="font-cairo text-xs text-[#9F3647] font-medium mt-0.5">
                         {formatArabicDate(w.eventDate)}
                       </p>
                     </div>
                     {/* Active indicator ring */}
                     {isActive && (
-                      <span className="w-2.5 h-2.5 rounded-full bg-[#8B1A1A] flex-shrink-0 animate-pulse" />
+                      <span className="w-2.5 h-2.5 rounded-full bg-[#9F3647] flex-shrink-0 animate-pulse" />
                     )}
                   </div>
                 </div>
@@ -137,7 +137,7 @@ export default function WeddingCarousel({ weddings }: { weddings: Event[] }) {
           variant="outline"
           size="icon"
           onClick={() => { api?.scrollPrev(); autoplay.reset() }}
-          className="size-10 rounded-full border border-[#E5DDD0] flex items-center justify-center text-[#6B5E52] hover:border-[#8B1A1A] hover:text-[#8B1A1A] transition-colors bg-transparent hover:bg-transparent"
+          className="size-10 rounded-full border border-[#E5DDD0] flex items-center justify-center text-[#6B5E52] hover:border-[#9F3647] hover:text-[#9F3647] transition-colors bg-transparent hover:bg-transparent"
           aria-label="السابق"
         >
           {/* RTL: prev = scroll right, so arrow points right → */}
@@ -157,7 +157,7 @@ export default function WeddingCarousel({ weddings }: { weddings: Event[] }) {
                 width: i === current ? "22px" : "6px",
                 height: "6px",
                 borderRadius: "3px",
-                background: i === current ? "#8B1A1A" : "#D0C4B0",
+                background: i === current ? "#9F3647" : "#D0C4B0",
                 transition: "width 0.3s ease, background 0.3s ease",
               }}
             />
@@ -169,7 +169,7 @@ export default function WeddingCarousel({ weddings }: { weddings: Event[] }) {
           variant="outline"
           size="icon"
           onClick={() => { api?.scrollNext(); autoplay.reset() }}
-          className="size-10 rounded-full border border-[#E5DDD0] flex items-center justify-center text-[#6B5E52] hover:border-[#8B1A1A] hover:text-[#8B1A1A] transition-colors bg-transparent hover:bg-transparent"
+          className="size-10 rounded-full border border-[#E5DDD0] flex items-center justify-center text-[#6B5E52] hover:border-[#9F3647] hover:text-[#9F3647] transition-colors bg-transparent hover:bg-transparent"
           aria-label="التالي"
         >
           {/* RTL: next = scroll left, so arrow points left ← */}

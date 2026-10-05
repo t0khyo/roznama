@@ -149,29 +149,27 @@ export default function BookingForm() {
     <section id="booking" className="py-24">
       <div className="max-w-2xl mx-auto px-6">
         <div className="mb-12">
-          <p className="text-[#8B1A1A] font-cairo text-sm font-medium mb-2 tracking-wider">التسجيل</p>
+          <p className="text-primary font-cairo text-sm font-medium mb-2 tracking-wider">التسجيل</p>
           <h2
-            className="text-4xl md:text-5xl font-bold text-[#1A1714]"
+            className="text-4xl md:text-5xl font-bold text-foreground"
             style={{ fontFamily: "var(--font-thmanyah-serif), serif" }}
           >
             سجل مناسبتك
           </h2>
-          <p className="font-cairo text-[#6B5E52] mt-3 text-base">
+          <p className="font-cairo text-muted-foreground mt-3 text-base">
             سجّل مناسبتك لتظهر في الموقع ويطلع عليها الجميع
           </p>
         </div>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-5" noValidate>
+        <div className="bg-white dark:bg-card border border-border/50 rounded-xl p-8 md:p-10 shadow-[0_8px_30px_rgb(0,0,0,0.08)]">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-5" noValidate>
           <Field data-invalid={!!errors.name} className="space-y-2">
-            <FieldLabel htmlFor="booking-name" className="font-cairo text-sm font-medium text-[#4A4038]">
-              الاسم
-            </FieldLabel>
             <Input
               id="booking-name"
               type="text"
-              placeholder="محمد بن خالد بن سعد المطيري"
+              placeholder="الاسم"
               aria-invalid={!!errors.name}
-              className="w-full bg-[#F3EDE3] border border-[#E5DDD0] rounded-xl px-4 py-3.5 h-auto font-cairo text-sm text-[#1A1714] placeholder:text-[#C0B4A8] focus-visible:border-[#C9973A] focus-visible:bg-[#FAF8F3] focus-visible:ring-0 transition-colors shadow-none"
+              className="w-full bg-secondary/30 border-transparent rounded-md px-4 py-3.5 h-auto font-cairo text-sm text-foreground placeholder:text-muted-foreground focus-visible:border-primary focus-visible:bg-card focus-visible:ring-2 focus-visible:ring-primary/20 transition-all shadow-none"
               dir="rtl"
               {...register("name")}
             />
@@ -183,15 +181,12 @@ export default function BookingForm() {
           </Field>
 
           <Field data-invalid={!!errors.phone} className="space-y-2">
-            <FieldLabel htmlFor="booking-phone" className="font-cairo text-sm font-medium text-[#4A4038]">
-              رقم الهاتف
-            </FieldLabel>
             <Input
               id="booking-phone"
               type="tel"
-              placeholder="+965 9804 0875"
+              placeholder="رقم الهاتف"
               aria-invalid={!!errors.phone}
-              className="w-full bg-[#F3EDE3] border border-[#E5DDD0] rounded-xl px-4 py-3.5 h-auto font-cairo text-sm text-[#1A1714] placeholder:text-[#C0B4A8] focus-visible:border-[#C9973A] focus-visible:bg-[#FAF8F3] focus-visible:ring-0 transition-colors shadow-none"
+              className="w-full bg-secondary/30 border-transparent rounded-md px-4 py-3.5 h-auto font-cairo text-sm text-foreground placeholder:text-muted-foreground ltr:text-left rtl:text-right focus-visible:border-primary focus-visible:bg-card focus-visible:ring-2 focus-visible:ring-primary/20 transition-all shadow-none"
               dir="ltr"
               {...register("phone")}
             />
@@ -207,9 +202,6 @@ export default function BookingForm() {
             name="date"
             render={({ field }) => (
               <Field data-invalid={!!errors.date} className="space-y-2">
-                <FieldLabel htmlFor="booking-date" className="font-cairo text-sm font-medium text-[#4A4038]">
-                  تاريخ المناسبة
-                </FieldLabel>
                 <Popover open={isCalendarOpen} onOpenChange={setIsCalendarOpen}>
                   <PopoverTrigger
                     id="booking-date"
@@ -217,7 +209,7 @@ export default function BookingForm() {
                       <Button
                         type="button"
                         variant="outline"
-                        className={`w-full justify-start bg-[#F3EDE3] border-[#E5DDD0] rounded-xl px-4 py-6 font-cairo text-sm focus:border-[#C9973A] focus:bg-[#FAF8F3] transition-colors ${!field.value ? "text-[#C0B4A8]" : "text-[#1A1714]"
+                        className={`w-full justify-start bg-secondary/30 border-transparent rounded-md px-4 py-6 font-cairo text-sm focus:border-primary focus:bg-card focus:ring-2 focus:ring-primary/20 transition-all ${!field.value ? "text-muted-foreground" : "text-foreground"
                           } ${errors.date ? "!border-red-500" : ""}`}
                         dir="rtl"
                       />
@@ -227,7 +219,7 @@ export default function BookingForm() {
                     {field.value ? (
                       format(field.value, "PPP", { locale: ar })
                     ) : (
-                      <span>اختر التاريخ</span>
+                      <span>تاريخ المناسبة</span>
                     )}
                   </PopoverTrigger>
                   <PopoverContent className="w-auto p-0" align="start" dir="rtl">
@@ -257,17 +249,12 @@ export default function BookingForm() {
           />
 
           <Field data-invalid={!!errors.venue} className="space-y-2">
-            <div className="flex items-center justify-between">
-              <FieldLabel htmlFor="booking-venue" className="font-cairo text-sm font-medium text-[#4A4038]">
-                المكان
-              </FieldLabel>
-            </div>
             <Input
               id="booking-venue"
               type="text"
-              placeholder="قاعة الملوك — الجهراء"
+              placeholder="المكان"
               aria-invalid={!!errors.venue}
-              className="w-full bg-[#F3EDE3] border border-[#E5DDD0] rounded-xl px-4 py-3.5 h-auto font-cairo text-sm text-[#1A1714] placeholder:text-[#C0B4A8] focus-visible:border-[#C9973A] focus-visible:bg-[#FAF8F3] focus-visible:ring-0 transition-colors shadow-none"
+              className="w-full bg-secondary/30 border-transparent rounded-md px-4 py-3.5 h-auto font-cairo text-sm text-foreground placeholder:text-muted-foreground focus-visible:border-primary focus-visible:bg-card focus-visible:ring-2 focus-visible:ring-primary/20 transition-all shadow-none"
               dir="rtl"
               {...register("venue")}
             />
@@ -278,14 +265,17 @@ export default function BookingForm() {
             )}
           </Field>
 
-          <Button
-            type="submit"
-            disabled={isSubmitting}
-            className="w-full bg-[#8B1A1A] text-[#FAF8F3] font-cairo font-semibold py-4 h-auto rounded-xl text-base hover:bg-[#C9973A] transition-colors duration-300 mt-2"
-          >
-            {isSubmitting ? "جارٍ الإرسال..." : "إرسال الطلب"}
-          </Button>
+          <div className="flex justify-center md:justify-start pt-2">
+            <Button
+              type="submit"
+              disabled={isSubmitting}
+              className="w-auto px-8 bg-gradient-to-r from-primary to-[#722230] text-primary-foreground font-cairo font-semibold py-3 h-auto rounded-md text-sm hover:opacity-90 hover:scale-95 hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 active:scale-95"
+            >
+              {isSubmitting ? "جاري الإرسال..." : "أرسل الطلب"}
+            </Button>
+          </div>
         </form>
+        </div>
       </div>
     </section>
   )

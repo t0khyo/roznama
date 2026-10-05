@@ -65,9 +65,9 @@ export function BookingsTable({ bookings, isLoading, onStatusChange }: BookingsT
       return <ArrowUpDownIcon className="size-3 text-[#A09080]/60 shrink-0" />
     }
     return sortConfig.direction === "asc" ? (
-      <ArrowUpIcon className="size-3 text-[#8B1A1A] shrink-0" />
+      <ArrowUpIcon className="size-3 text-[#9F3647] shrink-0" />
     ) : (
-      <ArrowDownIcon className="size-3 text-[#8B1A1A] shrink-0" />
+      <ArrowDownIcon className="size-3 text-[#9F3647] shrink-0" />
     )
   }
 
@@ -128,7 +128,7 @@ export function BookingsTable({ bookings, isLoading, onStatusChange }: BookingsT
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="بحث بالاسم، رقم الهاتف، أو المكان..."
-              className="font-cairo text-sm pr-9 pl-8 h-9 bg-[#FAF8F3] border-[#E5DDD0] focus:border-[#C9973A] placeholder:text-[#C0B4A8]"
+              className="font-cairo text-sm pr-9 pl-8 h-9 bg-[#FAF8F3] border-[#E5DDD0] focus:border-[#A8823A] placeholder:text-[#C0B4A8]"
             />
             {searchQuery && (
               <button
@@ -147,7 +147,7 @@ export function BookingsTable({ bookings, isLoading, onStatusChange }: BookingsT
               id="show-rejected"
               checked={showRejected}
               onCheckedChange={setShowRejected}
-              className="data-checked:bg-[#8B1A1A] cursor-pointer"
+              className="data-checked:bg-[#9F3647] cursor-pointer"
             />
             <Label
               htmlFor="show-rejected"
@@ -207,7 +207,7 @@ export function BookingsTable({ bookings, isLoading, onStatusChange }: BookingsT
               return (
                 <div
                   key={`mobile-${b.id}`}
-                  className="bg-[#FAF8F3] border border-[#E5DDD0] rounded-xl p-3.5 space-y-3 shadow-2xs hover:border-[#C9973A]/60 transition-all"
+                  className="bg-[#FAF8F3] border border-[#E5DDD0] rounded-xl p-3.5 space-y-3 shadow-2xs hover:border-[#A8823A]/60 transition-all"
                 >
                   {/* Card Header: Name, date & status badge */}
                   <div className="flex items-start justify-between gap-2">
@@ -283,8 +283,8 @@ export function BookingsTable({ bookings, isLoading, onStatusChange }: BookingsT
                         className={cn(
                           "font-cairo text-xs h-7 px-2.5 gap-1 rounded-lg transition-all",
                           b.status === RequestStatus.NEW
-                            ? "bg-[#C9973A]/20 text-[#9E6E1A] border-[#C9973A]/40 cursor-default opacity-100 font-semibold"
-                            : "border-[#E5DDD0] text-[#6B5E52] hover:text-[#C9973A] hover:bg-[#C9973A]/10 hover:border-[#C9973A]/30"
+                            ? "bg-[#A8823A]/20 text-[#9E6E1A] border-[#A8823A]/40 cursor-default opacity-100 font-semibold"
+                            : "border-[#E5DDD0] text-[#6B5E52] hover:text-[#A8823A] hover:bg-[#A8823A]/10 hover:border-[#A8823A]/30"
                         )}
                       >
                         <ClockIcon className="size-3.5" />
@@ -344,7 +344,7 @@ export function BookingsTable({ bookings, isLoading, onStatusChange }: BookingsT
             <TableRow className="border-[#E5DDD0] bg-[#F3EDE3]/60 hover:bg-[#F3EDE3]/60">
               <TableHead
                 onClick={() => handleSort("name")}
-                className="font-cairo font-semibold text-[#6B5E52] text-sm text-right cursor-pointer select-none hover:text-[#8B1A1A] transition-colors"
+                className="font-cairo font-semibold text-[#6B5E52] text-sm text-right cursor-pointer select-none hover:text-[#9F3647] transition-colors"
               >
                 <div className="flex items-center gap-1.5 justify-start">
                   <span>الاسم</span>
@@ -354,7 +354,7 @@ export function BookingsTable({ bookings, isLoading, onStatusChange }: BookingsT
 
               <TableHead
                 onClick={() => handleSort("phone")}
-                className="font-cairo font-semibold text-[#6B5E52] text-sm text-right cursor-pointer select-none hover:text-[#8B1A1A] transition-colors"
+                className="font-cairo font-semibold text-[#6B5E52] text-sm text-right cursor-pointer select-none hover:text-[#9F3647] transition-colors"
               >
                 <div className="flex items-center gap-1.5 justify-start">
                   <span>الهاتف</span>
@@ -364,7 +364,7 @@ export function BookingsTable({ bookings, isLoading, onStatusChange }: BookingsT
 
               <TableHead
                 onClick={() => handleSort("preferredDate")}
-                className="font-cairo font-semibold text-[#6B5E52] text-sm text-right cursor-pointer select-none hover:text-[#8B1A1A] transition-colors"
+                className="font-cairo font-semibold text-[#6B5E52] text-sm text-right cursor-pointer select-none hover:text-[#9F3647] transition-colors"
               >
                 <div className="flex items-center gap-1.5 justify-start">
                   <span>تاريخ المناسبة</span>
@@ -374,7 +374,7 @@ export function BookingsTable({ bookings, isLoading, onStatusChange }: BookingsT
 
               <TableHead
                 onClick={() => handleSort("venue")}
-                className="font-cairo font-semibold text-[#6B5E52] text-sm text-right cursor-pointer select-none hover:text-[#8B1A1A] transition-colors"
+                className="font-cairo font-semibold text-[#6B5E52] text-sm text-right cursor-pointer select-none hover:text-[#9F3647] transition-colors"
               >
                 <div className="flex items-center gap-1.5 justify-start">
                   <span>المكان</span>
@@ -384,7 +384,7 @@ export function BookingsTable({ bookings, isLoading, onStatusChange }: BookingsT
 
               <TableHead
                 onClick={() => handleSort("createdAt")}
-                className="font-cairo font-semibold text-[#6B5E52] text-sm text-right cursor-pointer select-none hover:text-[#8B1A1A] transition-colors"
+                className="font-cairo font-semibold text-[#6B5E52] text-sm text-right cursor-pointer select-none hover:text-[#9F3647] transition-colors"
               >
                 <div className="flex items-center gap-1.5 justify-start">
                   <span>تاريخ الطلب</span>
@@ -394,7 +394,7 @@ export function BookingsTable({ bookings, isLoading, onStatusChange }: BookingsT
 
               <TableHead
                 onClick={() => handleSort("status")}
-                className="font-cairo font-semibold text-[#6B5E52] text-sm text-right cursor-pointer select-none hover:text-[#8B1A1A] transition-colors"
+                className="font-cairo font-semibold text-[#6B5E52] text-sm text-right cursor-pointer select-none hover:text-[#9F3647] transition-colors"
               >
                 <div className="flex items-center gap-1.5 justify-start">
                   <span>الحالة</span>
@@ -486,8 +486,8 @@ export function BookingsTable({ bookings, isLoading, onStatusChange }: BookingsT
                           className={cn(
                             "size-7 rounded-lg transition-all",
                             b.status === RequestStatus.NEW
-                              ? "bg-[#C9973A]/20 text-[#9E6E1A] border border-[#C9973A]/40 cursor-default opacity-100 shadow-2xs"
-                              : "text-[#A09080] hover:text-[#C9973A] hover:bg-[#C9973A]/10 border border-transparent hover:border-[#C9973A]/25"
+                              ? "bg-[#A8823A]/20 text-[#9E6E1A] border border-[#A8823A]/40 cursor-default opacity-100 shadow-2xs"
+                              : "text-[#A09080] hover:text-[#A8823A] hover:bg-[#A8823A]/10 border border-transparent hover:border-[#A8823A]/25"
                           )}
                         >
                           <ClockIcon className="size-3.5" />

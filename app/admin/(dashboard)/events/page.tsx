@@ -57,7 +57,7 @@ export default function AdminEventsPage() {
       {/* Heading + action */}
       <div className="flex items-end justify-between gap-4">
         <div>
-          <p className="text-[#8B1A1A] font-cairo text-xs font-semibold tracking-widest mb-1 uppercase">
+          <p className="text-[#9F3647] font-cairo text-xs font-semibold tracking-widest mb-1 uppercase">
             Events
           </p>
           <h1
@@ -72,7 +72,7 @@ export default function AdminEventsPage() {
         </div>
         <Button
           onClick={openCreate}
-          className="font-cairo font-bold bg-[#8B1A1A] text-[#FAF8F3] hover:bg-[#6A1212] h-9 gap-2"
+          className="font-cairo font-bold bg-[#9F3647] text-[#FAF8F3] hover:bg-[#722230] h-9 gap-2"
         >
           إضافة مناسبة
           <PlusIcon className="size-4" />

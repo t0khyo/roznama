@@ -90,19 +90,19 @@ export function AdminSidebar() {
                         "font-cairo text-sm rounded-lg h-10 gap-3 transition-all duration-200",
                         "group-data-[collapsible=icon]:size-8 group-data-[collapsible=icon]:p-0 group-data-[collapsible=icon]:justify-center",
                         active
-                          ? "bg-[#8B1A1A]/10 text-[#8B1A1A] font-semibold"
-                          : "text-[#4A4038] hover:bg-[#8B1A1A]/6 hover:text-[#8B1A1A]"
+                          ? "bg-[#9F3647]/10 text-[#9F3647] font-semibold"
+                          : "text-[#4A4038] hover:bg-[#9F3647]/6 hover:text-[#9F3647]"
                       )}
                     >
                       <Icon
                         className={cn(
                           "size-4 shrink-0 transition-colors",
-                          active ? "text-[#8B1A1A]" : "text-[#6B5E52]"
+                          active ? "text-[#9F3647]" : "text-[#6B5E52]"
                         )}
                       />
                       <span className="group-data-[collapsible=icon]:hidden">{item.label}</span>
                       {active && (
-                        <span className="mr-auto w-1.5 h-1.5 rounded-full bg-[#8B1A1A] group-data-[collapsible=icon]:hidden" />
+                        <span className="mr-auto w-1.5 h-1.5 rounded-full bg-[#9F3647] group-data-[collapsible=icon]:hidden" />
                       )}
                     </SidebarMenuButton>
                   </SidebarMenuItem>
@@ -122,9 +122,9 @@ export function AdminSidebar() {
             <SidebarMenuButton
               render={<Link href="/" target="_blank" rel="noreferrer" />}
               tooltip={{ children: "عرض الموقع العام", side: "left" }}
-              className="font-cairo text-sm text-[#A09080] hover:text-[#8B1A1A] hover:bg-[#8B1A1A]/6 rounded-lg h-10 gap-3 transition-all group-data-[collapsible=icon]:size-8 group-data-[collapsible=icon]:p-0 group-data-[collapsible=icon]:justify-center"
+              className="font-cairo text-sm text-[#A09080] hover:text-[#9F3647] hover:bg-[#9F3647]/6 rounded-lg h-10 gap-3 transition-all group-data-[collapsible=icon]:size-8 group-data-[collapsible=icon]:p-0 group-data-[collapsible=icon]:justify-center"
             >
-              <ExternalLinkIcon className="size-4 shrink-0 text-[#C9973A]" />
+              <ExternalLinkIcon className="size-4 shrink-0 text-[#A8823A]" />
               <span className="group-data-[collapsible=icon]:hidden">عرض الموقع العام</span>
             </SidebarMenuButton>
           </SidebarMenuItem>

@@ -1,6 +1,7 @@
-﻿"use client"
+"use client"
 
 import * as React from "react"
+import Image from "next/image"
 import type { Event } from "@/types"
 import { formatArabicDate } from "@/lib/date-utils"
 import {
@@ -57,74 +58,43 @@ function EventCard({
   const ref = useRevealRef(delay)
 
   return (
-    <div ref={ref} className="w-full">
-      {/* Full-size image */}
+    <div ref={ref} className="w-full flex flex-col gap-4 group hover:-translate-y-1 transition-transform duration-500">
+      {/* Top Component: Image */}
       <div
-        className="relative w-full overflow-hidden rounded-2xl cursor-pointer group bg-[#1A1714]"
+        className="relative w-full cursor-pointer"
         onClick={() => onImageClick(event)}
       >
-        {/* Blurred backdrop */}
-        <img
-          src={event.imageUrl}
-          alt=""
-          className="absolute inset-0 w-full h-full object-cover blur-xl scale-110 opacity-50 pointer-events-none"
-          draggable={false}
-        />
-
-        {/* Primary image */}
-        <img
+        <Image
           src={event.imageUrl}
           alt={`مناسبة ${event.tribe}`}
-          className="relative w-full object-contain z-10 transition-transform duration-700 ease-out group-hover:scale-[1.03]"
-          style={{ maxHeight: "90vh" }}
+          width={800}
+          height={1200}
+          className="w-full h-auto rounded-md object-contain shadow-sm"
           draggable={false}
+          unoptimized
         />
+      </div>
 
-        {/* Gradient fade at bottom */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#1A1714]/70 via-[#1A1714]/10 to-transparent z-20 pointer-events-none" />
+      {/* Bottom Component: Event Details Card */}
+      <div className="rounded-none border-t-4 border-[#B59410] shadow-sm bg-white p-6 md:p-8 flex flex-col gap-6 group-hover:shadow-xl transition-shadow duration-500">
+        {/* Title */}
+        <h3 className="text-center font-medium text-2xl text-foreground font-tajawal">
+          {event.tribe}
+        </h3>
 
-        {/* Tribe overlay */}
-        <div className="absolute bottom-0 inset-x-0 p-5 z-30 pointer-events-none">
-          <p className="font-amiri text-[#E8CC88] text-2xl font-bold drop-shadow-lg">
-            {event.tribe}
-          </p>
-        </div>
-
-        {/* Expand hint */}
-        <div className="absolute top-4 end-4 z-30 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <div className="size-9 rounded-full bg-white/15 backdrop-blur-sm flex items-center justify-center">
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <path d="M2 5V2h3M9 2h3v3M12 9v3H9M5 12H2V9" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
+        {/* Details List */}
+        <div className="flex flex-col gap-2 font-tajawal">
+          {/* Row 1 */}
+          <div className="flex justify-between items-center pb-3 border-b border-border/50">
+            <span className="text-muted-foreground text-sm">اسم المعرس:</span>
+            <span className="font-medium text-foreground text-lg">{event.groomName}</span>
           </div>
-        </div>
-      </div>
 
-      {/* Divider */}
-      <div className="flex items-center gap-3 my-4 px-1">
-        <div className="flex-1 h-px bg-[#E5DDD0]" />
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="shrink-0 opacity-40">
-          <circle cx="8" cy="8" r="2" fill="#8B1A1A" />
-          <circle cx="2" cy="8" r="1.2" fill="#8B1A1A" />
-          <circle cx="14" cy="8" r="1.2" fill="#8B1A1A" />
-        </svg>
-        <div className="flex-1 h-px bg-[#E5DDD0]" />
-      </div>
-
-      {/* Data row */}
-      <div className="flex items-center justify-between px-1 pb-2">
-        <div>
-          <p className="font-cairo font-bold text-base text-[#1A1714] leading-snug">
-            {event.groomName}
-          </p>
-          <p className="font-cairo text-sm text-[#6B5E52] mt-0.5">
-            {event.tribe}
-          </p>
-        </div>
-        <div className="text-end">
-          <p className="font-cairo text-sm font-semibold text-[#8B1A1A]">
-            {formatArabicDate(event.eventDate)}
-          </p>
+          {/* Row 2 */}
+          <div className="flex justify-between items-center pb-1">
+            <span className="text-muted-foreground text-sm">التاريخ:</span>
+            <span className="font-medium text-foreground text-lg">{formatArabicDate(event.eventDate)}</span>
+          </div>
         </div>
       </div>
     </div>

@@ -84,7 +84,7 @@ export function LoginForm() {
                   required
                   placeholder="admin"
                   dir="ltr"
-                  className="font-cairo text-sm h-10 pr-9 border-[#E5DDD0] focus-visible:border-[#8B1A1A] focus-visible:ring-[#8B1A1A]/20 bg-[#FAF8F3]/50 text-left"
+                  className="font-cairo text-sm h-10 pr-9 border-[#E5DDD0] focus-visible:border-[#9F3647] focus-visible:ring-[#9F3647]/20 bg-[#FAF8F3]/50 text-left"
                   disabled={isPending}
                 />
                 <UserIcon className="absolute right-3 top-1/2 -translate-y-1/2 size-4 text-[#A09080] pointer-events-none" />
@@ -112,13 +112,13 @@ export function LoginForm() {
                   required
                   placeholder="••••••••"
                   dir="ltr"
-                  className="font-cairo text-sm h-10 pr-9 border-[#E5DDD0] focus-visible:border-[#8B1A1A] focus-visible:ring-[#8B1A1A]/20 bg-[#FAF8F3]/50 text-left"
+                  className="font-cairo text-sm h-10 pr-9 border-[#E5DDD0] focus-visible:border-[#9F3647] focus-visible:ring-[#9F3647]/20 bg-[#FAF8F3]/50 text-left"
                   disabled={isPending}
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword((prev) => !prev)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-[#A09080] hover:text-[#4A4038] p-0.5 rounded transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-[#8B1A1A]"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-[#A09080] hover:text-[#4A4038] p-0.5 rounded transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-[#9F3647]"
                   aria-label={showPassword ? "إخفاء كلمة المرور" : "إظهار كلمة المرور"}
                   title={showPassword ? "إخفاء كلمة المرور" : "إظهار كلمة المرور"}
                   tabIndex={0}
@@ -140,7 +140,7 @@ export function LoginForm() {
             <Button
               type="submit"
               disabled={isPending}
-              className="w-full h-10 font-cairo text-sm font-semibold bg-[#8B1A1A] hover:bg-[#721515] text-white shadow-sm transition-all mt-2"
+              className="w-full h-10 font-cairo text-sm font-semibold bg-[#9F3647] hover:bg-[#721515] text-white shadow-sm transition-all mt-2"
             >
               {isPending ? (
                 <>
@@ -160,7 +160,7 @@ export function LoginForm() {
           </span>
           <Link
             href="/"
-            className="inline-flex items-center gap-1.5 text-xs font-cairo text-[#7D6E63] hover:text-[#8B1A1A] transition-colors"
+            className="inline-flex items-center gap-1.5 text-xs font-cairo text-[#7D6E63] hover:text-[#9F3647] transition-colors"
           >
             العودة إلى الموقع الرئيسي
             <ArrowLeftIcon className="size-3.5" />

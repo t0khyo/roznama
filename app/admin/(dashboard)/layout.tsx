@@ -32,7 +32,7 @@ export default async function DashboardLayout({
           <SidebarInset className="flex flex-col flex-1 min-w-0 bg-[#FAF8F3]">
             {/* Top bar */}
             <header className="flex h-14 items-center gap-3 border-b border-[#E5DDD0] px-4 shrink-0 bg-[#FAF8F3]">
-              <SidebarTrigger className="text-[#6B5E52] hover:text-[#8B1A1A] hover:bg-[#8B1A1A]/6 transition-colors" />
+              <SidebarTrigger className="text-[#6B5E52] hover:text-[#9F3647] hover:bg-[#9F3647]/6 transition-colors" />
               <Separator orientation="vertical" className="h-5 bg-[#E5DDD0]" />
               <span
                 className="text-sm font-medium text-[#A09080] font-cairo"

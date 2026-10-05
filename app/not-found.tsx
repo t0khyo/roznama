@@ -14,25 +14,25 @@ export default function NotFound() {
         className="absolute -inset-12 opacity-30 pointer-events-none"
         style={{
           backgroundImage: `
-            radial-gradient(circle at 20% 50%, #8B1A1A12 0%, transparent 50%),
-            radial-gradient(circle at 80% 20%, #C9973A10 0%, transparent 40%)
+            radial-gradient(circle at 20% 50%, #9F364712 0%, transparent 50%),
+            radial-gradient(circle at 80% 20%, #A8823A10 0%, transparent 40%)
           `,
         }}
       />
 
       {/* Side decorative rules */}
-      <div className="absolute top-1/3 right-0 w-px h-32 bg-gradient-to-b from-transparent via-[#8B1A1A]/25 to-transparent pointer-events-none" />
-      <div className="absolute top-1/3 left-0 w-px h-32 bg-gradient-to-b from-transparent via-[#8B1A1A]/25 to-transparent pointer-events-none" />
+      <div className="absolute top-1/3 right-0 w-px h-32 bg-gradient-to-b from-transparent via-[#9F3647]/25 to-transparent pointer-events-none" />
+      <div className="absolute top-1/3 left-0 w-px h-32 bg-gradient-to-b from-transparent via-[#9F3647]/25 to-transparent pointer-events-none" />
 
       <div className="relative text-center space-y-8 max-w-2xl animate-fade-up">
 
         {/* Category label */}
         <div className="flex items-center justify-center gap-3">
-          <div className="h-px w-12 bg-gradient-to-l from-[#8B1A1A] to-transparent" />
-          <span className="text-[#8B1A1A] font-cairo text-sm font-medium tracking-widest">
+          <div className="h-px w-12 bg-gradient-to-l from-[#9F3647] to-transparent" />
+          <span className="text-[#9F3647] font-cairo text-sm font-medium tracking-widest">
             خطأ ٤٠٤
           </span>
-          <div className="h-px w-12 bg-gradient-to-r from-[#8B1A1A] to-transparent" />
+          <div className="h-px w-12 bg-gradient-to-r from-[#9F3647] to-transparent" />
         </div>
 
         {/* Large ornamental 404 */}
@@ -55,11 +55,11 @@ export default function NotFound() {
 
         {/* Decorative gold divider */}
         <div className="flex items-center justify-center gap-3">
-          <div className="h-px flex-1 max-w-[80px] bg-gradient-to-l from-[#C9973A]/60 to-transparent" />
-          <div className="w-1.5 h-1.5 rounded-full bg-[#C9973A]" />
-          <div className="w-1 h-1 rounded-full bg-[#C9973A]/60" />
-          <div className="w-1.5 h-1.5 rounded-full bg-[#C9973A]" />
-          <div className="h-px flex-1 max-w-[80px] bg-gradient-to-r from-[#C9973A]/60 to-transparent" />
+          <div className="h-px flex-1 max-w-[80px] bg-gradient-to-l from-[#A8823A]/60 to-transparent" />
+          <div className="w-1.5 h-1.5 rounded-full bg-[#A8823A]" />
+          <div className="w-1 h-1 rounded-full bg-[#A8823A]/60" />
+          <div className="w-1.5 h-1.5 rounded-full bg-[#A8823A]" />
+          <div className="h-px flex-1 max-w-[80px] bg-gradient-to-r from-[#A8823A]/60 to-transparent" />
         </div>
 
         {/* Description */}
@@ -71,13 +71,13 @@ export default function NotFound() {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
           <Link
             href="/#upcoming"
-            className="inline-flex items-center justify-center border border-[#8B1A1A] text-[#8B1A1A] font-cairo font-medium px-8 py-3.5 rounded-full text-sm hover:bg-[#8B1A1A]/10 transition-colors duration-300 w-full sm:w-auto bg-transparent"
+            className="inline-flex items-center justify-center border border-[#9F3647] text-[#9F3647] font-cairo font-medium px-8 py-3.5 rounded-full text-sm hover:bg-[#9F3647]/10 transition-colors duration-300 w-full sm:w-auto bg-transparent"
           >
             المناسبات القادمة
           </Link>
           <Link
             href="/"
-            className="inline-flex items-center justify-center bg-[#8B1A1A] text-[#FAF8F3] font-cairo font-bold px-8 py-3.5 rounded-full text-sm hover:bg-[#6A1212] transition-all duration-300 w-full sm:w-auto shadow-sm"
+            className="inline-flex items-center justify-center bg-[#9F3647] text-[#FAF8F3] font-cairo font-bold px-8 py-3.5 rounded-full text-sm hover:bg-[#722230] transition-all duration-300 w-full sm:w-auto shadow-sm"
           >
             العودة للرئيسية
           </Link>

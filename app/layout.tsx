@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { DirectionProvider } from "@/components/ui/direction";
 import { Toaster } from "@/components/ui/sonner";
 import { CircleCheckIcon } from "lucide-react";
-import { thmanyahSans, thmanyahSerif } from "@/lib/fonts";
+import { thmanyahSans, thmanyahSerif, ibmPlexSansArabic, tajawal } from "@/lib/fonts";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -16,7 +16,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="ar"
       dir="rtl"
-      className={`h-full ${thmanyahSans.variable} ${thmanyahSerif.variable}`}
+      className={`h-full ${thmanyahSans.variable} ${thmanyahSerif.variable} ${ibmPlexSansArabic.variable} ${tajawal.variable}`}
       data-scroll-behavior="smooth"
       suppressHydrationWarning
     >

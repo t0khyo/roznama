@@ -7,7 +7,7 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto px-6">
         <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-12">
           <div>
-            <div className="inline-flex items-center justify-center p-2 bg-[#FAF8F3] rounded-2xl mb-4 shadow-lg border border-[#3A3530]/40">
+            <div className="inline-flex items-center justify-center p-2 bg-[#FAF8F3] rounded-md mb-4 shadow-sm border border-[#3A3530]/40">
               <img src="/logo.png" alt="سناب مطير" className="h-12 w-auto object-contain rounded-lg" />
             </div>
             <p className="font-cairo text-[#A09080] text-sm max-w-xs">
@@ -21,9 +21,9 @@ export default function Footer() {
             {/* Phone */}
             <a
               href="tel:+96598040875"
-              className="flex items-center gap-3 text-[#E5DDD0] hover:text-[#C9973A] transition-colors group"
+              className="flex items-center gap-3 text-[#E5DDD0] hover:text-[#A8823A] transition-colors group"
             >
-              <span className="w-9 h-9 rounded-full border border-[#3A3530] flex items-center justify-center group-hover:border-[#C9973A]/50 group-hover:bg-[#C9973A]/10 transition-colors">
+              <span className="w-9 h-9 rounded-md border border-[#3A3530] flex items-center justify-center group-hover:border-[#A8823A]/50 group-hover:bg-[#A8823A]/10 transition-colors">
                 <Phone className="w-4 h-4" />
               </span>
               <span className="font-cairo text-sm" dir="ltr">+965 9804 0875</span>
@@ -34,9 +34,9 @@ export default function Footer() {
               href="https://www.snapchat.com/add/snap_almutair"
               target="_blank"
               rel="noreferrer"
-              className="flex items-center gap-3 text-[#E5DDD0] hover:text-[#C9973A] transition-colors group"
+              className="flex items-center gap-3 text-[#E5DDD0] hover:text-[#A8823A] transition-colors group"
             >
-              <span className="w-9 h-9 rounded-full border border-[#3A3530] flex items-center justify-center group-hover:border-[#C9973A]/50 group-hover:bg-[#C9973A]/10 transition-colors">
+              <span className="w-9 h-9 rounded-md border border-[#3A3530] flex items-center justify-center group-hover:border-[#A8823A]/50 group-hover:bg-[#A8823A]/10 transition-colors">
                 <FaSnapchat className="w-4 h-4" />
               </span>
               <span className="font-cairo text-sm" dir="ltr">snap_almutair</span>
@@ -47,9 +47,9 @@ export default function Footer() {
               href="https://instagram.com/snap_almutair"
               target="_blank"
               rel="noreferrer"
-              className="flex items-center gap-3 text-[#E5DDD0] hover:text-[#C9973A] transition-colors group"
+              className="flex items-center gap-3 text-[#E5DDD0] hover:text-[#A8823A] transition-colors group"
             >
-              <span className="w-9 h-9 rounded-full border border-[#3A3530] flex items-center justify-center group-hover:border-[#C9973A]/50 group-hover:bg-[#C9973A]/10 transition-colors">
+              <span className="w-9 h-9 rounded-md border border-[#3A3530] flex items-center justify-center group-hover:border-[#A8823A]/50 group-hover:bg-[#A8823A]/10 transition-colors">
                 <FaInstagram className="w-4 h-4" />
               </span>
               <span className="font-cairo text-sm" dir="ltr">snap_almutair</span>
@@ -62,9 +62,9 @@ export default function Footer() {
             © {new Date().getFullYear()} سناب مطير. جميع الحقوق محفوظة.
           </p>
           <div className="flex items-center gap-2">
-            <div className="w-1 h-1 rounded-full bg-[#8B1A1A]" />
-            <div className="w-1 h-1 rounded-full bg-[#C9973A]" />
-            <div className="w-1 h-1 rounded-full bg-[#C9973A]/50" />
+            <div className="w-1 h-1 rounded-full bg-[#9F3647]" />
+            <div className="w-1 h-1 rounded-full bg-[#A8823A]" />
+            <div className="w-1 h-1 rounded-full bg-[#A8823A]/50" />
           </div>
         </div>
       </div>
