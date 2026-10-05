@@ -107,6 +107,7 @@ export default function WeddingCalendar({ events }: { events: Event[] }) {
               week: "mt-0",
               // Day cell
               day: "border-b border-r border-[#E5DDD0]/50 rounded-none p-0 aspect-auto",
+              today: "bg-[#E5DDD0]/70 font-bold text-[#1A1714]",
               // Grid
               month_grid: "w-full border-collapse",
             }}
@@ -161,7 +162,7 @@ export default function WeddingCalendar({ events }: { events: Event[] }) {
 
       {/* Dialog for selected day's weddings */}
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-        <DialogContent dir="rtl" className="font-cairo max-w-md">
+        <DialogContent dir="rtl" className="font-cairo w-[92vw] sm:w-full max-w-md rounded-xl p-6">
           <DialogHeader>
             <DialogTitle className="text-right font-cairo text-[#1A1714]">
               {dialogDay

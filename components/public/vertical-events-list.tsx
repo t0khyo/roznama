@@ -78,7 +78,7 @@ function EventCard({
       {/* Bottom Component: Event Details Card */}
       <div className="rounded-none border-t-4 border-[#B59410] shadow-sm bg-white p-6 md:p-8 flex flex-col gap-6 group-hover:shadow-xl transition-shadow duration-500">
         {/* Title */}
-        <h3 className="text-center font-medium text-2xl text-foreground font-tajawal">
+        <h3 className="text-center font-bold text-[#315F79] text-xl md:text-3xl font-tajawal">
           {event.tribe}
         </h3>
 
@@ -87,13 +87,13 @@ function EventCard({
           {/* Row 1 */}
           <div className="flex justify-between items-center pb-3 border-b border-border/50">
             <span className="text-muted-foreground text-sm">اسم المعرس:</span>
-            <span className="font-medium text-foreground text-lg">{event.groomName}</span>
+            <span className="font-bold text-[#315F79] text-lg">{event.groomName}</span>
           </div>
 
           {/* Row 2 */}
           <div className="flex justify-between items-center pb-1">
             <span className="text-muted-foreground text-sm">التاريخ:</span>
-            <span className="font-medium text-foreground text-lg">{formatArabicDate(event.eventDate)}</span>
+            <span className="font-bold text-[#315F79] text-lg">{formatArabicDate(event.eventDate)}</span>
           </div>
         </div>
       </div>

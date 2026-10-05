@@ -25,7 +25,7 @@ export default function Hero() {
         </div>
 
         <p className="font-cairo text-lg md:text-xl text-muted-foreground font-light leading-relaxed max-w-xl mx-auto opacity-0 animate-fade-up [animation-delay:200ms]">
-          نقدمها لكم لتكون مرجعاً للتنسيق والتذكير بالمناسبات كافة
+         تحديد زفاف مطير نقدمها لكم لتكون مرجعاً للتنسيق والتذكير بالمناسبات كافة
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4 opacity-0 animate-fade-up [animation-delay:300ms]">
