@@ -4,6 +4,7 @@ import { DirectionProvider } from "@/components/ui/direction";
 import { Toaster } from "@/components/ui/sonner";
 import { CircleCheckIcon } from "lucide-react";
 import { thmanyahSans, thmanyahSerif, ibmPlexSansArabic, tajawal } from "@/lib/fonts";
+import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -21,7 +22,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col font-sans" suppressHydrationWarning>
-        <DirectionProvider direction="rtl">{children}</DirectionProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          disableTransitionOnChange
+        >
+          <DirectionProvider direction="rtl">{children}</DirectionProvider>
+        </ThemeProvider>
         <Toaster
           position="top-center"
           dir="rtl"

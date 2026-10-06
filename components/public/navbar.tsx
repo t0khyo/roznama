@@ -9,6 +9,7 @@ import {
 import { Button } from "@/components/ui/button"
 import { navLinks } from "@/lib/constants"
 import { Menu } from "lucide-react"
+import { ModeToggle } from "@/components/mode-toggle"
 
 export default function Navbar() {
   const scrollTo = (id: string) => {
@@ -35,15 +36,16 @@ export default function Navbar() {
               <button
                 key={link.id}
                 onClick={() => scrollTo(link.id)}
-                className="font-cairo text-sm font-medium text-neutral-dark hover:text-primary transition-colors px-3 py-1.5 rounded-md hover:bg-primary/5"
+                className="font-cairo text-sm font-medium text-foreground/80 hover:text-primary transition-colors px-3 py-1.5 rounded-md hover:bg-primary/5"
               >
                 {link.label}
               </button>
             ))}
           </nav>
 
-          {/* Right side: CTA + hamburger */}
+          {/* Right side: CTA + Mode Toggle + hamburger */}
           <div className="flex items-center gap-2 flex-shrink-0">
+            <ModeToggle />
             {/* CTA — visible on all sizes */}
             <Button
               onClick={() => window.open("https://wa.me/96598040875", "_blank")}
@@ -68,11 +70,9 @@ export default function Navbar() {
               </DrawerTrigger>
 
               <DrawerContent
-                className="md:hidden w-[80vw] max-w-xs border-l border-border !rounded-none"
+                className="md:hidden w-[80vw] max-w-xs border-l border-border !rounded-none bg-background/95 backdrop-blur-md"
                 style={{
-                  background: "rgba(250,248,243,0.97)",
-                  backdropFilter: "blur(20px)",
-                  "--drawer-bleed-background": "#FAF8F3",
+                  "--drawer-bleed-background": "var(--background)",
                 } as React.CSSProperties}
               >
                 {/* Header */}
@@ -83,7 +83,7 @@ export default function Navbar() {
                       <Button
                         variant="outline"
                         size="icon"
-                        className="size-8 flex items-center justify-center rounded-md border border-border text-chart-4 hover:border-primary/40 hover:text-primary transition-colors bg-transparent hover:bg-transparent"
+                        className="size-8 flex items-center justify-center rounded-md border border-border text-foreground/70 hover:border-primary/40 hover:text-primary transition-colors bg-transparent hover:bg-transparent"
                         aria-label="إغلاق"
                       />
                     }
@@ -109,7 +109,7 @@ export default function Navbar() {
                         render={
                           <button
                             onClick={() => scrollTo(link.id)}
-                            className={`w-full text-right px-5 py-4 font-cairo text-base font-medium text-neutral-dark hover:text-primary hover:bg-primary/5 transition-colors ${
+                            className={`w-full text-right px-5 py-4 font-cairo text-base font-medium text-foreground/80 hover:text-primary hover:bg-primary/5 transition-colors ${
                               idx < arr.length - 1 ? "border-b border-border/40" : ""
                             }`}
                           />

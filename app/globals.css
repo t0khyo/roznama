@@ -345,8 +345,8 @@ textarea:focus {
   --muted-surface: oklch(0.2 0 0);
   --muted-text-light: oklch(0.5 0 0);
   --primary-dark: oklch(0.3 0.1 20);
-  --brand-blue: oklch(0.4 0.05 240);
-  --brand-gold: oklch(0.6 0.15 80);
+  --brand-blue: oklch(0.85 0.05 240);
+  --brand-gold: oklch(0.7 0.15 80);
   --footer-border: oklch(0.3 0 0);
   --footer-border-dark: oklch(0.2 0 0);
 }

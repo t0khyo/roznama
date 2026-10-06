@@ -90,7 +90,7 @@ export default function WeddingCalendar({ events }: { events: Event[] }) {
                 month: "w-full",
                 // Month caption — Amiri font, brand colours
                 caption_label:
-                  "font-bold text-foreground text-lg tracking-wide flex items-center gap-1 [&>svg]:size-4",
+                  "font-bold text-foreground text-lg tracking-wide flex items-center gap-1 [&>svg]:hidden",
                 month_caption:
                   "flex h-(--cell-size) w-full items-center justify-center px-(--cell-size)",
                 dropdowns: "flex h-(--cell-size) w-full items-center justify-center gap-2 font-bold text-foreground text-sm md:text-base",

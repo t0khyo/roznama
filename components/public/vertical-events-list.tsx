@@ -76,7 +76,7 @@ function EventCard({
       </div>
 
       {/* Bottom Component: Event Details Card */}
-      <div className="rounded-none border-t-4 border-brand-gold shadow-sm bg-white p-6 md:p-8 flex flex-col gap-6 group-hover:shadow-xl transition-shadow duration-500">
+      <div className="rounded-none border-t-4 border-brand-gold shadow-sm bg-card p-6 md:p-8 flex flex-col gap-6 group-hover:shadow-xl transition-shadow duration-500">
         {/* Title */}
         <h3 className="text-center font-bold text-brand-blue text-xl md:text-3xl font-tajawal">
           {event.tribe}
