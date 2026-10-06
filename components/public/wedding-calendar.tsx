@@ -4,7 +4,7 @@ import { useState } from "react"
 import { arSA } from "react-day-picker/locale"
 import { Calendar } from "@/components/ui/calendar"
 import { arabicMonths } from "@/lib/constants"
-import { formatArabicDate } from "@/lib/date-utils"
+import { formatArabicDate, parseLocalDate } from "@/lib/date-utils"
 import type { Event } from "@/types"
 import {
   Dialog,
@@ -16,7 +16,7 @@ import {
 const customArSA = { ...arSA, code: "ar-SA-u-ca-gregory" }
 
 export default function WeddingCalendar({ events }: { events: Event[] }) {
-  const [month, setMonth] = useState<Date>(new Date(2026, 8, 1))
+  const [month, setMonth] = useState<Date>(new Date())
   const [dialogOpen, setDialogOpen] = useState(false)
   const [dialogDay, setDialogDay] = useState<Date | undefined>(undefined)
 
@@ -24,15 +24,15 @@ export default function WeddingCalendar({ events }: { events: Event[] }) {
   const monthIndex = month.getMonth()
 
   const weddingsThisMonth = events.filter((w) => {
-    const d = new Date(w.eventDate)
+    const d = parseLocalDate(w.eventDate)
     return d.getFullYear() === year && d.getMonth() === monthIndex
   })
 
-  const weddingDays = events.map((w) => new Date(w.eventDate))
+  const weddingDays = events.map((w) => parseLocalDate(w.eventDate))
 
   const dialogWeddings = dialogDay
     ? events.filter(
-      (w) => new Date(w.eventDate).toDateString() === dialogDay.toDateString()
+      (w) => parseLocalDate(w.eventDate).toDateString() === dialogDay.toDateString()
     )
     : []
 
@@ -61,7 +61,7 @@ export default function WeddingCalendar({ events }: { events: Event[] }) {
               onSelect={(day) => {
                 if (!day) return
                 const hasWedding = events.some(
-                  (w) => new Date(w.eventDate).toDateString() === day.toDateString()
+                  (w) => parseLocalDate(w.eventDate).toDateString() === day.toDateString()
                 )
                 if (hasWedding) {
                   setDialogDay(day)
@@ -133,7 +133,7 @@ export default function WeddingCalendar({ events }: { events: Event[] }) {
                 >
                   <div className="w-10 h-10 rounded-md bg-[#A8823A] flex items-center justify-center flex-shrink-0 shadow-sm shadow-[#A8823A]/25">
                     <span className="font-cairo font-bold text-sm text-[#FAF8F3]">
-                      {new Date(w.eventDate).getDate()}
+                      {parseLocalDate(w.eventDate).getDate()}
                     </span>
                   </div>
                   <div className="flex-1 min-w-0">
@@ -178,7 +178,7 @@ export default function WeddingCalendar({ events }: { events: Event[] }) {
               >
                 <div className="w-10 h-10 rounded-md bg-[#A8823A] flex items-center justify-center flex-shrink-0">
                   <span className="font-cairo font-bold text-sm text-[#FAF8F3]">
-                    {new Date(w.eventDate).getDate()}
+                    {parseLocalDate(w.eventDate).getDate()}
                   </span>
                 </div>
                 <div className="flex-1 min-w-0">
