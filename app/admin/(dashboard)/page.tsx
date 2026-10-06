@@ -56,9 +56,9 @@ const statConfig = [
     key: "totalBookings" as keyof DashboardStats,
     label: "طلبات التسجيل",
     icon: ClipboardListIcon,
-    color: "text-chart-4",
-    bg: "bg-chart-4/10",
-    border: "border-chart-4/20",
+    color: "text-foreground",
+    bg: "bg-foreground/5",
+    border: "border-foreground/10",
   },
   {
     key: "pendingBookings" as keyof DashboardStats,
@@ -93,18 +93,18 @@ const quickActions = [
     label: "إدارة المناسبات",
     icon: CalendarDaysIcon,
     href: "/admin/events",
-    color: "text-chart-4",
-    bg: "bg-chart-4/8 hover:bg-chart-4/16",
-    border: "border-chart-4/20",
+    color: "text-foreground",
+    bg: "bg-foreground/5 hover:bg-foreground/10",
+    border: "border-foreground/15",
   },
   {
     label: "عرض الموقع",
     icon: ExternalLinkIcon,
     href: "/",
     external: true,
-    color: "text-neutral-dark",
-    bg: "bg-neutral-dark/6 hover:bg-neutral-dark/12",
-    border: "border-neutral-dark/15",
+    color: "text-foreground",
+    bg: "bg-foreground/5 hover:bg-foreground/10",
+    border: "border-foreground/15",
   },
 ]
 
@@ -154,7 +154,7 @@ export function StatCard({
         <div className={cn("p-1.5 md:p-2.5 rounded-md md:rounded-xl", stat.bg)}>
           <stat.icon className={cn("size-3 md:size-5", stat.color)} />
         </div>
-        <CardTitle className="font-cairo text-[10px] md:text-sm font-medium text-chart-4 text-right leading-tight truncate px-1">
+        <CardTitle className="font-cairo text-[10px] md:text-sm font-medium text-muted-foreground text-right leading-tight truncate px-1">
           {stat.label}
         </CardTitle>
       </CardHeader>
@@ -199,7 +199,7 @@ function RecentRequestsPanel({ requests }: { requests: EventRequest[] }) {
         <div className="flex items-center justify-between">
           <CardTitle className="font-cairo text-sm font-semibold text-foreground flex items-center gap-2">
             طلبات التسجيل الجديدة
-            <ClipboardListIcon className="size-4 text-chart-4" />
+            <ClipboardListIcon className="size-4 text-muted-foreground" />
           </CardTitle>
           <Link
             href="/admin/bookings"
@@ -213,7 +213,7 @@ function RecentRequestsPanel({ requests }: { requests: EventRequest[] }) {
       <CardContent className="px-0 pb-0 flex-1">
         {newRequests.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-10 text-center px-4">
-            <ClipboardListIcon className="size-8 text-muted-icon mb-2" />
+            <ClipboardListIcon className="size-8 text-muted-foreground mb-2" />
             <p className="font-cairo text-sm text-muted-foreground">لا توجد طلبات حجز جديدة حالياً</p>
           </div>
         ) : (
@@ -232,7 +232,7 @@ function RecentRequestsPanel({ requests }: { requests: EventRequest[] }) {
                   {/* Avatar initial */}
                   <div className={cn(
                     "size-8 rounded-full flex items-center justify-center shrink-0 font-cairo font-bold text-sm",
-                    isPending ? "bg-ring/15 text-warning" : "bg-border text-chart-4"
+                    isPending ? "bg-ring/15 text-warning" : "bg-border text-muted-foreground"
                   )}>
                     {req.name.charAt(0)}
                   </div>
@@ -253,7 +253,7 @@ function RecentRequestsPanel({ requests }: { requests: EventRequest[] }) {
                     <Badge className={cn("text-[10px] h-4.5 px-1.5 rounded-md font-cairo border-0", statusMeta?.className)}>
                       {statusMeta?.label ?? req.status}
                     </Badge>
-                    <span className="font-cairo text-[10px] text-muted-text-light">
+                    <span className="font-cairo text-[10px] text-muted-foreground">
                       {relativeTime(req.createdAt)}
                     </span>
                   </div>
@@ -320,7 +320,7 @@ function UpcomingTimeline({ events }: { events: Event[] }) {
       <CardContent className="px-4 md:px-5 py-3 flex-1">
         {events.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-10 text-center">
-            <CalendarDaysIcon className="size-8 text-muted-icon mb-2" />
+            <CalendarDaysIcon className="size-8 text-muted-foreground mb-2" />
             <p className="font-cairo text-sm text-muted-foreground">لا توجد مناسبات قادمة</p>
           </div>
         ) : (
@@ -340,8 +340,8 @@ function UpcomingTimeline({ events }: { events: Event[] }) {
                       isToday
                         ? "bg-primary text-background"
                         : isSoon
-                          ? "bg-muted-surface text-warning border border-ring/30"
-                          : "bg-secondary text-chart-4 border border-border"
+                          ? "bg-secondary text-warning border border-ring/30"
+                          : "bg-secondary text-muted-foreground border border-border"
                     )}>
                       <span className="text-[11px] font-bold leading-none font-cairo">
                         {new Date(ev.eventDate).getDate()}
@@ -495,9 +495,9 @@ function MiniCalendarPanel({ events }: { events: Event[] }) {
             dropdowns:
               "flex h-(--cell-size) w-full items-center justify-center gap-2 font-bold text-foreground text-sm md:text-base",
             button_previous:
-              "size-(--cell-size) p-0 select-none rounded-full border border-border text-chart-4 hover:border-primary hover:text-primary transition-colors bg-transparent hover:bg-transparent inline-flex items-center justify-center z-10 [&>svg]:-scale-x-100",
+              "size-(--cell-size) p-0 select-none rounded-full border border-border text-muted-foreground hover:border-primary hover:text-primary transition-colors bg-transparent hover:bg-transparent inline-flex items-center justify-center z-10 [&>svg]:-scale-x-100",
             button_next:
-              "size-(--cell-size) p-0 select-none rounded-full border border-border text-chart-4 hover:border-primary hover:text-primary transition-colors bg-transparent hover:bg-transparent inline-flex items-center justify-center z-10 [&>svg]:-scale-x-100",
+              "size-(--cell-size) p-0 select-none rounded-full border border-border text-muted-foreground hover:border-primary hover:text-primary transition-colors bg-transparent hover:bg-transparent inline-flex items-center justify-center z-10 [&>svg]:-scale-x-100",
             weekday:
               "font-cairo text-xs font-semibold text-muted-foreground py-3",
             weekdays: "border-b border-border",
@@ -516,7 +516,7 @@ function MiniCalendarPanel({ events }: { events: Event[] }) {
         {/* Event list for selected/current month */}
         {eventsThisMonth.length > 0 && (
           <div className="border-t border-border/60 p-4 md:p-6 space-y-3">
-            <p className="font-cairo text-sm font-semibold text-chart-4 text-right mb-4">
+            <p className="font-cairo text-sm font-semibold text-muted-foreground text-right mb-4">
               {`مناسبات ${arabicMonths[monthIndex]}`}
             </p>
             <div className="space-y-0">

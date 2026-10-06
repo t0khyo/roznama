@@ -128,7 +128,7 @@ export function BookingsTable({ bookings, isLoading, onStatusChange }: BookingsT
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="بحث بالاسم، رقم الهاتف، أو المكان..."
-              className="font-cairo text-sm pr-9 pl-8 h-9 bg-background border-border focus:border-ring placeholder:text-[#C0B4A8]"
+              className="font-cairo text-sm pr-9 pl-8 h-9 bg-background border-border focus:border-ring placeholder:text-muted-foreground"
             />
             {searchQuery && (
               <button
@@ -151,11 +151,11 @@ export function BookingsTable({ bookings, isLoading, onStatusChange }: BookingsT
             />
             <Label
               htmlFor="show-rejected"
-              className="font-cairo text-xs text-chart-4 cursor-pointer select-none flex items-center gap-1.5"
+              className="font-cairo text-xs text-muted-foreground cursor-pointer select-none flex items-center gap-1.5"
             >
               <span>عرض المرفوض</span>
               {rejectedCount > 0 && (
-                <span className="text-[10px] bg-border text-chart-4 px-1.5 py-0.5 rounded-full tabular-nums">
+                <span className="text-[10px] bg-border text-muted-foreground px-1.5 py-0.5 rounded-full tabular-nums">
                   {rejectedCount}
                 </span>
               )}
@@ -163,7 +163,7 @@ export function BookingsTable({ bookings, isLoading, onStatusChange }: BookingsT
           </div>
         </div>
 
-        <div className="text-xs font-cairo text-[#7D6E63] shrink-0 self-end sm:self-center">
+        <div className="text-xs font-cairo text-muted-foreground shrink-0 self-end sm:self-center">
           {filteredAndSortedBookings.length} من {bookings.length} طلب
         </div>
       </div>
@@ -175,7 +175,7 @@ export function BookingsTable({ bookings, isLoading, onStatusChange }: BookingsT
             <TableRow className="border-border bg-secondary/60 hover:bg-secondary/60">
               <TableHead
                 onClick={() => handleSort("name")}
-                className="font-cairo font-semibold text-chart-4 text-sm text-right cursor-pointer select-none hover:text-primary transition-colors"
+                className="font-cairo font-semibold text-muted-foreground text-sm text-right cursor-pointer select-none hover:text-primary transition-colors"
               >
                 <div className="flex items-center gap-1.5 justify-start">
                   <span>الاسم</span>
@@ -185,7 +185,7 @@ export function BookingsTable({ bookings, isLoading, onStatusChange }: BookingsT
 
               <TableHead
                 onClick={() => handleSort("phone")}
-                className="font-cairo font-semibold text-chart-4 text-sm text-right cursor-pointer select-none hover:text-primary transition-colors"
+                className="font-cairo font-semibold text-muted-foreground text-sm text-right cursor-pointer select-none hover:text-primary transition-colors"
               >
                 <div className="flex items-center gap-1.5 justify-start">
                   <span>الهاتف</span>
@@ -195,7 +195,7 @@ export function BookingsTable({ bookings, isLoading, onStatusChange }: BookingsT
 
               <TableHead
                 onClick={() => handleSort("preferredDate")}
-                className="font-cairo font-semibold text-chart-4 text-sm text-right cursor-pointer select-none hover:text-primary transition-colors"
+                className="font-cairo font-semibold text-muted-foreground text-sm text-right cursor-pointer select-none hover:text-primary transition-colors"
               >
                 <div className="flex items-center gap-1.5 justify-start">
                   <span>تاريخ المناسبة</span>
@@ -205,7 +205,7 @@ export function BookingsTable({ bookings, isLoading, onStatusChange }: BookingsT
 
               <TableHead
                 onClick={() => handleSort("venue")}
-                className="font-cairo font-semibold text-chart-4 text-sm text-right cursor-pointer select-none hover:text-primary transition-colors"
+                className="font-cairo font-semibold text-muted-foreground text-sm text-right cursor-pointer select-none hover:text-primary transition-colors"
               >
                 <div className="flex items-center gap-1.5 justify-start">
                   <span>المكان</span>
@@ -215,7 +215,7 @@ export function BookingsTable({ bookings, isLoading, onStatusChange }: BookingsT
 
               <TableHead
                 onClick={() => handleSort("createdAt")}
-                className="font-cairo font-semibold text-chart-4 text-sm text-right cursor-pointer select-none hover:text-primary transition-colors"
+                className="font-cairo font-semibold text-muted-foreground text-sm text-right cursor-pointer select-none hover:text-primary transition-colors"
               >
                 <div className="flex items-center gap-1.5 justify-start">
                   <span>تاريخ الطلب</span>
@@ -225,7 +225,7 @@ export function BookingsTable({ bookings, isLoading, onStatusChange }: BookingsT
 
               <TableHead
                 onClick={() => handleSort("status")}
-                className="font-cairo font-semibold text-chart-4 text-sm text-right cursor-pointer select-none hover:text-primary transition-colors"
+                className="font-cairo font-semibold text-muted-foreground text-sm text-right cursor-pointer select-none hover:text-primary transition-colors"
               >
                 <div className="flex items-center gap-1.5 justify-start">
                   <span>الحالة</span>
@@ -233,7 +233,7 @@ export function BookingsTable({ bookings, isLoading, onStatusChange }: BookingsT
                 </div>
               </TableHead>
 
-              <TableHead className="w-[120px] font-cairo font-semibold text-chart-4 text-sm text-center">
+              <TableHead className="w-[120px] font-cairo font-semibold text-muted-foreground text-sm text-center">
                 الإجراءات
               </TableHead>
             </TableRow>
@@ -277,7 +277,7 @@ export function BookingsTable({ bookings, isLoading, onStatusChange }: BookingsT
                           href={formatWhatsAppUrl(b.phone)}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center justify-center size-6 rounded-full bg-emerald-50 text-emerald-600 hover:bg-emerald-600 hover:text-white border border-emerald-200 transition-all shadow-2xs hover:scale-105 shrink-0"
+                          className="inline-flex items-center justify-center size-6 rounded-full bg-emerald-50 text-emerald-600 hover:bg-emerald-600 hover:text-white border border-emerald-200 dark:bg-emerald-500/10 dark:text-emerald-400 dark:hover:bg-emerald-500 dark:hover:text-white dark:border-emerald-500/30 transition-all shadow-2xs hover:scale-105 shrink-0"
                           title="مراسلة عبر واتساب"
                           aria-label={`مراسلة ${b.name} عبر واتساب`}
                         >
@@ -285,12 +285,12 @@ export function BookingsTable({ bookings, isLoading, onStatusChange }: BookingsT
                         </a>
                       </div>
                     </TableCell>
-                    <TableCell className="font-cairo text-neutral-dark text-sm tabular-nums">
+                    <TableCell className="font-cairo text-foreground/90 text-sm tabular-nums">
                       {b.preferredDate
                         ? formatArabicDate(new Date(b.preferredDate).toISOString())
                         : "—"}
                     </TableCell>
-                    <TableCell className="font-cairo text-neutral-dark text-sm min-w-[150px] max-w-[250px] break-words whitespace-normal leading-snug">
+                    <TableCell className="font-cairo text-foreground/90 text-sm min-w-[150px] max-w-[250px] break-words whitespace-normal leading-snug">
                       {b.venue ?? "—"}
                     </TableCell>
                     <TableCell className="font-cairo text-muted-foreground text-xs tabular-nums">
@@ -317,7 +317,7 @@ export function BookingsTable({ bookings, isLoading, onStatusChange }: BookingsT
                           className={cn(
                             "size-7 rounded-lg transition-all",
                             b.status === RequestStatus.NEW
-                              ? "bg-ring/20 text-warning border border-ring/40 cursor-default opacity-100 shadow-2xs"
+                              ? "bg-ring/20 text-warning border border-ring/40 dark:bg-ring/15 dark:text-ring dark:border-ring/30 cursor-default opacity-100 shadow-2xs"
                               : "text-muted-foreground hover:text-ring hover:bg-ring/10 border border-transparent hover:border-ring/25"
                           )}
                         >
@@ -336,8 +336,8 @@ export function BookingsTable({ bookings, isLoading, onStatusChange }: BookingsT
                           className={cn(
                             "size-7 rounded-lg transition-all",
                             b.status === RequestStatus.PUBLISHED
-                              ? "bg-emerald-100 text-emerald-800 border border-emerald-300 cursor-default opacity-100 shadow-2xs"
-                              : "text-muted-foreground hover:text-emerald-700 hover:bg-emerald-50 border border-transparent hover:border-emerald-200"
+                              ? "bg-emerald-100 text-emerald-800 border border-emerald-300 dark:bg-emerald-500/15 dark:text-emerald-400 dark:border-emerald-500/30 cursor-default opacity-100 shadow-2xs"
+                              : "text-muted-foreground hover:text-emerald-700 hover:bg-emerald-50 border border-transparent hover:border-emerald-200 dark:hover:text-emerald-600 dark:hover:bg-emerald-500/10 dark:hover:border-emerald-500/20"
                           )}
                         >
                           <CheckCircle2Icon className="size-3.5" />
@@ -355,8 +355,8 @@ export function BookingsTable({ bookings, isLoading, onStatusChange }: BookingsT
                           className={cn(
                             "size-7 rounded-lg transition-all",
                             b.status === RequestStatus.CLOSED
-                              ? "bg-red-100 text-red-800 border border-red-300 cursor-default opacity-100 shadow-2xs"
-                              : "text-muted-foreground hover:text-red-700 hover:bg-red-50 border border-transparent hover:border-red-200"
+                              ? "bg-red-100 text-red-800 border border-red-300 dark:bg-red-500/15 dark:text-red-400 dark:border-red-500/30 cursor-default opacity-100 shadow-2xs"
+                              : "text-muted-foreground hover:text-red-700 hover:bg-red-50 border border-transparent hover:border-red-200 dark:hover:text-red-600 dark:hover:bg-red-500/10 dark:hover:border-red-500/20"
                           )}
                         >
                           <XCircleIcon className="size-3.5" />

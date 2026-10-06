@@ -5,6 +5,7 @@ import { AdminSidebar } from "@/components/admin/admin-sidebar"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { Separator } from "@/components/ui/separator"
 import { verifySession } from "@/lib/session"
+import { ModeToggle } from "@/components/mode-toggle"
 
 export const metadata: Metadata = {
   title: "لوحة التحكم — رزنامة مطير",
@@ -32,14 +33,15 @@ export default async function DashboardLayout({
           <SidebarInset className="flex flex-col flex-1 min-w-0 bg-background">
             {/* Top bar */}
             <header className="flex h-14 items-center gap-3 border-b border-border px-4 shrink-0 bg-background">
-              <SidebarTrigger className="text-chart-4 hover:text-primary hover:bg-primary/6 transition-colors" />
+              <SidebarTrigger className="text-foreground/70 hover:text-primary hover:bg-primary/5 transition-colors" />
               <Separator orientation="vertical" className="h-5 bg-border" />
               <span
-                className="text-sm font-medium text-muted-foreground font-cairo"
+                className="text-sm font-medium text-muted-foreground font-cairo flex-1"
                 suppressHydrationWarning
               >
                 لوحة التحكم
               </span>
+              <ModeToggle />
             </header>
 
             {/* Page content */}

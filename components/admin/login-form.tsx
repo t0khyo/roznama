@@ -25,25 +25,15 @@ export function LoginForm() {
 
   return (
     <div className="w-full max-w-md mx-auto" dir="rtl">
-      <Card className="border border-border shadow-sm bg-[#FCFEFB] overflow-hidden">
+      <Card className="border border-border shadow-sm bg-card overflow-hidden">
         <CardHeader className="space-y-3 text-center pb-2 pt-6">
           {/* Logo with matching navbar fill and border styling */}
-          <div className="flex justify-center">
-            <div
-              className="p-2 rounded-full border border-border/80 shadow-xs inline-flex items-center justify-center"
-              style={{
-                background: "rgba(250,248,243,0.92)",
-                backdropFilter: "blur(16px)",
-              }}
-            >
-              <div className="size-16 rounded-full bg-[#FCFEFB] overflow-hidden flex items-center justify-center border border-border/80 shadow-xs">
-                <img
-                  src="/logo.png"
-                  alt="سناب مطير"
-                  className="size-full object-contain p-1"
-                />
-              </div>
-            </div>
+          <div className="flex justify-center mb-2">
+            <img
+              src="/logo.png"
+              alt="سناب مطير"
+              className="h-20 w-auto object-contain drop-shadow-sm"
+            />
           </div>
 
           <div className="space-y-1">
@@ -53,7 +43,7 @@ export function LoginForm() {
             >
               تسجيل دخول لوحة التحكم
             </CardTitle>
-            <CardDescription className="text-sm text-[#7D6E63] font-cairo">
+            <CardDescription className="text-sm text-muted-foreground font-cairo">
               أدخل بيانات حساب الإدارة للمتابعة
             </CardDescription>
           </div>
@@ -62,8 +52,8 @@ export function LoginForm() {
         <CardContent className="pt-4">
           <form action={formAction} className="space-y-4">
             {state?.error && (
-              <div className="rounded-lg bg-red-50 border border-red-200 p-3 text-sm text-red-800 font-cairo flex items-center gap-2">
-                <span className="size-1.5 rounded-full bg-red-600 shrink-0" />
+              <div className="rounded-lg bg-red-50 border border-red-200 p-3 text-sm text-red-800 dark:bg-red-500/15 dark:text-red-400 dark:border-red-500/30 font-cairo flex items-center gap-2">
+                <span className="size-1.5 rounded-full bg-red-600 dark:bg-red-500 shrink-0" />
                 <span>{state.error}</span>
               </div>
             )}
@@ -71,7 +61,7 @@ export function LoginForm() {
             <div className="space-y-1.5">
               <Label
                 htmlFor="username"
-                className="font-cairo text-xs font-semibold text-neutral-dark"
+                className="font-cairo text-xs font-semibold text-foreground/90"
               >
                 اسم المستخدم
               </Label>
@@ -99,7 +89,7 @@ export function LoginForm() {
             <div className="space-y-1.5">
               <Label
                 htmlFor="password"
-                className="font-cairo text-xs font-semibold text-neutral-dark"
+                className="font-cairo text-xs font-semibold text-foreground/90"
               >
                 كلمة المرور
               </Label>
@@ -140,7 +130,7 @@ export function LoginForm() {
             <Button
               type="submit"
               disabled={isPending}
-              className="w-full h-10 font-cairo text-sm font-semibold bg-primary hover:bg-[#721515] text-white shadow-sm transition-all mt-2"
+              className="w-full h-10 font-cairo text-sm font-semibold bg-primary hover:bg-primary-dark text-white shadow-sm transition-all mt-2"
             >
               {isPending ? (
                 <>
@@ -160,7 +150,7 @@ export function LoginForm() {
           </span>
           <Link
             href="/"
-            className="inline-flex items-center gap-1.5 text-xs font-cairo text-[#7D6E63] hover:text-primary transition-colors"
+            className="inline-flex items-center gap-1.5 text-xs font-cairo text-muted-foreground hover:text-primary transition-colors"
           >
             العودة إلى الموقع الرئيسي
             <ArrowLeftIcon className="size-3.5" />

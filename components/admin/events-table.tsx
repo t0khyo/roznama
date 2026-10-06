@@ -129,7 +129,7 @@ export function EventsTable({ events, isLoading, onEdit, onDelete }: EventsTable
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="بحث بالقبيلة، اسم المعرس، أو المكان..."
-              className="font-cairo text-sm pr-9 pl-8 h-9 bg-background border-border focus:border-ring placeholder:text-[#C0B4A8]"
+              className="font-cairo text-sm pr-9 pl-8 h-9 bg-background border-border focus:border-ring placeholder:text-muted-foreground"
             />
             {searchQuery && (
               <button
@@ -152,11 +152,11 @@ export function EventsTable({ events, isLoading, onEdit, onDelete }: EventsTable
             />
             <Label
               htmlFor="show-finished"
-              className="font-cairo text-xs text-chart-4 cursor-pointer select-none flex items-center gap-1.5"
+              className="font-cairo text-xs text-muted-foreground cursor-pointer select-none flex items-center gap-1.5"
             >
               <span>عرض المنتهي</span>
               {finishedCount > 0 && (
-                <span className="text-[10px] bg-border text-chart-4 px-1.5 py-0.5 rounded-full tabular-nums">
+                <span className="text-[10px] bg-border text-muted-foreground px-1.5 py-0.5 rounded-full tabular-nums">
                   {finishedCount}
                 </span>
               )}
@@ -164,7 +164,7 @@ export function EventsTable({ events, isLoading, onEdit, onDelete }: EventsTable
           </div>
         </div>
 
-        <div className="text-xs font-cairo text-[#7D6E63] shrink-0 self-end sm:self-center">
+        <div className="text-xs font-cairo text-muted-foreground shrink-0 self-end sm:self-center">
           {filteredAndSortedEvents.length} من {events.length} مناسبة
         </div>
       </div>
@@ -176,7 +176,7 @@ export function EventsTable({ events, isLoading, onEdit, onDelete }: EventsTable
             <TableRow className="border-border bg-secondary/60 hover:bg-secondary/60">
               <TableHead
                 onClick={() => handleSort("tribe")}
-                className="font-cairo font-semibold text-chart-4 text-sm text-right cursor-pointer select-none hover:text-primary transition-colors"
+                className="font-cairo font-semibold text-muted-foreground text-sm text-right cursor-pointer select-none hover:text-primary transition-colors"
               >
                 <div className="flex items-center gap-1.5 justify-start">
                   <span>القبيلة</span>
@@ -186,7 +186,7 @@ export function EventsTable({ events, isLoading, onEdit, onDelete }: EventsTable
 
               <TableHead
                 onClick={() => handleSort("groomName")}
-                className="font-cairo font-semibold text-chart-4 text-sm text-right cursor-pointer select-none hover:text-primary transition-colors"
+                className="font-cairo font-semibold text-muted-foreground text-sm text-right cursor-pointer select-none hover:text-primary transition-colors"
               >
                 <div className="flex items-center gap-1.5 justify-start">
                   <span>اسم المعرس</span>
@@ -196,7 +196,7 @@ export function EventsTable({ events, isLoading, onEdit, onDelete }: EventsTable
 
               <TableHead
                 onClick={() => handleSort("eventDate")}
-                className="font-cairo font-semibold text-chart-4 text-sm text-right cursor-pointer select-none hover:text-primary transition-colors"
+                className="font-cairo font-semibold text-muted-foreground text-sm text-right cursor-pointer select-none hover:text-primary transition-colors"
               >
                 <div className="flex items-center gap-1.5 justify-start">
                   <span>التاريخ</span>
@@ -206,7 +206,7 @@ export function EventsTable({ events, isLoading, onEdit, onDelete }: EventsTable
 
               <TableHead
                 onClick={() => handleSort("status")}
-                className="font-cairo font-semibold text-chart-4 text-sm text-right cursor-pointer select-none hover:text-primary transition-colors"
+                className="font-cairo font-semibold text-muted-foreground text-sm text-right cursor-pointer select-none hover:text-primary transition-colors"
               >
                 <div className="flex items-center gap-1.5 justify-start">
                   <span>الحالة</span>
@@ -214,7 +214,7 @@ export function EventsTable({ events, isLoading, onEdit, onDelete }: EventsTable
                 </div>
               </TableHead>
 
-              <TableHead className="font-cairo font-semibold text-chart-4 text-sm text-right">
+              <TableHead className="font-cairo font-semibold text-muted-foreground text-sm text-right">
                 صورة الدعوة
               </TableHead>
               <TableHead className="w-[90px]" />
@@ -249,10 +249,10 @@ export function EventsTable({ events, isLoading, onEdit, onDelete }: EventsTable
                     <TableCell className="font-cairo font-semibold text-foreground text-sm min-w-[120px] max-w-[200px] break-words whitespace-normal leading-snug">
                       {event.tribe}
                     </TableCell>
-                    <TableCell className="font-cairo text-neutral-dark text-sm min-w-[150px] max-w-[250px] break-words whitespace-normal leading-snug">
+                    <TableCell className="font-cairo text-foreground/90 text-sm min-w-[150px] max-w-[250px] break-words whitespace-normal leading-snug">
                       {event.groomName}
                     </TableCell>
-                    <TableCell className="font-cairo text-neutral-dark text-sm tabular-nums">
+                    <TableCell className="font-cairo text-foreground/90 text-sm tabular-nums">
                       {formatArabicDate(new Date(event.eventDate).toISOString())}
                     </TableCell>
                     <TableCell>
@@ -285,7 +285,7 @@ export function EventsTable({ events, isLoading, onEdit, onDelete }: EventsTable
                           variant="ghost"
                           size="icon-sm"
                           onClick={() => onEdit(event)}
-                          className="size-7 text-chart-4 hover:text-primary hover:bg-primary/8 transition-colors"
+                          className="size-7 text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors"
                           aria-label="تعديل"
                         >
                           <PencilIcon className="size-3.5" />
@@ -294,7 +294,7 @@ export function EventsTable({ events, isLoading, onEdit, onDelete }: EventsTable
                           variant="ghost"
                           size="icon-sm"
                           onClick={() => onDelete(event)}
-                          className="size-7 text-chart-4 hover:text-red-600 hover:bg-red-50 transition-colors"
+                          className="size-7 text-muted-foreground hover:text-red-500 hover:bg-red-500/10 transition-colors"
                           aria-label="حذف"
                         >
                           <Trash2Icon className="size-3.5" />

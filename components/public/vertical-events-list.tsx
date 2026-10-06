@@ -4,13 +4,6 @@ import * as React from "react"
 import Image from "next/image"
 import type { Event } from "@/types"
 import { formatArabicDate } from "@/lib/date-utils"
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-} from "@/components/ui/dialog"
-import { Button } from "@/components/ui/button"
-import { XIcon } from "lucide-react"
 
 /* ─── Per-card fade-in-up hook ─────────────────────────────────────────── */
 function useRevealRef(delay: number) {
@@ -49,21 +42,16 @@ function useRevealRef(delay: number) {
 function EventCard({
   event,
   delay,
-  onImageClick,
 }: {
   event: Event
   delay: number
-  onImageClick: (e: Event) => void
 }) {
   const ref = useRevealRef(delay)
 
   return (
     <div ref={ref} className="w-full flex flex-col gap-4 group hover:-translate-y-1 transition-transform duration-500">
       {/* Top Component: Image */}
-      <div
-        className="relative w-full cursor-pointer"
-        onClick={() => onImageClick(event)}
-      >
+      <div className="relative w-full">
         <Image
           src={event.imageUrl}
           alt={`مناسبة ${event.tribe}`}
@@ -103,54 +91,15 @@ function EventCard({
 
 /* ─── Main export ───────────────────────────────────────────────────────── */
 export default function VerticalEventsList({ events }: { events: Event[] }) {
-  const [lightboxEvent, setLightboxEvent] = React.useState<Event | null>(null)
-
   return (
-    <>
-      <div className="flex flex-col gap-16">
-        {events.map((event, i) => (
-          <EventCard
-            key={event.id}
-            event={event}
-            delay={i === 0 ? 0 : 80}
-            onImageClick={setLightboxEvent}
-          />
-        ))}
-      </div>
-
-      {/* Lightbox */}
-      <Dialog
-        open={!!lightboxEvent}
-        onOpenChange={(open) => !open && setLightboxEvent(null)}
-      >
-        <DialogContent
-          className="max-w-[95vw] md:max-w-4xl p-0 overflow-hidden bg-foreground/95 border-none shadow-2xl"
-          showCloseButton={false}
-        >
-          {lightboxEvent && (
-            <div className="relative flex flex-col items-center justify-center w-full min-h-[50vh]">
-              <DialogClose
-                render={
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="absolute top-3 end-3 z-10 size-10 rounded-full bg-white/10 text-zinc-200 backdrop-blur-sm hover:bg-white/20 hover:text-white"
-                    aria-label="إغلاق الصورة"
-                  />
-                }
-              >
-                <XIcon className="size-5" />
-                <span className="sr-only">إغلاق الصورة</span>
-              </DialogClose>
-              <img
-                src={lightboxEvent.imageUrl}
-                alt={`مناسبة ${lightboxEvent.tribe}`}
-                className="w-full max-h-[85vh] object-contain select-none"
-              />
-            </div>
-          )}
-        </DialogContent>
-      </Dialog>
-    </>
+    <div className="flex flex-col gap-16">
+      {events.map((event, i) => (
+        <EventCard
+          key={event.id}
+          event={event}
+          delay={i === 0 ? 0 : 80}
+        />
+      ))}
+    </div>
   )
 }

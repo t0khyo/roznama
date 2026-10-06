@@ -234,7 +234,7 @@ export function EventFormDialog({
               placeholder=""
               value={form.tribe}
               onChange={set("tribe")}
-              className="font-cairo bg-secondary border-border focus:border-ring placeholder:text-[#C0B4A8]"
+              className="font-cairo bg-secondary border-border focus:border-ring placeholder:text-muted-foreground"
             />
           </div>
 
@@ -246,7 +246,7 @@ export function EventFormDialog({
               placeholder="الاسم"
               value={form.groomName}
               onChange={set("groomName")}
-              className="font-cairo bg-secondary border-border focus:border-ring placeholder:text-[#C0B4A8]"
+              className="font-cairo bg-secondary border-border focus:border-ring placeholder:text-muted-foreground"
             />
           </div>
 
@@ -259,7 +259,7 @@ export function EventFormDialog({
               placeholder=""
               value={form.venue ?? ""}
               onChange={set("venue")}
-              className="font-cairo bg-secondary border-border focus:border-ring placeholder:text-[#C0B4A8]"
+              className="font-cairo bg-secondary border-border focus:border-ring placeholder:text-muted-foreground"
             />
           </div>
 
@@ -273,7 +273,7 @@ export function EventFormDialog({
                   <Button
                     type="button"
                     variant="outline"
-                    className={`w-full justify-start bg-secondary border-border rounded-lg px-3 py-2.5 h-auto font-cairo text-sm focus:border-ring focus:bg-background transition-colors ${!form.eventDate ? "text-[#C0B4A8]" : "text-foreground"
+                    className={`w-full justify-start bg-secondary border-border rounded-lg px-3 py-2.5 h-auto font-cairo text-sm focus:border-ring focus:bg-background transition-colors ${!form.eventDate ? "text-muted-foreground" : "text-foreground"
                       }`}
                     dir="rtl"
                   />
@@ -344,7 +344,7 @@ export function EventFormDialog({
                   <p className="font-cairo text-sm font-semibold text-foreground">
                     اضغط لاختيار صورة الدعوة من جهازك
                   </p>
-                  <p className="font-cairo text-xs text-[#7D6E63] mt-0.5">
+                  <p className="font-cairo text-xs text-muted-foreground mt-0.5">
                     أو اسحب وأفلت الصورة هنا (PNG, JPG, WEBP حتى 10 ميجابايت)
                   </p>
                 </div>
@@ -368,7 +368,7 @@ export function EventFormDialog({
                   >
                     {fileInfo?.name || "صورة الدعوة"}
                   </AttachmentTitle>
-                  <AttachmentDescription className="font-cairo text-xs text-[#7D6E63] mt-0.5 truncate block w-full">
+                  <AttachmentDescription className="font-cairo text-xs text-muted-foreground mt-0.5 truncate block w-full">
                     {selectedFile
                       ? fileInfo?.size || "جاهز للرفع إلى Cloudflare R2"
                       : "الصورة الحالية للدعوة"}
@@ -378,7 +378,7 @@ export function EventFormDialog({
                   <AttachmentAction
                     type="button"
                     onClick={handleRemoveImage}
-                    className="text-[#7D6E63] hover:text-red-600 hover:bg-red-50 p-1.5 rounded-lg transition-colors"
+                    className="text-muted-foreground hover:text-red-600 hover:bg-red-50 p-1.5 rounded-lg transition-colors"
                     title="إزالة الصورة"
                   >
                     <XIcon className="size-4" />
