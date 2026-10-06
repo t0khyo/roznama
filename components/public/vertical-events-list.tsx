@@ -85,9 +85,9 @@ function EventCard({
         {/* Details List */}
         <div className="flex flex-col gap-2 font-tajawal">
           {/* Row 1 */}
-          <div className="flex justify-between items-center pb-3 border-b border-border/50">
-            <span className="text-muted-foreground text-sm">اسم المعرس:</span>
-            <span className="font-bold text-[#315F79] text-lg">{event.groomName}</span>
+          <div className="flex justify-between items-start gap-4 pb-3 border-b border-border/50">
+            <span className="text-muted-foreground text-sm whitespace-nowrap pt-1">اسم المعرس:</span>
+            <span className="font-bold text-[#315F79] text-lg text-left leading-snug">{event.groomName}</span>
           </div>
 
           {/* Row 2 */}
