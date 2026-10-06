@@ -96,9 +96,9 @@ export default function WeddingCalendar({ events }: { events: Event[] }) {
                 dropdowns: "flex h-(--cell-size) w-full items-center justify-center gap-2 font-bold text-foreground text-sm md:text-base",
                 // Nav buttons — brand hover
                 button_previous:
-                  "size-(--cell-size) p-0 select-none rounded-full border border-border text-chart-4 hover:border-primary hover:text-primary transition-colors bg-transparent hover:bg-transparent inline-flex items-center justify-center z-10 [&>svg]:-scale-x-100",
+                  "size-(--cell-size) p-0 select-none rounded-full border border-border text-muted-foreground hover:border-primary hover:text-primary transition-colors bg-transparent hover:bg-transparent inline-flex items-center justify-center z-10 [&>svg]:-scale-x-100",
                 button_next:
-                  "size-(--cell-size) p-0 select-none rounded-full border border-border text-chart-4 hover:border-primary hover:text-primary transition-colors bg-transparent hover:bg-transparent inline-flex items-center justify-center z-10 [&>svg]:-scale-x-100",
+                  "size-(--cell-size) p-0 select-none rounded-full border border-border text-muted-foreground hover:border-primary hover:text-primary transition-colors bg-transparent hover:bg-transparent inline-flex items-center justify-center z-10 [&>svg]:-scale-x-100",
                 // Weekday header
                 weekday:
                   "font-cairo text-xs font-semibold text-muted-foreground py-3",
@@ -118,45 +118,44 @@ export default function WeddingCalendar({ events }: { events: Event[] }) {
               <span className="w-2 h-2 rounded-full bg-primary inline-block" />
               <span>يوم محجوز</span>
             </div>
-          </div>
+            {/* Event list for selected/current month */}
+            {weddingsThisMonth.length > 0 && (
+              <div className="border-t border-border/60 p-4 md:p-6 space-y-3">
+                <p className="font-cairo text-sm font-semibold text-muted-foreground mb-4">
+                  {`مناسبات ${arabicMonths[monthIndex]}`}
+                </p>
+                {weddingsThisMonth.map((w) => (
+                  <div
+                    key={w.id}
+                    className="flex items-center gap-4 px-2 py-4 border-b border-border hover:bg-border/10 transition-colors last:border-b-0"
+                  >
+                    <div className="w-10 h-10 rounded-md bg-ring flex items-center justify-center flex-shrink-0 shadow-sm shadow-ring/25">
+                      <span className="font-cairo font-bold text-sm text-background">
+                        {parseLocalDate(w.eventDate).getDate()}
+                      </span>
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="font-cairo font-bold text-sm text-ring">
+                        {w.tribe}
+                      </p>
+                      <p className="font-cairo text-xs text-muted-foreground font-medium leading-snug">
+                        {w.groomName}
+                      </p>
+                    </div>
+                    <p className="font-cairo text-xs text-muted-foreground flex-shrink-0">
+                      {formatArabicDate(w.eventDate)}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            )}
 
-          {/* Event list for selected/current month */}
-          {weddingsThisMonth.length > 0 && (
-            <div className="mt-8 space-y-3">
-              <p className="font-cairo text-sm font-medium text-chart-4 mb-4">
-                {`مناسبات ${arabicMonths[monthIndex]}`}
+            {weddingsThisMonth.length === 0 && (
+              <p className="text-center font-cairo text-muted-foreground text-sm py-6 border-t border-border/60">
+                لا توجد مناسبات مسجلة في هذا الشهر
               </p>
-              {weddingsThisMonth.map((w) => (
-                <div
-                  key={w.id}
-                  className="flex items-center gap-4 px-2 py-4 border-b border-border hover:bg-border/10 transition-colors last:border-b-0"
-                >
-                  <div className="w-10 h-10 rounded-md bg-ring flex items-center justify-center flex-shrink-0 shadow-sm shadow-ring/25">
-                    <span className="font-cairo font-bold text-sm text-background">
-                      {parseLocalDate(w.eventDate).getDate()}
-                    </span>
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="font-cairo font-bold text-sm text-ring">
-                      {w.tribe}
-                    </p>
-                    <p className="font-cairo text-xs text-muted-foreground font-medium leading-snug">
-                      {w.groomName}
-                    </p>
-                  </div>
-                  <p className="font-cairo text-xs text-muted-foreground flex-shrink-0">
-                    {formatArabicDate(w.eventDate)}
-                  </p>
-                </div>
-              ))}
-            </div>
-          )}
-
-          {weddingsThisMonth.length === 0 && (
-            <p className="text-center font-cairo text-muted-foreground text-sm mt-8 py-8">
-              لا توجد مناسبات مسجلة في هذا الشهر
-            </p>
-          )}
+            )}
+          </div>
         </div>
       </section>
 
