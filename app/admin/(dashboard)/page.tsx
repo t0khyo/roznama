@@ -150,17 +150,17 @@ export function StatCard({
         stat.border
       )}
     >
-      <CardHeader className="flex flex-row-reverse items-center justify-between pb-2 pt-4 px-4 md:px-5">
-        <div className={cn("p-2.5 rounded-xl", stat.bg)}>
-          <stat.icon className={cn("size-4 md:size-5", stat.color)} />
+      <CardHeader className="flex flex-row-reverse items-center justify-between p-2 pb-1 md:pb-2 md:pt-4 md:px-5 border-none">
+        <div className={cn("p-1.5 md:p-2.5 rounded-md md:rounded-xl", stat.bg)}>
+          <stat.icon className={cn("size-3 md:size-5", stat.color)} />
         </div>
-        <CardTitle className="font-cairo text-xs md:text-sm font-medium text-[#6B5E52] text-right">
+        <CardTitle className="font-cairo text-[10px] md:text-sm font-medium text-[#6B5E52] text-right leading-tight truncate px-1">
           {stat.label}
         </CardTitle>
       </CardHeader>
-      <CardContent className="px-4 md:px-5 pb-4 md:pb-5">
+      <CardContent className="px-2 pb-2 pt-0 md:px-5 md:pb-5">
         <p
-          className={cn("text-3xl md:text-4xl font-bold", stat.color)}
+          className={cn("text-xl md:text-4xl font-bold px-1", stat.color)}
           style={{ fontFamily: "var(--font-thmanyah-serif), serif" }}
         >
           {value}
@@ -175,14 +175,14 @@ export function StatCard({
 function StatCardSkeleton({ stat }: { stat: (typeof statConfig)[number] }) {
   return (
     <Card className={cn("border bg-[#FAF8F3] shadow-sm", stat.border)}>
-      <CardHeader className="flex flex-row-reverse items-center justify-between pb-2 pt-4 px-4 md:px-5">
-        <div className={cn("p-2.5 rounded-xl", stat.bg)}>
-          <Skeleton className="size-4 md:size-5 rounded" />
+      <CardHeader className="flex flex-row-reverse items-center justify-between p-2 pb-1 md:pb-2 md:pt-4 md:px-5">
+        <div className={cn("p-1.5 md:p-2.5 rounded-md md:rounded-xl", stat.bg)}>
+          <Skeleton className="size-3 md:size-5 rounded" />
         </div>
-        <Skeleton className="h-3.5 w-28 rounded" />
+        <Skeleton className="h-2.5 w-12 md:h-3.5 md:w-28 rounded mx-1" />
       </CardHeader>
-      <CardContent className="px-4 md:px-5 pb-4 md:pb-5">
-        <Skeleton className="h-9 w-16 rounded" />
+      <CardContent className="px-2 pb-2 pt-0 md:px-5 md:pb-5">
+        <Skeleton className="h-5 w-8 md:h-9 md:w-16 rounded mx-1" />
       </CardContent>
     </Card>
   )
@@ -326,8 +326,8 @@ function UpcomingTimeline({ events }: { events: Event[] }) {
         ) : (
           <div className="relative">
             {/* Timeline line */}
-            <div className="absolute right-[19px] top-2 bottom-2 w-px bg-gradient-to-b from-[#A8823A]/30 via-[#E5DDD0] to-transparent" />
-            <div className="space-y-1">
+            <div className="absolute right-[19px] top-[30px] bottom-[30px] w-px bg-gradient-to-b from-[#A8823A]/30 via-[#E5DDD0] to-transparent z-0" />
+            <div className="space-y-1 relative z-10">
               {events.map((ev, idx) => {
                 const days = daysUntil(ev.eventDate)
                 const isToday = days === 0
@@ -340,7 +340,7 @@ function UpcomingTimeline({ events }: { events: Event[] }) {
                       isToday
                         ? "bg-[#9F3647] text-[#FAF8F3]"
                         : isSoon
-                          ? "bg-[#A8823A]/15 text-[#9E6E1A] border border-[#A8823A]/30"
+                          ? "bg-[#EEE6D7] text-[#9E6E1A] border border-[#A8823A]/30"
                           : "bg-[#F3EDE3] text-[#6B5E52] border border-[#E5DDD0]"
                     )}>
                       <span className="text-[11px] font-bold leading-none font-cairo">
@@ -516,30 +516,29 @@ function MiniCalendarPanel({ events }: { events: Event[] }) {
         {/* Event list for selected/current month */}
         {eventsThisMonth.length > 0 && (
           <div className="border-t border-[#E5DDD0]/60 p-4 md:p-6 space-y-3">
-            <p className="font-cairo text-sm font-semibold text-[#6B5E52] text-right">
+            <p className="font-cairo text-sm font-semibold text-[#6B5E52] text-right mb-4">
               {`مناسبات شهر ${arabicMonths[monthIndex]}`}
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div className="space-y-0">
               {eventsThisMonth.map((w) => (
                 <div
                   key={w.id}
-                  className="flex items-center gap-4 bg-[#FAF8F3] border border-[#E5DDD0] rounded-xl px-4 py-3 hover:border-[#9F3647]/30 transition-colors"
-                  style={{ boxShadow: "0 1px 8px rgba(26,23,20,0.04)" }}
+                  className="flex items-center gap-4 px-2 py-4 border-b border-[#E5DDD0] hover:bg-[#E5DDD0]/10 transition-colors last:border-b-0"
                 >
-                  <div className="w-9 h-9 rounded-full bg-[#A8823A] flex items-center justify-center shrink-0 shadow-sm shadow-[#A8823A]/25">
-                    <span className="font-cairo font-bold text-xs text-[#FAF8F3]">
+                  <div className="w-10 h-10 rounded-md bg-[#A8823A] flex items-center justify-center flex-shrink-0 shadow-sm shadow-[#A8823A]/25">
+                    <span className="font-cairo font-bold text-sm text-[#FAF8F3]">
                       {new Date(w.eventDate).getDate()}
                     </span>
                   </div>
                   <div className="flex-1 min-w-0 text-right">
-                    <p className="font-cairo font-bold text-sm text-[#1A1714] truncate">
-                      {w.groomName}
+                    <p className="font-cairo font-bold text-sm text-ring">
+                      {w.tribe}
                     </p>
-                    <p className="font-cairo text-xs text-[#A8823A] font-medium truncate">
-                      {w.tribe}{w.venue ? ` • ${w.venue}` : ""}
+                    <p className="font-cairo text-xs text-muted-foreground font-medium leading-snug">
+                      {w.groomName}{w.venue ? ` • ${w.venue}` : ""}
                     </p>
                   </div>
-                  <p className="font-cairo text-xs text-[#A09080] shrink-0">
+                  <p className="font-cairo text-xs text-[#A09080] flex-shrink-0">
                     {formatArabicDate(w.eventDate)}
                   </p>
                 </div>
@@ -565,26 +564,26 @@ function MiniCalendarPanel({ events }: { events: Event[] }) {
                 : ""}
             </DialogTitle>
           </DialogHeader>
-          <div className="space-y-3 mt-2">
+          <div className="space-y-0 mt-2">
             {dialogWeddings.map((w) => (
               <div
                 key={w.id}
-                className="flex items-center gap-4 bg-[#FAF8F3] border border-[#E5DDD0] rounded-xl px-5 py-4"
+                className="flex items-center gap-4 px-2 py-4 border-b border-[#E5DDD0] hover:bg-[#E5DDD0]/10 transition-colors last:border-b-0"
               >
-                <div className="w-10 h-10 rounded-full bg-[#A8823A] flex items-center justify-center shrink-0 shadow-sm shadow-[#A8823A]/25">
+                <div className="w-10 h-10 rounded-md bg-[#A8823A] flex items-center justify-center flex-shrink-0 shadow-sm shadow-[#A8823A]/25">
                   <span className="font-cairo font-bold text-sm text-[#FAF8F3]">
                     {new Date(w.eventDate).getDate()}
                   </span>
                 </div>
                 <div className="flex-1 min-w-0 text-right">
-                  <p className="font-cairo font-bold text-sm text-[#1A1714]">
-                    {w.groomName}
+                  <p className="font-cairo font-bold text-sm text-ring">
+                    {w.tribe}
                   </p>
-                  <p className="font-cairo text-xs text-[#A8823A] font-medium">
-                    {w.tribe}{w.venue ? ` • ${w.venue}` : ""}
+                  <p className="font-cairo text-xs text-muted-foreground font-medium leading-snug">
+                    {w.groomName}{w.venue ? ` • ${w.venue}` : ""}
                   </p>
                 </div>
-                <p className="font-cairo text-xs text-[#A09080] shrink-0">
+                <p className="font-cairo text-xs text-[#A09080] flex-shrink-0">
                   {formatArabicDate(w.eventDate)}
                 </p>
               </div>
@@ -668,7 +667,7 @@ export default function AdminOverviewPage() {
               target={action.external ? "_blank" : undefined}
               rel={action.external ? "noreferrer" : undefined}
               className={cn(
-                "group flex flex-col items-center justify-center gap-2.5 rounded-2xl border px-4 py-5",
+                "group flex flex-col items-center justify-center gap-1 md:gap-2.5 rounded-lg md:rounded-2xl border px-1 py-2 md:px-4 md:py-5",
                 "transition-all duration-200 active:scale-95",
                 action.bg,
                 action.border
@@ -676,18 +675,18 @@ export default function AdminOverviewPage() {
             >
               <div
                 className={cn(
-                  "p-3 rounded-xl transition-transform duration-200 group-hover:scale-110",
+                  "p-1.5 md:p-3 rounded-md md:rounded-xl transition-transform duration-200 group-hover:scale-110",
                   action.bg.split(" ")[0]
                 )}
               >
-                <action.icon className={cn("size-5", action.color)} />
+                <action.icon className={cn("size-3.5 md:size-5", action.color)} />
               </div>
-              <span className={cn("font-cairo text-sm font-medium", action.color)}>
+              <span className={cn("font-cairo text-[10px] md:text-sm font-medium text-center leading-tight mt-0.5", action.color)}>
                 {action.label}
               </span>
               <ArrowLeftIcon
                 className={cn(
-                  "size-3.5 opacity-0 group-hover:opacity-60 transition-opacity duration-200",
+                  "hidden md:block size-3.5 opacity-0 group-hover:opacity-60 transition-opacity duration-200",
                   action.color
                 )}
               />
