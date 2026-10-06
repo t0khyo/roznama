@@ -37,9 +37,9 @@ const bookingSchema = z.object({
     .refine(
       (val) => {
         const clean = val.replace(/[\s-]/g, "")
-        return /^\+?\d{8,15}$/.test(clean)
+        return /^\+?[\d٠-٩]{8,15}$/.test(clean)
       },
-      { message: "يرجى إدخال رقم هاتف صحيح (مثال: 98040875)" }
+      { message: "يرجى إدخال رقم هاتف صحيح" }
     ),
   date: z.date({
     required_error: "يرجى اختيار تاريخ المناسبة",
@@ -73,9 +73,11 @@ export default function BookingForm() {
   })
 
   const onSubmit = async (data: BookingFormData) => {
+    const normalizedPhone = data.phone.replace(/[٠-٩]/g, (d) => "٠١٢٣٤٥٦٧٨٩".indexOf(d).toString())
+
     const submitRequest = submitBookingAction({
       name: data.name,
-      phone: data.phone,
+      phone: normalizedPhone,
       preferredDate: data.date,
       venue: data.venue || undefined,
     })

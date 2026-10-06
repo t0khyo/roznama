@@ -231,7 +231,7 @@ export function EventFormDialog({
             <Input
               required
               dir="rtl"
-              placeholder="مثال: المطيري"
+              placeholder=""
               value={form.tribe}
               onChange={set("tribe")}
               className="font-cairo bg-[#F3EDE3] border-[#E5DDD0] focus:border-[#A8823A] placeholder:text-[#C0B4A8]"
@@ -243,7 +243,7 @@ export function EventFormDialog({
             <Input
               required
               dir="rtl"
-              placeholder="مثال: محمد بن خالد بن سعد المطيري"
+              placeholder="الاسم"
               value={form.groomName}
               onChange={set("groomName")}
               className="font-cairo bg-[#F3EDE3] border-[#E5DDD0] focus:border-[#A8823A] placeholder:text-[#C0B4A8]"
@@ -350,33 +350,31 @@ export function EventFormDialog({
                 </div>
               </div>
             ) : (
-              <Attachment className="w-full flex-nowrap justify-between items-center bg-[#F3EDE3]/70 border-[#E5DDD0] p-2.5 rounded-xl min-w-0">
-                <div className="flex items-center gap-3 min-w-0 flex-1">
-                  <AttachmentMedia
-                    variant="image"
-                    className="size-14 rounded-lg overflow-hidden border border-[#E5DDD0] shrink-0"
+              <Attachment className="w-full grid grid-cols-[auto_1fr_auto] gap-3 items-center bg-[#F3EDE3]/70 border-[#E5DDD0] p-2.5 rounded-xl overflow-hidden">
+                <AttachmentMedia
+                  variant="image"
+                  className="size-14 rounded-lg overflow-hidden border border-[#E5DDD0] shrink-0"
+                >
+                  <img
+                    src={previewUrl || form.imageUrl}
+                    alt="معاينة الدعوة"
+                    className="size-full object-cover"
+                  />
+                </AttachmentMedia>
+                <div className="flex flex-col min-w-0 overflow-hidden text-right">
+                  <AttachmentTitle
+                    className="font-cairo text-sm font-semibold text-[#1A1714] truncate block w-full"
+                    title={fileInfo?.name || "صورة الدعوة"}
                   >
-                    <img
-                      src={previewUrl || form.imageUrl}
-                      alt="معاينة الدعوة"
-                      className="size-full object-cover"
-                    />
-                  </AttachmentMedia>
-                  <AttachmentContent className="text-right min-w-0 flex-1 overflow-hidden">
-                    <AttachmentTitle
-                      className="font-cairo text-sm font-semibold text-[#1A1714] truncate block"
-                      title={fileInfo?.name || "صورة الدعوة"}
-                    >
-                      {fileInfo?.name || "صورة الدعوة"}
-                    </AttachmentTitle>
-                    <AttachmentDescription className="font-cairo text-xs text-[#7D6E63] mt-0.5 truncate block">
-                      {selectedFile
-                        ? fileInfo?.size || "جاهز للرفع إلى Cloudflare R2"
-                        : "الصورة الحالية للدعوة"}
-                    </AttachmentDescription>
-                  </AttachmentContent>
+                    {fileInfo?.name || "صورة الدعوة"}
+                  </AttachmentTitle>
+                  <AttachmentDescription className="font-cairo text-xs text-[#7D6E63] mt-0.5 truncate block w-full">
+                    {selectedFile
+                      ? fileInfo?.size || "جاهز للرفع إلى Cloudflare R2"
+                      : "الصورة الحالية للدعوة"}
+                  </AttachmentDescription>
                 </div>
-                <AttachmentActions>
+                <AttachmentActions className="shrink-0 relative static self-center">
                   <AttachmentAction
                     type="button"
                     onClick={handleRemoveImage}
