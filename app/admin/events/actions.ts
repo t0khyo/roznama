@@ -12,7 +12,6 @@ import {
 } from "@/lib/data/events"
 
 import { uploadImageToR2 } from "@/lib/storage"
-import sharp from "sharp"
 
 async function requireAdmin() {
   const session = await verifySession()
@@ -40,24 +39,14 @@ export async function uploadEventImageAction(formData: FormData): Promise<{ url:
   const arrayBuffer = await file.arrayBuffer()
   const bytes = new Uint8Array(arrayBuffer)
 
-  // Optimize image with Sharp:
-  // - Resize to a max width of 1200px (good for web, doesn't enlarge if smaller)
-  // - Convert to WebP format with 80% quality (excellent balance of quality vs file size)
-  const optimizedBuffer = await sharp(bytes)
-    .resize({ width: 1200, withoutEnlargement: true })
-    .webp({ quality: 80 })
-    .toBuffer()
-
-  const optimizedBytes = new Uint8Array(optimizedBuffer)
-
-  // Update filename and mime type to reflect WebP conversion
   const originalNameParts = file.name.split('.')
+  let extension = "bin"
   if (originalNameParts.length > 1) {
-    originalNameParts.pop() // remove old extension
+    extension = originalNameParts.pop() || "bin"
   }
-  const optimizedName = `${originalNameParts.join('.')}.webp`
+  const sanitizedName = `${originalNameParts.join('.')}-${Date.now()}.${extension}`
 
-  const url = await uploadImageToR2(optimizedBytes, optimizedName, "image/webp")
+  const url = await uploadImageToR2(bytes, sanitizedName, file.type)
   return { url }
 }
 

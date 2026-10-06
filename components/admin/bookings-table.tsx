@@ -23,6 +23,7 @@ import {
   ArrowUpDownIcon,
   ArrowUpIcon,
   ArrowDownIcon,
+  Loader2Icon,
 } from "lucide-react"
 import { FaWhatsapp } from "react-icons/fa6"
 import { RequestStatus, type EventRequest, REQUEST_STATUS_LABELS } from "@/types"
@@ -47,6 +48,7 @@ export function BookingsTable({ bookings, isLoading, onStatusChange }: BookingsT
     key: "createdAt",
     direction: "desc",
   })
+  const [updatingState, setUpdatingState] = useState<{ id: string; status: RequestStatus } | null>(null)
 
   const rejectedCount = useMemo(
     () => bookings.filter((b) => b.status === RequestStatus.CLOSED).length,
@@ -259,7 +261,8 @@ export function BookingsTable({ bookings, isLoading, onStatusChange }: BookingsT
               </TableRow>
             ) : (
               filteredAndSortedBookings.map((b) => {
-                const sc = REQUEST_STATUS_LABELS[b.status] ?? REQUEST_STATUS_LABELS.NEW
+                const effectiveStatus = updatingState?.id === b.id ? updatingState.status : b.status
+                const sc = REQUEST_STATUS_LABELS[effectiveStatus] ?? REQUEST_STATUS_LABELS.NEW
                 return (
                   <TableRow
                     key={b.id}
@@ -301,7 +304,13 @@ export function BookingsTable({ bookings, isLoading, onStatusChange }: BookingsT
                       })}
                     </TableCell>
                     <TableCell>
-                      <Badge className={sc.className}>{sc.label}</Badge>
+                      {updatingState?.id === b.id ? (
+                        <div className="flex h-[22px] items-center justify-center">
+                          <Loader2Icon className="size-4 animate-spin text-muted-foreground" />
+                        </div>
+                      ) : (
+                        <Badge className={sc.className}>{sc.label}</Badge>
+                      )}
                     </TableCell>
                     <TableCell>
                       <div className="flex items-center gap-1.5 justify-center">
@@ -310,13 +319,21 @@ export function BookingsTable({ bookings, isLoading, onStatusChange }: BookingsT
                           type="button"
                           variant="ghost"
                           size="icon-sm"
-                          onClick={() => onStatusChange(b.id, RequestStatus.NEW)}
-                          disabled={b.status === RequestStatus.NEW}
+                          onClick={async () => {
+                            if (effectiveStatus === RequestStatus.NEW) return
+                            setUpdatingState({ id: b.id, status: RequestStatus.NEW })
+                            try {
+                              await onStatusChange(b.id, RequestStatus.NEW)
+                            } finally {
+                              setUpdatingState(null)
+                            }
+                          }}
+                          disabled={effectiveStatus === RequestStatus.NEW || !!updatingState}
                           title="تعيين كـ جديد"
                           aria-label="جديد"
                           className={cn(
                             "size-7 rounded-lg transition-all",
-                            b.status === RequestStatus.NEW
+                            effectiveStatus === RequestStatus.NEW
                               ? "bg-ring/20 text-warning border border-ring/40 dark:bg-ring/15 dark:text-ring dark:border-ring/30 cursor-default opacity-100 shadow-2xs"
                               : "text-muted-foreground hover:text-ring hover:bg-ring/10 border border-transparent hover:border-ring/25"
                           )}
@@ -329,13 +346,21 @@ export function BookingsTable({ bookings, isLoading, onStatusChange }: BookingsT
                           type="button"
                           variant="ghost"
                           size="icon-sm"
-                          onClick={() => onStatusChange(b.id, RequestStatus.PUBLISHED)}
-                          disabled={b.status === RequestStatus.PUBLISHED}
+                          onClick={async () => {
+                            if (effectiveStatus === RequestStatus.PUBLISHED) return
+                            setUpdatingState({ id: b.id, status: RequestStatus.PUBLISHED })
+                            try {
+                              await onStatusChange(b.id, RequestStatus.PUBLISHED)
+                            } finally {
+                              setUpdatingState(null)
+                            }
+                          }}
+                          disabled={effectiveStatus === RequestStatus.PUBLISHED || !!updatingState}
                           title="تعيين كـ منشور"
                           aria-label="منشور"
                           className={cn(
                             "size-7 rounded-lg transition-all",
-                            b.status === RequestStatus.PUBLISHED
+                            effectiveStatus === RequestStatus.PUBLISHED
                               ? "bg-emerald-100 text-emerald-800 border border-emerald-300 dark:bg-emerald-500/15 dark:text-emerald-400 dark:border-emerald-500/30 cursor-default opacity-100 shadow-2xs"
                               : "text-muted-foreground hover:text-emerald-700 hover:bg-emerald-50 border border-transparent hover:border-emerald-200 dark:hover:text-emerald-600 dark:hover:bg-emerald-500/10 dark:hover:border-emerald-500/20"
                           )}
@@ -348,13 +373,21 @@ export function BookingsTable({ bookings, isLoading, onStatusChange }: BookingsT
                           type="button"
                           variant="ghost"
                           size="icon-sm"
-                          onClick={() => onStatusChange(b.id, RequestStatus.CLOSED)}
-                          disabled={b.status === RequestStatus.CLOSED}
+                          onClick={async () => {
+                            if (effectiveStatus === RequestStatus.CLOSED) return
+                            setUpdatingState({ id: b.id, status: RequestStatus.CLOSED })
+                            try {
+                              await onStatusChange(b.id, RequestStatus.CLOSED)
+                            } finally {
+                              setUpdatingState(null)
+                            }
+                          }}
+                          disabled={effectiveStatus === RequestStatus.CLOSED || !!updatingState}
                           title="تعيين كـ مرفوض"
                           aria-label="مرفوض"
                           className={cn(
                             "size-7 rounded-lg transition-all",
-                            b.status === RequestStatus.CLOSED
+                            effectiveStatus === RequestStatus.CLOSED
                               ? "bg-red-100 text-red-800 border border-red-300 dark:bg-red-500/15 dark:text-red-400 dark:border-red-500/30 cursor-default opacity-100 shadow-2xs"
                               : "text-muted-foreground hover:text-red-700 hover:bg-red-50 border border-transparent hover:border-red-200 dark:hover:text-red-600 dark:hover:bg-red-500/10 dark:hover:border-red-500/20"
                           )}
