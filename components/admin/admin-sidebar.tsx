@@ -28,7 +28,20 @@ import {
 import { adminNavItems } from "@/lib/constants"
 import { cn } from "@/lib/utils"
 
-const NAV_GROUPS = [
+type NavItem = {
+  href: string
+  label: string
+  icon: React.ElementType
+  exact?: boolean
+  isExternal?: boolean
+}
+
+type NavGroup = {
+  label: string
+  items: NavItem[]
+}
+
+const NAV_GROUPS: NavGroup[] = [
   {
     label: "الرئيسية",
     items: [
