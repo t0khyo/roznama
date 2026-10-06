@@ -137,10 +137,10 @@ export default function WeddingCalendar({ events }: { events: Event[] }) {
                     </span>
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="font-cairo font-bold text-sm text-[#1A1714]">
+                    <p className="font-cairo font-bold text-sm text-[#A8823A]">
                       {w.tribe}
                     </p>
-                    <p className="font-cairo text-xs text-[#A8823A] font-medium">
+                    <p className="font-cairo text-xs text-[#6B5E52] font-medium">
                       {w.groomName}
                     </p>
                   </div>
@@ -182,10 +182,10 @@ export default function WeddingCalendar({ events }: { events: Event[] }) {
                   </span>
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="font-cairo font-bold text-sm text-[#1A1714]">
+                  <p className="font-cairo font-bold text-sm text-[#A8823A]">
                     {w.tribe}
                   </p>
-                  <p className="font-cairo text-xs text-[#A8823A] font-medium">
+                  <p className="font-cairo text-xs text-[#6B5E52] font-medium">
                     {w.groomName}
                   </p>
                 </div>
