@@ -1,6 +1,6 @@
 "use client"
 
-import Image from "next/image"
+
 import { useMemo, useState } from "react"
 import {
   PencilIcon,
@@ -268,11 +268,9 @@ export function EventsTable({ events, isLoading, onEdit, onDelete }: EventsTable
                     </TableCell>
                     <TableCell>
                       {event.imageUrl ? (
-                        <Image
+                        <img
                           src={event.imageUrl}
                           alt={`دعوة ${event.tribe}`}
-                          width={48}
-                          height={48}
                           className="w-12 h-12 rounded-lg object-cover border border-border"
                         />
                       ) : (

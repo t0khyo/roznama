@@ -227,7 +227,7 @@ export function EventFormDialog({
 
         <form onSubmit={handleSubmit} className="space-y-4 py-2">
           <div className="space-y-1.5">
-            <Label className="font-cairo text-sm text-neutral-dark">القبيلة</Label>
+            <Label className="font-cairo text-sm text-foreground">القبيلة</Label>
             <Input
               required
               dir="rtl"
@@ -239,7 +239,7 @@ export function EventFormDialog({
           </div>
 
           <div className="space-y-1.5">
-            <Label className="font-cairo text-sm text-neutral-dark">اسم المعرس</Label>
+            <Label className="font-cairo text-sm text-foreground">اسم المعرس</Label>
             <Input
               required
               dir="rtl"
@@ -251,7 +251,7 @@ export function EventFormDialog({
           </div>
 
           <div className="space-y-1.5">
-            <Label className="font-cairo text-sm text-neutral-dark">
+            <Label className="font-cairo text-sm text-foreground">
               المكان <span className="text-muted-foreground font-normal">(اختياري)</span>
             </Label>
             <Input
@@ -266,7 +266,7 @@ export function EventFormDialog({
           {/* Gallery URL field hidden for now as requested, preserved in state and data model */}
 
           <div className="space-y-1.5">
-            <Label className="font-cairo text-sm text-neutral-dark">تاريخ المناسبة</Label>
+            <Label className="font-cairo text-sm text-foreground">تاريخ المناسبة</Label>
             <Popover open={isCalendarOpen} onOpenChange={setIsCalendarOpen}>
               <PopoverTrigger
                 render={
@@ -305,7 +305,7 @@ export function EventFormDialog({
 
           {/* Image Upload from Device */}
           <div className="space-y-1.5">
-            <Label className="font-cairo text-sm text-neutral-dark">صورة الدعوة</Label>
+            <Label className="font-cairo text-sm text-foreground">صورة الدعوة</Label>
 
             {/* Hidden file input */}
             <input
@@ -378,7 +378,7 @@ export function EventFormDialog({
                   <AttachmentAction
                     type="button"
                     onClick={handleRemoveImage}
-                    className="text-muted-foreground hover:text-red-600 hover:bg-red-50 p-1.5 rounded-lg transition-colors"
+                    className="text-muted-foreground hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-500/10 dark:hover:text-red-400 p-1.5 rounded-lg transition-colors"
                     title="إزالة الصورة"
                   >
                     <XIcon className="size-4" />
@@ -415,7 +415,7 @@ export function EventFormDialog({
               variant="outline"
               onClick={() => onOpenChange(false)}
               disabled={saving || uploading}
-              className="font-cairo h-9 border-border text-neutral-dark"
+              className="font-cairo h-9 border-border text-foreground"
             >
               إلغاء
             </Button>

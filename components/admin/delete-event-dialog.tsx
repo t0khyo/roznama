@@ -35,7 +35,7 @@ export function DeleteEventDialog({
           </DialogTitle>
         </DialogHeader>
 
-        <p className="font-cairo text-sm text-chart-4 leading-relaxed">
+        <p className="font-cairo text-sm text-muted-foreground leading-relaxed">
           هل أنت متأكد من حذف مناسبة{" "}
           <span className="font-bold text-foreground">{event?.tribe}</span>؟
           <br />
@@ -56,7 +56,7 @@ export function DeleteEventDialog({
           <Button
             variant="outline"
             onClick={() => onOpenChange(false)}
-            className="font-cairo h-9 border-border text-neutral-dark"
+            className="font-cairo h-9 border-border text-foreground"
           >
             إلغاء
           </Button>

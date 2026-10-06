@@ -84,7 +84,7 @@ export default function BookingForm() {
 
     toast.promise(submitRequest, {
       loading: (
-        <span className="block w-full text-center text-sm text-neutral-dark">
+        <span className="block w-full text-center text-sm text-foreground">
           جارٍ إرسال طلب التسجيل...
         </span>
       ),
