@@ -4,7 +4,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import {
   LayoutDashboardIcon,
-  HeartHandshakeIcon,
+  CalendarDays,
   ClipboardListIcon,
   ExternalLinkIcon,
   LogOutIcon,
@@ -28,11 +28,27 @@ import {
 import { adminNavItems } from "@/lib/constants"
 import { cn } from "@/lib/utils"
 
-const NAV_ICONS: Record<string, typeof LayoutDashboardIcon> = {
-  "/admin": LayoutDashboardIcon,
-  "/admin/events": HeartHandshakeIcon,
-  "/admin/bookings": ClipboardListIcon,
-}
+const NAV_GROUPS = [
+  {
+    label: "الرئيسية",
+    items: [
+      { href: "/admin", label: "لوحة التحكم", exact: true, icon: LayoutDashboardIcon },
+    ],
+  },
+  {
+    label: "إدارة المحتوى",
+    items: [
+      { href: "/admin/events", label: "المناسبات", icon: CalendarDays },
+      { href: "/admin/bookings", label: "طلبات التواصل", icon: ClipboardListIcon },
+    ],
+  },
+  {
+    label: "اخرى",
+    items: [
+      { href: "/", label: "الموقع الرئيسي", icon: ExternalLinkIcon, isExternal: true },
+    ],
+  },
+]
 
 export function AdminSidebar() {
   const pathname = usePathname()
@@ -46,22 +62,20 @@ export function AdminSidebar() {
       side="right"
       collapsible="icon"
       dir="rtl"
-      className="border-l border-[#E5DDD0] bg-[#FAF8F3]"
+      className="border-l border-sidebar-border bg-sidebar"
     >
       {/* ── Brand header (Non-clickable branding) ── */}
-      <SidebarHeader className="border-b border-[#E5DDD0] px-4 py-4 group-data-[collapsible=icon]:px-1 group-data-[collapsible=icon]:py-3 transition-all">
+      <SidebarHeader className="border-b border-sidebar-border px-4 py-4 group-data-[collapsible=icon]:px-1 group-data-[collapsible=icon]:py-3 transition-all">
         <div className="flex items-center gap-3 group-data-[collapsible=icon]:justify-center">
-          <div className="size-9 group-data-[collapsible=icon]:size-7 rounded-full bg-[#FCFEFB] overflow-hidden flex items-center justify-center border border-[#E5DDD0]/80 shadow-xs shrink-0 transition-all">
-            <img src="/logo.png" alt="سناب مطير" className="size-full object-contain p-0.5" />
-          </div>
+          <img src="/logo.png" alt="رزنامة مطير" className="size-10 group-data-[collapsible=icon]:size-8 object-contain drop-shadow-sm shrink-0 transition-all" />
           <div className="flex flex-col leading-none overflow-hidden group-data-[collapsible=icon]:hidden">
             <span
-              className="text-base font-bold text-[#1A1714] truncate"
+              className="text-base font-bold text-sidebar-foreground truncate"
               style={{ fontFamily: "var(--font-thmanyah-serif), serif" }}
             >
-              سناب مطير
+              رزنامة مطير
             </span>
-            <span className="text-[10px] font-cairo text-[#A09080] tracking-wider">
+            <span className="text-[10px] font-cairo text-muted-foreground tracking-wider">
               لوحة التحكم
             </span>
           </div>
@@ -70,72 +84,64 @@ export function AdminSidebar() {
 
       {/* ── Navigation ── */}
       <SidebarContent className="px-2 py-3 group-data-[collapsible=icon]:px-1 group-data-[collapsible=icon]:py-2">
-        <SidebarGroup className="group-data-[collapsible=icon]:p-0">
-          <SidebarGroupLabel className="font-cairo text-[11px] text-[#A09080] tracking-widest px-2 mb-1 group-data-[collapsible=icon]:hidden">
-            القسم
-          </SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu className="group-data-[collapsible=icon]:items-center">
-              {adminNavItems.map((item) => {
-                const active = isActive(item.href, item.exact)
-                const Icon = NAV_ICONS[item.href] || LayoutDashboardIcon
-                return (
-                  <SidebarMenuItem key={item.href} className="group-data-[collapsible=icon]:flex group-data-[collapsible=icon]:justify-center">
-                    <SidebarMenuButton
-                      render={<Link href={item.href} />}
-                      isActive={active}
-                      tooltip={{ children: item.label, side: "left" }}
-                      onClick={() => setOpenMobile(false)}
-                      className={cn(
-                        "font-cairo text-sm rounded-lg h-10 gap-3 transition-all duration-200",
-                        "group-data-[collapsible=icon]:size-8 group-data-[collapsible=icon]:p-0 group-data-[collapsible=icon]:justify-center",
-                        active
-                          ? "bg-[#9F3647]/10 text-[#9F3647] font-semibold"
-                          : "text-[#4A4038] hover:bg-[#9F3647]/6 hover:text-[#9F3647]"
-                      )}
-                    >
-                      <Icon
+        {NAV_GROUPS.map((group, index) => (
+          <SidebarGroup key={index} className="group-data-[collapsible=icon]:p-0">
+            <SidebarGroupLabel className="font-cairo text-[11px] text-muted-foreground tracking-widest px-2 mb-1 group-data-[collapsible=icon]:hidden">
+              {group.label}
+            </SidebarGroupLabel>
+            <SidebarGroupContent>
+              <SidebarMenu className="group-data-[collapsible=icon]:items-center">
+                {group.items.map((item) => {
+                  const active = item.isExternal ? false : isActive(item.href, !!item.exact)
+                  const Icon = item.icon
+                  return (
+                    <SidebarMenuItem key={item.href} className="group-data-[collapsible=icon]:flex group-data-[collapsible=icon]:justify-center">
+                      <SidebarMenuButton
+                        render={<Link href={item.href} target={item.isExternal ? "_blank" : undefined} rel={item.isExternal ? "noreferrer" : undefined} />}
+                        isActive={active}
+                        tooltip={{ children: item.label, side: "left" }}
+                        onClick={() => !item.isExternal && setOpenMobile(false)}
                         className={cn(
-                          "size-4 shrink-0 transition-colors",
-                          active ? "text-[#9F3647]" : "text-[#6B5E52]"
+                          "font-cairo text-sm rounded-lg h-10 gap-3 transition-all duration-200",
+                          "group-data-[collapsible=icon]:size-8 group-data-[collapsible=icon]:p-0 group-data-[collapsible=icon]:justify-center",
+                          active
+                            ? "bg-sidebar-primary/10 text-sidebar-primary font-semibold"
+                            : "text-sidebar-foreground/80 hover:bg-sidebar-primary/10 hover:text-sidebar-primary"
                         )}
-                      />
-                      <span className="group-data-[collapsible=icon]:hidden">{item.label}</span>
-                      {active && (
-                        <span className="mr-auto w-1.5 h-1.5 rounded-full bg-[#9F3647] group-data-[collapsible=icon]:hidden" />
-                      )}
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                )
-              })}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
+                      >
+                        <Icon
+                          className={cn(
+                            "size-4 shrink-0 transition-colors",
+                            active ? "text-sidebar-primary" : "text-sidebar-foreground/60"
+                          )}
+                        />
+                        <span className="group-data-[collapsible=icon]:hidden">{item.label}</span>
+                        {active && (
+                          <span className="mr-auto w-1.5 h-1.5 rounded-full bg-sidebar-primary group-data-[collapsible=icon]:hidden" />
+                        )}
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                  )
+                })}
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
+        ))}
       </SidebarContent>
 
-      <SidebarSeparator className="bg-[#E5DDD0]/60 group-data-[collapsible=icon]:mx-1" />
+      <SidebarSeparator className="bg-sidebar-border/60 group-data-[collapsible=icon]:mx-1" />
 
-      {/* ── Footer: link to public site & logout ── */}
+      {/* ── Footer: Logout ── */}
       <SidebarFooter className="px-2 py-3 space-y-1 group-data-[collapsible=icon]:px-1 group-data-[collapsible=icon]:py-2">
         <SidebarMenu className="group-data-[collapsible=icon]:items-center">
-          <SidebarMenuItem className="group-data-[collapsible=icon]:flex group-data-[collapsible=icon]:justify-center">
-            <SidebarMenuButton
-              render={<Link href="/" target="_blank" rel="noreferrer" />}
-              tooltip={{ children: "عرض الموقع العام", side: "left" }}
-              className="font-cairo text-sm text-[#A09080] hover:text-[#9F3647] hover:bg-[#9F3647]/6 rounded-lg h-10 gap-3 transition-all group-data-[collapsible=icon]:size-8 group-data-[collapsible=icon]:p-0 group-data-[collapsible=icon]:justify-center"
-            >
-              <ExternalLinkIcon className="size-4 shrink-0 text-[#A8823A]" />
-              <span className="group-data-[collapsible=icon]:hidden">عرض الموقع العام</span>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
           <SidebarMenuItem className="group-data-[collapsible=icon]:flex group-data-[collapsible=icon]:justify-center">
             <form action={logoutAction} className="w-full group-data-[collapsible=icon]:flex group-data-[collapsible=icon]:justify-center">
               <SidebarMenuButton
                 type="submit"
                 tooltip={{ children: "تسجيل الخروج", side: "left" }}
-                className="w-full font-cairo text-sm text-red-600 hover:text-red-700 hover:bg-red-50 rounded-lg h-10 gap-3 transition-all cursor-pointer group-data-[collapsible=icon]:size-8 group-data-[collapsible=icon]:p-0 group-data-[collapsible=icon]:justify-center"
+                className="w-full font-cairo text-sm text-sidebar-foreground/80 hover:bg-sidebar-primary/10 hover:text-sidebar-primary rounded-lg h-10 gap-3 transition-all cursor-pointer group-data-[collapsible=icon]:size-8 group-data-[collapsible=icon]:p-0 group-data-[collapsible=icon]:justify-center"
               >
-                <LogOutIcon className="size-4 shrink-0 text-red-500" />
+                <LogOutIcon className="size-4 shrink-0 text-sidebar-primary" />
                 <span className="group-data-[collapsible=icon]:hidden">تسجيل الخروج</span>
               </SidebarMenuButton>
             </form>

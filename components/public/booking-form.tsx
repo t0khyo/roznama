@@ -4,7 +4,7 @@ import { useState } from "react"
 import { useForm, Controller } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
-import { Calendar as CalendarIcon, CircleCheckIcon } from "lucide-react"
+import { CalendarDays, CircleCheckIcon } from "lucide-react"
 import { format } from "date-fns"
 import { ar } from "date-fns/locale"
 import { arSA } from "react-day-picker/locale"
@@ -215,7 +215,7 @@ export default function BookingForm() {
                       />
                     }
                   >
-                    <CalendarIcon className="ml-2 h-4 w-4 opacity-50" />
+                    <CalendarDays className="ml-2 h-4 w-4 opacity-60" />
                     {field.value ? (
                       format(field.value, "PPP", { locale: ar })
                     ) : (

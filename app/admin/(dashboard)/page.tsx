@@ -3,10 +3,10 @@
 import { useEffect, useState } from "react"
 import Link from "next/link"
 import {
-  HeartHandshakeIcon,
+  CalendarIcon, // Replaced HeartHandshakeIcon
   CalendarDaysIcon,
   ClipboardListIcon,
-  ClockIcon,
+  CalendarClockIcon,
   PlusCircleIcon,
   ExternalLinkIcon,
   ArrowLeftIcon,
@@ -39,7 +39,7 @@ const statConfig = [
   {
     key: "totalEvents" as keyof DashboardStats,
     label: "المناسبات",
-    icon: HeartHandshakeIcon,
+    icon: CalendarDaysIcon,
     color: "text-[#9F3647]",
     bg: "bg-[#9F3647]/10",
     border: "border-[#9F3647]/20",
@@ -63,7 +63,7 @@ const statConfig = [
   {
     key: "pendingBookings" as keyof DashboardStats,
     label: "طلبات قيد الانتظار",
-    icon: ClockIcon,
+    icon: CalendarClockIcon,
     color: "text-[#9F3647]",
     bg: "bg-[#9F3647]/8",
     border: "border-[#9F3647]/15",
@@ -82,8 +82,8 @@ const quickActions = [
     border: "border-[#9F3647]/20",
   },
   {
-    label: "طلبات الانتظار",
-    icon: ClockIcon,
+    label: "عرض الطلبات",
+    icon: CalendarClockIcon,
     href: "/admin/bookings",
     color: "text-[#A8823A]",
     bg: "bg-[#A8823A]/8 hover:bg-[#A8823A]/16",
@@ -91,7 +91,7 @@ const quickActions = [
   },
   {
     label: "إدارة المناسبات",
-    icon: HeartHandshakeIcon,
+    icon: CalendarDaysIcon,
     href: "/admin/events",
     color: "text-[#6B5E52]",
     bg: "bg-[#6B5E52]/8 hover:bg-[#6B5E52]/16",
@@ -433,8 +433,8 @@ function MiniCalendarPanel({ events }: { events: Event[] }) {
 
   const dialogWeddings = dialogDay
     ? events.filter(
-        (w) => new Date(w.eventDate).toDateString() === dialogDay.toDateString()
-      )
+      (w) => new Date(w.eventDate).toDateString() === dialogDay.toDateString()
+    )
     : []
 
   return (

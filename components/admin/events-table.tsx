@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import { useMemo, useState } from "react"
 import {
   PencilIcon,
@@ -168,130 +169,8 @@ export function EventsTable({ events, isLoading, onEdit, onDelete }: EventsTable
         </div>
       </div>
 
-      {/* ── Mobile View: Cards Pattern (1 Column) ── */}
-      <div className="md:hidden">
-        {isLoading ? (
-          <div className="p-3 space-y-3">
-            {Array.from({ length: 4 }).map((_, index) => (
-              <div
-                key={`mobile-skeleton-${index}`}
-                className="bg-[#FAF8F3] border border-[#E5DDD0] rounded-xl p-3.5 space-y-3 shadow-2xs"
-              >
-                <div className="flex items-start justify-between gap-3">
-                  <div className="flex items-center gap-3 flex-1 min-w-0">
-                    <Skeleton className="size-16 rounded-xl shrink-0" />
-                    <div className="space-y-1.5 flex-1 min-w-0">
-                      <Skeleton className="h-4 w-3/4" />
-                      <Skeleton className="h-3.5 w-full" />
-                      <Skeleton className="h-3 w-1/2" />
-                    </div>
-                  </div>
-                  <Skeleton className="h-6 w-14 rounded-full shrink-0" />
-                </div>
-                <div className="flex items-center justify-end gap-2 pt-2 border-t border-[#E5DDD0]/60">
-                  <Skeleton className="h-8 w-20 rounded-lg" />
-                  <Skeleton className="h-8 w-20 rounded-lg" />
-                </div>
-              </div>
-            ))}
-          </div>
-        ) : filteredAndSortedEvents.length === 0 ? (
-          <div className="p-8 text-center font-cairo text-[#A09080] text-sm">
-            {searchQuery ? "لا توجد نتائج مطابقة لبحثك" : "لا توجد مناسبات مسجلة"}
-          </div>
-        ) : (
-          <div className="p-3 space-y-3">
-            {filteredAndSortedEvents.map((event) => {
-              const isPast = new Date(event.eventDate) < today
-              return (
-                <div
-                  key={`mobile-${event.id}`}
-                  className="bg-[#FAF8F3] border border-[#E5DDD0] rounded-xl p-3.5 space-y-3 shadow-2xs hover:border-[#A8823A]/60 transition-all"
-                >
-                  {/* Card Header: Thumbnail, Event details & Status badge */}
-                  <div className="flex items-start justify-between gap-3">
-                    <div className="flex items-center gap-3 min-w-0 flex-1">
-                      {/* Image Thumbnail */}
-                      {event.imageUrl ? (
-                        <img
-                          src={event.imageUrl}
-                          alt={`دعوة ${event.tribe}`}
-                          className="size-16 rounded-xl object-cover border border-[#E5DDD0] shrink-0"
-                        />
-                      ) : (
-                        <div className="size-16 rounded-xl bg-[#F3EDE3] border border-[#E5DDD0] flex items-center justify-center font-cairo text-xs text-[#A09080] shrink-0">
-                          بدون صورة
-                        </div>
-                      )}
-
-                      {/* Text info */}
-                      <div className="min-w-0 flex-1">
-                        <h3 className="font-cairo font-bold text-[#1A1714] text-sm truncate">
-                          {event.tribe}
-                        </h3>
-                        <p
-                          className="font-cairo text-[#4A4038] text-xs line-clamp-1 mt-0.5"
-                          title={event.groomName}
-                        >
-                          {event.groomName}
-                        </p>
-                        <p className="font-cairo text-[#A09080] text-[11px] tabular-nums mt-0.5">
-                          {formatArabicDate(new Date(event.eventDate).toISOString())}
-                        </p>
-                      </div>
-                    </div>
-
-                    <Badge
-                      className={
-                        isPast
-                          ? "bg-[#E5DDD0] text-[#6B5E52] hover:bg-[#E5DDD0] font-cairo text-xs shrink-0"
-                          : "bg-[#9F3647]/10 text-[#9F3647] hover:bg-[#9F3647]/10 border border-[#9F3647]/20 font-cairo text-xs shrink-0"
-                      }
-                    >
-                      {isPast ? "انتهى" : "قادم"}
-                    </Badge>
-                  </div>
-
-                  {/* Venue box if exists */}
-                  {event.venue && (
-                    <div className="bg-[#F3EDE3]/40 px-3 py-2 rounded-lg border border-[#E5DDD0]/60 text-xs font-cairo flex items-center justify-between">
-                      <span className="text-[#7D6E63]">المكان:</span>
-                      <span className="text-[#1A1714] font-medium truncate max-w-[220px]">
-                        {event.venue}
-                      </span>
-                    </div>
-                  )}
-
-                  {/* Actions Footer */}
-                  <div className="flex items-center justify-end gap-2 pt-2 border-t border-[#E5DDD0]/60">
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => onEdit(event)}
-                      className="font-cairo text-xs h-8 px-3 gap-1.5 border-[#E5DDD0] text-[#6B5E52] hover:text-[#9F3647] hover:bg-[#9F3647]/10 hover:border-[#9F3647]/30 rounded-lg transition-all"
-                    >
-                      <PencilIcon className="size-3.5" />
-                      <span>تعديل</span>
-                    </Button>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => onDelete(event)}
-                      className="font-cairo text-xs h-8 px-3 gap-1.5 border-[#E5DDD0] text-[#6B5E52] hover:text-red-700 hover:bg-red-50 hover:border-red-200 rounded-lg transition-all"
-                    >
-                      <Trash2Icon className="size-3.5" />
-                      <span>حذف</span>
-                    </Button>
-                  </div>
-                </div>
-              )
-            })}
-          </div>
-        )}
-      </div>
-
-      {/* ── Desktop View: Table ── */}
-      <div className="hidden md:block">
+      {/* ── Table View ── */}
+      <div className="overflow-x-auto">
         <Table dir="rtl">
           <TableHeader>
             <TableRow className="border-[#E5DDD0] bg-[#F3EDE3]/60 hover:bg-[#F3EDE3]/60">
@@ -389,9 +268,11 @@ export function EventsTable({ events, isLoading, onEdit, onDelete }: EventsTable
                     </TableCell>
                     <TableCell>
                       {event.imageUrl ? (
-                        <img
+                        <Image
                           src={event.imageUrl}
                           alt={`دعوة ${event.tribe}`}
+                          width={48}
+                          height={48}
                           className="w-12 h-12 rounded-lg object-cover border border-[#E5DDD0]"
                         />
                       ) : (

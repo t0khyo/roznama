@@ -7,7 +7,7 @@ import { Separator } from "@/components/ui/separator"
 import { verifySession } from "@/lib/session"
 
 export const metadata: Metadata = {
-  title: "لوحة التحكم — سناب مطير",
+  title: "لوحة التحكم — رزنامة مطير",
   description: "إدارة المناسبات وطلبات التسجيل",
 }
 
@@ -38,7 +38,7 @@ export default async function DashboardLayout({
                 className="text-sm font-medium text-[#A09080] font-cairo"
                 suppressHydrationWarning
               >
-                لوحة تحكم سناب مطير
+                لوحة التحكم
               </span>
             </header>
 

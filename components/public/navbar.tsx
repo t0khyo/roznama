@@ -46,7 +46,7 @@ export default function Navbar() {
           <div className="flex items-center gap-2 flex-shrink-0">
             {/* CTA — visible on all sizes */}
             <Button
-              onClick={() => scrollTo("booking")}
+              onClick={() => window.open("https://wa.me/96598040875", "_blank")}
               className="bg-gradient-to-tr from-primary via-[#722230] to-primary animate-gradient-shift text-primary-foreground font-cairo font-bold text-sm px-5 py-2 h-auto rounded-md hover:opacity-90 hover:scale-95 hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 whitespace-nowrap active:scale-95"
             >
               سجل مناسبتك
@@ -125,7 +125,7 @@ export default function Navbar() {
                   <DrawerClose
                     render={
                       <Button
-                        onClick={() => scrollTo("booking")}
+                        onClick={() => window.open("https://wa.me/96598040875", "_blank")}
                         className="w-full bg-gradient-to-tr from-primary via-[#722230] to-primary animate-gradient-shift text-primary-foreground font-cairo font-bold text-sm py-3.5 h-auto rounded-md hover:opacity-90 hover:scale-95 hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 active:scale-95"
                       />
                     }
