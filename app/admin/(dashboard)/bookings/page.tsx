@@ -30,16 +30,16 @@ export default function AdminBookingsPage() {
     <div className="space-y-6 max-w-6xl">
       {/* Heading */}
       <div>
-        <p className="text-[#9F3647] font-cairo text-xs font-semibold tracking-widest mb-1 uppercase">
+        <p className="text-primary font-cairo text-xs font-semibold tracking-widest mb-1 uppercase">
           Bookings
         </p>
         <h1
-          className="text-3xl md:text-4xl font-bold text-[#1A1714]"
+          className="text-3xl md:text-4xl font-bold text-foreground"
           style={{ fontFamily: "var(--font-thmanyah-serif), serif" }}
         >
           طلبات التسجيل
         </h1>
-        <p className="font-cairo text-sm text-[#A09080] mt-1">
+        <p className="font-cairo text-sm text-muted-foreground mt-1">
           {bookings.length} طلب —{" "}
           {newCount} جديد · {publishedCount} منشور · {closedCount} مرفوض
         </p>

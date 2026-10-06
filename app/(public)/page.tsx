@@ -31,37 +31,37 @@ function EventsSkeleton() {
         <div className="max-w-xl mx-auto px-6 mb-14">
           <div className="flex items-end gap-4">
             <div>
-              <Skeleton className="h-4 w-24 mb-3 bg-[#E5DDD0]" />
-              <Skeleton className="h-12 w-64 bg-[#E5DDD0]" />
+              <Skeleton className="h-4 w-24 mb-3 bg-border" />
+              <Skeleton className="h-12 w-64 bg-border" />
             </div>
-            <div className="h-px flex-1 bg-[#E5DDD0] mb-4 hidden md:block" />
+            <div className="h-px flex-1 bg-border mb-4 hidden md:block" />
           </div>
         </div>
         {/* Stacked vertical card skeletons */}
         <div className="max-w-xl mx-auto px-6 flex flex-col gap-16">
           {Array.from({ length: 3 }).map((_, i) => (
             <div key={i}>
-              <Skeleton className="w-full aspect-[3/4] rounded-2xl bg-[#E5DDD0]" />
-              <div className="my-4 h-px bg-[#E5DDD0]" />
+              <Skeleton className="w-full aspect-[3/4] rounded-2xl bg-border" />
+              <div className="my-4 h-px bg-border" />
               <div className="flex justify-between items-center px-1">
                 <div>
-                  <Skeleton className="h-4 w-32 mb-2 bg-[#E5DDD0]" />
-                  <Skeleton className="h-3 w-20 bg-[#E5DDD0]" />
+                  <Skeleton className="h-4 w-32 mb-2 bg-border" />
+                  <Skeleton className="h-3 w-20 bg-border" />
                 </div>
-                <Skeleton className="h-4 w-24 bg-[#E5DDD0]" />
+                <Skeleton className="h-4 w-24 bg-border" />
               </div>
             </div>
           ))}
         </div>
       </section>
 
-      <section className="py-24 bg-[#F3EDE3]">
+      <section className="py-24 bg-secondary">
         <div className="max-w-4xl mx-auto px-6">
           <div className="mb-12">
-            <Skeleton className="h-4 w-24 mb-3 bg-[#E5DDD0]" />
-            <Skeleton className="h-12 w-48 bg-[#E5DDD0]" />
+            <Skeleton className="h-4 w-24 mb-3 bg-border" />
+            <Skeleton className="h-12 w-48 bg-border" />
           </div>
-          <Skeleton className="w-full h-[500px] rounded-2xl bg-[#FAF8F3]" />
+          <Skeleton className="w-full h-[500px] rounded-2xl bg-background" />
         </div>
       </section>
     </>
@@ -70,7 +70,7 @@ function EventsSkeleton() {
 
 export default function HomePage() {
   return (
-    <div dir="rtl" className="min-h-screen text-[#1A1714]">
+    <div dir="rtl" className="min-h-screen text-foreground">
       <Navbar />
       <Hero />
       <Suspense fallback={<EventsSkeleton />}>

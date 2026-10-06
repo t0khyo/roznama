@@ -57,22 +57,22 @@ export default function AdminEventsPage() {
       {/* Heading + action */}
       <div className="flex items-end justify-between gap-4">
         <div>
-          <p className="text-[#9F3647] font-cairo text-xs font-semibold tracking-widest mb-1 uppercase">
+          <p className="text-primary font-cairo text-xs font-semibold tracking-widest mb-1 uppercase">
             Events
           </p>
           <h1
-            className="text-3xl md:text-4xl font-bold text-[#1A1714]"
+            className="text-3xl md:text-4xl font-bold text-foreground"
             style={{ fontFamily: "var(--font-thmanyah-serif), serif" }}
           >
             إدارة المناسبات
           </h1>
-          <p className="font-cairo text-sm text-[#A09080] mt-1">
+          <p className="font-cairo text-sm text-muted-foreground mt-1">
             {events.length} مناسبة مسجلة
           </p>
         </div>
         <Button
           onClick={openCreate}
-          className="font-cairo font-bold bg-[#9F3647] text-[#FAF8F3] hover:bg-[#722230] h-9 gap-2"
+          className="font-cairo font-bold bg-primary text-background hover:bg-primary/90 h-9 gap-2"
         >
           إضافة مناسبة
           <PlusIcon className="size-4" />

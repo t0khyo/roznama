@@ -40,33 +40,33 @@ const statConfig = [
     key: "totalEvents" as keyof DashboardStats,
     label: "المناسبات",
     icon: CalendarDaysIcon,
-    color: "text-[#9F3647]",
-    bg: "bg-[#9F3647]/10",
-    border: "border-[#9F3647]/20",
+    color: "text-primary",
+    bg: "bg-primary/10",
+    border: "border-primary/20",
   },
   {
     key: "upcomingEvents" as keyof DashboardStats,
     label: "مناسبات قادمة",
     icon: CalendarDaysIcon,
-    color: "text-[#A8823A]",
-    bg: "bg-[#A8823A]/10",
-    border: "border-[#A8823A]/20",
+    color: "text-ring",
+    bg: "bg-ring/10",
+    border: "border-ring/20",
   },
   {
     key: "totalBookings" as keyof DashboardStats,
     label: "طلبات التسجيل",
     icon: ClipboardListIcon,
-    color: "text-[#6B5E52]",
-    bg: "bg-[#6B5E52]/10",
-    border: "border-[#6B5E52]/20",
+    color: "text-chart-4",
+    bg: "bg-chart-4/10",
+    border: "border-chart-4/20",
   },
   {
     key: "pendingBookings" as keyof DashboardStats,
     label: "طلبات قيد الانتظار",
     icon: CalendarClockIcon,
-    color: "text-[#9F3647]",
-    bg: "bg-[#9F3647]/8",
-    border: "border-[#9F3647]/15",
+    color: "text-primary",
+    bg: "bg-primary/8",
+    border: "border-primary/15",
   },
 ]
 
@@ -77,34 +77,34 @@ const quickActions = [
     label: "إضافة مناسبة",
     icon: PlusCircleIcon,
     href: "/admin/events",
-    color: "text-[#9F3647]",
-    bg: "bg-[#9F3647]/8 hover:bg-[#9F3647]/16",
-    border: "border-[#9F3647]/20",
+    color: "text-primary",
+    bg: "bg-primary/8 hover:bg-primary/16",
+    border: "border-primary/20",
   },
   {
     label: "عرض الطلبات",
     icon: CalendarClockIcon,
     href: "/admin/bookings",
-    color: "text-[#A8823A]",
-    bg: "bg-[#A8823A]/8 hover:bg-[#A8823A]/16",
-    border: "border-[#A8823A]/20",
+    color: "text-ring",
+    bg: "bg-ring/8 hover:bg-ring/16",
+    border: "border-ring/20",
   },
   {
     label: "إدارة المناسبات",
     icon: CalendarDaysIcon,
     href: "/admin/events",
-    color: "text-[#6B5E52]",
-    bg: "bg-[#6B5E52]/8 hover:bg-[#6B5E52]/16",
-    border: "border-[#6B5E52]/20",
+    color: "text-chart-4",
+    bg: "bg-chart-4/8 hover:bg-chart-4/16",
+    border: "border-chart-4/20",
   },
   {
     label: "عرض الموقع",
     icon: ExternalLinkIcon,
     href: "/",
     external: true,
-    color: "text-[#4A4038]",
-    bg: "bg-[#4A4038]/6 hover:bg-[#4A4038]/12",
-    border: "border-[#4A4038]/15",
+    color: "text-neutral-dark",
+    bg: "bg-neutral-dark/6 hover:bg-neutral-dark/12",
+    border: "border-neutral-dark/15",
   },
 ]
 
@@ -146,7 +146,7 @@ export function StatCard({
   return (
     <Card
       className={cn(
-        "border bg-[#FAF8F3] shadow-sm hover:shadow-md transition-shadow duration-200",
+        "border bg-background shadow-sm hover:shadow-md transition-shadow duration-200",
         stat.border
       )}
     >
@@ -154,7 +154,7 @@ export function StatCard({
         <div className={cn("p-1.5 md:p-2.5 rounded-md md:rounded-xl", stat.bg)}>
           <stat.icon className={cn("size-3 md:size-5", stat.color)} />
         </div>
-        <CardTitle className="font-cairo text-[10px] md:text-sm font-medium text-[#6B5E52] text-right leading-tight truncate px-1">
+        <CardTitle className="font-cairo text-[10px] md:text-sm font-medium text-chart-4 text-right leading-tight truncate px-1">
           {stat.label}
         </CardTitle>
       </CardHeader>
@@ -174,7 +174,7 @@ export function StatCard({
 
 function StatCardSkeleton({ stat }: { stat: (typeof statConfig)[number] }) {
   return (
-    <Card className={cn("border bg-[#FAF8F3] shadow-sm", stat.border)}>
+    <Card className={cn("border bg-background shadow-sm", stat.border)}>
       <CardHeader className="flex flex-row-reverse items-center justify-between p-2 pb-1 md:pb-2 md:pt-4 md:px-5">
         <div className={cn("p-1.5 md:p-2.5 rounded-md md:rounded-xl", stat.bg)}>
           <Skeleton className="size-3 md:size-5 rounded" />
@@ -194,16 +194,16 @@ function RecentRequestsPanel({ requests }: { requests: EventRequest[] }) {
   const newRequests = requests.filter((r) => r.status === RequestStatus.NEW)
 
   return (
-    <Card className="border border-[#E5DDD0] bg-[#FAF8F3] shadow-sm flex flex-col">
-      <CardHeader className="pb-3 pt-4 px-4 md:px-5 border-b border-[#E5DDD0]/60">
+    <Card className="border border-border bg-background shadow-sm flex flex-col">
+      <CardHeader className="pb-3 pt-4 px-4 md:px-5 border-b border-border/60">
         <div className="flex items-center justify-between">
-          <CardTitle className="font-cairo text-sm font-semibold text-[#1A1714] flex items-center gap-2">
+          <CardTitle className="font-cairo text-sm font-semibold text-foreground flex items-center gap-2">
             طلبات التسجيل الجديدة
-            <ClipboardListIcon className="size-4 text-[#6B5E52]" />
+            <ClipboardListIcon className="size-4 text-chart-4" />
           </CardTitle>
           <Link
             href="/admin/bookings"
-            className="font-cairo text-xs text-[#9F3647] hover:underline flex items-center gap-1"
+            className="font-cairo text-xs text-primary hover:underline flex items-center gap-1"
           >
             عرض الكل
             <ArrowLeftIcon className="size-3" />
@@ -213,11 +213,11 @@ function RecentRequestsPanel({ requests }: { requests: EventRequest[] }) {
       <CardContent className="px-0 pb-0 flex-1">
         {newRequests.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-10 text-center px-4">
-            <ClipboardListIcon className="size-8 text-[#D0C4B0] mb-2" />
-            <p className="font-cairo text-sm text-[#A09080]">لا توجد طلبات حجز جديدة حالياً</p>
+            <ClipboardListIcon className="size-8 text-muted-icon mb-2" />
+            <p className="font-cairo text-sm text-muted-foreground">لا توجد طلبات حجز جديدة حالياً</p>
           </div>
         ) : (
-          <div className="divide-y divide-[#E5DDD0]/50">
+          <div className="divide-y divide-border/50">
             {newRequests.map((req) => {
               const isPending = req.status === RequestStatus.NEW
               const statusMeta = REQUEST_STATUS_LABELS[req.status]
@@ -225,24 +225,24 @@ function RecentRequestsPanel({ requests }: { requests: EventRequest[] }) {
                 <div
                   key={req.id}
                   className={cn(
-                    "flex items-center gap-3 px-4 py-3 transition-colors hover:bg-[#F3EDE3]/40",
-                    isPending && "border-r-2 border-r-[#A8823A] bg-[#A8823A]/3"
+                    "flex items-center gap-3 px-4 py-3 transition-colors hover:bg-secondary/40",
+                    isPending && "border-r-2 border-r-ring bg-ring/3"
                   )}
                 >
                   {/* Avatar initial */}
                   <div className={cn(
                     "size-8 rounded-full flex items-center justify-center shrink-0 font-cairo font-bold text-sm",
-                    isPending ? "bg-[#A8823A]/15 text-[#9E6E1A]" : "bg-[#E5DDD0] text-[#6B5E52]"
+                    isPending ? "bg-ring/15 text-warning" : "bg-border text-chart-4"
                   )}>
                     {req.name.charAt(0)}
                   </div>
 
                   {/* Info */}
                   <div className="flex-1 min-w-0 text-right">
-                    <p className="font-cairo text-sm font-medium text-[#1A1714] truncate">
+                    <p className="font-cairo text-sm font-medium text-foreground truncate">
                       {req.name}
                     </p>
-                    <p className="font-cairo text-xs text-[#A09080] truncate">
+                    <p className="font-cairo text-xs text-muted-foreground truncate">
                       {req.preferredDate ? formatArabicDate(req.preferredDate) : "بدون تاريخ"}
                       {req.venue ? ` • ${req.venue}` : ""}
                     </p>
@@ -253,7 +253,7 @@ function RecentRequestsPanel({ requests }: { requests: EventRequest[] }) {
                     <Badge className={cn("text-[10px] h-4.5 px-1.5 rounded-md font-cairo border-0", statusMeta?.className)}>
                       {statusMeta?.label ?? req.status}
                     </Badge>
-                    <span className="font-cairo text-[10px] text-[#B0A090]">
+                    <span className="font-cairo text-[10px] text-muted-text-light">
                       {relativeTime(req.createdAt)}
                     </span>
                   </div>
@@ -269,15 +269,15 @@ function RecentRequestsPanel({ requests }: { requests: EventRequest[] }) {
 
 function RecentRequestsSkeleton() {
   return (
-    <Card className="border border-[#E5DDD0] bg-[#FAF8F3] shadow-sm">
-      <CardHeader className="pb-3 pt-4 px-4 md:px-5 border-b border-[#E5DDD0]/60">
+    <Card className="border border-border bg-background shadow-sm">
+      <CardHeader className="pb-3 pt-4 px-4 md:px-5 border-b border-border/60">
         <div className="flex items-center justify-between">
           <Skeleton className="h-4 w-16 rounded" />
           <Skeleton className="h-4 w-32 rounded" />
         </div>
       </CardHeader>
       <CardContent className="px-0 pb-0">
-        <div className="divide-y divide-[#E5DDD0]/50">
+        <div className="divide-y divide-border/50">
           {Array.from({ length: 5 }).map((_, i) => (
             <div key={i} className="flex items-center gap-3 px-4 py-3">
               <Skeleton className="size-8 rounded-full shrink-0" />
@@ -301,16 +301,16 @@ function RecentRequestsSkeleton() {
 
 function UpcomingTimeline({ events }: { events: Event[] }) {
   return (
-    <Card className="border border-[#E5DDD0] bg-[#FAF8F3] shadow-sm flex flex-col">
-      <CardHeader className="pb-3 pt-4 px-4 md:px-5 border-b border-[#E5DDD0]/60">
+    <Card className="border border-border bg-background shadow-sm flex flex-col">
+      <CardHeader className="pb-3 pt-4 px-4 md:px-5 border-b border-border/60">
         <div className="flex items-center justify-between">
-          <CardTitle className="font-cairo text-sm font-semibold text-[#1A1714] flex items-center gap-2">
+          <CardTitle className="font-cairo text-sm font-semibold text-foreground flex items-center gap-2">
             المناسبات القادمة
-            <CalendarDaysIcon className="size-4 text-[#A8823A]" />
+            <CalendarDaysIcon className="size-4 text-ring" />
           </CardTitle>
           <Link
             href="/admin/events"
-            className="font-cairo text-xs text-[#9F3647] hover:underline flex items-center gap-1"
+            className="font-cairo text-xs text-primary hover:underline flex items-center gap-1"
           >
             عرض الكل
             <ArrowLeftIcon className="size-3" />
@@ -320,13 +320,13 @@ function UpcomingTimeline({ events }: { events: Event[] }) {
       <CardContent className="px-4 md:px-5 py-3 flex-1">
         {events.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-10 text-center">
-            <CalendarDaysIcon className="size-8 text-[#D0C4B0] mb-2" />
-            <p className="font-cairo text-sm text-[#A09080]">لا توجد مناسبات قادمة</p>
+            <CalendarDaysIcon className="size-8 text-muted-icon mb-2" />
+            <p className="font-cairo text-sm text-muted-foreground">لا توجد مناسبات قادمة</p>
           </div>
         ) : (
           <div className="relative">
             {/* Timeline line */}
-            <div className="absolute right-[19px] top-[30px] bottom-[30px] w-px bg-gradient-to-b from-[#A8823A]/30 via-[#E5DDD0] to-transparent z-0" />
+            <div className="absolute right-[19px] top-[30px] bottom-[30px] w-px bg-gradient-to-b from-ring/30 via-border to-transparent z-0" />
             <div className="space-y-1 relative z-10">
               {events.map((ev, idx) => {
                 const days = daysUntil(ev.eventDate)
@@ -338,10 +338,10 @@ function UpcomingTimeline({ events }: { events: Event[] }) {
                     <div className={cn(
                       "flex flex-col items-center justify-center size-10 rounded-xl shrink-0 text-center z-10",
                       isToday
-                        ? "bg-[#9F3647] text-[#FAF8F3]"
+                        ? "bg-primary text-background"
                         : isSoon
-                          ? "bg-[#EEE6D7] text-[#9E6E1A] border border-[#A8823A]/30"
-                          : "bg-[#F3EDE3] text-[#6B5E52] border border-[#E5DDD0]"
+                          ? "bg-muted-surface text-warning border border-ring/30"
+                          : "bg-secondary text-chart-4 border border-border"
                     )}>
                       <span className="text-[11px] font-bold leading-none font-cairo">
                         {new Date(ev.eventDate).getDate()}
@@ -353,10 +353,10 @@ function UpcomingTimeline({ events }: { events: Event[] }) {
 
                     {/* Event info */}
                     <div className="flex-1 min-w-0 pt-0.5 text-right">
-                      <p className="font-cairo text-sm font-medium text-[#1A1714] truncate">
+                      <p className="font-cairo text-sm font-medium text-foreground truncate">
                         {ev.groomName}
                       </p>
-                      <p className="font-cairo text-xs text-[#A09080] truncate">
+                      <p className="font-cairo text-xs text-muted-foreground truncate">
                         {ev.tribe}{ev.venue ? ` • ${ev.venue}` : ""}
                       </p>
                     </div>
@@ -364,15 +364,15 @@ function UpcomingTimeline({ events }: { events: Event[] }) {
                     {/* Days badge */}
                     <div className="shrink-0 pt-1">
                       {isToday ? (
-                        <span className="font-cairo text-[10px] font-bold text-[#9F3647] bg-[#9F3647]/10 px-2 py-0.5 rounded-full">
+                        <span className="font-cairo text-[10px] font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-full">
                           اليوم
                         </span>
                       ) : (
                         <span className={cn(
                           "font-cairo text-[10px] px-2 py-0.5 rounded-full",
                           isSoon
-                            ? "text-[#9E6E1A] bg-[#A8823A]/10"
-                            : "text-[#A09080] bg-[#F3EDE3]"
+                            ? "text-warning bg-ring/10"
+                            : "text-muted-foreground bg-secondary"
                         )}>
                           {days === 1 ? "غداً" : `${days} يوم`}
                         </span>
@@ -391,8 +391,8 @@ function UpcomingTimeline({ events }: { events: Event[] }) {
 
 function TimelineSkeleton() {
   return (
-    <Card className="border border-[#E5DDD0] bg-[#FAF8F3] shadow-sm">
-      <CardHeader className="pb-3 pt-4 px-4 md:px-5 border-b border-[#E5DDD0]/60">
+    <Card className="border border-border bg-background shadow-sm">
+      <CardHeader className="pb-3 pt-4 px-4 md:px-5 border-b border-border/60">
         <div className="flex items-center justify-between">
           <Skeleton className="h-4 w-16 rounded" />
           <Skeleton className="h-4 w-36 rounded" />
@@ -439,16 +439,16 @@ function MiniCalendarPanel({ events }: { events: Event[] }) {
 
   return (
     <>
-      <div className="bg-[#FAF8F3] rounded-2xl border border-[#E5DDD0] shadow-sm overflow-hidden">
+      <div className="bg-background rounded-2xl border border-border shadow-sm overflow-hidden">
         {/* Header */}
-        <div className="pb-3 pt-4 px-4 md:px-5 border-b border-[#E5DDD0]/60 flex items-center justify-between">
-          <CardTitle className="font-cairo text-sm font-semibold text-[#1A1714] flex items-center gap-2">
+        <div className="pb-3 pt-4 px-4 md:px-5 border-b border-border/60 flex items-center justify-between">
+          <CardTitle className="font-cairo text-sm font-semibold text-foreground flex items-center gap-2">
             تقويم المناسبات
-            <CalendarDaysIcon className="size-4 text-[#9F3647]" />
+            <CalendarDaysIcon className="size-4 text-primary" />
           </CardTitle>
           <Link
             href="/admin/events"
-            className="font-cairo text-xs text-[#9F3647] hover:underline flex items-center gap-1"
+            className="font-cairo text-xs text-primary hover:underline flex items-center gap-1"
           >
             عرض الكل
             <ArrowLeftIcon className="size-3" />
@@ -489,44 +489,44 @@ function MiniCalendarPanel({ events }: { events: Event[] }) {
             months: "w-full relative",
             month: "w-full",
             caption_label:
-              "font-bold text-[#1A1714] text-lg tracking-wide flex items-center gap-1 [&>svg]:size-4",
+              "font-bold text-foreground text-lg tracking-wide flex items-center gap-1 [&>svg]:size-4",
             month_caption:
               "flex h-(--cell-size) w-full items-center justify-center px-(--cell-size)",
             dropdowns:
-              "flex h-(--cell-size) w-full items-center justify-center gap-2 font-bold text-[#1A1714] text-sm md:text-base",
+              "flex h-(--cell-size) w-full items-center justify-center gap-2 font-bold text-foreground text-sm md:text-base",
             button_previous:
-              "size-(--cell-size) p-0 select-none rounded-full border border-[#E5DDD0] text-[#6B5E52] hover:border-[#9F3647] hover:text-[#9F3647] transition-colors bg-transparent hover:bg-transparent inline-flex items-center justify-center z-10 [&>svg]:-scale-x-100",
+              "size-(--cell-size) p-0 select-none rounded-full border border-border text-chart-4 hover:border-primary hover:text-primary transition-colors bg-transparent hover:bg-transparent inline-flex items-center justify-center z-10 [&>svg]:-scale-x-100",
             button_next:
-              "size-(--cell-size) p-0 select-none rounded-full border border-[#E5DDD0] text-[#6B5E52] hover:border-[#9F3647] hover:text-[#9F3647] transition-colors bg-transparent hover:bg-transparent inline-flex items-center justify-center z-10 [&>svg]:-scale-x-100",
+              "size-(--cell-size) p-0 select-none rounded-full border border-border text-chart-4 hover:border-primary hover:text-primary transition-colors bg-transparent hover:bg-transparent inline-flex items-center justify-center z-10 [&>svg]:-scale-x-100",
             weekday:
-              "font-cairo text-xs font-semibold text-[#A09080] py-3",
-            weekdays: "border-b border-[#E5DDD0]",
+              "font-cairo text-xs font-semibold text-muted-foreground py-3",
+            weekdays: "border-b border-border",
             week: "mt-0",
-            day: "border-b border-r border-[#E5DDD0]/50 rounded-none p-0 aspect-auto",
+            day: "border-b border-r border-border/50 rounded-none p-0 aspect-auto",
             month_grid: "w-full border-collapse",
           }}
         />
 
         {/* Legend */}
-        <div className="flex items-center gap-2 px-4 py-3 border-t border-[#E5DDD0]/50 text-[#A09080] font-cairo text-xs">
-          <span className="w-2 h-2 rounded-full bg-[#9F3647] inline-block" />
+        <div className="flex items-center gap-2 px-4 py-3 border-t border-border/50 text-muted-foreground font-cairo text-xs">
+          <span className="w-2 h-2 rounded-full bg-primary inline-block" />
           <span>يوم به مناسبة</span>
         </div>
 
         {/* Event list for selected/current month */}
         {eventsThisMonth.length > 0 && (
-          <div className="border-t border-[#E5DDD0]/60 p-4 md:p-6 space-y-3">
-            <p className="font-cairo text-sm font-semibold text-[#6B5E52] text-right mb-4">
-              {`مناسبات شهر ${arabicMonths[monthIndex]}`}
+          <div className="border-t border-border/60 p-4 md:p-6 space-y-3">
+            <p className="font-cairo text-sm font-semibold text-chart-4 text-right mb-4">
+              {`مناسبات ${arabicMonths[monthIndex]}`}
             </p>
             <div className="space-y-0">
               {eventsThisMonth.map((w) => (
                 <div
                   key={w.id}
-                  className="flex items-center gap-4 px-2 py-4 border-b border-[#E5DDD0] hover:bg-[#E5DDD0]/10 transition-colors last:border-b-0"
+                  className="flex items-center gap-4 px-2 py-4 border-b border-border hover:bg-border/10 transition-colors last:border-b-0"
                 >
-                  <div className="w-10 h-10 rounded-md bg-[#A8823A] flex items-center justify-center flex-shrink-0 shadow-sm shadow-[#A8823A]/25">
-                    <span className="font-cairo font-bold text-sm text-[#FAF8F3]">
+                  <div className="w-10 h-10 rounded-md bg-ring flex items-center justify-center flex-shrink-0 shadow-sm shadow-ring/25">
+                    <span className="font-cairo font-bold text-sm text-background">
                       {new Date(w.eventDate).getDate()}
                     </span>
                   </div>
@@ -538,7 +538,7 @@ function MiniCalendarPanel({ events }: { events: Event[] }) {
                       {w.groomName}{w.venue ? ` • ${w.venue}` : ""}
                     </p>
                   </div>
-                  <p className="font-cairo text-xs text-[#A09080] flex-shrink-0">
+                  <p className="font-cairo text-xs text-muted-foreground flex-shrink-0">
                     {formatArabicDate(w.eventDate)}
                   </p>
                 </div>
@@ -548,7 +548,7 @@ function MiniCalendarPanel({ events }: { events: Event[] }) {
         )}
 
         {eventsThisMonth.length === 0 && (
-          <p className="text-center font-cairo text-[#A09080] text-sm py-6 border-t border-[#E5DDD0]/60">
+          <p className="text-center font-cairo text-muted-foreground text-sm py-6 border-t border-border/60">
             لا توجد مناسبات مسجلة في هذا الشهر
           </p>
         )}
@@ -558,7 +558,7 @@ function MiniCalendarPanel({ events }: { events: Event[] }) {
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
         <DialogContent dir="rtl" className="font-cairo max-w-md">
           <DialogHeader>
-            <DialogTitle className="text-right font-cairo text-[#1A1714]">
+            <DialogTitle className="text-right font-cairo text-foreground">
               {dialogDay
                 ? `مناسبات يوم ${dialogDay.getDate()} ${arabicMonths[dialogDay.getMonth()]}`
                 : ""}
@@ -568,10 +568,10 @@ function MiniCalendarPanel({ events }: { events: Event[] }) {
             {dialogWeddings.map((w) => (
               <div
                 key={w.id}
-                className="flex items-center gap-4 px-2 py-4 border-b border-[#E5DDD0] hover:bg-[#E5DDD0]/10 transition-colors last:border-b-0"
+                className="flex items-center gap-4 px-2 py-4 border-b border-border hover:bg-border/10 transition-colors last:border-b-0"
               >
-                <div className="w-10 h-10 rounded-md bg-[#A8823A] flex items-center justify-center flex-shrink-0 shadow-sm shadow-[#A8823A]/25">
-                  <span className="font-cairo font-bold text-sm text-[#FAF8F3]">
+                <div className="w-10 h-10 rounded-md bg-ring flex items-center justify-center flex-shrink-0 shadow-sm shadow-ring/25">
+                  <span className="font-cairo font-bold text-sm text-background">
                     {new Date(w.eventDate).getDate()}
                   </span>
                 </div>
@@ -583,7 +583,7 @@ function MiniCalendarPanel({ events }: { events: Event[] }) {
                     {w.groomName}{w.venue ? ` • ${w.venue}` : ""}
                   </p>
                 </div>
-                <p className="font-cairo text-xs text-[#A09080] flex-shrink-0">
+                <p className="font-cairo text-xs text-muted-foreground flex-shrink-0">
                   {formatArabicDate(w.eventDate)}
                 </p>
               </div>
@@ -597,8 +597,8 @@ function MiniCalendarPanel({ events }: { events: Event[] }) {
 
 function CalendarSkeleton() {
   return (
-    <Card className="border border-[#E5DDD0] bg-[#FAF8F3] shadow-sm">
-      <CardHeader className="pb-3 pt-4 px-4 md:px-5 border-b border-[#E5DDD0]/60">
+    <Card className="border border-border bg-background shadow-sm">
+      <CardHeader className="pb-3 pt-4 px-4 md:px-5 border-b border-border/60">
         <Skeleton className="h-4 w-36 rounded ml-auto" />
       </CardHeader>
       <CardContent className="px-4 py-6">
@@ -629,16 +629,16 @@ export default function AdminOverviewPage() {
     <div className="space-y-6 max-w-5xl">
       {/* ── Page heading ── */}
       <div>
-        <p className="text-[#9F3647] font-cairo text-xs font-semibold tracking-widest mb-1 uppercase">
+        <p className="text-primary font-cairo text-xs font-semibold tracking-widest mb-1 uppercase">
           Dashboard
         </p>
         <h1
-          className="text-3xl md:text-4xl font-bold text-[#1A1714]"
+          className="text-3xl md:text-4xl font-bold text-foreground"
           style={{ fontFamily: "var(--font-thmanyah-serif), serif" }}
         >
           نظرة عامة
         </h1>
-        <p className="font-cairo text-sm text-[#A09080] mt-1">
+        <p className="font-cairo text-sm text-muted-foreground mt-1">
           {getGreeting()} — ملخص المناسبات وطلبات الحجز المسجلة
         </p>
       </div>
@@ -656,7 +656,7 @@ export default function AdminOverviewPage() {
 
       {/* ── Quick actions ── */}
       <div>
-        <p className="font-cairo text-xs font-semibold text-[#A09080] tracking-widest uppercase mb-3">
+        <p className="font-cairo text-xs font-semibold text-muted-foreground tracking-widest uppercase mb-3">
           إجراءات سريعة
         </p>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
@@ -697,7 +697,7 @@ export default function AdminOverviewPage() {
 
       {/* ── Recent requests + Upcoming timeline (2-col on lg+) ── */}
       <div>
-        <p className="font-cairo text-xs font-semibold text-[#A09080] tracking-widest uppercase mb-3">
+        <p className="font-cairo text-xs font-semibold text-muted-foreground tracking-widest uppercase mb-3">
           لمحة سريعة
         </p>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
@@ -717,7 +717,7 @@ export default function AdminOverviewPage() {
 
       {/* ── Mini calendar (full-width) ── */}
       <div>
-        <p className="font-cairo text-xs font-semibold text-[#A09080] tracking-widest uppercase mb-3">
+        <p className="font-cairo text-xs font-semibold text-muted-foreground tracking-widest uppercase mb-3">
           التقويم
         </p>
         {isLoading ? (

@@ -24,18 +24,18 @@ export default async function DashboardLayout({
   return (
     <TooltipProvider>
       <SidebarProvider>
-        <div className="flex h-screen w-full overflow-hidden bg-[#FAF8F3]">
+        <div className="flex h-screen w-full overflow-hidden bg-background">
           {/* Sidebar renders on the right due to RTL + side="right" */}
           <AdminSidebar />
 
           {/* Main content area */}
-          <SidebarInset className="flex flex-col flex-1 min-w-0 bg-[#FAF8F3]">
+          <SidebarInset className="flex flex-col flex-1 min-w-0 bg-background">
             {/* Top bar */}
-            <header className="flex h-14 items-center gap-3 border-b border-[#E5DDD0] px-4 shrink-0 bg-[#FAF8F3]">
-              <SidebarTrigger className="text-[#6B5E52] hover:text-[#9F3647] hover:bg-[#9F3647]/6 transition-colors" />
-              <Separator orientation="vertical" className="h-5 bg-[#E5DDD0]" />
+            <header className="flex h-14 items-center gap-3 border-b border-border px-4 shrink-0 bg-background">
+              <SidebarTrigger className="text-chart-4 hover:text-primary hover:bg-primary/6 transition-colors" />
+              <Separator orientation="vertical" className="h-5 bg-border" />
               <span
-                className="text-sm font-medium text-[#A09080] font-cairo"
+                className="text-sm font-medium text-muted-foreground font-cairo"
                 suppressHydrationWarning
               >
                 لوحة التحكم
