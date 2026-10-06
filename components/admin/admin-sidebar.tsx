@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation"
 import {
   LayoutDashboardIcon,
   CalendarDays,
-  ClipboardListIcon,
+  MessageSquareDot,
   ExternalLinkIcon,
   LogOutIcon,
 } from "lucide-react"
@@ -52,7 +52,7 @@ const NAV_GROUPS: NavGroup[] = [
     label: "إدارة المحتوى",
     items: [
       { href: "/admin/events", label: "المناسبات", icon: CalendarDays },
-      { href: "/admin/bookings", label: "طلبات التواصل", icon: ClipboardListIcon },
+      { href: "/admin/bookings", label: "طلبات التسجيل", icon: MessageSquareDot },
     ],
   },
   {
