@@ -31,7 +31,7 @@ export default function Hero() {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4 opacity-0 animate-fade-up [animation-delay:300ms]">
           <a
             href="#upcoming"
-            className="inline-flex items-center justify-center border border-[#A8823A] text-[#A8823A] font-cairo font-medium px-8 py-3.5 h-auto rounded-md text-sm hover:bg-[#A8823A]/10 hover:scale-95 transition-all duration-300 w-full sm:w-56 bg-transparent active:scale-95"
+            className="inline-flex items-center justify-center border border-ring text-ring font-cairo font-medium px-8 py-3.5 h-auto rounded-md text-sm hover:bg-ring/10 hover:scale-95 transition-all duration-300 w-full sm:w-56 bg-transparent active:scale-95"
           >
             المناسبات القادمة
           </a>
@@ -39,7 +39,7 @@ export default function Hero() {
             href="https://wa.me/96598040875"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-primary to-[#722230] text-primary-foreground font-cairo font-bold px-8 py-3.5 h-auto rounded-md text-sm hover:opacity-90 hover:scale-95 hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 w-full sm:w-56 active:scale-95"
+            className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-primary to-primary-dark text-primary-foreground font-cairo font-bold px-8 py-3.5 h-auto rounded-md text-sm hover:opacity-90 hover:scale-95 hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 w-full sm:w-56 active:scale-95"
           >
             <span>احجز مناسبتك معنا</span>
             <svg width="20" height="20" viewBox="0 0 448 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg">

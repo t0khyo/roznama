@@ -62,12 +62,12 @@ export function BookingsTable({ bookings, isLoading, onStatusChange }: BookingsT
 
   const renderSortIcon = (key: SortKey) => {
     if (sortConfig.key !== key) {
-      return <ArrowUpDownIcon className="size-3 text-[#A09080]/60 shrink-0" />
+      return <ArrowUpDownIcon className="size-3 text-muted-foreground/60 shrink-0" />
     }
     return sortConfig.direction === "asc" ? (
-      <ArrowUpIcon className="size-3 text-[#9F3647] shrink-0" />
+      <ArrowUpIcon className="size-3 text-primary shrink-0" />
     ) : (
-      <ArrowDownIcon className="size-3 text-[#9F3647] shrink-0" />
+      <ArrowDownIcon className="size-3 text-primary shrink-0" />
     )
   }
 
@@ -117,24 +117,24 @@ export function BookingsTable({ bookings, isLoading, onStatusChange }: BookingsT
   }, [bookings, searchQuery, sortConfig, showRejected])
 
   return (
-    <div className="rounded-xl border border-[#E5DDD0] overflow-hidden bg-[#FAF8F3] shadow-sm">
+    <div className="rounded-xl border border-border overflow-hidden bg-background shadow-sm">
       {/* ── Search & Filter Toolbar ── */}
-      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 p-3.5 border-b border-[#E5DDD0] bg-[#F3EDE3]/40">
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 p-3.5 border-b border-border bg-secondary/40">
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 flex-1">
           <div className="relative w-full sm:max-w-xs">
-            <SearchIcon className="absolute right-3 top-1/2 -translate-y-1/2 size-4 text-[#A09080] pointer-events-none" />
+            <SearchIcon className="absolute right-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground pointer-events-none" />
             <Input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="بحث بالاسم، رقم الهاتف، أو المكان..."
-              className="font-cairo text-sm pr-9 pl-8 h-9 bg-[#FAF8F3] border-[#E5DDD0] focus:border-[#A8823A] placeholder:text-[#C0B4A8]"
+              className="font-cairo text-sm pr-9 pl-8 h-9 bg-background border-border focus:border-ring placeholder:text-[#C0B4A8]"
             />
             {searchQuery && (
               <button
                 type="button"
                 onClick={() => setSearchQuery("")}
-                className="absolute left-2.5 top-1/2 -translate-y-1/2 text-[#A09080] hover:text-[#1A1714] p-0.5 rounded-full"
+                className="absolute left-2.5 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground p-0.5 rounded-full"
                 title="مسح البحث"
               >
                 <XIcon className="size-3.5" />
@@ -147,15 +147,15 @@ export function BookingsTable({ bookings, isLoading, onStatusChange }: BookingsT
               id="show-rejected"
               checked={showRejected}
               onCheckedChange={setShowRejected}
-              className="data-checked:bg-[#9F3647] cursor-pointer"
+              className="data-checked:bg-primary cursor-pointer"
             />
             <Label
               htmlFor="show-rejected"
-              className="font-cairo text-xs text-[#6B5E52] cursor-pointer select-none flex items-center gap-1.5"
+              className="font-cairo text-xs text-chart-4 cursor-pointer select-none flex items-center gap-1.5"
             >
               <span>عرض المرفوض</span>
               {rejectedCount > 0 && (
-                <span className="text-[10px] bg-[#E5DDD0] text-[#6B5E52] px-1.5 py-0.5 rounded-full tabular-nums">
+                <span className="text-[10px] bg-border text-chart-4 px-1.5 py-0.5 rounded-full tabular-nums">
                   {rejectedCount}
                 </span>
               )}
@@ -172,10 +172,10 @@ export function BookingsTable({ bookings, isLoading, onStatusChange }: BookingsT
       <div className="overflow-x-auto">
         <Table dir="rtl">
           <TableHeader>
-            <TableRow className="border-[#E5DDD0] bg-[#F3EDE3]/60 hover:bg-[#F3EDE3]/60">
+            <TableRow className="border-border bg-secondary/60 hover:bg-secondary/60">
               <TableHead
                 onClick={() => handleSort("name")}
-                className="font-cairo font-semibold text-[#6B5E52] text-sm text-right cursor-pointer select-none hover:text-[#9F3647] transition-colors"
+                className="font-cairo font-semibold text-chart-4 text-sm text-right cursor-pointer select-none hover:text-primary transition-colors"
               >
                 <div className="flex items-center gap-1.5 justify-start">
                   <span>الاسم</span>
@@ -185,7 +185,7 @@ export function BookingsTable({ bookings, isLoading, onStatusChange }: BookingsT
 
               <TableHead
                 onClick={() => handleSort("phone")}
-                className="font-cairo font-semibold text-[#6B5E52] text-sm text-right cursor-pointer select-none hover:text-[#9F3647] transition-colors"
+                className="font-cairo font-semibold text-chart-4 text-sm text-right cursor-pointer select-none hover:text-primary transition-colors"
               >
                 <div className="flex items-center gap-1.5 justify-start">
                   <span>الهاتف</span>
@@ -195,7 +195,7 @@ export function BookingsTable({ bookings, isLoading, onStatusChange }: BookingsT
 
               <TableHead
                 onClick={() => handleSort("preferredDate")}
-                className="font-cairo font-semibold text-[#6B5E52] text-sm text-right cursor-pointer select-none hover:text-[#9F3647] transition-colors"
+                className="font-cairo font-semibold text-chart-4 text-sm text-right cursor-pointer select-none hover:text-primary transition-colors"
               >
                 <div className="flex items-center gap-1.5 justify-start">
                   <span>تاريخ المناسبة</span>
@@ -205,7 +205,7 @@ export function BookingsTable({ bookings, isLoading, onStatusChange }: BookingsT
 
               <TableHead
                 onClick={() => handleSort("venue")}
-                className="font-cairo font-semibold text-[#6B5E52] text-sm text-right cursor-pointer select-none hover:text-[#9F3647] transition-colors"
+                className="font-cairo font-semibold text-chart-4 text-sm text-right cursor-pointer select-none hover:text-primary transition-colors"
               >
                 <div className="flex items-center gap-1.5 justify-start">
                   <span>المكان</span>
@@ -215,7 +215,7 @@ export function BookingsTable({ bookings, isLoading, onStatusChange }: BookingsT
 
               <TableHead
                 onClick={() => handleSort("createdAt")}
-                className="font-cairo font-semibold text-[#6B5E52] text-sm text-right cursor-pointer select-none hover:text-[#9F3647] transition-colors"
+                className="font-cairo font-semibold text-chart-4 text-sm text-right cursor-pointer select-none hover:text-primary transition-colors"
               >
                 <div className="flex items-center gap-1.5 justify-start">
                   <span>تاريخ الطلب</span>
@@ -225,7 +225,7 @@ export function BookingsTable({ bookings, isLoading, onStatusChange }: BookingsT
 
               <TableHead
                 onClick={() => handleSort("status")}
-                className="font-cairo font-semibold text-[#6B5E52] text-sm text-right cursor-pointer select-none hover:text-[#9F3647] transition-colors"
+                className="font-cairo font-semibold text-chart-4 text-sm text-right cursor-pointer select-none hover:text-primary transition-colors"
               >
                 <div className="flex items-center gap-1.5 justify-start">
                   <span>الحالة</span>
@@ -233,7 +233,7 @@ export function BookingsTable({ bookings, isLoading, onStatusChange }: BookingsT
                 </div>
               </TableHead>
 
-              <TableHead className="w-[120px] font-cairo font-semibold text-[#6B5E52] text-sm text-center">
+              <TableHead className="w-[120px] font-cairo font-semibold text-chart-4 text-sm text-center">
                 الإجراءات
               </TableHead>
             </TableRow>
@@ -253,7 +253,7 @@ export function BookingsTable({ bookings, isLoading, onStatusChange }: BookingsT
               ))
             ) : filteredAndSortedBookings.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={7} className="h-32 text-center font-cairo text-[#A09080] text-sm">
+                <TableCell colSpan={7} className="h-32 text-center font-cairo text-muted-foreground text-sm">
                   {searchQuery ? "لا توجد نتائج مطابقة لبحثك" : "لا توجد طلبات حجز"}
                 </TableCell>
               </TableRow>
@@ -263,14 +263,14 @@ export function BookingsTable({ bookings, isLoading, onStatusChange }: BookingsT
                 return (
                   <TableRow
                     key={b.id}
-                    className="border-[#E5DDD0] hover:bg-[#F3EDE3]/40 transition-colors"
+                    className="border-border hover:bg-secondary/40 transition-colors"
                   >
-                    <TableCell className="font-cairo font-semibold text-[#1A1714] text-sm min-w-[150px] max-w-[250px] break-words whitespace-normal leading-snug">
+                    <TableCell className="font-cairo font-semibold text-foreground text-sm min-w-[150px] max-w-[250px] break-words whitespace-normal leading-snug">
                       {b.name}
                     </TableCell>
                     <TableCell className="font-cairo text-sm text-right">
                       <div className="flex items-center gap-2 justify-start">
-                        <span className="text-[#1A1714] font-medium tabular-nums" dir="ltr">
+                        <span className="text-foreground font-medium tabular-nums" dir="ltr">
                           {b.phone}
                         </span>
                         <a
@@ -285,15 +285,15 @@ export function BookingsTable({ bookings, isLoading, onStatusChange }: BookingsT
                         </a>
                       </div>
                     </TableCell>
-                    <TableCell className="font-cairo text-[#4A4038] text-sm tabular-nums">
+                    <TableCell className="font-cairo text-neutral-dark text-sm tabular-nums">
                       {b.preferredDate
                         ? formatArabicDate(new Date(b.preferredDate).toISOString())
                         : "—"}
                     </TableCell>
-                    <TableCell className="font-cairo text-[#4A4038] text-sm min-w-[150px] max-w-[250px] break-words whitespace-normal leading-snug">
+                    <TableCell className="font-cairo text-neutral-dark text-sm min-w-[150px] max-w-[250px] break-words whitespace-normal leading-snug">
                       {b.venue ?? "—"}
                     </TableCell>
-                    <TableCell className="font-cairo text-[#A09080] text-xs tabular-nums">
+                    <TableCell className="font-cairo text-muted-foreground text-xs tabular-nums">
                       {new Date(b.createdAt).toLocaleDateString("ar-KW", {
                         year: "numeric",
                         month: "short",
@@ -317,8 +317,8 @@ export function BookingsTable({ bookings, isLoading, onStatusChange }: BookingsT
                           className={cn(
                             "size-7 rounded-lg transition-all",
                             b.status === RequestStatus.NEW
-                              ? "bg-[#A8823A]/20 text-[#9E6E1A] border border-[#A8823A]/40 cursor-default opacity-100 shadow-2xs"
-                              : "text-[#A09080] hover:text-[#A8823A] hover:bg-[#A8823A]/10 border border-transparent hover:border-[#A8823A]/25"
+                              ? "bg-ring/20 text-warning border border-ring/40 cursor-default opacity-100 shadow-2xs"
+                              : "text-muted-foreground hover:text-ring hover:bg-ring/10 border border-transparent hover:border-ring/25"
                           )}
                         >
                           <ClockIcon className="size-3.5" />
@@ -337,7 +337,7 @@ export function BookingsTable({ bookings, isLoading, onStatusChange }: BookingsT
                             "size-7 rounded-lg transition-all",
                             b.status === RequestStatus.PUBLISHED
                               ? "bg-emerald-100 text-emerald-800 border border-emerald-300 cursor-default opacity-100 shadow-2xs"
-                              : "text-[#A09080] hover:text-emerald-700 hover:bg-emerald-50 border border-transparent hover:border-emerald-200"
+                              : "text-muted-foreground hover:text-emerald-700 hover:bg-emerald-50 border border-transparent hover:border-emerald-200"
                           )}
                         >
                           <CheckCircle2Icon className="size-3.5" />
@@ -356,7 +356,7 @@ export function BookingsTable({ bookings, isLoading, onStatusChange }: BookingsT
                             "size-7 rounded-lg transition-all",
                             b.status === RequestStatus.CLOSED
                               ? "bg-red-100 text-red-800 border border-red-300 cursor-default opacity-100 shadow-2xs"
-                              : "text-[#A09080] hover:text-red-700 hover:bg-red-50 border border-transparent hover:border-red-200"
+                              : "text-muted-foreground hover:text-red-700 hover:bg-red-50 border border-transparent hover:border-red-200"
                           )}
                         >
                           <XCircleIcon className="size-3.5" />

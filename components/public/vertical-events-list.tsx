@@ -76,9 +76,9 @@ function EventCard({
       </div>
 
       {/* Bottom Component: Event Details Card */}
-      <div className="rounded-none border-t-4 border-[#B59410] shadow-sm bg-white p-6 md:p-8 flex flex-col gap-6 group-hover:shadow-xl transition-shadow duration-500">
+      <div className="rounded-none border-t-4 border-brand-gold shadow-sm bg-white p-6 md:p-8 flex flex-col gap-6 group-hover:shadow-xl transition-shadow duration-500">
         {/* Title */}
-        <h3 className="text-center font-bold text-[#315F79] text-xl md:text-3xl font-tajawal">
+        <h3 className="text-center font-bold text-brand-blue text-xl md:text-3xl font-tajawal">
           {event.tribe}
         </h3>
 
@@ -87,13 +87,13 @@ function EventCard({
           {/* Row 1 */}
           <div className="flex justify-between items-start gap-4 pb-3 border-b border-border/50">
             <span className="text-muted-foreground text-sm whitespace-nowrap pt-1">اسم المعرس:</span>
-            <span className="font-bold text-[#315F79] text-lg text-left leading-snug">{event.groomName}</span>
+            <span className="font-bold text-brand-blue text-lg text-left leading-snug">{event.groomName}</span>
           </div>
 
           {/* Row 2 */}
           <div className="flex justify-between items-center pb-1">
             <span className="text-muted-foreground text-sm">التاريخ:</span>
-            <span className="font-bold text-[#315F79] text-lg">{formatArabicDate(event.eventDate)}</span>
+            <span className="font-bold text-brand-blue text-lg">{formatArabicDate(event.eventDate)}</span>
           </div>
         </div>
       </div>
@@ -124,7 +124,7 @@ export default function VerticalEventsList({ events }: { events: Event[] }) {
         onOpenChange={(open) => !open && setLightboxEvent(null)}
       >
         <DialogContent
-          className="max-w-[95vw] md:max-w-4xl p-0 overflow-hidden bg-[#1A1714]/95 border-none shadow-2xl"
+          className="max-w-[95vw] md:max-w-4xl p-0 overflow-hidden bg-foreground/95 border-none shadow-2xl"
           showCloseButton={false}
         >
           {lightboxEvent && (

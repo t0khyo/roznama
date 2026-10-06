@@ -215,10 +215,10 @@ export function EventFormDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-md bg-[#FAF8F3]" dir="rtl">
+      <DialogContent className="sm:max-w-md bg-background" dir="rtl">
         <DialogHeader>
           <DialogTitle
-            className="text-[#1A1714] font-bold text-xl"
+            className="text-foreground font-bold text-xl"
             style={{ fontFamily: "var(--font-thmanyah-serif), serif" }}
           >
             {isEdit ? "تعديل المناسبة" : "إضافة مناسبة جديدة"}
@@ -227,53 +227,53 @@ export function EventFormDialog({
 
         <form onSubmit={handleSubmit} className="space-y-4 py-2">
           <div className="space-y-1.5">
-            <Label className="font-cairo text-sm text-[#4A4038]">القبيلة</Label>
+            <Label className="font-cairo text-sm text-neutral-dark">القبيلة</Label>
             <Input
               required
               dir="rtl"
               placeholder=""
               value={form.tribe}
               onChange={set("tribe")}
-              className="font-cairo bg-[#F3EDE3] border-[#E5DDD0] focus:border-[#A8823A] placeholder:text-[#C0B4A8]"
+              className="font-cairo bg-secondary border-border focus:border-ring placeholder:text-[#C0B4A8]"
             />
           </div>
 
           <div className="space-y-1.5">
-            <Label className="font-cairo text-sm text-[#4A4038]">اسم المعرس</Label>
+            <Label className="font-cairo text-sm text-neutral-dark">اسم المعرس</Label>
             <Input
               required
               dir="rtl"
               placeholder="الاسم"
               value={form.groomName}
               onChange={set("groomName")}
-              className="font-cairo bg-[#F3EDE3] border-[#E5DDD0] focus:border-[#A8823A] placeholder:text-[#C0B4A8]"
+              className="font-cairo bg-secondary border-border focus:border-ring placeholder:text-[#C0B4A8]"
             />
           </div>
 
           <div className="space-y-1.5">
-            <Label className="font-cairo text-sm text-[#4A4038]">
-              المكان <span className="text-[#A09080] font-normal">(اختياري)</span>
+            <Label className="font-cairo text-sm text-neutral-dark">
+              المكان <span className="text-muted-foreground font-normal">(اختياري)</span>
             </Label>
             <Input
               dir="rtl"
               placeholder=""
               value={form.venue ?? ""}
               onChange={set("venue")}
-              className="font-cairo bg-[#F3EDE3] border-[#E5DDD0] focus:border-[#A8823A] placeholder:text-[#C0B4A8]"
+              className="font-cairo bg-secondary border-border focus:border-ring placeholder:text-[#C0B4A8]"
             />
           </div>
 
           {/* Gallery URL field hidden for now as requested, preserved in state and data model */}
 
           <div className="space-y-1.5">
-            <Label className="font-cairo text-sm text-[#4A4038]">تاريخ المناسبة</Label>
+            <Label className="font-cairo text-sm text-neutral-dark">تاريخ المناسبة</Label>
             <Popover open={isCalendarOpen} onOpenChange={setIsCalendarOpen}>
               <PopoverTrigger
                 render={
                   <Button
                     type="button"
                     variant="outline"
-                    className={`w-full justify-start bg-[#F3EDE3] border-[#E5DDD0] rounded-lg px-3 py-2.5 h-auto font-cairo text-sm focus:border-[#A8823A] focus:bg-[#FAF8F3] transition-colors ${!form.eventDate ? "text-[#C0B4A8]" : "text-[#1A1714]"
+                    className={`w-full justify-start bg-secondary border-border rounded-lg px-3 py-2.5 h-auto font-cairo text-sm focus:border-ring focus:bg-background transition-colors ${!form.eventDate ? "text-[#C0B4A8]" : "text-foreground"
                       }`}
                     dir="rtl"
                   />
@@ -305,7 +305,7 @@ export function EventFormDialog({
 
           {/* Image Upload from Device */}
           <div className="space-y-1.5">
-            <Label className="font-cairo text-sm text-[#4A4038]">صورة الدعوة</Label>
+            <Label className="font-cairo text-sm text-neutral-dark">صورة الدعوة</Label>
 
             {/* Hidden file input */}
             <input
@@ -331,17 +331,17 @@ export function EventFormDialog({
                   if (file) handleSelectedFile(file)
                 }}
                 className={cn(
-                  "border-2 border-dashed rounded-xl p-6 text-center cursor-pointer transition-all flex flex-col items-center justify-center gap-2.5 bg-[#F3EDE3]/50 hover:bg-[#F3EDE3]",
+                  "border-2 border-dashed rounded-xl p-6 text-center cursor-pointer transition-all flex flex-col items-center justify-center gap-2.5 bg-secondary/50 hover:bg-secondary",
                   dragActive
-                    ? "border-[#9F3647] bg-[#9F3647]/5"
-                    : "border-[#E5DDD0] hover:border-[#A8823A]"
+                    ? "border-primary bg-primary/5"
+                    : "border-border hover:border-ring"
                 )}
               >
-                <div className="size-11 rounded-full bg-[#FAF8F3] border border-[#E5DDD0] flex items-center justify-center text-[#9F3647] shadow-xs">
+                <div className="size-11 rounded-full bg-background border border-border flex items-center justify-center text-primary shadow-xs">
                   <UploadCloudIcon className="size-5" />
                 </div>
                 <div>
-                  <p className="font-cairo text-sm font-semibold text-[#1A1714]">
+                  <p className="font-cairo text-sm font-semibold text-foreground">
                     اضغط لاختيار صورة الدعوة من جهازك
                   </p>
                   <p className="font-cairo text-xs text-[#7D6E63] mt-0.5">
@@ -350,10 +350,10 @@ export function EventFormDialog({
                 </div>
               </div>
             ) : (
-              <Attachment className="w-full grid grid-cols-[auto_1fr_auto] gap-3 items-center bg-[#F3EDE3]/70 border-[#E5DDD0] p-2.5 rounded-xl overflow-hidden">
+              <Attachment className="w-full grid grid-cols-[auto_1fr_auto] gap-3 items-center bg-secondary/70 border-border p-2.5 rounded-xl overflow-hidden">
                 <AttachmentMedia
                   variant="image"
-                  className="size-14 rounded-lg overflow-hidden border border-[#E5DDD0] shrink-0"
+                  className="size-14 rounded-lg overflow-hidden border border-border shrink-0"
                 >
                   <img
                     src={previewUrl || form.imageUrl}
@@ -363,7 +363,7 @@ export function EventFormDialog({
                 </AttachmentMedia>
                 <div className="flex flex-col min-w-0 overflow-hidden text-right">
                   <AttachmentTitle
-                    className="font-cairo text-sm font-semibold text-[#1A1714] truncate block w-full"
+                    className="font-cairo text-sm font-semibold text-foreground truncate block w-full"
                     title={fileInfo?.name || "صورة الدعوة"}
                   >
                     {fileInfo?.name || "صورة الدعوة"}
@@ -392,7 +392,7 @@ export function EventFormDialog({
             <Button
               type="submit"
               disabled={saving || uploading}
-              className="font-cairo font-bold bg-[#9F3647] text-[#FAF8F3] hover:bg-[#722230] h-9 px-5"
+              className="font-cairo font-bold bg-primary text-background hover:bg-primary-dark h-9 px-5"
             >
               {uploading ? (
                 <>
@@ -415,7 +415,7 @@ export function EventFormDialog({
               variant="outline"
               onClick={() => onOpenChange(false)}
               disabled={saving || uploading}
-              className="font-cairo h-9 border-[#E5DDD0] text-[#4A4038]"
+              className="font-cairo h-9 border-border text-neutral-dark"
             >
               إلغاء
             </Button>

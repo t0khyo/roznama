@@ -8,7 +8,7 @@ export default function WhatsappButton() {
       className="fixed bottom-6 left-6 z-50 group flex items-center gap-3"
     >
       {/* Tooltip */}
-      <span className="opacity-0 group-hover:opacity-100 translate-x-2 group-hover:translate-x-0 transition-all duration-300 bg-[#1A1714] text-[#FAF8F3] font-cairo text-xs font-medium px-3 py-1.5 rounded-full whitespace-nowrap pointer-events-none">
+      <span className="opacity-0 group-hover:opacity-100 translate-x-2 group-hover:translate-x-0 transition-all duration-300 bg-foreground text-background font-cairo text-xs font-medium px-3 py-1.5 rounded-full whitespace-nowrap pointer-events-none">
         تواصل عبر واتساب
       </span>
 

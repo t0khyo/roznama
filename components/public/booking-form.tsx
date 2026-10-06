@@ -84,7 +84,7 @@ export default function BookingForm() {
 
     toast.promise(submitRequest, {
       loading: (
-        <span className="block w-full text-center text-sm text-[#4A4038]">
+        <span className="block w-full text-center text-sm text-neutral-dark">
           جارٍ إرسال طلب التسجيل...
         </span>
       ),
@@ -271,7 +271,7 @@ export default function BookingForm() {
             <Button
               type="submit"
               disabled={isSubmitting}
-              className="w-auto px-8 bg-gradient-to-r from-primary to-[#722230] text-primary-foreground font-cairo font-semibold py-3 h-auto rounded-md text-sm hover:opacity-90 hover:scale-95 hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 active:scale-95"
+              className="w-auto px-8 bg-gradient-to-r from-primary to-primary-dark text-primary-foreground font-cairo font-semibold py-3 h-auto rounded-md text-sm hover:opacity-90 hover:scale-95 hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 active:scale-95"
             >
               {isSubmitting ? "جاري الإرسال..." : "أرسل الطلب"}
             </Button>

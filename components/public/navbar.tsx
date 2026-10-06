@@ -16,7 +16,7 @@ export default function Navbar() {
   }
 
   return (
-    <div className="fixed top-0 inset-x-0 z-50 flex justify-center bg-[#FAF8F3]/95 backdrop-blur-md border-b border-[#E5DDD0]/80 transition-all duration-300">
+    <div className="fixed top-0 inset-x-0 z-50 flex justify-center bg-background/95 backdrop-blur-md border-b border-border/80 transition-all duration-300">
       <div className="w-full">
         {/* Main capsule bar */}
         <div className="flex items-center justify-between gap-3 px-6 md:px-12 py-3">
@@ -35,7 +35,7 @@ export default function Navbar() {
               <button
                 key={link.id}
                 onClick={() => scrollTo(link.id)}
-                className="font-cairo text-sm font-medium text-[#4A4038] hover:text-[#9F3647] transition-colors px-3 py-1.5 rounded-md hover:bg-[#9F3647]/5"
+                className="font-cairo text-sm font-medium text-neutral-dark hover:text-primary transition-colors px-3 py-1.5 rounded-md hover:bg-primary/5"
               >
                 {link.label}
               </button>
@@ -47,7 +47,7 @@ export default function Navbar() {
             {/* CTA — visible on all sizes */}
             <Button
               onClick={() => window.open("https://wa.me/96598040875", "_blank")}
-              className="bg-gradient-to-tr from-primary via-[#722230] to-primary animate-gradient-shift text-primary-foreground font-cairo font-bold text-sm px-5 py-2 h-auto rounded-md hover:opacity-90 hover:scale-95 hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 whitespace-nowrap active:scale-95"
+              className="bg-gradient-to-tr from-primary via-primary-dark to-primary animate-gradient-shift text-primary-foreground font-cairo font-bold text-sm px-5 py-2 h-auto rounded-md hover:opacity-90 hover:scale-95 hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 whitespace-nowrap active:scale-95"
             >
               سجل مناسبتك
             </Button>
@@ -59,7 +59,7 @@ export default function Navbar() {
                   <Button
                     variant="outline"
                     size="icon"
-                    className="md:hidden flex size-9 items-center justify-center rounded-md border border-[#E5DDD0] text-[#1A1714] hover:border-[#9F3647]/40 hover:text-[#9F3647] transition-colors bg-transparent hover:bg-transparent"
+                    className="md:hidden flex size-9 items-center justify-center rounded-md border border-border text-foreground hover:border-primary/40 hover:text-primary transition-colors bg-transparent hover:bg-transparent"
                     aria-label="القائمة"
                   />
                 }
@@ -68,7 +68,7 @@ export default function Navbar() {
               </DrawerTrigger>
 
               <DrawerContent
-                className="md:hidden w-[80vw] max-w-xs border-l border-[#E5DDD0] !rounded-none"
+                className="md:hidden w-[80vw] max-w-xs border-l border-border !rounded-none"
                 style={{
                   background: "rgba(250,248,243,0.97)",
                   backdropFilter: "blur(20px)",
@@ -76,14 +76,14 @@ export default function Navbar() {
                 } as React.CSSProperties}
               >
                 {/* Header */}
-                <div className="flex items-center justify-between px-5 pt-6 pb-4 border-b border-[#E5DDD0]/60">
+                <div className="flex items-center justify-between px-5 pt-6 pb-4 border-b border-border/60">
                   <img src="/logo.png" alt="سناب مطير" className="size-10 object-contain drop-shadow-sm" />
                   <DrawerClose
                     render={
                       <Button
                         variant="outline"
                         size="icon"
-                        className="size-8 flex items-center justify-center rounded-md border border-[#E5DDD0] text-[#6B5E52] hover:border-[#9F3647]/40 hover:text-[#9F3647] transition-colors bg-transparent hover:bg-transparent"
+                        className="size-8 flex items-center justify-center rounded-md border border-border text-chart-4 hover:border-primary/40 hover:text-primary transition-colors bg-transparent hover:bg-transparent"
                         aria-label="إغلاق"
                       />
                     }
@@ -109,8 +109,8 @@ export default function Navbar() {
                         render={
                           <button
                             onClick={() => scrollTo(link.id)}
-                            className={`w-full text-right px-5 py-4 font-cairo text-base font-medium text-[#4A4038] hover:text-[#9F3647] hover:bg-[#9F3647]/5 transition-colors ${
-                              idx < arr.length - 1 ? "border-b border-[#E5DDD0]/40" : ""
+                            className={`w-full text-right px-5 py-4 font-cairo text-base font-medium text-neutral-dark hover:text-primary hover:bg-primary/5 transition-colors ${
+                              idx < arr.length - 1 ? "border-b border-border/40" : ""
                             }`}
                           />
                         }
@@ -126,7 +126,7 @@ export default function Navbar() {
                     render={
                       <Button
                         onClick={() => window.open("https://wa.me/96598040875", "_blank")}
-                        className="w-full bg-gradient-to-tr from-primary via-[#722230] to-primary animate-gradient-shift text-primary-foreground font-cairo font-bold text-sm py-3.5 h-auto rounded-md hover:opacity-90 hover:scale-95 hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 active:scale-95"
+                        className="w-full bg-gradient-to-tr from-primary via-primary-dark to-primary animate-gradient-shift text-primary-foreground font-cairo font-bold text-sm py-3.5 h-auto rounded-md hover:opacity-90 hover:scale-95 hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 active:scale-95"
                       />
                     }
                   >

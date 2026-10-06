@@ -80,7 +80,7 @@ export default function WeddingCarousel({ weddings }: { weddings: Event[] }) {
                 >
                   {/* Image */}
                   <div
-                    className="relative aspect-[3/4] overflow-hidden bg-[#1A1714] cursor-pointer group"
+                    className="relative aspect-[3/4] overflow-hidden bg-foreground cursor-pointer group"
                     onClick={() => setLightboxImage(w)}
                   >
                     {/* Blurred background layer */}
@@ -98,11 +98,11 @@ export default function WeddingCarousel({ weddings }: { weddings: Event[] }) {
                       draggable={false}
                     />
                     {/* Gradient overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#1A1714]/60 via-[#1A1714]/10 to-transparent z-10 pointer-events-none" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 via-foreground/10 to-transparent z-10 pointer-events-none" />
 
                     {/* Bottom text overlay — Tribe name */}
                     <div className="absolute bottom-0 inset-x-0 p-4 sm:p-5 z-20 pointer-events-none">
-                      <p className="font-amiri text-[#E8CC88] text-lg sm:text-xl font-bold leading-snug drop-shadow-md">
+                      <p className="font-amiri text-chart-3 text-lg sm:text-xl font-bold leading-snug drop-shadow-md">
                         {w.tribe}
                       </p>
                     </div>
@@ -111,16 +111,16 @@ export default function WeddingCarousel({ weddings }: { weddings: Event[] }) {
                   {/* Card footer — always visible */}
                   <div className="px-5 py-4 flex items-center justify-between">
                     <div>
-                      <p className="font-cairo font-bold text-sm text-[#1A1714] leading-snug">
+                      <p className="font-cairo font-bold text-sm text-foreground leading-snug">
                         {w.groomName}
                       </p>
-                      <p className="font-cairo text-xs text-[#9F3647] font-medium mt-0.5">
+                      <p className="font-cairo text-xs text-primary font-medium mt-0.5">
                         {formatArabicDate(w.eventDate)}
                       </p>
                     </div>
                     {/* Active indicator ring */}
                     {isActive && (
-                      <span className="w-2.5 h-2.5 rounded-full bg-[#9F3647] flex-shrink-0 animate-pulse" />
+                      <span className="w-2.5 h-2.5 rounded-full bg-primary flex-shrink-0 animate-pulse" />
                     )}
                   </div>
                 </div>
@@ -137,7 +137,7 @@ export default function WeddingCarousel({ weddings }: { weddings: Event[] }) {
           variant="outline"
           size="icon"
           onClick={() => { api?.scrollPrev(); autoplay.reset() }}
-          className="size-10 rounded-full border border-[#E5DDD0] flex items-center justify-center text-[#6B5E52] hover:border-[#9F3647] hover:text-[#9F3647] transition-colors bg-transparent hover:bg-transparent"
+          className="size-10 rounded-full border border-border flex items-center justify-center text-chart-4 hover:border-primary hover:text-primary transition-colors bg-transparent hover:bg-transparent"
           aria-label="السابق"
         >
           {/* RTL: prev = scroll right, so arrow points right → */}
@@ -169,7 +169,7 @@ export default function WeddingCarousel({ weddings }: { weddings: Event[] }) {
           variant="outline"
           size="icon"
           onClick={() => { api?.scrollNext(); autoplay.reset() }}
-          className="size-10 rounded-full border border-[#E5DDD0] flex items-center justify-center text-[#6B5E52] hover:border-[#9F3647] hover:text-[#9F3647] transition-colors bg-transparent hover:bg-transparent"
+          className="size-10 rounded-full border border-border flex items-center justify-center text-chart-4 hover:border-primary hover:text-primary transition-colors bg-transparent hover:bg-transparent"
           aria-label="التالي"
         >
           {/* RTL: next = scroll left, so arrow points left ← */}
@@ -182,7 +182,7 @@ export default function WeddingCarousel({ weddings }: { weddings: Event[] }) {
       {/* Lightbox Dialog */}
       <Dialog open={!!lightboxImage} onOpenChange={(open) => !open && setLightboxImage(null)}>
         <DialogContent
-          className="max-w-[95vw] md:max-w-4xl p-0 overflow-hidden bg-[#1A1714]/95 border-none shadow-2xl"
+          className="max-w-[95vw] md:max-w-4xl p-0 overflow-hidden bg-foreground/95 border-none shadow-2xl"
           showCloseButton={false}
         >
           {lightboxImage && (

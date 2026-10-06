@@ -25,19 +25,19 @@ export function DeleteEventDialog({
 }: DeleteEventDialogProps) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-sm bg-[#FAF8F3]" dir="rtl">
+      <DialogContent className="sm:max-w-sm bg-background" dir="rtl">
         <DialogHeader>
           <DialogTitle
-            className="text-[#1A1714] font-bold text-xl"
+            className="text-foreground font-bold text-xl"
             style={{ fontFamily: "var(--font-thmanyah-serif), serif" }}
           >
             حذف المناسبة
           </DialogTitle>
         </DialogHeader>
 
-        <p className="font-cairo text-sm text-[#6B5E52] leading-relaxed">
+        <p className="font-cairo text-sm text-chart-4 leading-relaxed">
           هل أنت متأكد من حذف مناسبة{" "}
-          <span className="font-bold text-[#1A1714]">{event?.tribe}</span>؟
+          <span className="font-bold text-foreground">{event?.tribe}</span>؟
           <br />
           لا يمكن التراجع عن هذا الإجراء.
         </p>
@@ -56,7 +56,7 @@ export function DeleteEventDialog({
           <Button
             variant="outline"
             onClick={() => onOpenChange(false)}
-            className="font-cairo h-9 border-[#E5DDD0] text-[#4A4038]"
+            className="font-cairo h-9 border-border text-neutral-dark"
           >
             إلغاء
           </Button>

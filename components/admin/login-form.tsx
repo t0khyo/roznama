@@ -25,18 +25,18 @@ export function LoginForm() {
 
   return (
     <div className="w-full max-w-md mx-auto" dir="rtl">
-      <Card className="border border-[#E5DDD0] shadow-sm bg-[#FCFEFB] overflow-hidden">
+      <Card className="border border-border shadow-sm bg-[#FCFEFB] overflow-hidden">
         <CardHeader className="space-y-3 text-center pb-2 pt-6">
           {/* Logo with matching navbar fill and border styling */}
           <div className="flex justify-center">
             <div
-              className="p-2 rounded-full border border-[#E5DDD0]/80 shadow-xs inline-flex items-center justify-center"
+              className="p-2 rounded-full border border-border/80 shadow-xs inline-flex items-center justify-center"
               style={{
                 background: "rgba(250,248,243,0.92)",
                 backdropFilter: "blur(16px)",
               }}
             >
-              <div className="size-16 rounded-full bg-[#FCFEFB] overflow-hidden flex items-center justify-center border border-[#E5DDD0]/80 shadow-xs">
+              <div className="size-16 rounded-full bg-[#FCFEFB] overflow-hidden flex items-center justify-center border border-border/80 shadow-xs">
                 <img
                   src="/logo.png"
                   alt="سناب مطير"
@@ -48,7 +48,7 @@ export function LoginForm() {
 
           <div className="space-y-1">
             <CardTitle
-              className="text-2xl font-bold text-[#1A1714]"
+              className="text-2xl font-bold text-foreground"
               style={{ fontFamily: "var(--font-thmanyah-serif), serif" }}
             >
               تسجيل دخول لوحة التحكم
@@ -71,7 +71,7 @@ export function LoginForm() {
             <div className="space-y-1.5">
               <Label
                 htmlFor="username"
-                className="font-cairo text-xs font-semibold text-[#4A4038]"
+                className="font-cairo text-xs font-semibold text-neutral-dark"
               >
                 اسم المستخدم
               </Label>
@@ -84,10 +84,10 @@ export function LoginForm() {
                   required
                   placeholder="admin"
                   dir="ltr"
-                  className="font-cairo text-sm h-10 pr-9 border-[#E5DDD0] focus-visible:border-[#9F3647] focus-visible:ring-[#9F3647]/20 bg-[#FAF8F3]/50 text-left"
+                  className="font-cairo text-sm h-10 pr-9 border-border focus-visible:border-primary focus-visible:ring-primary/20 bg-background/50 text-left"
                   disabled={isPending}
                 />
-                <UserIcon className="absolute right-3 top-1/2 -translate-y-1/2 size-4 text-[#A09080] pointer-events-none" />
+                <UserIcon className="absolute right-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground pointer-events-none" />
               </div>
               {state?.errors?.username && (
                 <p className="text-xs text-red-600 font-cairo mt-1">
@@ -99,7 +99,7 @@ export function LoginForm() {
             <div className="space-y-1.5">
               <Label
                 htmlFor="password"
-                className="font-cairo text-xs font-semibold text-[#4A4038]"
+                className="font-cairo text-xs font-semibold text-neutral-dark"
               >
                 كلمة المرور
               </Label>
@@ -112,13 +112,13 @@ export function LoginForm() {
                   required
                   placeholder="••••••••"
                   dir="ltr"
-                  className="font-cairo text-sm h-10 pr-9 border-[#E5DDD0] focus-visible:border-[#9F3647] focus-visible:ring-[#9F3647]/20 bg-[#FAF8F3]/50 text-left"
+                  className="font-cairo text-sm h-10 pr-9 border-border focus-visible:border-primary focus-visible:ring-primary/20 bg-background/50 text-left"
                   disabled={isPending}
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword((prev) => !prev)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-[#A09080] hover:text-[#4A4038] p-0.5 rounded transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-[#9F3647]"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-neutral-dark p-0.5 rounded transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-primary"
                   aria-label={showPassword ? "إخفاء كلمة المرور" : "إظهار كلمة المرور"}
                   title={showPassword ? "إخفاء كلمة المرور" : "إظهار كلمة المرور"}
                   tabIndex={0}
@@ -140,7 +140,7 @@ export function LoginForm() {
             <Button
               type="submit"
               disabled={isPending}
-              className="w-full h-10 font-cairo text-sm font-semibold bg-[#9F3647] hover:bg-[#721515] text-white shadow-sm transition-all mt-2"
+              className="w-full h-10 font-cairo text-sm font-semibold bg-primary hover:bg-[#721515] text-white shadow-sm transition-all mt-2"
             >
               {isPending ? (
                 <>
@@ -154,13 +154,13 @@ export function LoginForm() {
           </form>
         </CardContent>
 
-        <CardFooter className="border-t border-[#E5DDD0]/60 bg-[#FAF8F3]/60 px-6 py-3 flex items-center justify-between">
-          <span className="text-[11px] font-cairo text-[#A09080]">
+        <CardFooter className="border-t border-border/60 bg-background/60 px-6 py-3 flex items-center justify-between">
+          <span className="text-[11px] font-cairo text-muted-foreground">
             سناب مطير الرسمي
           </span>
           <Link
             href="/"
-            className="inline-flex items-center gap-1.5 text-xs font-cairo text-[#7D6E63] hover:text-[#9F3647] transition-colors"
+            className="inline-flex items-center gap-1.5 text-xs font-cairo text-[#7D6E63] hover:text-primary transition-colors"
           >
             العودة إلى الموقع الرئيسي
             <ArrowLeftIcon className="size-3.5" />
