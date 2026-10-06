@@ -246,10 +246,10 @@ export function EventsTable({ events, isLoading, onEdit, onDelete }: EventsTable
                     key={event.id}
                     className="border-[#E5DDD0] hover:bg-[#F3EDE3]/40 transition-colors"
                   >
-                    <TableCell className="font-cairo font-semibold text-[#1A1714] text-sm">
+                    <TableCell className="font-cairo font-semibold text-[#1A1714] text-sm min-w-[120px] max-w-[200px] break-words whitespace-normal leading-snug">
                       {event.tribe}
                     </TableCell>
-                    <TableCell className="font-cairo text-[#4A4038] text-sm">
+                    <TableCell className="font-cairo text-[#4A4038] text-sm min-w-[150px] max-w-[250px] break-words whitespace-normal leading-snug">
                       {event.groomName}
                     </TableCell>
                     <TableCell className="font-cairo text-[#4A4038] text-sm tabular-nums">

@@ -256,7 +256,7 @@ export function EventFormDialog({
             </Label>
             <Input
               dir="rtl"
-              placeholder="مثال: قاعة الأفراح — الجهراء"
+              placeholder=""
               value={form.venue ?? ""}
               onChange={set("venue")}
               className="font-cairo bg-[#F3EDE3] border-[#E5DDD0] focus:border-[#A8823A] placeholder:text-[#C0B4A8]"

@@ -265,7 +265,7 @@ export function BookingsTable({ bookings, isLoading, onStatusChange }: BookingsT
                     key={b.id}
                     className="border-[#E5DDD0] hover:bg-[#F3EDE3]/40 transition-colors"
                   >
-                    <TableCell className="font-cairo font-semibold text-[#1A1714] text-sm">
+                    <TableCell className="font-cairo font-semibold text-[#1A1714] text-sm min-w-[150px] max-w-[250px] break-words whitespace-normal leading-snug">
                       {b.name}
                     </TableCell>
                     <TableCell className="font-cairo text-sm text-right">
@@ -290,7 +290,7 @@ export function BookingsTable({ bookings, isLoading, onStatusChange }: BookingsT
                         ? formatArabicDate(new Date(b.preferredDate).toISOString())
                         : "—"}
                     </TableCell>
-                    <TableCell className="font-cairo text-[#4A4038] text-sm max-w-[180px] truncate">
+                    <TableCell className="font-cairo text-[#4A4038] text-sm min-w-[150px] max-w-[250px] break-words whitespace-normal leading-snug">
                       {b.venue ?? "—"}
                     </TableCell>
                     <TableCell className="font-cairo text-[#A09080] text-xs tabular-nums">
