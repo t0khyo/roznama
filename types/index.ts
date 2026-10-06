@@ -18,21 +18,21 @@ export const REQUEST_STATUS_LABELS: Record<string, { label: string; className: s
   NEW: {
     label: "جديد",
     className:
-      "bg-[#A8823A]/10 text-[#A8823A] border border-[#A8823A]/25 hover:bg-[#A8823A]/10 font-cairo text-xs",
+      "bg-ring/10 text-ring border border-ring/25 hover:bg-ring/10 dark:bg-ring/15 dark:border-ring/30 font-cairo text-xs",
   },
   CONTACTED: {
     label: "تم التواصل",
     className:
-      "bg-blue-50 text-blue-700 border border-blue-200 hover:bg-blue-50 font-cairo text-xs",
+      "bg-blue-50 text-blue-700 border border-blue-200 hover:bg-blue-50 dark:bg-blue-500/15 dark:text-blue-400 dark:border-blue-500/30 dark:hover:bg-blue-500/15 font-cairo text-xs",
   },
   CLOSED: {
     label: "مرفوض",
     className:
-      "bg-red-50 text-red-700 border border-red-200 hover:bg-red-50 font-cairo text-xs",
+      "bg-red-50 text-red-700 border border-red-200 hover:bg-red-50 dark:bg-red-500/15 dark:text-red-400 dark:border-red-500/30 dark:hover:bg-red-500/15 font-cairo text-xs",
   },
   PUBLISHED: {
     label: "منشور",
     className:
-      "bg-emerald-50 text-emerald-700 border border-emerald-200 hover:bg-emerald-50 font-cairo text-xs",
+      "bg-emerald-50 text-emerald-700 border border-emerald-200 hover:bg-emerald-50 dark:bg-emerald-500/15 dark:text-emerald-400 dark:border-emerald-500/30 dark:hover:bg-emerald-500/15 font-cairo text-xs",
   },
 }

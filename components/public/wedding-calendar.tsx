@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { arSA } from "react-day-picker/locale"
+import { UserIcon } from "lucide-react"
 import { Calendar } from "@/components/ui/calendar"
 import { arabicMonths } from "@/lib/constants"
 import { formatArabicDate, parseLocalDate } from "@/lib/date-utils"
@@ -127,18 +128,18 @@ export default function WeddingCalendar({ events }: { events: Event[] }) {
                 {weddingsThisMonth.map((w) => (
                   <div
                     key={w.id}
-                    className="flex items-center gap-4 px-2 py-4 border-b border-border hover:bg-border/10 transition-colors last:border-b-0"
+                    className="flex items-center gap-4 px-2 py-4 border-b border-border/60 hover:bg-border/10 transition-colors last:border-b-0"
                   >
-                    <div className="w-10 h-10 rounded-md bg-ring flex items-center justify-center flex-shrink-0 shadow-sm shadow-ring/25">
-                      <span className="font-cairo font-bold text-sm text-background">
+                    <div className="w-10 h-10 rounded-md bg-primary flex items-center justify-center flex-shrink-0 shadow-sm shadow-primary/25">
+                      <span className="font-cairo font-bold text-sm text-primary-foreground">
                         {parseLocalDate(w.eventDate).getDate()}
                       </span>
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="font-cairo font-bold text-sm text-ring">
+                      <p className="font-cairo font-bold text-sm text-foreground">
                         {w.tribe}
                       </p>
-                      <p className="font-cairo text-xs text-muted-foreground font-medium leading-snug">
+                      <p className="font-cairo text-xs text-muted-foreground font-medium leading-snug mt-0.5">
                         {w.groomName}
                       </p>
                     </div>
@@ -173,18 +174,18 @@ export default function WeddingCalendar({ events }: { events: Event[] }) {
             {dialogWeddings.map((w) => (
               <div
                 key={w.id}
-                className="flex items-center gap-4 px-2 py-4 border-b border-border last:border-b-0"
+                className="flex items-center gap-4 px-2 py-4 border-b border-border/60 last:border-b-0"
               >
-                <div className="w-10 h-10 rounded-md bg-ring flex items-center justify-center flex-shrink-0">
-                  <span className="font-cairo font-bold text-sm text-background">
+                <div className="w-10 h-10 rounded-md bg-primary flex items-center justify-center flex-shrink-0 shadow-sm shadow-primary/25">
+                  <span className="font-cairo font-bold text-sm text-primary-foreground">
                     {parseLocalDate(w.eventDate).getDate()}
                   </span>
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="font-cairo font-bold text-sm text-ring">
+                  <p className="font-cairo font-bold text-sm text-foreground">
                     {w.tribe}
                   </p>
-                  <p className="font-cairo text-xs text-muted-foreground font-medium leading-snug">
+                  <p className="font-cairo text-xs text-muted-foreground font-medium leading-snug mt-0.5">
                     {w.groomName}
                   </p>
                 </div>
