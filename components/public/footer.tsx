@@ -7,7 +7,7 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto px-6">
         <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-12">
           <div>
-            <img src="/logo.png" alt="سناب مطير" className="h-15 w-auto object-contain mb-4 drop-shadow-sm" />
+            <img src="/logo.png" alt="رزنامة مطير" className="h-15 w-auto object-contain mb-4 drop-shadow-sm" />
             <p className="font-cairo text-muted-foreground text-sm max-w-xs">
               مرجعكم للتنسيق والتذكير بمناسبات مطير
             </p>
@@ -57,7 +57,7 @@ export default function Footer() {
 
         <div className="mt-16 pt-6 border-t border-footer-border-dark dark:border-border flex flex-col md:flex-row items-center justify-between gap-3">
           <p className="font-cairo text-xs text-muted-foreground">
-            © {new Date().getFullYear()} سناب مطير. جميع الحقوق محفوظة.
+            © {new Date().getFullYear()} رزنامة مطير . جميع الحقوق محفوظة.
           </p>
           <div className="flex items-center gap-2">
             <div className="w-1 h-1 rounded-full bg-primary" />

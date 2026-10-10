@@ -4,8 +4,8 @@ import { verifySession } from "@/lib/session"
 import { LoginForm } from "@/components/admin/login-form"
 
 export const metadata: Metadata = {
-  title: "تسجيل الدخول — لوحة تحكم سناب مطير",
-  description: "تسجيل الدخول لحساب إدارة روزنامة مناسبات سناب مطير",
+  title: "تسجيل الدخول — لوحة تحكم رزنامة مطير",
+  description: "تسجيل الدخول لحساب إدارة رزنامة مطير",
 }
 
 export default async function AdminLoginPage() {

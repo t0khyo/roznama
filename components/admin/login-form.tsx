@@ -31,7 +31,7 @@ export function LoginForm() {
           <div className="flex justify-center mb-2">
             <img
               src="/logo.png"
-              alt="سناب مطير"
+              alt="رزنامة مطير"
               className="h-20 w-auto object-contain drop-shadow-sm"
             />
           </div>
@@ -146,7 +146,7 @@ export function LoginForm() {
 
         <CardFooter className="border-t border-border/60 bg-background/60 px-6 py-3 flex items-center justify-between">
           <span className="text-[11px] font-cairo text-muted-foreground">
-            سناب مطير الرسمي
+            رزنامة مطير
           </span>
           <Link
             href="/"

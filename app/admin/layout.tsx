@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "لوحة التحكم — سناب مطير",
+  title: "لوحة التحكم — رزنامة مطير",
   description: "إدارة المناسبات وطلبات التسجيل",
 }
 

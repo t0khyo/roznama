@@ -38,6 +38,66 @@ import { cn } from "@/lib/utils"
 
 const customArSA = { ...arSA, code: "ar-SA-u-ca-gregory" }
 
+/** Compress an image file in the browser using a canvas element.
+ *  - Resizes to at most `maxDim` pixels on the longest side.
+ *  - Re-encodes as JPEG at the given quality (0–1).
+ *  - Falls back to the original file if anything fails.
+ */
+async function compressImage(
+  file: File,
+  maxDim = 1920,
+  quality = 0.85,
+): Promise<File> {
+  return new Promise((resolve) => {
+    const img = new Image()
+    const objectUrl = URL.createObjectURL(file)
+
+    img.onload = () => {
+      URL.revokeObjectURL(objectUrl)
+
+      let { width, height } = img
+      if (width > maxDim || height > maxDim) {
+        if (width >= height) {
+          height = Math.round((height / width) * maxDim)
+          width = maxDim
+        } else {
+          width = Math.round((width / height) * maxDim)
+          height = maxDim
+        }
+      }
+
+      const canvas = document.createElement("canvas")
+      canvas.width = width
+      canvas.height = height
+      const ctx = canvas.getContext("2d")
+      if (!ctx) return resolve(file)
+
+      ctx.drawImage(img, 0, 0, width, height)
+
+      canvas.toBlob(
+        (blob) => {
+          if (!blob) return resolve(file)
+          // Keep original filename but signal it's been compressed
+          const compressed = new File([blob], file.name.replace(/\.[^.]+$/, ".jpg"), {
+            type: "image/jpeg",
+            lastModified: Date.now(),
+          })
+          resolve(compressed)
+        },
+        "image/jpeg",
+        quality,
+      )
+    }
+
+    img.onerror = () => {
+      URL.revokeObjectURL(objectUrl)
+      resolve(file) // fallback to original
+    }
+
+    img.src = objectUrl
+  })
+}
+
 interface EventFormDialogProps {
   open: boolean
   onOpenChange: (open: boolean) => void
@@ -72,6 +132,7 @@ export function EventFormDialog({
   const [fileInfo, setFileInfo] = useState<FileMeta | null>(null)
   const [dragActive, setDragActive] = useState(false)
   const [isCalendarOpen, setIsCalendarOpen] = useState(false)
+  const [compressing, setCompressing] = useState(false)
   const [uploading, setUploading] = useState(false)
   const [saving, setSaving] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
@@ -188,11 +249,15 @@ export function EventFormDialog({
     try {
       let finalImageUrl = form.imageUrl
 
-      // If user selected a new image file, upload it to Cloudflare R2
+      // If user selected a new image file, compress then upload to Cloudflare R2
       if (selectedFile) {
+        setCompressing(true)
+        const compressed = await compressImage(selectedFile)
+        setCompressing(false)
+
         setUploading(true)
         const formData = new FormData()
-        formData.append("file", selectedFile)
+        formData.append("file", compressed)
         const { url } = await uploadEventImageAction(formData)
         finalImageUrl = url
         setUploading(false)
@@ -205,11 +270,13 @@ export function EventFormDialog({
       const message = err instanceof Error ? err.message : "حدث خطأ أثناء حفظ المناسبة"
       toast.error(message)
     } finally {
+      setCompressing(false)
       setUploading(false)
       setSaving(false)
     }
   }
 
+  const isBusy = saving || compressing || uploading
   const isEdit = !!event
   const hasImage = !!previewUrl || !!form.imageUrl
 
@@ -391,10 +458,15 @@ export function EventFormDialog({
           <DialogFooter className="gap-2 pt-2 flex-row-reverse sm:flex-row-reverse">
             <Button
               type="submit"
-              disabled={saving || uploading}
+              disabled={isBusy}
               className="font-cairo font-bold bg-primary text-background hover:bg-primary-dark h-9 px-5"
             >
-              {uploading ? (
+              {compressing ? (
+                <>
+                  جارٍ ضغط الصورة…
+                  <Loader2Icon className="size-4 animate-spin ml-2" />
+                </>
+              ) : uploading ? (
                 <>
                   جارٍ رفع الصورة…
                   <Loader2Icon className="size-4 animate-spin ml-2" />
@@ -414,7 +486,7 @@ export function EventFormDialog({
               type="button"
               variant="outline"
               onClick={() => onOpenChange(false)}
-              disabled={saving || uploading}
+              disabled={isBusy}
               className="font-cairo h-9 border-border text-foreground"
             >
               إلغاء

@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import Link from "next/link"
 
 export const metadata: Metadata = {
-  title: "الصفحة غير موجودة — سناب مطير",
+  title: "الصفحة غير موجودة — رزنامة مطير",
   description: "تعذر العثور على الصفحة المطلوبة.",
 }
 
@@ -85,8 +85,8 @@ export default function NotFound() {
 
         {/* Bottom logo watermark */}
         <div className="pt-8 flex flex-col items-center gap-2 opacity-40">
-          <img src="/logo.png" alt="سناب مطير" className="h-10 w-auto object-contain" />
-          <span className="font-cairo text-xs text-muted-foreground">سناب مطير</span>
+          <img src="/logo.png" alt="رزنامة مطير" className="h-10 w-auto object-contain" />
+          <span className="font-cairo text-xs text-muted-foreground">رزنامة مطير</span>
         </div>
       </div>
     </main>

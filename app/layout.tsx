@@ -8,8 +8,8 @@ import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "سناب مطير — مناسبات",
-  description: "مرجعكم للتنسيق والتذكير بمناسبات مطير",
+  title: "رزنامة مطير",
+  description: "مرجعكم للتنسيق والتذكير بمناسبات قبيلة مطير",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
